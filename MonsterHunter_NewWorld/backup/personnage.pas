@@ -32,6 +32,8 @@ function calculHpMaxBase() : Integer;
 
 function calculArmureBase() : Integer;
 
+function calculADBase() : Integer;
+
 implementation
 
 uses
@@ -125,7 +127,12 @@ end;
 
 function calculArmureBase() : Integer;
 begin
-    calculHpMax := 300+(10*getlvlActuelle());
+    calculArmureBase := 30+(4*getlvlActuelle());
+end;
+
+function calculADBase() : Integer;
+begin
+    calculADBase := 75+(5*getlvlActuelle());
 end;
 
 end.
