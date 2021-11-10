@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="8">
+      <Unit0>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="5"/>
+        <UsageCount Value="59"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="menu.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gestionTexte"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="59"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="gestiontexte.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gestionTexte"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="59" Y="12"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="personnage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Personnage"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="43"/>
+        <CursorPos X="6" Y="54"/>
+        <FoldState Value=" T4a01 T3i2067B"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="GestionEcran.pas"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="22" Y="18"/>
+        <UsageCount Value="30"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="..\..\..\Downloads\Clav_Tact\affclavier.lfm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="60"/>
+        <UsageCount Value="7"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="gestionfichier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="gestionFichier"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="14"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="backup\menu.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+    </Units>
+    <JumpHistory Count="18" HistoryIndex="17">
+      <Position1>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="8" Column="34"/>
+      </Position1>
+      <Position2>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="29" Column="23" TopLine="12"/>
+      </Position2>
+      <Position3>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="31" Column="25" TopLine="15"/>
+      </Position3>
+      <Position4>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="29" Column="41" TopLine="11"/>
+      </Position4>
+      <Position5>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="32" Column="27" TopLine="11"/>
+      </Position5>
+      <Position6>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="29" Column="2" TopLine="14"/>
+      </Position6>
+      <Position7>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="31" Column="10" TopLine="14"/>
+      </Position7>
+      <Position8>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="27" Column="19" TopLine="15"/>
+      </Position8>
+      <Position9>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="26" Column="35" TopLine="11"/>
+      </Position9>
+      <Position10>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="27" Column="14" TopLine="15"/>
+      </Position10>
+      <Position11>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="29" Column="14" TopLine="14"/>
+      </Position11>
+      <Position12>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="30" Column="23" TopLine="15"/>
+      </Position12>
+      <Position13>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="27" Column="24" TopLine="20"/>
+      </Position13>
+      <Position14>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="28" Column="28" TopLine="14"/>
+      </Position14>
+      <Position15>
+        <Filename Value="GestionEcran.pas"/>
+        <Caret Line="18" Column="27" TopLine="227"/>
+      </Position15>
+      <Position16>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="52" Column="23" TopLine="14"/>
+      </Position16>
+      <Position17>
+        <Filename Value="gestionfichier.pas"/>
+        <Caret Line="14" Column="47"/>
+      </Position17>
+      <Position18>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="107" Column="27" TopLine="31"/>
+      </Position18>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
