@@ -34,14 +34,33 @@ function calculArmureBase() : Integer;
 
 function calculADBase() : Integer;
 
+
+
+// Création personnage
+procedure miseAjourNom(valeur : String);
+
+function getNomActuelle() : String;
+
+procedure miseAjourSexe(valeur : String);
+
+function getSexeActuelle() : String;
+
+procedure miseAjourTaille(valeur : integer);
+
+function getTailleActuelle() : Integer;
+
+
 implementation
 
 uses
-  Crt, Dos, Classes, SysUtils;
+    Dos, Classes, SysUtils;
 
 var lvlglobal : Text;
-var lvlexp : Text;
-var Orglobal : Text;
+    lvlexp : Text;
+    Orglobal : Text;
+    Nomact  : Text;
+    Sexeact : Text;
+    Tailleact : Text;
 
 
 //________________________________________________ Zone Lvl
@@ -133,6 +152,62 @@ end;
 function calculADBase() : Integer;
 begin
     calculADBase := 75+(5*getlvlActuelle());
+end;
+
+//__________________________________________________ Création personnage
+
+procedure miseAjourNom(valeur : String);
+begin
+  Assign(Nomact,'C:\MHNewWorld\nom.txt');
+  Rewrite(Nomact);
+  Writeln(Nomact,valeur) ;
+  Close(Nomact);
+end;
+
+function getNomActuelle() : String;
+var nom : string;
+begin
+     Assign(Nomact,'C:\MHNewWorld\nom.txt');
+     reset(Nomact);
+     Readln(Nomact,nom);
+     getNomActuelle := nom;
+     Close(Nomact);
+end;
+
+procedure miseAjourSexe(valeur : String);
+begin
+  Assign(Sexeact,'C:\MHNewWorld\sexe.txt');
+  Rewrite(Sexeact);
+  Writeln(Sexeact,valeur) ;
+  Close(Sexeact);
+end;
+
+function getSexeActuelle() : String;
+var sexe : string;
+begin
+     Assign(Sexeact,'C:\MHNewWorld\sexe.txt');
+     reset(Sexeact);
+     Readln(Sexeact,sexe);
+     getSexeActuelle := sexe;
+     Close(Sexeact);
+end;
+
+procedure miseAjourTaille(valeur : integer);
+begin
+  Assign(Tailleact,'C:\MHNewWorld\taille.txt');
+  Rewrite(Tailleact);
+  Writeln(Tailleact,valeur);
+  Close(Tailleact);
+end;
+
+function getTailleActuelle() : Integer;
+var taille : string;
+begin
+     Assign(Tailleact,'C:\MHNewWorld\taille.txt');
+     reset(Tailleact);
+     Readln(Tailleact,taille);
+     getTailleActuelle := StrToInt(taille);
+     Close(Tailleact);
 end;
 
 end.
