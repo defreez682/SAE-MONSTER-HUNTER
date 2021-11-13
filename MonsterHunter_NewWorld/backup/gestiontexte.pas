@@ -7,6 +7,8 @@ interface
 {Créer un texte qui s'affiche lettre par lettre en fonction d'un intervalle de temps
 en millisecondes}
 procedure texteAtemps(texte : string; temps : integer; couleur : integer);
+procedure texteEnCouleur(texte : string; couleur : integer);
+procedure texteXY(x,y : Integer; texte : string);
 
 implementation
 
@@ -26,9 +28,22 @@ begin
              couleurTexte(couleur);
              write(texte[i]);
              // On met en pause le programme pour avoir l'impression que les lettres s'écrivent une par une
-             sleep(temps);
+             attendre(temps);
 
          end;
 end;
 
+procedure texteEnCouleur(texte :string; couleur : integer);
+begin
+     couleurTexte(couleur);
+     write(texte);
+end;
+
+
+procedure texteXY(x,y : Integer; texte : string; couleur : integer);
+begin
+     couleurTexte(couleur);
+     deplacerCurseurXY(x,y);
+     write(texte);
+end;
 end.

@@ -26,7 +26,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="6">
+    <Units Count="8">
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
@@ -56,6 +56,15 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="personageIHM"/>
       </Unit5>
+      <Unit6>
+        <Filename Value="crtperso.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="crtPerso"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="menu.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

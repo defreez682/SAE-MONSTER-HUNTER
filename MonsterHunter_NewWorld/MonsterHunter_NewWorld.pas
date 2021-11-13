@@ -1,13 +1,11 @@
 program MonsterHunter_NewWorld;
 
 
-uses Windows,sysutils, personageIHM;
+uses Windows,sysutils,menu,personnage,gestionFichier;
 
 
 begin
-  //checkUp();
-
-  creationPersonnage();
-
+   checkUp();
+   creationChoix();
 end.
 

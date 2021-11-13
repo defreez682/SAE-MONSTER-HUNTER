@@ -4,21 +4,41 @@ unit personageIHM;
 
 interface
 
+procedure choixONInterface();
+procedure choixONInterface2();
 procedure creationInterfaceDialogue();
-procedure CreationInterfaceFormulaire();
-procedure CreationInterfaceResume();
+procedure creationInterfaceFormulaire();
+procedure CreationInterfaceResume(Vitesse : boolean);
+procedure interfaceSaisieNom();
+procedure interfaceSaisieSexe();
+procedure interfaceSaisieTaille();
 procedure creationPersonnage();
 procedure saisieNom();
 procedure saisieSexe();
 procedure saisieTaille();
 procedure resume();
 
+
 implementation
 
 uses
-  Classes, SysUtils,Personnage,GestionEcran, gestionTexte;
+  Classes, SysUtils,Personnage,GestionEcran, gestionTexte, crtperso;
 
 
+
+procedure choixONInterface();
+begin
+     creationInterfaceFormulaire;
+     dessinerCadreXY(20,16,30,20,simple,White,Black);
+     dessinerCadreXY(40,16,50,20,simple,White,Black);
+end;
+
+procedure choixONInterface2();
+begin;
+     creationInterfaceResume(False);
+     dessinerCadreXY(90,10,100,14,simple,White,Black);
+     dessinerCadreXY(90,16,100,20,simple,White,Black);
+end;
 
 
 procedure creationInterfaceDialogue();
@@ -35,70 +55,151 @@ begin
      write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
 end;
 
-procedure CreationInterfaceFormulaire();
+procedure creationInterfaceFormulaire();
 begin
      effacerEcran();
      dessinerCadreXY(80,5,100,20,double,DarkGray,White);
      dessinerCadreXY(10,2,60,25,double,White,Black);
 end;
 
-procedure CreationInterfaceResume();
+procedure creationInterfaceResume(Vitesse : Boolean);
+var T10,T20,T5,T30,T100 : Integer;
 begin
+    if (Vitesse = True) then
+       begin
+            T10 := 10;
+            T20 := 20;
+            T5 := 5;
+            T30 := 30;
+            T100 := 100;
+       end
+    else
+        begin
+            T10 := 0;
+            T20 := 0;
+            T5 := 0;
+            T30 := 0;
+            T100 := 0;
+        end;
     effacerEcran();
     dessinerCadreXY(40,3,80,30,double,White,Black);
     deplacerCurseurXY(41,5);
-    texteAtemps('Nom : ',20,White);
-    texteAtemps(getNomActuelle(),20,White);
+    texteAtemps('Nom : ',T20,White);
+    texteAtemps(getNomActuelle(),T20,White);
     deplacerCurseurXY(41,7);
-    texteAtemps('Sexe : ',20,White);
-    texteAtemps(getSexeActuelle(),20,White);
+    texteAtemps('Sexe : ',T20,White);
+    texteAtemps(getSexeActuelle(),T20,White);
     deplacerCurseurXY(41,9);
-    texteAtemps('Taille : ',20,White);
-    texteAtemps(IntToStr(getTailleActuelle()),20,White);
-    texteAtemps(' m',20,White);
+    texteAtemps('Taille : ',T20,White);
+    texteAtemps(IntToStr(getTailleActuelle()),T20,White);
+    texteAtemps(' cm',T20,White);
     deplacerCurseurXY(41,10);
-    texteAtemps('_______________________________________',5,White);
+    texteAtemps('_______________________________________',T5,White);
     deplacerCurseurXY(41,12);
-    texteAtemps('Niveau : ',20,White);
-    texteAtemps(IntToStr(getLvlActuelle()),20,White);
+    texteAtemps('Niveau : ',T20,White);
+    texteAtemps(IntToStr(getLvlActuelle()),T20,White);
     deplacerCurseurXY(41,13);
-    texteAtemps('Experience necessaire avant niveau',10,White);
+    texteAtemps('Experience necessaire avant niveau',T10,White);
     deplacerCurseurXY(41,14);
-    texteAtemps('suivant : ',10,White);
-    texteAtemps(IntToStr(calculLvlSuivant()),10,White);
+    texteAtemps('suivant : ',T10,White);
+    texteAtemps(IntToStr(calculLvlSuivant()),T10,White);
     deplacerCurseurXY(41,15);
-    texteAtemps('_______________________________________',5,White);
+    texteAtemps('_______________________________________',T5,White);
     deplacerCurseurXY(41,17);
-    texteAtemps('Argent : ',20,White);
-    texteAtemps(IntToStr(getOrActuelle()),20,White);
+    texteAtemps('Argent : ',T20,White);
+    texteAtemps(IntToStr(getOrActuelle()),T20,White);
     deplacerCurseurXY(41,18);
-    texteAtemps('_______________________________________',5,White);
+    texteAtemps('_______________________________________',T5,White);
     deplacerCurseurXY(41,20);
-    texteAtemps('Equipement : ',20,White);
+    texteAtemps('Equipement : ',T20,White);
     deplacerCurseurXY(41,21);
-    texteAtemps('- Epee Basique',10,White);
+    texteAtemps('- Epee Basique',T10,White);
     deplacerCurseurXY(41,22);
-    texteAtemps('- Casque de chasseur simple',10,White);
+    texteAtemps('- Casque de chasseur simple',T10,White);
     deplacerCurseurXY(41,23);
-    texteAtemps('- Plastron de chasseur simple',10,White);
+    texteAtemps('- Plastron de chasseur simple',T10,White);
     deplacerCurseurXY(41,24);
-    texteAtemps('- Gants de chasseur simple',10,White);
+    texteAtemps('- Gants de chasseur simple',T10,White);
     deplacerCurseurXY(41,25);
-    texteAtemps('- Taille de chasseur simple',10,White);
+    texteAtemps('- Taille de chasseur simple',T10,White);
     deplacerCurseurXY(41,26);
-    texteAtemps('- Jambiere de chasseur simple',10,White);
+    texteAtemps('- Jambiere de chasseur simple',T10,White);
     deplacerCurseurXY(41,27);
-    texteAtemps('- 3 Potions simples',10,White);
+    texteAtemps('- 3 Potions simples',T10,White);
+    deplacerCurseurXY(60-9,1);
+    texteAtemps('Cela vous convient ?',T30,White);
+    deplacerCurseurXY(60-21,2);
+    texteAtemps('(Une fois accepte, plus de retour arriere)',T100,Red);
 
 end;
 
-// 120 de largeur
 
+
+procedure interfaceSaisieNom();
+begin
+     deplacerCurseurXY(15,4);
+     write('Ecrivez votre nom : (20 lettres MAX)');
+     deplacerCurseurXY(15,6);
+     write(getNomActuelle());
+     deplacerCurseurXY(15,8);
+     write('Votre nom est "');
+     texteEnCouleur(getNomActuelle(),Red);
+     texteEnCouleur('"',White);
+     deplacerCurseurXY(15,9);
+     write('Correcte?');
+end;
+
+procedure interfaceSaisieSexe();
+begin
+     deplacerCurseurXY(15,4);
+     write('Quel est votre sexe, ');
+     texteEnCouleur(getNomActuelle(),Red);
+     texteEnCouleur('?',White);
+     deplacerCurseurXY(15,5);
+     write('(30 Lettres MAX)');
+     deplacerCurseurXY(15,7);
+     write(getSexeActuelle());
+     deplacerCurseurXY(15,9);
+     write('Votre sexe est "');
+     texteEnCouleur(getSexeActuelle(),Yellow);
+     texteEnCouleur('"',White);
+     deplacerCurseurXY(15,10);
+     write('Correcte?');
+     deplacerCurseurXY(81,6);
+     couleurTexte(Black);
+     write(getNomActuelle());
+end;
+
+procedure interfaceSaisieTaille();
+begin
+     deplacerCurseurXY(15,4);
+     write('Quel est votre taille (cm), ');
+     texteEnCouleur(getNomActuelle(),Red);
+     texteEnCouleur('?',White);
+     deplacerCurseurXY(15,5);
+     write('(au moins 100cm et pas plus de 230cm)');
+     deplacerCurseurXY(15,7);
+     write(IntToStr(getTailleActuelle()));
+     deplacerCurseurXY(15,9);
+     write('Votre taille est de ');
+     texteEnCouleur(IntToStr(getTailleActuelle()),LightMagenta);
+     texteEnCouleur(' cm',White);
+     deplacerCurseurXY(15,10);
+     write('Correcte?');
+     deplacerCurseurXY(81,6);
+     couleurTexte(Black);
+     write(getNomActuelle());
+     deplacerCurseurXY(81,8);
+     couleurTexte(Black);
+     write(getSexeActuelle());
+end;
 
 procedure saisieNom();
 var nomsaisie : string;
-    rep : string;
+    rep : integer = 1;
+    ch : Char;
     correcte: boolean = False;
+    cho : boolean = False;
 
 begin
      while (correcte = False) do
@@ -118,25 +219,70 @@ begin
                            texteAtemps(getNomActuelle(),50,Red);
                            texteAtemps('"',25,White);
                            deplacerCurseurXY(15,9);
-                           texteAtemps('Correcte? (O/N)',40,White);
-                           deplacerCurseurXY(15,10);
-                           readln(rep);
-                           if (rep = 'O') or (rep = 'o') then
+                           texteAtemps('Correcte?',40,White);
+                           cho := True;
+                           choixONInterface();
+                           interfaceSaisieNom();
+                           deplacerCurseurXY(24,18);
+                           texteEnCouleur('Oui',Red);
+                           deplacerCurseurXY(44,18);
+                           texteEnCouleur('Non',White);
+                           deplacerCurseurXY(27,18);
+                           while (cho = True) do
+                                 begin
+                                     ch := ReadKey;
+                                     case ch of
+                                          #75 : if (rep < 2) then
+                                                   rep := rep + 1
+                                                else
+                                                   rep := 1;
+                                          #77 : if (rep > 1) then
+                                                   rep := rep - 1
+                                                else
+                                                   rep := 2;
+                                          #13 : cho := False;
+                                     end;
+
+
+
+                                     if (rep = 1) then
+                                        begin
+                                            choixONInterface();
+                                            interfaceSaisieNom();
+                                            deplacerCurseurXY(24,18);
+                                            texteEnCouleur('Oui',Red);
+                                            deplacerCurseurXY(44,18);
+                                            texteEnCouleur('Non',White);
+                                            deplacerCurseurXY(27,18);
+                                        end
+                                     else
+                                         begin
+                                            choixONInterface();
+                                            interfaceSaisieNom();
+                                            deplacerCurseurXY(24,18);
+                                            texteEnCouleur('Oui',White);
+                                            deplacerCurseurXY(44,18);
+                                            texteEnCouleur('Non',Red);
+                                         end;
+                                 end;
+                           if (rep = 1) then
                               correcte := True
-                           else;
+                           else
+                              rep := 1;
+
                       end
                       else;
                   end;
            end;
-
-     saisieSexe();
-
+     saisieSexe()
 end;
 
 procedure saisieSexe();
 var sexesaisie : string;
-    rep : string;
+    rep : integer = 1;
+    ch : Char;
     correcte: boolean = False;
+    cho : boolean = False;
 begin
      while (correcte = False) do
            begin
@@ -162,45 +308,91 @@ begin
                            texteAtemps(getSexeActuelle(),50,Yellow);
                            texteAtemps('"',25,White);
                            deplacerCurseurXY(15,10);
-                           texteAtemps('Correcte? (O/N)',40,White);
-                           deplacerCurseurXY(15,11);
-                           readln(rep);
-                           if (rep = 'O') or (rep = 'o') then
-                              begin
-                              // Oui c'est long.
-                              case sexesaisie of 'homme','Homme','Femme','femme','Garçon','garçon','garcon','Garcon' :
+                           texteAtemps('Correcte?',40,White);
+                           cho := True;
+                           choixONInterface();
+                           interfaceSaisieSexe();
+                           deplacerCurseurXY(24,18);
+                           texteEnCouleur('Oui',Red);
+                           deplacerCurseurXY(44,18);
+                           texteEnCouleur('Non',White);
+                           deplacerCurseurXY(27,18);
+                           while (cho= True) do
                                  begin
-                                      correcte := True;
-                                 end
-                              else
-                                 begin
-                                      deplacerCurseurXY(15,11);
-                                      texteAtemps(getSexeActuelle,30,Yellow);
-                                      texteAtemps('... ',700,Yellow);
-                                      deplacerCurseurXY(15,12);
-                                      texteAtemps('Je ne connaissais pas ce sexe...',15,White);
-                                      deplacerCurseurXY(15,13);
-                                      texteAtemps('Mais passons.',30,White);
-                                      readln();
-                                 end
-                              end;
-                              correcte := True
-                           end
-                           else;
+                                      ch := ReadKey;
+                                      case ch of
+                                           #75 : if (rep < 2) then
+                                                    rep := rep + 1
+                                                 else
+                                                    rep := 1;
+                                           #77 : if (rep > 1) then
+                                                    rep := rep - 1
+                                                 else
+                                                    rep := 2;
+                                          #13 : cho := False;
+                                      end;
 
+
+
+                                      if (rep = 1) then
+                                              begin
+                                                   choixONInterface();
+                                                   interfaceSaisieSexe();
+                                                   deplacerCurseurXY(24,18);
+                                                   texteEnCouleur('Oui',Red);
+                                                   deplacerCurseurXY(44,18);
+                                                   texteEnCouleur('Non',White);
+                                                   deplacerCurseurXY(27,18);
+                                              end
+                                              else
+                                                  begin
+                                                       choixONInterface();
+                                                       interfaceSaisieSexe();
+                                                       deplacerCurseurXY(24,18);
+                                                       texteEnCouleur('Oui',White);
+                                                       deplacerCurseurXY(44,18);
+                                                       texteEnCouleur('Non',Red);
+                                                  end;
+                                 end;
+                                 if (rep = 1) then
+                                    begin
+                                         case sexesaisie of 'homme','Homme','Femme','femme','Garçon','garçon','garcon','Garcon' :
+                                              begin
+                                                  correcte := True;
+                                              end
+                                              else
+                                                  begin
+                                                       creationInterfaceFormulaire();
+                                                       interfaceSaisieSexe();
+                                                       deplacerCurseurXY(15,11);
+                                                       texteAtemps(getSexeActuelle,30,Yellow);
+                                                       texteAtemps('... ',700,Yellow);
+                                                       deplacerCurseurXY(15,12);
+                                                       texteAtemps('Je ne connaissais pas ce sexe...',15,White);
+                                                       deplacerCurseurXY(15,13);
+                                                       texteAtemps('Mais passons.',30,White);
+                                                       ReadKey();
+                                                       correcte := True;
+                                                  end;
+                                         end;
+                                    end
+                                    else
+                                        rep := 1;
                       end
                       else;
                   end;
            end;
-       saisieTaille();
+     saisieTaille();
 end;
 
 
 procedure saisieTaille();
 
 var taillesaisie : integer;
-    rep : string;
+    rep : integer = 1;
+    ch : Char;
     correcte: boolean = False;
+    cho : boolean = False;
 begin
           while (correcte = False) do
            begin
@@ -227,77 +419,160 @@ begin
                         texteAtemps(IntToStr(getTailleActuelle()),50,LightMagenta);
                         texteAtemps(' cm',25,White);
                         deplacerCurseurXY(15,10);
-                        texteAtemps('Correcte? (O/N)',40,White);
+                        texteAtemps('Correcte?',40,White);
                         deplacerCurseurXY(15,11);
-                        readln(rep);
-                        if (rep = 'O') or (rep = 'o') then
-                                correcte := true
-                        else;
+                        cho := True;
+                        choixONInterface();
+                        interfaceSaisieTaille();
+                        deplacerCurseurXY(24,18);
+                        texteEnCouleur('Oui',Red);
+                        deplacerCurseurXY(44,18);
+                        texteEnCouleur('Non',White);
+                        deplacerCurseurXY(27,18);
+                        while (cho = True) do
+                              begin
+                                   ch := ReadKey;
+                                   case ch of
+                                        #75 : if (rep < 2) then
+                                                 rep := rep + 1
+                                              else
+                                                 rep := 1;
+                                        #77 : if (rep > 1) then
+                                                 rep := rep - 1
+                                              else
+                                                 rep := 2;
+                                        #13 : cho := False;
+                                   end;
+
+
+
+                                   if (rep = 1) then
+                                      begin
+                                           choixONInterface();
+                                           interfaceSaisieTaille();
+                                           deplacerCurseurXY(24,18);
+                                           texteEnCouleur('Oui',Red);
+                                           deplacerCurseurXY(44,18);
+                                           texteEnCouleur('Non',White);
+                                           deplacerCurseurXY(27,18);
+                                       end
+                                   else
+                                      begin
+                                          choixONInterface();
+                                          interfaceSaisieTaille();
+                                          deplacerCurseurXY(24,18);
+                                          texteEnCouleur('Oui',White);
+                                          deplacerCurseurXY(44,18);
+                                          texteEnCouleur('Non',Red);
+                                      end;
+                                end;
+                        if (rep = 1) then
+                            correcte := True
+                        else
+                            rep := 1;
                   end
-               else
-                   begin
-                   end;
+                  else;
 
            end;
-
            resume();
-
 end;
 
 procedure resume();
-var rep : string;
+var rep : integer = 1;
+    ch : Char;
+    correcte : Boolean = False;
+
 begin
-     CreationInterfaceResume();
+     creationInterfaceResume(True);
+     choixONInterface2();
+     deplacerCurseurXY(94,12);
+     texteEnCouleur('Oui',Red);
+     deplacerCurseurXY(94,18);
+     texteEnCouleur('Non',White);
+     deplacerCurseurXY(97,12);
+     correcte := True;
+     while (correcte = True) do
+           begin
+               ch := ReadKey;
+               case ch of
+                    #80 : if (rep < 2) then
+                             rep := rep + 1
+                          else
+                             rep := 1;
+                    #72 : if (rep > 1) then
+                             rep := rep - 1
+                          else
+                             rep := 2;
+                    #13 : correcte := False;
+               end;
 
-     deplacerCurseurXY(60-12,1);
-     texteAtemps('Cela vous convient ? (O/N)',30,White);
-     deplacerCurseurXY(60-21,2);
-     texteAtemps('(Une fois accepter, plus de retour arriere)',100,Red);
 
-     deplacerCurseurXY(85,15);
-     texteAtemps('Reponse : ',10,Yellow);
-     readln(rep);
-     if (rep = 'O') or (rep = 'o') then
-     else
-       saisieNom();
+
+               if (rep = 1) then
+                  begin
+                      choixONInterface2();
+                      deplacerCurseurXY(94,12);
+                      texteEnCouleur('Oui',Red);
+                      deplacerCurseurXY(94,18);
+                      texteEnCouleur('Non',White);
+                      deplacerCurseurXY(97,12);
+                  end
+               else
+                   begin
+                      choixONInterface2();
+                      deplacerCurseurXY(94,12);
+                      texteEnCouleur('Oui',White);
+                      deplacerCurseurXY(94,18);
+                      texteEnCouleur('Non',Red);
+                      deplacerCurseurXY(97,18);                                                                                                                                                                 ;
+                   end;
+
+
+           end;
+    if (rep = 1) then
+        miseAjourPersonnage(1);
+        // Village
+    else
+       creationPersonnage();
 end;
+
 
 procedure creationPersonnage();
 
 begin
 
-
+     changerTailleConsole(120,31);
      creationInterfaceDialogue();
      deplacerCurseurXY(60-6,15);
      texteAtemps('Aventurier.',40,White);
-     readln();
+     ReadKey;
 
      creationInterfaceDialogue();
      deplacerCurseurXY(60-34,15);
      texteAtemps('Vous faites partie de la sixieme grande expedition du nouveau monde.',20,White);
-     readln();
+     ReadKey;
 
      creationInterfaceDialogue();
      deplacerCurseurXY(60-23,15);
      texteAtemps('Une nouvelle ile mysterieuse a ete decouverte :',30,White);
-     readln();
+     ReadKey;
 
      creationInterfaceDialogue();
      deplacerCurseurXY(60-4,15);
      texteAtemps('Aeternum',60,LightCyan);
-     readln();
+     ReadKey;
 
      creationInterfaceDialogue();
      deplacerCurseurXY(60-32,15);
      texteAtemps('Vous y etes envoye pour decouvrir tous les ',25,White);
      texteAtemps('mysteres de cette ile.',25,Cyan);
-     readln();
+     ReadKey;
 
      creationInterfaceDialogue();
      deplacerCurseurXY(60-37,15);
      texteAtemps('Mais avant tout, j''ai besoin que vous remplissiez cette ',25,White);
      texteAtemps('fiche d''information.',25,Red);
-     readln();
+     ReadKey;
 
      saisieNom();
 

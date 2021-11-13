@@ -37,6 +37,10 @@ function calculADBase() : Integer;
 
 
 // Création personnage
+procedure miseAjourPersonnage (valeur : integer);
+
+function getPersonnageActuelle () : String;
+
 procedure miseAjourNom(valeur : String);
 
 function getNomActuelle() : String;
@@ -61,6 +65,7 @@ var lvlglobal : Text;
     Nomact  : Text;
     Sexeact : Text;
     Tailleact : Text;
+    Personnageglobal : Text;
 
 
 //________________________________________________ Zone Lvl
@@ -156,6 +161,24 @@ end;
 
 //__________________________________________________ Création personnage
 
+procedure miseAjourPersonnage(valeur : String);
+begin
+  Assign(Personnageglobal,'C:\MHNewWorld\personnage.txt');
+  Rewrite(Personnageglobal);
+  Writeln(Personnageglobal,valeur) ;
+  Close(Personnageglobal);
+end;
+
+function getPersonnageActuelle() : String;
+var personnage : string;
+begin
+     Assign(Personnageglobal,'C:\MHNewWorld\personnage.txt');
+     reset(Personnageglobal);
+     Readln(Personnageglobal,personnage);
+     getPersonnageActuelle := personnage;
+     Close(Personnageglobal);
+end;
+
 procedure miseAjourNom(valeur : String);
 begin
   Assign(Nomact,'C:\MHNewWorld\nom.txt');
@@ -203,7 +226,7 @@ end;
 function getTailleActuelle() : Integer;
 var taille : string;
 begin
-     Assign(Tailleact,'C:\MHNewWorld\sexe.txt');
+     Assign(Tailleact,'C:\MHNewWorld\taille.txt');
      reset(Tailleact);
      Readln(Tailleact,taille);
      getTailleActuelle := StrToInt(taille);

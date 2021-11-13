@@ -14,7 +14,7 @@ procedure checkUp();
 
 implementation
 uses
-  Crt, Classes, SysUtils, Personnage;
+  Classes, SysUtils, Personnage;
 
 procedure checkUp ();
 begin
@@ -24,6 +24,7 @@ begin
              miseAjourLVL(1);
              miseAjourExp(0);
              miseAjourOr(0);
+             miseAjourPersonnage(0)
         end;
 
 end;
