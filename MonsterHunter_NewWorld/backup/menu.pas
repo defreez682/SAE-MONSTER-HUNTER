@@ -88,6 +88,10 @@ begin
      dessinerCadreXY (50,21,70,25,double,White,Black);
      deplacerCurseurXY(60-3,23);
      texteAtemps('Quitter',vitesse,White);
+     deplacerCurseurXY(60-26,26);
+     texteAtemps('(pour naviguer, utiliser les touches directionnelles',0,DarkGray);
+     deplacerCurseurXY(60-18,27);
+     texteAtemps('et entree pour valider votre action)',0,DarkGray);
 
 end;
 
@@ -191,8 +195,7 @@ begin
                  end;
           end;
     if (rep = 1) then
-       //menuAvertissement();
-       saisieTaille();
+       menuAvertissement();
     if (rep = 2) then
        // Fonction qui ammène au village
     if (rep = 3) then

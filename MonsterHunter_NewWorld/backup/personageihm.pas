@@ -91,8 +91,8 @@ begin
     texteAtemps(getSexeActuelle(),T20,White);
     deplacerCurseurXY(41,9);
     texteAtemps('Taille : ',T20,White);
-    texteAtemps(IntToStr(getTailleActuelle()),T20,White);
-    texteAtemps(' cm',T20,White);
+    texteAtemps(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),T20,White);
+    texteAtemps(' m',T20,White);
     deplacerCurseurXY(41,10);
     texteAtemps('_______________________________________',T5,White);
     deplacerCurseurXY(41,12);
@@ -173,16 +173,14 @@ end;
 procedure interfaceSaisieTaille();
 begin
      deplacerCurseurXY(15,4);
-     write('Quel est votre taille (cm), ');
+     write('Quel est votre taille (m), ');
      texteEnCouleur(getNomActuelle(),Red);
      texteEnCouleur('?',White);
-     deplacerCurseurXY(15,5);
-     write('(au moins 100cm et pas plus de 290cm)');
-     deplacerCurseurXY(15,9);
-     write('Votre taille est de ');
-     texteEnCouleur(IntToStr(getTailleActuelle()),LightMagenta);
-     texteEnCouleur(' cm',White);
      deplacerCurseurXY(15,10);
+     write('Votre taille est de ');
+     texteEnCouleur(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),LightMagenta);
+     texteEnCouleur(' m',White);
+     deplacerCurseurXY(15,11);
      write('Correcte?');
      deplacerCurseurXY(81,6);
      couleurTexte(Black);
@@ -387,6 +385,7 @@ end;
 procedure saisieTaille();
 
 var taillesaisie : integer = 100;
+    taillesaisieaff : real;
     rep : integer = 1;
     ch : Char;
     correcte: boolean = False;
@@ -404,14 +403,15 @@ begin
                couleurTexte(Black);
                write(getSexeActuelle());
                deplacerCurseurXY(15,4);
-               texteAtemps('Quel est votre taille (cm), ',25,White);
+               texteAtemps('Quel est votre taille (m), ',25,White);
                texteAtemps(getNomActuelle(),25,Red);
                texteAtemps('?',25,White);
-               deplacerCurseurXY(15,5);
-               texteAtemps('(au moins 100cm et pas plus de 290cm)',10,White);
                choixtaille := True;
-               texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
-               texteXY(15,7,'[-------------------------------------]',White);
+               taillesaisieaff := taillesaisie/100;
+               texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
+               texteXY(14,7,'[---------------------------------------]',White);
+               texteXY(13,8,'1.00',White);
+               texteXY(52,8,'2.90',White);
                texteXY(barx,7,'|',Red);
                while (choixtaille = True) do
                      begin
@@ -424,7 +424,10 @@ begin
                                               barx := barx - 2;
                                        end
                                    else
-                                       taillesaisie := 100;
+                                       begin
+                                            taillesaisie := 100;
+                                            barx := 15;
+                                       end;
                              #77 : if (taillesaisie < 290) then
                                       begin
                                            taillesaisie := taillesaisie + 1;
@@ -432,31 +435,40 @@ begin
                                               barx := barx + 2;
                                       end
                                    else
-                                       taillesaisie := 290;
+                                       begin
+                                            taillesaisie := 290;
+                                            barx := 53;
+                                       end;
                              #13 : choixtaille := False;
                         end;
 
-                             texteXY(15,4,'Quel est votre taille (cm), ',White);
+                             texteXY(15,4,'Quel est votre taille (m), ',White);
                              texteEnCouleur(getNomActuelle(),Red);
-                             texteEnCouleur('?',White);
-                             texteXY(15,5,'(au moins 100cm et pas plus de 290cm)',White);
-                             texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
-                             texteXY(15,7,'[-------------------------------------]',White);
+                             texteEnCouleur('?',White);;
+                             taillesaisieaff := taillesaisie/100;
+                             texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
+                             texteXY(14,7,'[---------------------------------------]',White);
+                             texteXY(13,8,'1.00',White);
+                             texteXY(52,8,'2.90',White);
                              texteXY(barx,7,'|',Red);
 
 
                      end;
                miseAjourTaille(taillesaisie);
-               deplacerCurseurXY(15,9);
-               texteAtemps('Votre taille est de ',25,White);
-               texteAtemps(IntToStr(getTailleActuelle()),50,LightMagenta);
-               texteAtemps(' cm',25,White);
                deplacerCurseurXY(15,10);
-               texteAtemps('Correcte?',40,White);
+               texteAtemps('Votre taille est de ',25,White);
+               texteAtemps(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),50,LightMagenta);
+               texteAtemps(' m',25,White);
                deplacerCurseurXY(15,11);
+               texteAtemps('Correcte?',40,White);
                cho := True;
                choixONInterface();
                interfaceSaisieTaille();
+               texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
+               texteXY(15,7,'[---------------------------------------]',White);
+               texteXY(13,8,'1.00',White);
+               texteXY(52,8,'2.90',White);
+               texteXY(barx,7,'|',Red);
                deplacerCurseurXY(24,18);
                texteEnCouleur('Oui',Red);
                deplacerCurseurXY(44,18);
@@ -483,8 +495,10 @@ begin
                              begin
                                   choixONInterface();
                                   interfaceSaisieTaille();
-                                  texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
-                                  texteXY(15,7,'[-------------------------------------]',White);
+                                  texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
+                                  texteXY(15,7,'[---------------------------------------]',White);
+                                  texteXY(13,8,'1.00',White);
+                                  texteXY(52,8,'2.90',White);
                                   texteXY(barx,7,'|',Red);
                                   deplacerCurseurXY(24,18);
                                   texteEnCouleur('Oui',Red);
@@ -496,8 +510,10 @@ begin
                               begin
                                    choixONInterface();
                                    interfaceSaisieTaille();
-                                   texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
-                                   texteXY(15,7,'[-------------------------------------]',White);
+                                   texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
+                                   texteXY(15,7,'[---------------------------------------]',White);
+                                   texteXY(13,8,'1.00',White);
+                                   texteXY(52,8,'2.90',White);
                                    texteXY(barx,7,'|',Red);
                                    deplacerCurseurXY(24,18);
                                    texteEnCouleur('Oui',White);
@@ -579,7 +595,7 @@ procedure creationPersonnage();
 
 begin
 
-     changerTailleConsole(120,31);
+     //changerTailleConsole(120,31);
      creationInterfaceDialogue();
      deplacerCurseurXY(60-6,15);
      texteAtemps('Aventurier.',40,White);
