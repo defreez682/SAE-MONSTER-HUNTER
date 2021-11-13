@@ -177,9 +177,7 @@ begin
      texteEnCouleur(getNomActuelle(),Red);
      texteEnCouleur('?',White);
      deplacerCurseurXY(15,5);
-     write('(au moins 100cm et pas plus de 230cm)');
-     deplacerCurseurXY(15,7);
-     write(IntToStr(getTailleActuelle()));
+     write('(au moins 100cm et pas plus de 290cm)');
      deplacerCurseurXY(15,9);
      write('Votre taille est de ');
      texteEnCouleur(IntToStr(getTailleActuelle()),LightMagenta);
@@ -388,11 +386,13 @@ end;
 
 procedure saisieTaille();
 
-var taillesaisie : integer;
+var taillesaisie : integer = 100;
     rep : integer = 1;
     ch : Char;
     correcte: boolean = False;
     cho : boolean = False;
+    choixtaille : boolean = False;
+    barx : integer = 15;
 begin
           while (correcte = False) do
            begin
@@ -408,70 +408,111 @@ begin
                texteAtemps(getNomActuelle(),25,Red);
                texteAtemps('?',25,White);
                deplacerCurseurXY(15,5);
-               texteAtemps('(au moins 100cm et pas plus de 230cm)',10,White);
-               deplacerCurseurXY(15,7);
-               readln(taillesaisie);
-               if (taillesaisie > 100) or (taillesaisie < 230) then
-                  begin
-                        miseAjourTaille(taillesaisie);
-                        deplacerCurseurXY(15,9);
-                        texteAtemps('Votre taille est de ',25,White);
-                        texteAtemps(IntToStr(getTailleActuelle()),50,LightMagenta);
-                        texteAtemps(' cm',25,White);
-                        deplacerCurseurXY(15,10);
-                        texteAtemps('Correcte?',40,White);
-                        deplacerCurseurXY(15,11);
-                        cho := True;
-                        choixONInterface();
-                        interfaceSaisieTaille();
-                        deplacerCurseurXY(24,18);
-                        texteEnCouleur('Oui',Red);
-                        deplacerCurseurXY(44,18);
-                        texteEnCouleur('Non',White);
-                        deplacerCurseurXY(27,18);
-                        while (cho = True) do
-                              begin
-                                   ch := ReadKey;
-                                   case ch of
-                                        #75 : if (rep < 2) then
-                                                 rep := rep + 1
-                                              else
-                                                 rep := 1;
-                                        #77 : if (rep > 1) then
-                                                 rep := rep - 1
-                                              else
-                                                 rep := 2;
-                                        #13 : cho := False;
-                                   end;
-
-
-
-                                   if (rep = 1) then
-                                      begin
-                                           choixONInterface();
-                                           interfaceSaisieTaille();
-                                           deplacerCurseurXY(24,18);
-                                           texteEnCouleur('Oui',Red);
-                                           deplacerCurseurXY(44,18);
-                                           texteEnCouleur('Non',White);
-                                           deplacerCurseurXY(27,18);
+               texteAtemps('(au moins 100cm et pas plus de 290cm)',10,White);
+               choixtaille := True;
+               texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
+               texteXY(15,7,'[-------------------------------------]',White);
+               texteXY(barx,7,'|',Red);
+               while (choixtaille = True) do
+                     begin
+                        ch := ReadKey;
+                        case ch of
+                             #75 : if (taillesaisie > 100) then
+                                       begin
+                                           taillesaisie := taillesaisie - 1;
+                                           if (taillesaisie mod 10 = 0) then
+                                              barx := barx - 2;
                                        end
                                    else
+                                       taillesaisie := 100;
+                             #77 : if (taillesaisie < 290) then
                                       begin
-                                          choixONInterface();
-                                          interfaceSaisieTaille();
-                                          deplacerCurseurXY(24,18);
-                                          texteEnCouleur('Oui',White);
-                                          deplacerCurseurXY(44,18);
-                                          texteEnCouleur('Non',Red);
-                                      end;
-                                end;
-                        if (rep = 1) then
-                            correcte := True
-                        else
-                            rep := 1;
-                  end
-                  else;
+                                           taillesaisie := taillesaisie + 1;
+                                           if (taillesaisie mod 10 = 0) then
+                                              barx := barx + 2;
+                                      end
+                                   else
+                                       taillesaisie := 290;
+                             #13 : choixtaille := False;
+                        end;
+
+                             texteXY(15,4,'Quel est votre taille (cm), ',White);
+                             texteEnCouleur(getNomActuelle(),Red);
+                             texteEnCouleur('?',White);
+                             texteXY(15,5,'(au moins 100cm et pas plus de 290cm)',White);
+                             texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
+                             texteXY(15,7,'[-------------------------------------]',White);
+                             texteXY(barx,7,'|',Red);
+
+
+                     end;
+               miseAjourTaille(taillesaisie);
+               deplacerCurseurXY(15,9);
+               texteAtemps('Votre taille est de ',25,White);
+               texteAtemps(IntToStr(getTailleActuelle()),50,LightMagenta);
+               texteAtemps(' cm',25,White);
+               deplacerCurseurXY(15,10);
+               texteAtemps('Correcte?',40,White);
+               deplacerCurseurXY(15,11);
+               cho := True;
+               choixONInterface();
+               interfaceSaisieTaille();
+               texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
+               texteXY(15,7,'[-------------------------------------]',White);
+               texteXY(barx,7,'|',Red);
+               deplacerCurseurXY(24,18);
+               texteEnCouleur('Oui',Red);
+               deplacerCurseurXY(44,18);
+               texteEnCouleur('Non',White);
+               deplacerCurseurXY(27,18);
+               while (cho = True) do
+                     begin
+                          ch := ReadKey;
+                          case ch of
+                               #75 : if (rep < 2) then
+                                        rep := rep + 1
+                                     else
+                                        rep := 1;
+                               #77 : if (rep > 1) then
+                                        rep := rep - 1
+                                     else
+                                        rep := 2;
+                               #13 : cho := False;
+                          end;
+
+
+
+                          if (rep = 1) then
+                             begin
+                                  choixONInterface();
+                                  interfaceSaisieTaille();
+                                  texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
+                                  texteXY(15,7,'[-------------------------------------]',White);
+                                  texteXY(barx,7,'|',Red);
+                                  deplacerCurseurXY(24,18);
+                                  texteEnCouleur('Oui',Red);
+                                  deplacerCurseurXY(44,18);
+                                  texteEnCouleur('Non',White);
+                                  deplacerCurseurXY(27,18);
+                             end
+                          else
+                              begin
+                                   choixONInterface();
+                                   interfaceSaisieTaille();
+                                   texteXY(33,6,IntToStr(taillesaisie),LightMagenta);
+                                   texteXY(15,7,'[-------------------------------------]',White);
+                                   texteXY(barx,7,'|',Red);
+                                   deplacerCurseurXY(24,18);
+                                   texteEnCouleur('Oui',White);
+                                   deplacerCurseurXY(44,18);
+                                   texteEnCouleur('Non',Red);
+                              end;
+                     end;
+               if (rep = 1) then
+                   correcte := True
+               else
+                   rep := 1;
+
 
            end;
            resume();

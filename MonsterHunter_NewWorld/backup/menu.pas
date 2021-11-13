@@ -133,10 +133,12 @@ begin
               ch := ReadKey;
               case ch of
                   #80 : if not (StrToInt(getPersonnageActuelle()) = 1) then
+                            begin
                                 if (rep < 3) then
                                    rep := rep + 2
                                 else
                                    rep := 1;
+                            end
                         else
                             begin
                                 if (rep < 3) then
@@ -146,10 +148,12 @@ begin
 
                             end;
                   #72 : if not (StrToInt(getPersonnageActuelle()) = 1) then
+                           begin
                                 if (rep > 1) then
                                    rep := rep - 2
                                 else
                                    rep := 3;
+                           end
                         else
                            begin
                                 if (rep > 1) then
@@ -187,7 +191,8 @@ begin
                  end;
           end;
     if (rep = 1) then
-       menuAvertissement();
+       //menuAvertissement();
+       saisieTaille();
     if (rep = 2) then
        // Fonction qui ammène au village
     if (rep = 3) then
