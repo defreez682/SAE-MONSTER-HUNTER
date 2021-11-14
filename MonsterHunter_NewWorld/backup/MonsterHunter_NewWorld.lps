@@ -8,8 +8,8 @@
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="13"/>
-        <UsageCount Value="108"/>
+        <CursorPos X="16"/>
+        <UsageCount Value="110"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -17,9 +17,9 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="75"/>
-        <CursorPos X="71" Y="92"/>
-        <UsageCount Value="37"/>
+        <TopLine Value="170"/>
+        <CursorPos X="26" Y="199"/>
+        <UsageCount Value="39"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -29,7 +29,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="12"/>
         <CursorPos X="18" Y="43"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -39,7 +39,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="23"/>
         <CursorPos X="26" Y="52"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="77"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -48,7 +48,7 @@
         <UnitName Value="gestionFichier"/>
         <EditorIndex Value="7"/>
         <CursorPos X="13" Y="28"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="73"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -56,9 +56,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="personageIHM"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="516"/>
-        <CursorPos Y="597"/>
-        <UsageCount Value="68"/>
+        <TopLine Value="10"/>
+        <CursorPos Y="59"/>
+        <FoldState Value=" T3P045 pjHjX0{F1]AZm60{G1s"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -67,15 +68,15 @@
         <UnitName Value="crtPerso"/>
         <EditorIndex Value="6"/>
         <CursorPos X="21" Y="238"/>
-        <UsageCount Value="47"/>
+        <UsageCount Value="49"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
         <Filename Value="GestionEcran.pas"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="247"/>
-        <CursorPos X="70" Y="277"/>
-        <UsageCount Value="55"/>
+        <TopLine Value="44"/>
+        <CursorPos X="27" Y="59"/>
+        <UsageCount Value="56"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
@@ -98,123 +99,127 @@
         <UsageCount Value="6"/>
       </Unit10>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="MonsterHunter_NewWorld.pas"/>
-        <Caret Line="11" Column="21"/>
+        <Filename Value="personageihm.pas"/>
+        <Caret Line="427" Column="50" TopLine="408"/>
       </Position1>
       <Position2>
-        <Filename Value="menu.pas"/>
-        <Caret Line="150" Column="50" TopLine="122"/>
+        <Filename Value="personageihm.pas"/>
+        <Caret Line="444" Column="78" TopLine="419"/>
       </Position2>
       <Position3>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="431" Column="51" TopLine="415"/>
+        <Caret Line="436" Column="92" TopLine="417"/>
       </Position3>
       <Position4>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="396" Column="35" TopLine="280"/>
+        <Caret Line="391" Column="33" TopLine="280"/>
       </Position4>
       <Position5>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="422" Column="35" TopLine="404"/>
+        <Caret Line="435" Column="51" TopLine="417"/>
       </Position5>
       <Position6>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="427" Column="50" TopLine="408"/>
+        <Caret Line="440" Column="52" TopLine="422"/>
       </Position6>
       <Position7>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="444" Column="78" TopLine="419"/>
+        <Caret Line="429" Column="77" TopLine="414"/>
       </Position7>
       <Position8>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="436" Column="92" TopLine="417"/>
+        <Caret Line="439" Column="65" TopLine="417"/>
       </Position8>
       <Position9>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="391" Column="33" TopLine="280"/>
+        <Caret Line="452" Column="56" TopLine="434"/>
       </Position9>
       <Position10>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="435" Column="51" TopLine="417"/>
+        <Caret Line="411" Column="37" TopLine="393"/>
       </Position10>
       <Position11>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="440" Column="52" TopLine="422"/>
+        <Caret Line="440" Column="67" TopLine="414"/>
       </Position11>
       <Position12>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="429" Column="77" TopLine="414"/>
+        <Caret Line="442" Column="69" TopLine="419"/>
       </Position12>
       <Position13>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="439" Column="65" TopLine="417"/>
+        <Caret Line="441" Column="65" TopLine="421"/>
       </Position13>
       <Position14>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="452" Column="56" TopLine="434"/>
+        <Caret Line="453" Column="61" TopLine="421"/>
       </Position14>
       <Position15>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="411" Column="37" TopLine="393"/>
+        <Caret Line="442" Column="72" TopLine="421"/>
       </Position15>
       <Position16>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="440" Column="67" TopLine="414"/>
+        <Caret Line="461" Column="59" TopLine="445"/>
       </Position16>
       <Position17>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="442" Column="69" TopLine="419"/>
+        <Caret Line="440" Column="54" TopLine="425"/>
       </Position17>
       <Position18>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="441" Column="65" TopLine="421"/>
+        <Caret Line="514" Column="79" TopLine="446"/>
       </Position18>
       <Position19>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="453" Column="61" TopLine="421"/>
+        <Caret Line="411" Column="65" TopLine="390"/>
       </Position19>
       <Position20>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="442" Column="72" TopLine="421"/>
+        <Caret Line="448" Column="78" TopLine="427"/>
       </Position20>
       <Position21>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="461" Column="59" TopLine="445"/>
+        <Caret Line="466" Column="64" TopLine="445"/>
       </Position21>
       <Position22>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="440" Column="54" TopLine="425"/>
+        <Caret Line="497" Column="83" TopLine="476"/>
       </Position22>
       <Position23>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="514" Column="79" TopLine="446"/>
+        <Caret Line="435" Column="45" TopLine="405"/>
       </Position23>
       <Position24>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="411" Column="65" TopLine="390"/>
+        <Caret Line="182" Column="38" TopLine="31"/>
       </Position24>
       <Position25>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="448" Column="78" TopLine="427"/>
+        <Caret Line="190" Column="6" TopLine="176"/>
       </Position25>
       <Position26>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="466" Column="64" TopLine="445"/>
+        <Caret Line="474" Column="6" TopLine="492"/>
       </Position26>
       <Position27>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="497" Column="83" TopLine="476"/>
+        <Caret Line="131" Column="6" TopLine="118"/>
       </Position27>
       <Position28>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="435" Column="45" TopLine="405"/>
+        <Caret Line="502" Column="3" TopLine="389"/>
       </Position28>
       <Position29>
         <Filename Value="personageihm.pas"/>
-        <Caret Line="182" Column="38" TopLine="31"/>
+        <Caret Line="414" Column="23" TopLine="395"/>
       </Position29>
+      <Position30>
+        <Filename Value="personageihm.pas"/>
+        <Caret Line="423" Column="31" TopLine="405"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -55,14 +55,12 @@ begin
 
               if (rep = 1) then
                  begin
-                     creationChoixAvertissement(0);
                      texteXY(44,14,'Oui',Red);
                      texteXY(74,14,'Non',White);
                      deplacerCurseurXY(47,14);
                  end
               else
                   begin
-                      creationChoixAvertissement(0);
                       texteXY(44,14,'Oui',White);
                       texteXY(74,14,'Non',Red);
                   end;
@@ -171,28 +169,24 @@ begin
 
               if (rep = 1) then
                  begin
-
-                     creationMenuInterface(0);
-                     creationChoixMenuInterface(0);
-                     deplacerCurseurXY(60-12,13);
-                     write('>>');
-                     deplacerCurseurXY(60-13,13)
+                     texteXY(60-12,13,'>>',White);
+                     texteXY(60-12,23,'  ',White);
+                     texteXY(60-12,18,'  ',White);
+                     deplacerCurseurXY(60-13,13);
                  end;
               if (rep = 2) then
                  begin
-                     creationMenuInterface(0);
-                     creationChoixMenuInterface(0);
-                     deplacerCurseurXY(60-12,18);
-                     write('>>');
+                     texteXY(60-12,18,'>>',White);
+                     texteXY(60-12,23,'  ',White);
+                     texteXY(60-12,13,'  ',White);
                      deplacerCurseurXY(60-13,18);
                  end;
               if (rep = 3) then
                  begin
-                     creationMenuInterface(0);
-                     creationChoixMenuInterface(0);
-                     deplacerCurseurXY(60-12,23);
-                     write('>>');
-                     deplacerCurseurXY(60-13,23)
+                     texteXY(60-12,23,'>>',White);
+                     texteXY(60-12,13,'  ',White);
+                     texteXY(60-12,18,'  ',White);
+                     deplacerCurseurXY(60-13,23);
                  end;
           end;
     if (rep = 1) then

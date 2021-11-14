@@ -92,6 +92,7 @@ begin
      texteAtemps('(pour naviguer, utiliser les touches directionnelles',0,DarkGray);
      deplacerCurseurXY(60-18,27);
      texteAtemps('et entree pour valider votre action)',0,DarkGray);
+     couleurTexte(White);
 
 end;
 
@@ -170,28 +171,24 @@ begin
 
               if (rep = 1) then
                  begin
-
-                     creationMenuInterface(0);
-                     creationChoixMenuInterface(0);
-                     deplacerCurseurXY(60-12,13);
-                     write('>>');
-                     deplacerCurseurXY(60-13,13)
+                     texteXY(60-12,13,'>>',White);
+                     texteXY(60-12,23,'  ',White);
+                     texteXY(60-12,18,'  ',White);
+                     deplacerCurseurXY(60-13,13);
                  end;
               if (rep = 2) then
                  begin
-                     creationMenuInterface(0);
-                     creationChoixMenuInterface(0);
-                     deplacerCurseurXY(60-12,18);
-                     write('>>');
+                     texteXY(60-12,18,'>>',White);
+                     texteXY(60-12,23,'  ',White);
+                     texteXY(60-12,13,'  ',White);
                      deplacerCurseurXY(60-13,18);
                  end;
               if (rep = 3) then
                  begin
-                     creationMenuInterface(0);
-                     creationChoixMenuInterface(0);
-                     deplacerCurseurXY(60-12,23);
-                     write('>>');
-                     deplacerCurseurXY(60-13,23)
+                     texteXY(60-12,23,'>>',White);
+                     texteXY(60-12,13,'  ',White);
+                     texteXY(60-12,18,'  ',White);
+                     deplacerCurseurXY(60-13,23);
                  end;
           end;
     if (rep = 1) then

@@ -8,10 +8,7 @@ procedure choixONInterface();
 procedure choixONInterface2();
 procedure creationInterfaceDialogue();
 procedure creationInterfaceFormulaire();
-procedure CreationInterfaceResume(Vitesse : boolean);
-procedure interfaceSaisieNom();
 procedure interfaceSaisieSexe();
-procedure interfaceSaisieTaille();
 procedure creationPersonnage();
 procedure saisieNom();
 procedure saisieSexe();
@@ -28,18 +25,15 @@ uses
 
 procedure choixONInterface();
 begin
-     creationInterfaceFormulaire;
      dessinerCadreXY(20,16,30,20,simple,White,Black);
      dessinerCadreXY(40,16,50,20,simple,White,Black);
 end;
 
 procedure choixONInterface2();
 begin;
-     creationInterfaceResume(False);
      dessinerCadreXY(90,10,100,14,simple,White,Black);
      dessinerCadreXY(90,16,100,20,simple,White,Black);
 end;
-
 
 procedure creationInterfaceDialogue();
 begin
@@ -62,132 +56,18 @@ begin
      dessinerCadreXY(10,2,60,25,double,White,Black);
 end;
 
-procedure creationInterfaceResume(Vitesse : Boolean);
-var T10,T20,T5,T30,T100 : Integer;
-begin
-    if (Vitesse = True) then
-       begin
-            T10 := 10;
-            T20 := 20;
-            T5 := 5;
-            T30 := 30;
-            T100 := 100;
-       end
-    else
-        begin
-            T10 := 0;
-            T20 := 0;
-            T5 := 0;
-            T30 := 0;
-            T100 := 0;
-        end;
-    effacerEcran();
-    dessinerCadreXY(40,3,80,30,double,White,Black);
-    deplacerCurseurXY(41,5);
-    texteAtemps('Nom : ',T20,White);
-    texteAtemps(getNomActuelle(),T20,White);
-    deplacerCurseurXY(41,7);
-    texteAtemps('Sexe : ',T20,White);
-    texteAtemps(getSexeActuelle(),T20,White);
-    deplacerCurseurXY(41,9);
-    texteAtemps('Taille : ',T20,White);
-    texteAtemps(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),T20,White);
-    texteAtemps(' m',T20,White);
-    deplacerCurseurXY(41,10);
-    texteAtemps('_______________________________________',T5,White);
-    deplacerCurseurXY(41,12);
-    texteAtemps('Niveau : ',T20,White);
-    texteAtemps(IntToStr(getLvlActuelle()),T20,White);
-    deplacerCurseurXY(41,13);
-    texteAtemps('Experience necessaire avant niveau',T10,White);
-    deplacerCurseurXY(41,14);
-    texteAtemps('suivant : ',T10,White);
-    texteAtemps(IntToStr(calculLvlSuivant()),T10,White);
-    deplacerCurseurXY(41,15);
-    texteAtemps('_______________________________________',T5,White);
-    deplacerCurseurXY(41,17);
-    texteAtemps('Argent : ',T20,White);
-    texteAtemps(IntToStr(getOrActuelle()),T20,White);
-    deplacerCurseurXY(41,18);
-    texteAtemps('_______________________________________',T5,White);
-    deplacerCurseurXY(41,20);
-    texteAtemps('Equipement : ',T20,White);
-    deplacerCurseurXY(41,21);
-    texteAtemps('- Epee Basique',T10,White);
-    deplacerCurseurXY(41,22);
-    texteAtemps('- Casque de chasseur simple',T10,White);
-    deplacerCurseurXY(41,23);
-    texteAtemps('- Plastron de chasseur simple',T10,White);
-    deplacerCurseurXY(41,24);
-    texteAtemps('- Gants de chasseur simple',T10,White);
-    deplacerCurseurXY(41,25);
-    texteAtemps('- Taille de chasseur simple',T10,White);
-    deplacerCurseurXY(41,26);
-    texteAtemps('- Jambiere de chasseur simple',T10,White);
-    deplacerCurseurXY(41,27);
-    texteAtemps('- 3 Potions simples',T10,White);
-    deplacerCurseurXY(60-9,1);
-    texteAtemps('Cela vous convient ?',T30,White);
-    deplacerCurseurXY(60-21,2);
-    texteAtemps('(Une fois accepte, plus de retour arriere)',T100,Red);
-
-end;
-
-
-
-procedure interfaceSaisieNom();
-begin
-     deplacerCurseurXY(15,4);
-     write('Ecrivez votre nom : (20 lettres MAX)');
-     deplacerCurseurXY(15,6);
-     write(getNomActuelle());
-     deplacerCurseurXY(15,8);
-     write('Votre nom est "');
-     texteEnCouleur(getNomActuelle(),Red);
-     texteEnCouleur('"',White);
-     deplacerCurseurXY(15,9);
-     write('Correcte?');
-end;
-
 procedure interfaceSaisieSexe();
 begin
-     deplacerCurseurXY(15,4);
-     write('Quel est votre sexe, ');
+     texteXY(15,4,'Quel est votre sexe, ',White);
      texteEnCouleur(getNomActuelle(),Red);
      texteEnCouleur('?',White);
-     deplacerCurseurXY(15,5);
-     write('(30 Lettres MAX)');
-     deplacerCurseurXY(15,7);
-     write(getSexeActuelle());
-     deplacerCurseurXY(15,9);
-     write('Votre sexe est "');
+     texteXY(15,5,'(30 Lettres MAX)',White);
+     texteXY(15,7,getSexeActuelle(),White);
+     texteXY(15,9,'Votre sexe est "',White);
      texteEnCouleur(getSexeActuelle(),Yellow);
      texteEnCouleur('"',White);
-     deplacerCurseurXY(15,10);
-     write('Correcte?');
-     deplacerCurseurXY(81,6);
-     couleurTexte(Black);
-     write(getNomActuelle());
-end;
-
-procedure interfaceSaisieTaille();
-begin
-     deplacerCurseurXY(15,4);
-     write('Quel est votre taille (m), ');
-     texteEnCouleur(getNomActuelle(),Red);
-     texteEnCouleur('?',White);
-     deplacerCurseurXY(15,10);
-     write('Votre taille est de ');
-     texteEnCouleur(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),LightMagenta);
-     texteEnCouleur(' m',White);
-     deplacerCurseurXY(15,11);
-     write('Correcte?');
-     deplacerCurseurXY(81,6);
-     couleurTexte(Black);
-     write(getNomActuelle());
-     deplacerCurseurXY(81,8);
-     couleurTexte(Black);
-     write(getSexeActuelle());
+     texteXY(15,10,'Correcte?',White);
+     texteXY(81,6,getNomActuelle(),Black);
 end;
 
 procedure saisieNom();
@@ -218,11 +98,8 @@ begin
                            texteAtemps('Correcte?',40,White);
                            cho := True;
                            choixONInterface();
-                           interfaceSaisieNom();
-                           deplacerCurseurXY(24,18);
-                           texteEnCouleur('Oui',Red);
-                           deplacerCurseurXY(44,18);
-                           texteEnCouleur('Non',White);
+                           texteXY(24,18,'Oui',Red);
+                           texteXY(44,18,'Non',White);
                            deplacerCurseurXY(27,18);
                            while (cho = True) do
                                  begin
@@ -243,22 +120,14 @@ begin
 
                                      if (rep = 1) then
                                         begin
-                                            choixONInterface();
-                                            interfaceSaisieNom();
-                                            deplacerCurseurXY(24,18);
-                                            texteEnCouleur('Oui',Red);
-                                            deplacerCurseurXY(44,18);
-                                            texteEnCouleur('Non',White);
+                                            texteXY(24,18,'Oui',Red);
+                                            texteXY(44,18,'Non',White);
                                             deplacerCurseurXY(27,18);
                                         end
                                      else
                                          begin
-                                            choixONInterface();
-                                            interfaceSaisieNom();
-                                            deplacerCurseurXY(24,18);
-                                            texteEnCouleur('Oui',White);
-                                            deplacerCurseurXY(44,18);
-                                            texteEnCouleur('Non',Red);
+                                            texteXY(24,18,'Oui',White);
+                                            texteXY(44,18,'Non',Red);
                                          end;
                                  end;
                            if (rep = 1) then
@@ -307,11 +176,8 @@ begin
                            texteAtemps('Correcte?',40,White);
                            cho := True;
                            choixONInterface();
-                           interfaceSaisieSexe();
-                           deplacerCurseurXY(24,18);
-                           texteEnCouleur('Oui',Red);
-                           deplacerCurseurXY(44,18);
-                           texteEnCouleur('Non',White);
+                           texteXY(24,18,'Oui',Red);
+                           texteXY(44,18,'Non',White);
                            deplacerCurseurXY(27,18);
                            while (cho= True) do
                                  begin
@@ -332,23 +198,16 @@ begin
 
                                       if (rep = 1) then
                                               begin
-                                                   choixONInterface();
-                                                   interfaceSaisieSexe();
-                                                   deplacerCurseurXY(24,18);
-                                                   texteEnCouleur('Oui',Red);
-                                                   deplacerCurseurXY(44,18);
-                                                   texteEnCouleur('Non',White);
-                                                   deplacerCurseurXY(27,18);
+
+                                                  texteXY(24,18,'Oui',Red);
+                                                  texteXY(44,18,'Non',White);
+                                                  deplacerCurseurXY(27,18);
                                               end
-                                              else
-                                                  begin
-                                                       choixONInterface();
-                                                       interfaceSaisieSexe();
-                                                       deplacerCurseurXY(24,18);
-                                                       texteEnCouleur('Oui',White);
-                                                       deplacerCurseurXY(44,18);
-                                                       texteEnCouleur('Non',Red);
-                                                  end;
+                                      else
+                                              begin
+                                                 texteXY(24,18,'Oui',White);
+                                                 texteXY(44,18,'Non',Red);
+                                              end;
                                  end;
                                  if (rep = 1) then
                                     begin
@@ -380,7 +239,6 @@ begin
            end;
      saisieTaille();
 end;
-
 
 procedure saisieTaille();
 
@@ -463,16 +321,8 @@ begin
                texteAtemps('Correcte?',40,White);
                cho := True;
                choixONInterface();
-               interfaceSaisieTaille();
-               texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
-               texteXY(15,7,'[---------------------------------------]',White);
-               texteXY(13,8,'1.00',White);
-               texteXY(52,8,'2.90',White);
-               texteXY(barx,7,'|',Red);
-               deplacerCurseurXY(24,18);
-               texteEnCouleur('Oui',Red);
-               deplacerCurseurXY(44,18);
-               texteEnCouleur('Non',White);
+               texteXY(24,18,'Oui',Red);
+               texteXY(44,18,'Non',White);
                deplacerCurseurXY(27,18);
                while (cho = True) do
                      begin
@@ -493,32 +343,14 @@ begin
 
                           if (rep = 1) then
                              begin
-                                  choixONInterface();
-                                  interfaceSaisieTaille();
-                                  texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
-                                  texteXY(15,7,'[---------------------------------------]',White);
-                                  texteXY(13,8,'1.00',White);
-                                  texteXY(52,8,'2.90',White);
-                                  texteXY(barx,7,'|',Red);
-                                  deplacerCurseurXY(24,18);
-                                  texteEnCouleur('Oui',Red);
-                                  deplacerCurseurXY(44,18);
-                                  texteEnCouleur('Non',White);
+                                 texteXY(24,18,'Oui',Red);
+                                 texteXY(44,18,'Non',White);
                                   deplacerCurseurXY(27,18);
                              end
                           else
                               begin
-                                   choixONInterface();
-                                   interfaceSaisieTaille();
-                                   texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
-                                   texteXY(15,7,'[---------------------------------------]',White);
-                                   texteXY(13,8,'1.00',White);
-                                   texteXY(52,8,'2.90',White);
-                                   texteXY(barx,7,'|',Red);
-                                   deplacerCurseurXY(24,18);
-                                   texteEnCouleur('Oui',White);
-                                   deplacerCurseurXY(44,18);
-                                   texteEnCouleur('Non',Red);
+                                 texteXY(24,18,'Oui',White);
+                                 texteXY(44,18,'Non',Red);
                               end;
                      end;
                if (rep = 1) then
@@ -537,12 +369,58 @@ var rep : integer = 1;
     correcte : Boolean = False;
 
 begin
-     creationInterfaceResume(True);
+     effacerEcran();
+     dessinerCadreXY(40,3,80,30,double,White,Black);
+     deplacerCurseurXY(41,5);
+     texteAtemps('Nom : ',20,White);
+     texteAtemps(getNomActuelle(),20,White);
+     deplacerCurseurXY(41,7);
+     texteAtemps('Sexe : ',20,White);
+     texteAtemps(getSexeActuelle(),20,White);
+     deplacerCurseurXY(41,9);
+     texteAtemps('Taille : ',20,White);
+     texteAtemps(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),20,White);
+     texteAtemps(' m',20,White);
+     deplacerCurseurXY(41,10);
+     texteAtemps('_______________________________________',5,White);
+     deplacerCurseurXY(41,12);
+     texteAtemps('Niveau : ',20,White);
+     texteAtemps(IntToStr(getLvlActuelle()),20,White);
+     deplacerCurseurXY(41,13);
+     texteAtemps('Experience necessaire avant niveau',10,White);
+     deplacerCurseurXY(41,14);
+     texteAtemps('suivant : ',10,White);
+     texteAtemps(IntToStr(calculLvlSuivant()),10,White);
+     deplacerCurseurXY(41,15);
+     texteAtemps('_______________________________________',5,White);
+     deplacerCurseurXY(41,17);
+     texteAtemps('Argent : ',20,White);
+     texteAtemps(IntToStr(getOrActuelle()),20,White);
+     deplacerCurseurXY(41,18);
+     texteAtemps('_______________________________________',5,White);
+     deplacerCurseurXY(41,20);
+     texteAtemps('Equipement : ',20,White);
+     deplacerCurseurXY(41,21);
+     texteAtemps('- Epee Basique',10,White);
+     deplacerCurseurXY(41,22);
+     texteAtemps('- Casque de chasseur simple',10,White);
+     deplacerCurseurXY(41,23);
+     texteAtemps('- Plastron de chasseur simple',10,White);
+     deplacerCurseurXY(41,24);
+     texteAtemps('- Gants de chasseur simple',10,White);
+     deplacerCurseurXY(41,25);
+     texteAtemps('- Taille de chasseur simple',10,White);
+     deplacerCurseurXY(41,26);
+     texteAtemps('- Jambiere de chasseur simple',10,White);
+     deplacerCurseurXY(41,27);
+     texteAtemps('- 3 Potions simples',10,White);
+     deplacerCurseurXY(60-9,1);
+     texteAtemps('Cela vous convient ?',30,White);
+     deplacerCurseurXY(60-21,2);
+     texteAtemps('(Une fois accepte, plus de retour arriere)',100,Red);
      choixONInterface2();
-     deplacerCurseurXY(94,12);
-     texteEnCouleur('Oui',Red);
-     deplacerCurseurXY(94,18);
-     texteEnCouleur('Non',White);
+     texteXY(94,12,'Oui',Red);
+     texteXY(94,18,'Non',White);
      deplacerCurseurXY(97,12);
      correcte := True;
      while (correcte = True) do
@@ -564,21 +442,15 @@ begin
 
                if (rep = 1) then
                   begin
-                      choixONInterface2();
-                      deplacerCurseurXY(94,12);
-                      texteEnCouleur('Oui',Red);
-                      deplacerCurseurXY(94,18);
-                      texteEnCouleur('Non',White);
+                      texteXY(94,12,'Oui',Red);
+                      texteXY(94,18,'Non',White);
                       deplacerCurseurXY(97,12);
                   end
                else
                    begin
-                      choixONInterface2();
-                      deplacerCurseurXY(94,12);
-                      texteEnCouleur('Oui',White);
-                      deplacerCurseurXY(94,18);
-                      texteEnCouleur('Non',Red);
-                      deplacerCurseurXY(97,18);                                                                                                                                                                 ;
+                      texteXY(94,12,'Oui',White);
+                      texteXY(94,18,'Non',Red);
+                      //deplacerCurseurXY(97,18);                                                                                                                                                                 ;
                    end;
 
 
@@ -589,7 +461,6 @@ begin
     else
        creationPersonnage();
 end;
-
 
 procedure creationPersonnage();
 
