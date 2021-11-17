@@ -58,7 +58,7 @@ end;
 
 procedure interfaceSaisieSexe();
 begin
-     texteXY(15,4,'Quel est votre sexe, ');
+     texteXY(15,4,'Quel est votre sexe, ',White);
      texteEnCouleur(getNomActuelle(),Red);
      texteEnCouleur('?',White);
      texteXY(15,5,'(30 Lettres MAX)',White);

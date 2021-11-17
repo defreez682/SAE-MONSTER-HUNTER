@@ -19,7 +19,7 @@ procedure resume();
 implementation
 
 uses
-  Classes, SysUtils,Personnage,GestionEcran, gestionTexte, crtperso;
+  Classes, SysUtils,Personnage,GestionEcran, gestionTexte, crtperso,villageIHM;
 
 
 

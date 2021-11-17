@@ -26,7 +26,12 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="7">
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="8">
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
@@ -60,6 +65,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="crtPerso"/>
       </Unit6>
+      <Unit7>
+        <Filename Value="villageihm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="villageIHM"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

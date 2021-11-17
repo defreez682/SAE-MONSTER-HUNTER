@@ -13,7 +13,7 @@ procedure creationChoix();
 implementation
 
 uses
-  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso;
+  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso,villageIHM;
 
 
 
@@ -115,6 +115,16 @@ begin
     attendre(vitesse);
     texteXY(30,7,'|| \|| ||___  \V/\V/      \V/\V/   \\_//  || \\ ||__| ||_//',White);
 
+    {texteXY(0,10,'    \`----.__                 ____',White);
+    texteXY(0,11,'    |       `--._         <=#  , *--,',White);
+    texteXY(0,12,'    /_             `-.    ,/  / `````',White);
+    texteXY(0,13,'      \__             (_.''  ,''',White);
+    texteXY(0,14,'         \__ ......''       \___----^__''',White);
+    texteXY(0,15,'        _./               ,''           `.',White);
+    texteXY(0,15,'|\     _.''   ___/ )\...._"   ___           \',White);
+    texteXY(0,16,'| \__.''  __.''            `""''   `""`.''"""`--\',White);
+    texteXY(0,17,'\____.-''',White)}
+
 
 end;
 
@@ -192,7 +202,7 @@ begin
     if (rep = 1) then
        menuAvertissement();
     if (rep = 2) then
-       // Fonction qui ammène au village
+       choixMenuVillage();
     if (rep = 3) then
 
 end;

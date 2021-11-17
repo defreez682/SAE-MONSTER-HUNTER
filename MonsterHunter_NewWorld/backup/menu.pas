@@ -13,7 +13,7 @@ procedure creationChoix();
 implementation
 
 uses
-  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso;
+  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso,villageIHM;
 
 
 
@@ -55,14 +55,12 @@ begin
 
               if (rep = 1) then
                  begin
-                     creationChoixAvertissement(0);
                      texteXY(44,14,'Oui',Red);
                      texteXY(74,14,'Non',White);
                      deplacerCurseurXY(47,14);
                  end
               else
                   begin
-                      creationChoixAvertissement(0);
                       texteXY(44,14,'Oui',White);
                       texteXY(74,14,'Non',Red);
                   end;
@@ -116,6 +114,16 @@ begin
     texteXY(30,6,'||\\|| ||==  \\ /\ //    \\ /\ // ((   )) ||_// ||    ||  ))',White);
     attendre(vitesse);
     texteXY(30,7,'|| \|| ||___  \V/\V/      \V/\V/   \\_//  || \\ ||__| ||_//',White);
+
+    {texteXY(0,10,'    \`----.__                 ____',White);
+    texteXY(0,11,'    |       `--._         <=#  , *--,',White);
+    texteXY(0,12,'    /_             `-.    ,/  / `````',White);
+    texteXY(0,13,'      \__             (_.''  ,''',White);
+    texteXY(0,14,'         \__ ......''       \___----^__''',White);
+    texteXY(0,15,'        _./               ,''           `.',White);
+    texteXY(0,15,'|\     _.''   ___/ )\...._"   ___           \',White);
+    texteXY(0,16,'| \__.''  __.''            `""''   `""`.''"""`--\',White);
+    texteXY(0,17,'\____.-''',White)}
 
 
 end;
