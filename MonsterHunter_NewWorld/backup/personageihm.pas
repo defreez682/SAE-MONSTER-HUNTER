@@ -4,22 +4,32 @@ unit personageIHM;
 
 interface
 
+{}
 procedure choixONInterface();
+{}
 procedure choixONInterface2();
+{}
 procedure creationInterfaceDialogue();
+{}
 procedure creationInterfaceFormulaire();
+{}
 procedure interfaceSaisieSexe();
+{}
 procedure creationPersonnage();
+{}
 procedure saisieNom();
+{}
 procedure saisieSexe();
+{}
 procedure saisieTaille();
+{}
 procedure resume();
 
 
 implementation
 
 uses
-  Classes, SysUtils,Personnage,GestionEcran, gestionTexte, crtperso;
+  Classes, SysUtils,Personnage,GestionEcran, gestionTexte, crtperso,villageIHM;
 
 
 

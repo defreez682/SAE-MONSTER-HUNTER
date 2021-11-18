@@ -9,6 +9,8 @@ unit gestionFichier;
 
 
 interface
+
+{}
 procedure checkUp();
 
 

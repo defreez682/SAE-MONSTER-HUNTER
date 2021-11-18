@@ -7,8 +7,10 @@ interface
 {Créer un texte qui s'affiche lettre par lettre en fonction d'un intervalle de temps
 en millisecondes}
 procedure texteAtemps(texte : string; temps : integer; couleur : integer);
+{}
 procedure texteEnCouleur(texte : string; couleur : integer);
-procedure texteXY(x,y : Integer; texte : string);
+{}
+procedure texteXY(x,y : Integer; texte : string; couleur : integer);
 
 implementation
 

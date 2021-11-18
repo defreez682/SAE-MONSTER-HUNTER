@@ -6,51 +6,57 @@ interface
 
 // Lvl
 
+{}
 procedure miseAjourLVL(valeur : Integer);
-
+{}
 function getlvlActuelle() : Integer;
 
 // Exp
 
+{}
 procedure miseAjourExp(valeur : Integer);
-
+{}
 function getExpActuelle() : Integer;
-
+{}
 procedure verifLvlUp();
-
+{}
 function calculLvlSuivant() : Integer;
 
 // Or
 
+{}
 procedure miseAjourOr(valeur : Integer);
-
+{}
 function getOrActuelle() : Integer;
 
 // Stats de base
 
+{}
 function calculHpMaxBase() : Integer;
-
+{}
 function calculArmureBase() : Integer;
-
+{}
 function calculADBase() : Integer;
 
 
 
 // Création personnage
+
+{}
 procedure miseAjourPersonnage (valeur : integer);
-
+{}
 function getPersonnageActuelle () : String;
-
+{}
 procedure miseAjourNom(valeur : String);
-
+{}
 function getNomActuelle() : String;
-
+{}
 procedure miseAjourSexe(valeur : String);
-
+{}
 function getSexeActuelle() : String;
-
+{}
 procedure miseAjourTaille(valeur : integer);
-
+{}
 function getTailleActuelle() : Integer;
 
 
@@ -161,7 +167,7 @@ end;
 
 //__________________________________________________ Création personnage
 
-procedure miseAjourPersonnage(valeur : String);
+procedure miseAjourPersonnage(valeur : integer);
 begin
   Assign(Personnageglobal,'C:\MHNewWorld\personnage.txt');
   Rewrite(Personnageglobal);

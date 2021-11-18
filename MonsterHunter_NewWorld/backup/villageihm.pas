@@ -4,14 +4,23 @@ unit villageIHM;
 
 interface
 
+{}
 procedure creationMenuVillage();
+{}
 procedure choixMenuVillage();
+{}
 procedure viderCadre();
+{}
 procedure descriptionChasse();
+{}
 procedure descriptionChambre();
+{}
 procedure descriptionMarchand();
+{}
 procedure descriptionForge();
+{}
 procedure descriptionCantine();
+{}
 procedure descriptionMenu();
 
 
@@ -91,6 +100,7 @@ var cho : boolean = False;
 begin
      creationMenuVillage();
      cho := True;
+     descriptionChasse();
      texteXY(8,3,'>>',White);
      deplacerCurseurXY(7,3);
      while (cho= True) do
@@ -111,7 +121,7 @@ begin
 
                if (rep = 1) then
                   begin
-                      viderCadre();
+                      descriptionChasse();
                       texteXY(8,3,'>>',White);
                       texteXY(8,9,'  ',White);
                       texteXY(8,15,'  ',White);
@@ -122,6 +132,7 @@ begin
                   end;
                if (rep = 2) then
                   begin
+                      descriptionChambre();
                       texteXY(8,3,'  ',White);
                       texteXY(8,9,'>>',White);
                       texteXY(8,15,'  ',White);
@@ -132,6 +143,7 @@ begin
                   end;
                if (rep = 3) then
                   begin
+                      descriptionMarchand();
                       texteXY(8,3,'  ',White);
                       texteXY(8,9,'  ',White);
                       texteXY(8,15,'>>',White);
@@ -142,6 +154,7 @@ begin
                   end;
                if (rep = 4) then
                   begin
+                      descriptionForge();
                       texteXY(8,3,'  ',White);
                       texteXY(8,9,'  ',White);
                       texteXY(8,15,'  ',White);
@@ -152,6 +165,7 @@ begin
                   end;
                if (rep = 5) then
                   begin
+                      descriptionCantine();
                       texteXY(8,3,'  ',White);
                       texteXY(8,9,'  ',White);
                       texteXY(8,15,'  ',White);
@@ -162,6 +176,7 @@ begin
                   end;
                if (rep = 6) then
                   begin
+                      descriptionMenu();
                       texteXY(8,3,'  ',White);
                       texteXY(8,9,'  ',White);
                       texteXY(8,15,'  ',White);

@@ -4,10 +4,15 @@ unit menu;
 
 interface
 
+{}
 procedure menuAvertissement();
+{}
 procedure creationChoixAvertissement(vitesse : integer);
+{}
 procedure creationMenuInterface(vitesse : integer);
+{}
 procedure creationChoixMenuInterface(vitesse : integer);
+{}
 procedure creationChoix();
 
 implementation
@@ -202,7 +207,7 @@ begin
     if (rep = 1) then
        menuAvertissement();
     if (rep = 2) then
-       // Fonction qui ammène au village
+       choixMenuVillage();
     if (rep = 3) then
 
 end;

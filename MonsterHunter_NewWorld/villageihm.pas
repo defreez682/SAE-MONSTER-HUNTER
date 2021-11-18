@@ -4,15 +4,25 @@ unit villageIHM;
 
 interface
 
+{On créer l’interface}
 procedure creationMenuVillage();
+{On initialise les choix de l’interface}
 procedure choixMenuVillage();
+{Vide le cadre}
 procedure viderCadre();
+{Décrit la chasse dans le cadre}
 procedure descriptionChasse();
+{Décrit la chambre dans le cadre}
 procedure descriptionChambre();
+{Décrit le marchand dans le cadre}
 procedure descriptionMarchand();
+{Décrit la forge dans le cadre}
 procedure descriptionForge();
+{Décrit la cantine dans le cadre}
 procedure descriptionCantine();
+{Décrit ce que fait le bouton menu}
 procedure descriptionMenu();
+
 
 
 

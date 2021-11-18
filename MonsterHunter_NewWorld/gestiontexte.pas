@@ -4,10 +4,11 @@ unit gestionTexte;
 
 interface
 
-{Créer un texte qui s'affiche lettre par lettre en fonction d'un intervalle de temps
-en millisecondes}
+{Créer un texte avec un délai entre chaque lettre (minimum : 1), ne pas oublier de préciser la couleur}
 procedure texteAtemps(texte : string; temps : integer; couleur : integer);
+{Créer un texte en couleur}
 procedure texteEnCouleur(texte : string; couleur : integer);
+{Créer un texte sur les coordonnées XY,  ne pas oublier de préciser la couleur.}
 procedure texteXY(x,y : Integer; texte : string; couleur : integer);
 
 implementation

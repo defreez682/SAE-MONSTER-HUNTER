@@ -24,7 +24,7 @@ begin
              miseAjourLVL(1);
              miseAjourExp(0);
              miseAjourOr(0);
-             miseAjourPersonnage(0)
+             miseAjourPersonnage(0);
         end;
 
 end;

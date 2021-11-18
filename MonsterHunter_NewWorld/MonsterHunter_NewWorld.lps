@@ -8,7 +8,6 @@
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="20" Y="9"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
@@ -17,8 +16,9 @@
         <Filename Value="menu.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="23"/>
-        <UsageCount Value="139"/>
+        <TopLine Value="7"/>
+        <CursorPos X="15" Y="15"/>
+        <UsageCount Value="140"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -26,19 +26,18 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionTexte"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="28"/>
-        <CursorPos X="42" Y="12"/>
-        <UsageCount Value="177"/>
+        <CursorPos X="2" Y="14"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Personnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="83"/>
-        <CursorPos X="44" Y="120"/>
-        <UsageCount Value="177"/>
+        <CursorPos X="63" Y="60"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -46,8 +45,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionFichier"/>
         <EditorIndex Value="8"/>
-        <CursorPos X="42" Y="9"/>
-        <UsageCount Value="173"/>
+        <CursorPos X="3" Y="13"/>
+        <UsageCount Value="174"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -55,8 +54,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="personageIHM"/>
         <EditorIndex Value="3"/>
-        <CursorPos Y="7"/>
-        <UsageCount Value="170"/>
+        <CursorPos X="21" Y="25"/>
+        <UsageCount Value="171"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -64,26 +63,25 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="crtPerso"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="42"/>
         <CursorPos X="113" Y="57"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="150"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
+        <Filename Value="villageihm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="villageIHM"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="19" Y="15"/>
+        <UsageCount Value="119"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
         <Filename Value="GestionEcran.pas"/>
         <EditorIndex Value="6"/>
         <TopLine Value="44"/>
         <CursorPos X="27" Y="59"/>
         <UsageCount Value="105"/>
-        <Loaded Value="True"/>
-      </Unit7>
-      <Unit8>
-        <Filename Value="villageihm.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="villageIHM"/>
-        <EditorIndex Value="2"/>
-        <CursorPos X="45" Y="8"/>
-        <UsageCount Value="118"/>
         <Loaded Value="True"/>
       </Unit8>
     </Units>

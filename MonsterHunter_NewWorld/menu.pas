@@ -4,10 +4,15 @@ unit menu;
 
 interface
 
+{Appelle le menu avertissement }
 procedure menuAvertissement();
+{Création des choix pour le menu avertissement }
 procedure creationChoixAvertissement(vitesse : integer);
+{création de l’interface du menu, on peut choisir la vitesse de création}
 procedure creationMenuInterface(vitesse : integer);
+{création des choix pour le menu interface, on peut choisir la vitesse de création}
 procedure creationChoixMenuInterface(vitesse : integer);
+{Créer le menu}
 procedure creationChoix();
 
 implementation
