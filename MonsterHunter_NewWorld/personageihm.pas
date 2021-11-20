@@ -462,12 +462,13 @@ begin
                       texteXY(94,18,'Non',Red);
                       //deplacerCurseurXY(97,18);                                                                                                                                                                 ;
                    end;
-
-
            end;
     if (rep = 1) then
-        miseAjourPersonnage(1)
-        // Village
+        begin
+             miseAjourPersonnage(1);
+             choixMenuVillage();
+             // Village
+        end
     else
        creationPersonnage();
 end;

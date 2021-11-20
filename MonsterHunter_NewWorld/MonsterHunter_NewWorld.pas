@@ -1,11 +1,12 @@
 program MonsterHunter_NewWorld;
 
 
-uses Windows,sysutils,menu,personnage,gestionFichier, villageIHM;
+uses Windows,sysutils,menu,personnage,gestionFichier, chasseIHM;
 
 
 begin
    checkUp();
-   creationChoix();
+   //creationChoix();
+   deplacementJoueur();
 end.
 

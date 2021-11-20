@@ -4,25 +4,25 @@ unit personageIHM;
 
 interface
 
-{}
+{créer l’interface de choix pour le nom, le sexe et la taille}
 procedure choixONInterface();
-{}
+{créer l’interface de choix pour le résumé }
 procedure choixONInterface2();
-{}
+{On créer l’interface nécessaire pour le dialogue}
 procedure creationInterfaceDialogue();
-{}
+{On créer l’interface du formulaire}
 procedure creationInterfaceFormulaire();
-{}
+{On créer les textes pour la saisie du sexe}
 procedure interfaceSaisieSexe();
-{}
+{Appelle à la création du personnage}
 procedure creationPersonnage();
-{}
+{Formulaire qui permet la saisie du nom}
 procedure saisieNom();
-{}
+{Formulaire qui permet la saisie du sexe}
 procedure saisieSexe();
-{}
+{Formulaire qui permet la saisie de la taille}
 procedure saisieTaille();
-{}
+{Création du résumé }
 procedure resume();
 
 
@@ -466,8 +466,11 @@ begin
 
            end;
     if (rep = 1) then
-        miseAjourPersonnage(1)
-        // Village
+        begin
+             miseAjourPersonnage(1);
+             choixMenuVillage();
+             // Village
+        end
     else
        creationPersonnage();
 end;

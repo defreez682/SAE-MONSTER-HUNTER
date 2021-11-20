@@ -31,7 +31,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="8">
+    <Units Count="9">
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
@@ -70,6 +70,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="villageIHM"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="chasseihm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="chasseIHM"/>
+      </Unit8>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

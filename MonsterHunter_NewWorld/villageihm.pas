@@ -35,25 +35,73 @@ uses
 procedure descriptionChasse();
 begin
      viderCadre();
-     texteXY(48,2,'Partir en chasse',White);
+     texteXY(48,2,'Part en chasse dans les contrees',White);
+     texteXY(48,3,'d''Aternum.',Cyan);
+     texteXY(48,5,'Vous decouvrirez tout type de monstre',White);
+     texteXY(48,6,'plus ',White);
+     texteEnCouleur('impressionnant ',Yellow);
+     texteEnCouleur('et ',White);
+     texteEnCouleur('dangereux',Red);
+     texteXY(48,7,'les uns que les autres.',White);
+     texteXY(48,9,'N''oublie pas de bien ',White);
+     texteEnCouleur('t''equiper ',Magenta);
+     texteEnCouleur('et ',White);
+     texteXY(48,10,'d''etre en forme car en dehors du ',White);
+     texteXY(48,11,'village, le ',White);
+     texteEnCouleur('danger ',Red);
+     texteEncouleur('est partout.',White);
 end;
 procedure descriptionChambre();
 begin
      viderCadre();
+     texteXY(48,2,'Apres une chasse, rien de mieux que',White);
+     texteXY(48,3,'le repos !',White);
+     texteXY(48,5,'Ici c''est ta chambre, tu peux venir',White);
+     texteXY(48,6,'quand tu veux',White);
+     texteXY(48,7,'Pour ',White);
+     texteEnCouleur('soigner ',Green);
+     texteEnCouleur('tes blessures apres une ',White);
+     texteXY(48,8,'chasse.',Cyan);
+     texteXY(48,10,'Tu peux aussi gerer tes ',White);
+     texteEnCouleur('affaires ',Yellow);
+     texteEnCouleur('dans',White);
+     texteXY(48,11,'ton coffre.',White);
+     texteXY(48,13,'Un peu de rangement de temps en temps,',White);
+     texteXY(48,14,'ca fait pas de mal !',White);
 end;
 procedure descriptionMarchand();
 begin
      viderCadre();
+     texteXY(48,2,'Bienvenue ',White);
+     texteEnCouleur('chez Marc le Marchand !',LightRed);
+     texteXY(48,4,'Ici vous pouvez achete toute sorte',White);
+     texteXY(48,5,'d''equipement.',Magenta);
+     texteXY(48,7,'Les articles du magasin change ',White);
+     texteXY(48,8,'a chaque ',White);
+     texteEnCouleur('chasse.',Cyan);
+
 end;
 
 procedure descriptionForge();
 begin
      viderCadre();
+     texteXY(48,2,'Bienvenue ',White);
+     texteEnCouleur('chez le forgeron !',LightRed);
+     texteXY(48,4,'Ici vous pouvez utilise les',White);
+     texteXY(48,5,'ressources ',LightBlue);
+     texteEnCouleur('accumulee apres chaque',White);
+     texteXY(48,6,'chasse pour forger des ',White);
+     texteEnCouleur('armes ',Magenta);
+     texteEnCouleur('et des ',White);
+     texteXY(48,7,'armures ',Magenta);
+     texteEnCouleur('surpuissantes.',White);
 end;
 
 procedure descriptionCantine();
 begin
      viderCadre();
+     texteXY(48,2,'Un peu de poulet pour donner un',White);
+     texteXY(48,3,'peu de force !',Brown);
 end;
 procedure descriptionMenu();
 begin
@@ -65,7 +113,7 @@ procedure viderCadre();
 var i : integer;
 begin
      for i := 2 to 29 do
-         texteXY(48,i,'                             ',White)
+         texteXY(48,i,'                                      ',White)
 end;
 
 procedure creationMenuVillage();
