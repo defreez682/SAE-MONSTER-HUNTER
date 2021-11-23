@@ -10,6 +10,10 @@ function gestionHaut(x,y : Integer) : Integer;
 
 function gestionDroite(x,y : Integer) : Integer;
 
+function gestionGauche(x,y : Integer) : Integer;
+
+function detectionZone(x,y : Integer) : Integer;
+
 implementation
 
 uses
@@ -205,6 +209,11 @@ begin
          x := x - 1;
 
      gestionGauche := x;
+end;
+
+function detectionZone(x,y : Integer) : Integer;
+begin
+
 end;
 
 end.

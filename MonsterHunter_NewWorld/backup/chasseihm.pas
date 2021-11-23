@@ -67,6 +67,7 @@ begin
      texteEnCouleur('....',DarkGray);
      texteEnCouleur('***',Orange);
      texteXY(53,15,'****',Orange);
+     texteXY(57,14,'**********',Orange);
 end;
 
 procedure creationZone3();
@@ -94,11 +95,13 @@ begin
      texteXY(68,17,'*',Orange);
      texteXY(68,18,'*',Orange);
      texteXY(69,19,'*',Orange);
-     texteXY(66,20,'****',Orange);
+     texteXY(66,20,'*******',Orange);
      texteXY(65,21,'*',Orange);
      texteXY(62,22,'*',Orange);
      texteXY(61,23,'*',Orange);
      texteXY(60,24,'*',Orange);
+     texteXY(63,22,'*',Orange);
+     texteXY(64,22,'*',Orange);
 end;
 
 procedure creationZone4();
@@ -108,12 +111,16 @@ begin
      texteXY(61,12,'*',Orange);
      texteEnCouleur('...',DarkGray);
      texteEnCouleur('4',LightRed);
-     texteEnCouleur('.......',DarkGray);
+     texteEnCouleur('......',DarkGray);
      texteEnCouleur('*',Orange);
      texteXY(60,13,'*',Orange);
      texteEnCouleur('..........',DarkGray);
      texteEnCouleur('*',Orange);
      texteXY(59,14,'************',Orange);
+     texteXY(68,15,'*',Orange);
+     texteXY(68,16,'*',Orange);
+     texteXY(68,17,'*',Orange);
+     texteXY(68,18,'*',Orange);
 end;
 
 procedure creationZone5();
@@ -244,12 +251,14 @@ var x : integer = 45;
     y : integer = 15;
     cho : boolean = True;
     ch : Char;
-    zone : Integer = 1;
+    zoneActuelle : Integer = 1;
 
 begin
      creationFuiteInterface();
      creationBordure();
      creationFrontiere();
+     texteXY(45,2,'Vous vous trouvez en zone : ',Green);
+     texteEnCouleur(IntToStr(zoneActuelle),LightGreen);
 
      texteXY(x,y,'X',LightBlue);
      deplacerCurseurXY(x,y);
@@ -276,68 +285,255 @@ begin
                end;
 
                if (x = 49) and (y = 20) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 50) and (y = 19) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 51) and (y = 18) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 52) and (y = 17) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 53) and (y = 16) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 52) and (y = 15) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 51) and (y = 14) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 50) and (y = 13) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 49) and (y = 12) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 49) and (y = 11) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 48) and (y = 10) then
-                  zone := 1
+                   zoneActuelle := 1
                else if (x = 50) and (y = 9) then
-                  zone := 2
+                   zoneActuelle := 2
                else if (x = 50) and (y = 10) then
-                  zone := 2
+                   zoneActuelle := 2
                else if (x = 51) and (y = 11) then
-                  zone := 2
+                   zoneActuelle := 2
                else if (x = 51) and (y = 12) then
-                  zone := 2
+                   zoneActuelle := 2
                else if (x = 52) and (y = 13) then
-                  zone := 2 
+                   zoneActuelle := 2
                else if (x = 53) and (y = 14) then
-                  zone := 2               
+                   zoneActuelle := 2
                else if (x = 54) and (y = 14) then
-                  zone := 2 
+                   zoneActuelle := 2
                else if (x = 55) and (y = 14) then
-                  zone := 2             
+                   zoneActuelle := 2
                else if (x = 56) and (y = 14) then
-                  zone := 2   
+                   zoneActuelle := 2
                else if (x = 57) and (y = 13) then
-                  zone := 2             
+                   zoneActuelle := 2
                else if (x = 58) and (y = 13) then
-                  zone := 2   
+                   zoneActuelle := 2
                else if (x = 59) and (y = 13) then
-                  zone := 2               
+                   zoneActuelle := 2
                else if (x = 60) and (y = 12) then
-                  zone := 2  
+                   zoneActuelle := 2
                else if (x = 61) and (y = 11) then
-                  zone := 2  
+                   zoneActuelle := 2
                else if (x = 62) and (y = 10) then
-                  zone := 2;
+                   zoneActuelle := 2
+               else if (x = 51) and (y = 20) then
+                   zoneActuelle := 3
+               else if (x = 52) and (y = 19) then
+                   zoneActuelle := 3
+               else if (x = 53) and (y = 18) then
+                   zoneActuelle := 3
+               else if (x = 54) and (y = 17) then
+                   zoneActuelle := 3
+               else if (x = 55) and (y = 16) then
+                   zoneActuelle := 3
+               else if (x = 57) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 58) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 59) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 60) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 61) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 62) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 63) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 64) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 66) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 67) and (y = 15) then
+                   zoneActuelle := 3
+               else if (x = 67) and (y = 16) then
+                   zoneActuelle := 3
+               else if (x = 67) and (y = 17) then
+                   zoneActuelle := 3
+               else if (x = 67) and (y = 18) then
+                   zoneActuelle := 3
+               else if (x = 67) and (y = 19) then
+                   zoneActuelle := 3
+               else if (x = 68) and (y = 19) then
+                   zoneActuelle := 3
+               else if (x = 66) and (y = 19) then
+                   zoneActuelle := 3
+               else if (x = 65) and (y = 20) then
+                   zoneActuelle := 3
+               else if (x = 64) and (y = 20) then
+                   zoneActuelle := 3
+               else if (x = 64) and (y = 21) then
+                   zoneActuelle := 3
+               else if (x = 63) and (y = 21) then
+                   zoneActuelle := 3
+               else if (x = 62) and (y = 21) then
+                   zoneActuelle := 3
+               else if (x = 61) and (y = 21) then
+                   zoneActuelle := 3
+               else if (x = 61) and (y = 22) then
+                   zoneActuelle := 3
+               else if (x = 60) and (y = 23) then
+                   zoneActuelle := 3
+               else if (x = 59) and (y = 23) then
+                   zoneActuelle := 3
+               else if (x = 56) and (y = 16) then
+                   zoneActuelle := 3
+               else if (x = 61) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 62) and (y = 12) then
+                   zoneActuelle := 4
+               else if (x = 63) and (y = 11) then
+                   zoneActuelle := 4
+               else if (x = 62) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 63) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 64) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 65) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 66) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 67) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 68) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 69) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 70) and (y = 13) then
+                   zoneActuelle := 4
+               else if (x = 69) and (y = 14) then
+                   zoneActuelle := 4
+               else if (x = 70) and (y = 14) then
+                   zoneActuelle := 4
+               else if (x = 77) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 76) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 75) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 74) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 73) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 73) and (y = 19) then
+                   zoneActuelle := 5
+               else if (x = 72) and (y = 19) then
+                   zoneActuelle := 5
+               else if (x = 71) and (y = 19) then
+                   zoneActuelle := 5
+               else if (x = 70) and (y = 19) then
+                   zoneActuelle := 5
+               else if (x = 70) and (y = 19) then
+                   zoneActuelle := 5
+               else if (x = 70) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 69) and (y = 18) then
+                   zoneActuelle := 5
+               else if (x = 69) and (y = 17) then
+                   zoneActuelle := 5
+               else if (x = 69) and (y = 16) then
+                   zoneActuelle := 5
+               else if (x = 69) and (y = 15) then
+                   zoneActuelle := 5
+               else if (x = 70) and (y = 15) then
+                   zoneActuelle := 5
+               else if (x = 71) and (y = 15) then
+                   zoneActuelle := 5
+               else if (x = 71) and (y = 14) then
+                   zoneActuelle := 5
+               else if (x = 72) and (y = 14) then
+                   zoneActuelle := 5
+               else if (x = 72) and (y = 13) then
+                   zoneActuelle := 5
+               else if (x = 73) and (y = 13) then
+                   zoneActuelle := 5
+               else if (x = 73) and (y = 12) then
+                   zoneActuelle := 5
+               else if (x = 61) and (y = 24) then
+                   zoneActuelle := 6
+               else if (x = 62) and (y = 24) then
+                   zoneActuelle := 6
+               else if (x = 62) and (y = 23) then
+                   zoneActuelle := 6
+               else if (x = 63) and (y = 23) then
+                   zoneActuelle := 6
+               else if (x = 64) and (y = 23) then
+                   zoneActuelle := 6
+               else if (x = 65) and (y = 23) then
+                   zoneActuelle := 6
+               else if (x = 65) and (y = 22) then
+                   zoneActuelle := 6
+               else if (x = 66) and (y = 22) then
+                   zoneActuelle := 6
+               else if (x = 66) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 67) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 68) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 69) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 70) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 71) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 72) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 73) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 74) and (y = 21) then
+                   zoneActuelle := 6
+               else if (x = 74) and (y = 20) then
+                   zoneActuelle := 6
+               else if (x = 75) and (y = 20) then
+                   zoneActuelle := 6
+               else if (x = 76) and (y = 20) then
+                   zoneActuelle := 6
+               else if (x = 77) and (y = 20) then
+                   zoneActuelle := 6;
 
-               if (zone = 1) then
+
+
+               if (zoneActuelle = 1) then
                   creationZone1()
-               else if (zone = 2) then
-                  creationZone2();
+               else if (zoneActuelle = 2) then
+                  creationZone2()
+               else if (zoneActuelle = 3) then
+                  creationZone3()
+               else if (zoneActuelle = 4) then
+                  creationZone4()
+               else if (zoneActuelle = 5) then
+                  creationZone5()
+               else if (zoneActuelle = 6) then
+                  creationZone6();
 
-               texteXY(1,1,IntToStr(x),Red);
+               {texteXY(1,1,IntToStr(x),Red);
                texteXY(1,2,'  ',White);
                texteXY(1,2,IntToStr(y),LightRed);
-               texteXY(1,3,'Zone : ',LightGreen);
-               texteEnCouleur(IntToStr(zone),LightGreen);
+               texteXY(1,3,'Zone : ',LightGreen);}
+               //texteXY(45,3,'Vous vous trouvez en zone : ',Green);
+               texteXY(73,2,IntToStr(zoneActuelle),LightGreen);
                creationZone2();
                texteXY(x,y,'X',LightBlue);
                deplacerCurseurXY(x,y);

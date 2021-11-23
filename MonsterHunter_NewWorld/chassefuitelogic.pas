@@ -12,6 +12,7 @@ function gestionDroite(x,y : Integer) : Integer;
 
 function gestionGauche(x,y : Integer) : Integer;
 
+
 implementation
 
 uses
@@ -208,6 +209,8 @@ begin
 
      gestionGauche := x;
 end;
+
+
 
 end.
 
