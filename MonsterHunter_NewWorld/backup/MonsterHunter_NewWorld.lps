@@ -4,11 +4,11 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="10">
+    <Units Count="11">
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="23" Y="10"/>
+        <CursorPos X="64" Y="4"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -16,56 +16,57 @@
         <Filename Value="menu.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="7"/>
-        <CursorPos X="15" Y="15"/>
-        <UsageCount Value="146"/>
+        <TopLine Value="118"/>
+        <CursorPos X="26" Y="211"/>
+        <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="gestiontexte.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionTexte"/>
-        <EditorIndex Value="6"/>
-        <CursorPos X="2" Y="14"/>
-        <UsageCount Value="184"/>
+        <EditorIndex Value="7"/>
+        <CursorPos X="48"/>
+        <UsageCount Value="232"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Personnage"/>
-        <EditorIndex Value="5"/>
-        <CursorPos X="66" Y="11"/>
-        <UsageCount Value="184"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="92"/>
+        <CursorPos X="20" Y="92"/>
+        <UsageCount Value="232"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="gestionfichier.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionFichier"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <CursorPos X="3" Y="13"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="228"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
         <Filename Value="personageihm.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="personageIHM"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="223"/>
-        <CursorPos X="74" Y="358"/>
-        <UsageCount Value="177"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="68"/>
+        <CursorPos X="13" Y="85"/>
+        <UsageCount Value="225"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="crtperso.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="crtPerso"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="65"/>
         <CursorPos X="68" Y="38"/>
-        <UsageCount Value="156"/>
+        <UsageCount Value="204"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -73,151 +74,162 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="villageIHM"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="216"/>
-        <CursorPos Y="155"/>
-        <UsageCount Value="125"/>
+        <TopLine Value="232"/>
+        <CursorPos X="36" Y="148"/>
+        <UsageCount Value="187"/>
         <Loaded Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="GestionEcran.pas"/>
-        <EditorIndex Value="7"/>
-        <TopLine Value="64"/>
-        <CursorPos X="40"/>
-        <UsageCount Value="105"/>
-        <Loaded Value="True"/>
-      </Unit8>
-      <Unit9>
         <Filename Value="chasseihm.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="chasseIHM"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="124"/>
-        <CursorPos X="52" Y="125"/>
-        <UsageCount Value="23"/>
+        <TopLine Value="292"/>
+        <CursorPos X="39" Y="306"/>
+        <FoldState Value=" T3J0Q4 pj1jb0F2K"/>
+        <UsageCount Value="85"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="GestionEcran.pas"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="64"/>
+        <CursorPos X="40"/>
+        <UsageCount Value="105"/>
         <Loaded Value="True"/>
       </Unit9>
+      <Unit10>
+        <Filename Value="chassefuitelogic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="chasseFuiteLogic"/>
+        <EditorIndex Value="4"/>
+        <CursorPos Y="12"/>
+        <FoldState Value=" T3J0{02 pibkc0Nl"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit10>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="39" Column="37" TopLine="31"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="199" Column="33" TopLine="184"/>
       </Position1>
       <Position2>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="38" Column="61" TopLine="27"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="96" Column="64"/>
       </Position2>
       <Position3>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="42" Column="39" TopLine="41"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="69" Column="20" TopLine="56"/>
       </Position3>
       <Position4>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="48" Column="34" TopLine="38"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="199" Column="34" TopLine="189"/>
       </Position4>
       <Position5>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="66" Column="38" TopLine="47"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="211" Column="61" TopLine="203"/>
       </Position5>
       <Position6>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="74" Column="27" TopLine="57"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="219" Column="38" TopLine="209"/>
       </Position6>
       <Position7>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="81" Column="36" TopLine="70"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="236" Column="39" TopLine="221"/>
       </Position7>
       <Position8>
-        <Filename Value="villageihm.pas"/>
-        <Caret Line="89" Column="43" TopLine="72"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="270" Column="38" TopLine="256"/>
       </Position8>
       <Position9>
-        <Filename Value="personageihm.pas"/>
-        <Caret Line="470" Column="28" TopLine="21"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="223" Column="38" TopLine="205"/>
       </Position9>
       <Position10>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="21" Column="17" TopLine="14"/>
+        <Caret Line="222" Column="60" TopLine="215"/>
       </Position10>
       <Position11>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="18" Column="18" TopLine="11"/>
+        <Caret Line="269" Column="60" TopLine="259"/>
       </Position11>
       <Position12>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="20" Column="53" TopLine="17"/>
+        <Caret Line="58" Column="89" TopLine="38"/>
       </Position12>
       <Position13>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="25" Column="48" TopLine="13"/>
+        <Caret Line="108" Column="46" TopLine="80"/>
       </Position13>
       <Position14>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="46" Column="36" TopLine="33"/>
+        <Caret Line="21" Column="30"/>
       </Position14>
       <Position15>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="110" Column="75" TopLine="93"/>
+        <Caret Line="50" Column="47" TopLine="43"/>
       </Position15>
       <Position16>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="66" Column="41" TopLine="55"/>
+        <Caret Line="57" Column="38" TopLine="41"/>
       </Position16>
       <Position17>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="68" Column="38" TopLine="58"/>
+        <Caret Line="66" Column="30" TopLine="45"/>
       </Position17>
       <Position18>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="97" Column="61" TopLine="88"/>
+        <Caret Line="131" Column="16" TopLine="123"/>
       </Position18>
       <Position19>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="100" Column="58" TopLine="90"/>
+        <Caret Line="109" Column="33" TopLine="20"/>
       </Position19>
       <Position20>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="117" Column="22" TopLine="112"/>
+        <Caret Line="110" Column="35" TopLine="47"/>
       </Position20>
       <Position21>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="119" Column="15" TopLine="110"/>
+        <Caret Line="121" Column="36" TopLine="13"/>
       </Position21>
       <Position22>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="122" Column="31" TopLine="112"/>
+        <Caret Line="132" Column="77" TopLine="121"/>
       </Position22>
       <Position23>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="130" Column="37" TopLine="114"/>
+        <Caret Line="262" Column="38" TopLine="256"/>
       </Position23>
       <Position24>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="133" Column="37" TopLine="115"/>
+        <Caret Line="261" Column="40" TopLine="256"/>
       </Position24>
       <Position25>
-        <Filename Value="chasseihm.pas"/>
-        <Caret Line="117" Column="12" TopLine="115"/>
+        <Filename Value="chassefuitelogic.pas"/>
+        <Caret Line="7" Column="25" TopLine="4"/>
       </Position25>
       <Position26>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="133" Column="35" TopLine="115"/>
+        <Caret Line="273" Column="25" TopLine="266"/>
       </Position26>
       <Position27>
-        <Filename Value="MonsterHunter_NewWorld.pas"/>
-        <Caret Line="10" Column="9"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="282" Column="48" TopLine="267"/>
       </Position27>
       <Position28>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="135" Column="41" TopLine="119"/>
+        <Caret Line="302" Column="75" TopLine="290"/>
       </Position28>
       <Position29>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="131" Column="49" TopLine="114"/>
+        <Caret Line="306" Column="35" TopLine="292"/>
       </Position29>
       <Position30>
         <Filename Value="chasseihm.pas"/>
-        <Caret Line="15" Column="11"/>
+        <Caret Line="247" Column="23" TopLine="238"/>
       </Position30>
     </JumpHistory>
     <RunParams>

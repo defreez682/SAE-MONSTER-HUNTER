@@ -7,6 +7,6 @@ uses Windows,sysutils,menu,personnage,gestionFichier, chasseIHM;
 begin
    checkUp();
    //creationChoix();
-   creationFuiteInterface();
+   deplacementJoueur();
 end.
 
