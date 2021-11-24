@@ -5,7 +5,7 @@ unit chasseIHM;
 interface
 
 var Orange : Integer = 150;
-    fuite : Boolean = True;
+    fuite : Boolean = False;
 
 procedure creationFuiteInterface();
 procedure deplacementJoueur();
@@ -38,7 +38,7 @@ begin
      texteXY(41,14,'...........',DarkGray);
      texteEnCouleur('*',Orange);
      texteXY(41,15,'............',DarkGray);
-     texteEnCouleur('***',Orange);
+     texteEnCouleur('****',Orange);
      texteXY(41,16,'...',DarkGray);
      texteEnCouleur('1',LightRed);
      texteEnCouleur('.........',DarkGray);
@@ -51,6 +51,7 @@ begin
      texteEnCouleur('*',Orange);
      texteXY(41,20,'.........',DarkGray);
      texteEnCouleur('*',Orange);
+     texteXY(41,9,'*',Orange);
 end;
 
 procedure creationZone2();
@@ -94,7 +95,7 @@ begin
      texteEnCouleur('........',DarkGray);
      texteXY(50,20,'*',Orange);
      texteEnCouleur('...............',DarkGray);
-     texteXY(57,14,'************',Orange);
+     texteXY(57,14,'****************',Orange);
      texteXY(53,21,'............',DarkGray);
      texteXY(54,22,'........',DarkGray);
      texteXY(55,23,'......',DarkGray);
@@ -110,6 +111,7 @@ begin
      texteXY(60,24,'*',Orange);
      texteXY(63,22,'*',Orange);
      texteXY(64,22,'*',Orange);
+     texteXY(54,15,'*',Orange);
 end;
 
 procedure creationZone4();
@@ -151,8 +153,10 @@ begin
      texteEnCouleur('.........',DarkGray);
      texteXY(69,19,'*',Orange);
      texteEnCouleur('....',DarkGray);
-     texteXY(70,20,'****',Orange);
      texteXY(74,19,'****',Orange);
+     texteXY(70,20,'****',Orange);
+     texteXY(66,20,'****',Orange);
+     texteXY(57,14,'***********',Orange);
 end;
 
 procedure creationZone6();
@@ -313,17 +317,17 @@ begin
      if (fuite = True) then
         mstr := 1
      else
-        mstr := random(7) + 1;
+        mstr := random(8) + 1;
 
      // On créer les monstres dans chaque zone
      for i := 1 to mstr do
          begin
-              zoneMonstre := random(5)+1;
+              zoneMonstre := random(6)+1;
 
               if (zoneMonstre = 1) then
                  begin
                       zoneMonstreC.x := random(9) + 41;
-                      zoneMonstreC.y := random(10) + 10;
+                      zoneMonstreC.y := random(9) + 12;
                  end;
               if (zoneMonstre = 2) then
                  begin
@@ -358,8 +362,8 @@ begin
                   begin
                        if (nbmonstre[i].x = nbmonstre[i-1].x) and (nbmonstre[i].y = nbmonstre[i-1].y) then
                           begin
-                               nbmonstre[i].x := NULL;
-                               nbmonstre[i].y := NULL;
+                               nbmonstre[i].x := 0;
+                               nbmonstre[i].y := 0;
                           end;
                   end;
          end;
@@ -578,9 +582,7 @@ begin
                    zoneActuelle := 4
                else if (x = 70) and (y = 13) then
                    zoneActuelle := 4
-               else if (x = 69) and (y = 14) then
-                   zoneActuelle := 4
-               else if (x = 70) and (y = 14) then
+               else if (x = 71) and (y = 12) then
                    zoneActuelle := 4
                else if (x = 77) and (y = 18) then
                    zoneActuelle := 5
@@ -729,7 +731,9 @@ begin
                              texteXY(76,17,'Refuser',Red);
                           end;
                   end;
-
+               texteXY(1,1,IntToStr(x),Red);
+               texteXY(1,2,IntToStr(y),Red);
+               texteXY(0,0,' ',White);
                deplacerCurseurXY(x,y);
            end;
 
