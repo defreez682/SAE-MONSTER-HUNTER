@@ -355,7 +355,7 @@ begin
                              begin
                                  texteXY(24,18,'Oui',Red);
                                  texteXY(44,18,'Non',White);
-                                  deplacerCurseurXY(27,18);
+                                 deplacerCurseurXY(27,18);
                              end
                           else
                               begin

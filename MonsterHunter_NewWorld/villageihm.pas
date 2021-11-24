@@ -29,7 +29,7 @@ procedure descriptionMenu();
 implementation
 
 uses
-  Classes, SysUtils,GestionEcran,gestionTexte,crtPerso,menu;
+  Classes, SysUtils,GestionEcran,gestionTexte,crtPerso,menu,chasseIHM;
 
 
 procedure descriptionChasse();
@@ -235,17 +235,18 @@ begin
                       deplacerCurseurXY(87,27);
                   end;
            end;
-  if (rep = 1) then;
+  if (rep = 1) then
      // On part en chasse
-  if (rep = 2) then;
+     deplacementJoueur()
+  else if (rep = 2) then
      // On part dans la chambre
-  if (rep = 3) then;
+  else if (rep = 3) then
      // On part dans chez le marchand
-  if (rep = 4) then;
+  else if (rep = 4) then
      // On part dans la froge
-  if (rep = 5) then;
+  else if (rep = 5) then
      // On part dans la cantine
-  if (rep = 6) then
+  else if (rep = 6) then
     creationChoix();
 end;
 

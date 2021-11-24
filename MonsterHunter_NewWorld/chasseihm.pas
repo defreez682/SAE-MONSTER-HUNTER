@@ -5,15 +5,23 @@ unit chasseIHM;
 interface
 
 var Orange : Integer = 150;
-
+    fuite : Boolean = False;
 
 procedure creationFuiteInterface();
 procedure deplacementJoueur();
+procedure creationBordure();
+procedure creationFrontiere();
+procedure creationZone1();
+procedure creationZone2();
+procedure creationZone3();
+procedure creationZone4();
+procedure creationZone6();
+procedure creationZone5();
 
 implementation
 
 uses
-  Classes, SysUtils,gestionTexte,GestionEcran,crtPerso,chasseFuiteLogic;
+  Classes, SysUtils,gestionTexte,GestionEcran,crtPerso,chasseFuiteLogic,villageIHM;
 
 
 
@@ -175,28 +183,27 @@ begin
 end;
 
 procedure creationBordure();
-var Jaune : Integer = 38;
 begin
-     texteXY(55,6,'XXXXX',Jaune);
-     texteXY(54,7,'XXXXXXX',Jaune);
-     texteXY(39,12,'XX',Jaune); 
-     texteXY(38,13,'XXX',Jaune);
-     texteXY(37,14,'XXXX',Jaune);
-     texteXY(36,15,'XXXXX',Jaune);
-     texteXY(37,16,'XXXX',Jaune); 
-     texteXY(38,17,'XXX',Jaune);
-     texteXY(39,18,'XX',Jaune);
-     texteXY(40,19,'X',Jaune);
-     texteXY(78,15,'X',Jaune);
-     texteXY(78,16,'X',Jaune);
-     texteXY(78,17,'X',Jaune);
-     texteXY(78,18,'XX',Jaune);
-     texteXY(78,19,'XXX',Jaune); 
-     texteXY(78,20,'XXXX',Jaune);
-     texteXY(78,21,'XXXX',Jaune);
-     texteXY(78,22,'XXXX',Jaune);
-     texteXY(78,23,'XX',Jaune);	 
-     texteXY(78,24,'X',Jaune);
+     texteXY(55,6,'XXXXX',Orange);
+     texteXY(54,7,'XXXXXXX',Orange);
+     texteXY(39,12,'XX',Orange);
+     texteXY(38,13,'XXX',Orange);
+     texteXY(37,14,'XXXX',Orange);
+     texteXY(36,15,'XXXXX',Orange);
+     texteXY(37,16,'XXXX',Orange);
+     texteXY(38,17,'XXX',Orange);
+     texteXY(39,18,'XX',Orange);
+     texteXY(40,19,'X',Orange);
+     texteXY(78,15,'X',Orange);
+     texteXY(78,16,'X',Orange);
+     texteXY(78,17,'X',Orange);
+     texteXY(78,18,'XX',Orange);
+     texteXY(78,19,'XXX',Orange);
+     texteXY(78,20,'XXXX',Orange);
+     texteXY(78,21,'XXXX',Orange);
+     texteXY(78,22,'XXXX',Orange);
+     texteXY(78,23,'XX',Orange);
+     texteXY(78,24,'X',Orange);
      texteXY(55,5,'_____',White);
      texteXY(54,6,'/',White);
      texteXY(60,6,'\',White);
@@ -241,26 +248,128 @@ end;
 
 procedure creationFuiteInterface();
 begin
-      dessinerCadreXY(33,3,85,27,double, White,Black);
+     effacerEcran();
+     dessinerCadreXY(33,3,85,27,double, White,Black);
+end;
+
+procedure legende();
+begin
+     texteXY(1,5,'X',LightMagenta);
+     texteEnCouleur(' sont des ',White);
+     texteEnCouleur('monstres',LightMagenta);
+
+     texteXY(1,6,'X',LightBlue);
+     texteEnCouleur(' c''est ',White);
+     texteEnCouleur('vous',LightBlue);
+
+     texteXY(1,7,'X',38);
+     texteEnCouleur(' sont des ',White);
+     texteEnCouleur('zones ',38);
+     texteEnCouleur('inexplorable.',White);
+
+     texteXY(1,8,'*',38);
+     texteEnCouleur(' sont des ',White);
+     texteEnCouleur('frontieres',38);
+     if (fuite = False) then
+        begin
+             texteXY(1,9,'________________________________',DarkGray);
+             texteXY(1,10,'*Appuyer sur echap pour quitter*',DarkGray);
+        end;
 
 end;
 
-
 procedure deplacementJoueur();
+
+type
+    monstre = RECORD
+      x : Integer;
+      y : Integer;
+
+    end;
+
+
 var x : integer = 45;
     y : integer = 15;
     cho : boolean = True;
     ch : Char;
     zoneActuelle : Integer = 1;
-
+    zoneMonstre : Integer;
+    zoneMonstreC : RECORD
+                 x : Integer;
+                 y : Integer;
+    end;
+    i : Integer;
+    nbmonstre : array[1..8] of monstre;
+    mstr : Integer;
+    choix : Boolean = False;
+    rep : Integer = 1;
+    ox : Integer = 0;
 begin
+     randomize;
      creationFuiteInterface();
      creationBordure();
      creationFrontiere();
+     legende();
+     if (fuite = True) then
+        mstr := 1
+     else
+        mstr := random(7) + 1;
+
+     // On créer les monstres dans chaque zone
+     for i := 1 to mstr do
+         begin
+              zoneMonstre := random(5)+1;
+
+              if (zoneMonstre = 1) then
+                 begin
+                      zoneMonstreC.x := random(9) + 41;
+                      zoneMonstreC.y := random(10) + 10;
+                 end;
+              if (zoneMonstre = 2) then
+                 begin
+                      zoneMonstreC.x := random(7) + 52;
+                      zoneMonstreC.y := random(5) + 8;
+                 end;
+              if (zoneMonstre = 3) then
+                  begin
+                       zoneMonstreC.x := random(9) + 55;
+                       zoneMonstreC.y := random(5) + 16;
+                  end;
+              if (zoneMonstre = 4) then
+                  begin
+                       zoneMonstreC.x := random(7) + 63;
+                       zoneMonstreC.y := random(2) + 11;
+                  end;
+              if (zoneMonstre = 5) then
+                  begin
+                       zoneMonstreC.x := random(6) + 71;
+                       zoneMonstreC.y := random(4) + 14;
+                  end;
+              if (zoneMonstre = 6) then
+                  begin
+                       zoneMonstreC.x := random(11) + 66;
+                       zoneMonstreC.y := random(3) + 21;
+                  end;
+
+               nbmonstre[i].x := zoneMonstreC.x;
+               nbmonstre[i].y := zoneMonstreC.y;
+
+               if (i > 1) then // Précaution, si deux monstre sont au même endroit, alors on en supprime un.
+                  begin
+                       if (nbmonstre[i].x = nbmonstre[i-1].x) and (nbmonstre[i].y = nbmonstre[i-1].y) then
+                          begin
+                               nbmonstre[i].x := NULL;
+                               nbmonstre[i].y := NULL;
+                          end;
+                  end;
+         end;
+
+
      texteXY(45,2,'Vous vous trouvez en zone : ',Green);
      texteEnCouleur(IntToStr(zoneActuelle),LightGreen);
-
      texteXY(x,y,'X',LightBlue);
+     for i := 1 to mstr do
+         texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
      deplacerCurseurXY(x,y);
      while (cho= True) do
            begin
@@ -268,20 +377,67 @@ begin
                case ch of
                    #80 :
                      begin // Bas
-                         y := gestionBas(x,y);
+                         if (choix = False) then
+                            y := gestionBas(x,y);
                      end;
                    #72 :
                      begin // Haut
-                         y := gestionHaut(x,y);
+                         if (choix = False) then
+                            y := gestionHaut(x,y);
                      end;
                    #77 :
                      begin // Droite
-                         x := gestionDroite(x,y);
+                         if (choix = False) then
+                            x := gestionDroite(x,y)
+                         else
+                           begin
+                                if (rep < 2) then
+                                   rep := rep + 1
+                                else
+                                   rep := 1;
+                           end;
                      end;
                    #75 : // Gauche
                      begin
-                         x := gestionGauche(x,y);
+                         if (choix = False) then
+                            x := gestionGauche(x,y)
+                         else
+                             begin
+                                  if (rep > 1) then
+                                     rep := rep - 1
+                                  else
+                                     rep := 2;
+                             end;
                      end;
+                   #13 :
+                     begin
+                         if (choix = True) then
+                            if (rep = 1) then
+                               cho := False
+                            else
+                               begin
+                                    effacerEcran();
+                                    creationFuiteInterface();
+                                    creationBordure();
+                                    creationFrontiere();
+                                    legende();
+                                    texteXY(45,2,'Vous vous trouvez en zone : ',Green);
+                                    texteEnCouleur(IntToStr(zoneActuelle),LightGreen);
+                                    x := ox;
+                                    texteXY(x,y,'X',LightBlue);
+                                    for i := 1 to mstr do
+                                        texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
+                                    deplacerCurseurXY(x,y);
+                                    choix := False;
+                               end ;
+                     end;
+                   #27 : begin
+                              if (fuite = False) then
+                                 begin
+                                      rep := 3;
+                                      cho := False;
+                                 end;
+                         end;
                end;
 
                if (x = 49) and (y = 20) then
@@ -514,7 +670,6 @@ begin
                    zoneActuelle := 6;
 
 
-
                if (zoneActuelle = 1) then
                   creationZone1()
                else if (zoneActuelle = 2) then
@@ -528,14 +683,64 @@ begin
                else if (zoneActuelle = 6) then
                   creationZone6();
 
-               {texteXY(1,1,IntToStr(x),Red);
-               texteXY(1,2,'  ',White);
-               texteXY(1,2,IntToStr(y),LightRed);}
+                                                     ;
                texteXY(73,2,IntToStr(zoneActuelle),LightGreen);
-               creationZone2();
                texteXY(x,y,'X',LightBlue);
+
+
+
+               for i := 1 to mstr do
+                   texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
+
+
+               if (choix = False) then
+                  begin
+                       for i := 1 to mstr do
+                           begin
+                               if (x = nbmonstre[i].x) and (y = nbmonstre[i].y) then
+                                  begin
+                                       if (x = 41) then
+                                          ox := x + 1
+                                       else
+                                           ox := x-1;
+                                       choix := True;
+                                  end;
+                           end;
+                  end;
+
+               if (choix = True) then
+                  begin
+                      dessinerCadreXY(35,13,84,16,simple,white,black);
+                      if (fuite = False) then
+                              texteXY(37,14,'Vous etes sur le point d''affronter un monstre.',White)
+                         else                                                                          
+                              texteXY(37,14,'Vous etes sur le point d''affronter le monstre.',White);
+
+
+                      if (rep = 1) then
+                         begin
+                              texteXY(37,17,'Accepter',Red);
+                              texteXY(76,17,'Refuser',White);
+
+                         end
+                      else
+                          begin
+                             texteXY(37,17,'Accepter',White);
+                             texteXY(76,17,'Refuser',Red);
+                          end;
+                  end;
+
                deplacerCurseurXY(x,y);
            end;
+
+     if (fuite = True) then
+     else
+        begin
+             if (rep = 3) then
+                choixMenuVillage();
+        end;
+
+
 end;
 
 end.
