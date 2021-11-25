@@ -5,7 +5,7 @@ unit chambreIHM;
 interface
 
 uses
-  Classes, SysUtils,GestionEcran, gestiontexte, crtPerso, villageIHM;
+  Classes, SysUtils,GestionEcran, gestiontexte, crtPerso,inventaireLogic,personnage,villageIHM;
   procedure chambreInterface();
   procedure chambreChoix();
   procedure repose();
@@ -114,7 +114,7 @@ begin
     if (rep = 1) then
        repose()
     else if (rep = 2) then
-       //Inventaire();
+       affichageInventaire(personnage1)
     else if (rep = 3) then
        choixMenuVillage();
 end;

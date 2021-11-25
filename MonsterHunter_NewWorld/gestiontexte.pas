@@ -12,7 +12,6 @@ procedure texteEnCouleur(texte : string; couleur : integer);
 procedure texteXY(x,y : Integer; texte : string; couleur : integer);
 {Colorier une zone defini par les quatres coordonées}
 procedure ColorierZoneXY(couleur : Byte ;couleurT : Byte; xStart,yStart,xEnd,yEnd:Integer);
-
 implementation
 
 uses
@@ -49,7 +48,6 @@ begin
      deplacerCurseurXY(x,y);
      write(texte);
 end;
-
 procedure ColorierZoneXY(couleur : Byte ;couleurT : Byte; xStart,yStart,xEnd,yEnd:Integer);
 var
    i: integer;
