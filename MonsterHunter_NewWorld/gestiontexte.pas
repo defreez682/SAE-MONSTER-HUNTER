@@ -10,6 +10,8 @@ procedure texteAtemps(texte : string; temps : integer; couleur : integer);
 procedure texteEnCouleur(texte : string; couleur : integer);
 {Créer un texte sur les coordonnées XY,  ne pas oublier de préciser la couleur.}
 procedure texteXY(x,y : Integer; texte : string; couleur : integer);
+{Colorier une zone defini par les quatres coordonées}
+procedure ColorierZoneXY(couleur : Byte ;couleurT : Byte; xStart,yStart,xEnd,yEnd:Integer);
 
 implementation
 
@@ -46,5 +48,13 @@ begin
      couleurTexte(couleur);
      deplacerCurseurXY(x,y);
      write(texte);
+end;
+
+procedure ColorierZoneXY(couleur : Byte ;couleurT : Byte; xStart,yStart,xEnd,yEnd:Integer);
+var
+   i: integer;
+begin
+  for i := yStart to yEnd do
+      ColorierZone(couleur, couleurT, xStart,xEnd,i);
 end;
 end.
