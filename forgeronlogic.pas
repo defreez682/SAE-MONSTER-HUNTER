@@ -5,7 +5,7 @@ unit forgeronLogic;
 interface
 
 uses
-  Classes, SysUtils, GestionEcran, forgeronIHM, villageIHM;
+  Classes, SysUtils, GestionEcran, forgeronIHM;
 
 procedure ForgeronDesign();
 procedure ForgeronCadre();
@@ -29,6 +29,7 @@ begin
 
 end;
 
+
 procedure ForgerArme();
 begin
 
@@ -50,7 +51,7 @@ begin
 
   effacerEcran();
   ChoixForgeron();
-  readln;
+
 
 end;
 
