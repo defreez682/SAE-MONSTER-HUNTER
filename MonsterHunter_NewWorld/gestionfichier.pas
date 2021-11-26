@@ -16,9 +16,10 @@ procedure checkUp();
 
 implementation
 uses
-  Classes, SysUtils, Personnage;
+  Classes, SysUtils, Personnage,inventaireLogic;
 
 procedure checkUp ();
+var i : Integer;
 begin
      if not DirectoryExists('C:\MHNewWorld') then
         begin
@@ -27,9 +28,11 @@ begin
              miseAjourExp(personnage1,0);
              miseAjourOr(personnage1,0);
              miseAjourPersonnage(personnage1,0);
+             creationInventaireItem(0,65); // En rajouter si on ajoute des slots
         end;
 
 end;
+
 
 end.
 

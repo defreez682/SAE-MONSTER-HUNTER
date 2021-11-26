@@ -4,7 +4,7 @@ unit inventaireihm;
 
 interface
 uses
-    SysUtils,GestionEcran,inventaireLogic,dessinBaton,crtPerso,personnage;
+    SysUtils,GestionEcran,inventaireLogic,dessinBaton,crt,personnage;
 //----------- AFFICHAGE INVENTAIRE --------------------------------------
 
 // Affiche l'inventaire

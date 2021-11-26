@@ -157,8 +157,9 @@ procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:t
 
 // Sauvegarde
 
-{On créer le fichier et le slot utiliser}
+{Celui là tu t'en fou c'est au premier lancement, à mettre dans gestion fichier}
 procedure creationInventaireItem(idItem,Slot : Integer);
+
 {Modifie le slot de l'inventaire avec l'id de l'arme}
 procedure modificationInventaireItem(idItem,Slot : Integer);
 {Renvoie l'id de l'arme sur le slot indiqué}
