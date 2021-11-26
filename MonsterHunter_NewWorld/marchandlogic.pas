@@ -3,246 +3,282 @@ unit marchandLogic;
 {$mode objfpc}{$H+}
 
 interface
-
-uses
-  SysUtils,MarchandIHM, Personnage, GestionEcran,villageIHM;
-
-procedure Marchand();
-procedure CadreMarchand();
-procedure Acheter();
-procedure CadreArgent();
-procedure Discussion();
-procedure Sujet1();
-procedure Sujet2();
-procedure Sujet2partie2();
-procedure Sujet2partie3();
-procedure Sujet3();
+procedure ChoixAchat();
+procedure ChoixDiscussions();
+procedure choixMarchand();
+procedure ChoixSujet1et3();
+procedure ChoixSujet2();
+procedure ChoixSujet2P2();
+procedure ChoixSujet2P3();
+procedure CadreArgent;
 procedure DemarrageMarchand();
 
 implementation
-procedure Marchand();
+uses
+  SysUtils,MarchandIHM, Personnage, GestionEcran, crtPerso, GestionTexte, villageIHM, inventaireLogic;
 
+
+
+
+
+// ------------------ Permet de faire un choix parmis ce que propose le marchand
+procedure ChoixMarchand();
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
 begin
-  MarchandDesignIHM
+    MarchandDesignIHM();
+    CadreMarchandIHM();
+    deplacerCurseurXY(9,24);
+    write('>>');
+
+    cho := True;
+    while (cho= True) do
+          begin
+              ch := ReadKey;
+              case ch of
+                  #80 :   //Indique la fleche en haut
+                      begin
+                          if (rep < 4) then
+                             rep := rep + 1
+                          else
+                             rep := 1;
+                      end;
+                  #72 :  //Indique la felche en bas
+                       begin
+                            if (rep > 1) then
+                               rep := rep - 1
+                            else
+                               rep := 4;
+                       end;
+                  #13 : cho := False;  //la touche entrer
+              end;
+
+              dessinFleche(rep);
+          end;
+    case rep of
+        1 : if (getOrActuelle(personnage1)=0) then
+                sujetArgentIHM()
+            else
+                choixAchat();
+        2 : vendre();
+        3 : discussionIHM();
+        4 : ChoixMenuVillage();
+    end;
 end;
 
-procedure CadreMarchand(); // Affiche le cadre du marchandIHM avec les discussions
+procedure choixAchat();
 
 var
-c : integer;
-
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+    i : integer;
 begin
-  CadreMarchandIHM();
-  c:=0;
-  while (c<>1) and (c<>2) and (c<>3) and (c<>4) do
-  begin
-  readln(c);
-  deplacerCurseurXY(106,27);
-  case c of // permet de faire choisir au joueur ce qu'il désire faire
-  1 : begin        // Acheter
-        if (getOrActuelle(personnage1)=0) then sujetArgentIHM() else
-          acheter();
-      end;
-  2 : begin
-        vendre(); // Vendre
-      end;
-  3 : begin
-        discussion();  // Discuter avec le marchand
-      end;
-  4 : begin
-        choixMenuVillage();   // Quitter et revenir aux choix des villes
-      end;
+     acheterIHM();
+     deplacerCurseurXY(13,23);
+     write('>>');
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #72 :   //Indique la fleche en haut
+                  begin
+                      if (rep > 1) then
+                         rep := rep - 1
+                      else
+                         rep := 6;
+                  end;
+              #80 :  //Indique la felche en bas
+                   begin
+                        if (rep < 6) then
+                           rep := rep + 1
+                        else
+                           rep := 1;
+                   end;
+              #27 : //la touche echap
+                   begin
+                       ChoixMarchand();
+                   end;
+              #13 : cho := False;  //la touche entrer
+          end;
+          DessinFlecheAchat(rep);
 
-  end;
+          case rep of
+                   1 : begin
+                       // alors GetOrActuelle - Valeur objet
+                       // ajoute objet dans inventaire
+                       MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[1].prix);
+                       cadreArgent();
+                       ajoutItemToPersonnage(
+                       choixAchat();
+                       readln;
 
-  end;
+                       end;
+                   2 : begin
 
-end;
+                       end;
+                   3 : begin
+
+                       end;
+                   4 : begin
+
+                       end;
+                   5 : begin
+
+                       end;
+                   6 : begin
+
+                       end;
+          end;
 
 
-// --------------------------------------- Achat item (à changer quand y'aura les items)
-procedure Acheter();
-
-var
-   c : integer;
-
-begin
-  acheterIHM();
-  readln(c);
-  begin
-
-  while (c<>1) do
-  begin
-  readln(c);
-  deplacerCurseurXY(110,27);
-  end;
-
-  CadreMarchand();
-  end;
-  readln;
-
-end;
-
-// ---------------------------------------- Affiche le cadre argent avec l'argent possédé
-procedure CadreArgent();
-
-begin
-  CadreArgentIHM();
-end;
-
-// ---------------------------------------- Permet de discutter avec le vendeur
-procedure Discussion();
-
-var
-   c : integer;
-
-begin
-  DiscussionIHM();
-  c:=0;
-  while (c<>1) and (c<>2) and (c<>3) and (c<>4) do
-  begin
-  readln(c);
-  deplacerCurseurXY(106,27);
-  case c of                 // permet au joueur de choisir de quoi il veut discuter
-  1 : begin        // Beau temps
-        Sujet1();
-      end;
-  2 : begin
-        Sujet2(); // Village
-      end;
-  3 : begin
-        Sujet3();  // Discuter avec le marchand
-      end;
-  4 : begin
-        CadreMarchand(); //Revenir en arrière
       end;
 
-  end;
-
-end;
-
-end;
-
-// ---------------------------- Sujet 1 de la discussion
-procedure Sujet1();
-
-var
-   c : integer;
-
-begin
-  Sujet1IHM();
-  c:=0;
-  while (c<>1) do
-  begin
-       readln(c);
-       deplacerCurseurXY(106,27);
-  end;
-
-  Discussion();
-
-end;
-
-// ---------------------------- Sujet 2 discussion sur le lore du village
-procedure Sujet2();
-
-var
-   c : integer;
-
-begin
-  Sujet2IHM();
-  c:=0;
-
-while (c<>1) and (c<>2) do
-begin
-  readln(c);
-  deplacerCurseurXY(106,27);
-  case c of
-  1 : begin
-        Discussion(); // Retour en arrière
-      end;
-  2 : begin
-        Sujet2partie2(); // Suite du sujet 2
-        end;
-  end;
-
-end;
-end;
-
-procedure Sujet2partie2(); // Sujet 2-2 discussion sur information de la ville
-
-Var
-   c : integer;
-
-begin
-Sujet2partie2IHM();
-c:=0;
-
-while (c<>1) and (c<>2) do
-begin
-     readln(c);
-     deplacerCurseurXY(106,27);
-     case c of
-     1 : begin
-           Sujet2(); // retour en arrière
-         end;
-     2 : begin
-           Sujet2partie3(); // suite du sujet 2
-         end;
      end;
-end;
 
-end;
 
-procedure Sujet2partie3(); // Sujet 2-3 discussion sur les informations de la ville
-var
-   c : integer;
-begin
-  Sujet2partie3IHM();
-  c:=0;
-begin
-  readln(c);
-  deplacerCurseurXY(106,27);
-  case c of
-  1 : begin
-        Sujet2partie2(); // retour en arrière
-      end;
-  2 : begin
-        Discussion(); // retour sur l'écran des choix de discussion
-      end;
-  end;
-end;
-
-end;
-
-// ---------------------------- Sujet 3 discussion sur les informations utiles
-procedure Sujet3();
+// ----------------- permet de faire un choix aux types de discussions possibles
+procedure choixDiscussions();
 
 var
-   c : integer;
-
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
 begin
-  Sujet3IHM();
-  c:=0;
-  while (c<>1) do
-  begin
-       readln(c);
-       deplacerCurseurXY(110,27);
-  end;
+    deplacerCurseurXY(9,24);
+    write('>>');
 
-  Discussion();
+    cho := True;
+    while (cho= True) do
+          begin
+              ch := ReadKey;
+              case ch of
+                  #80 :   //Indique la fleche en haut
+                      begin
+                          if (rep < 4) then
+                             rep := rep + 1
+                          else
+                             rep := 1;
+                      end;
+                  #72 :  //Indique la felche en bas
+                       begin
+                            if (rep > 1) then
+                               rep := rep - 1
+                            else
+                               rep := 4;
+                       end;
+                  #13 : cho := False;  //la touche entrer
+              end;
 
+              dessinFleche(rep);
+
+          end;
+    case rep of
+        1 : sujet1IHM();
+        2 : sujet2IHM();
+        3 : sujet3IHM();
+        4 : ChoixMarchand();
+    end;
 end;
 
-// ------------------------------------------------------- Démarage du programme marchand
+procedure ChoixSujet1et3();
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+    i : integer;
+begin
+
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #13 : begin  //la touche entrer
+              cho := True;
+              DiscussionIHM();
+              end;
+              end;
+          end;
+      end;
+
+procedure ChoixSujet2();
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+begin
+
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #13 : begin  //la touche entrer
+              cho := True;
+              Sujet2partie2IHM();
+              end;
+              end;
+          end;
+      end;
+
+procedure ChoixSujet2P2();
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+begin
+
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #13 : begin  //la touche entrer
+              cho := True;
+              Sujet2partie3IHM();
+              end;
+              end;
+          end;
+      end;
+
+procedure ChoixSujet2P3();
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+begin
+
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #13 : begin  //la touche entrer
+              cho := True;
+              DiscussionIHM();
+              end;
+              end;
+          end;
+      end;
+
+procedure CadreArgent();
+begin
+    cadreArgentIHM();
+end;
+
 procedure DemarrageMarchand();
 begin
 
      effacerEcran();
-     CadreArgent();
-     Marchand();
-     CadreMarchand();
+     cadreArgent();
+     choixMarchand();
 
 end;
+
 
 end.
 

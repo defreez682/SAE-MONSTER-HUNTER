@@ -4,6 +4,8 @@ unit marchandIHM;
 
 interface
 
+
+
 procedure MarchandDesignIHM();
 procedure CadreMarchandIHM();
 procedure acheterIHM();
@@ -17,10 +19,16 @@ procedure Sujet3IHM();
 procedure CadreArgentIHM();
 procedure SujetArgentIHM();
 procedure viderCadreMarchand();
+procedure DessinFleche(rep : integer);
+procedure DessinFlecheAchat(rep : integer);
+
+
 
 implementation
+
 uses
-   SysUtils, GestionEcran, gestionTexte, crtPerso, marchandLogic, Personnage;
+   SysUtils, GestionEcran, gestionTexte, crtPerso, marchandLogic, Personnage, VillageIHM, inventaireLogic;
+
 
 // -------------- Design du marchand ainsi que ce qui se trouve dans la boutique
 procedure MarchandDesignIHM();
@@ -63,46 +71,85 @@ begin
   deplacerCurseurXY(6,23);
   texteAtemps('Desirez-vous quelque chose en particulier ?',10,15);
   deplacerCurseurXY(9,24);
-  texteAtemps('1 : Acheter',10,15);
+  texteAtemps('    Acheter',10,15);
   deplacerCurseurXY(9,25);
-  texteAtemps('2 : Vendre',10,15);
+  texteAtemps('    Vendre',10,15);
   deplacerCurseurXY(9,26);
-  texteAtemps('3 : Discussion',10,15);
+  texteAtemps('    Discussion',10,15);
   deplacerCurseurXY(9,27);
-  texteAtemps('4 : Quitter',10,15);
+  texteAtemps('    Quitter',10,15);
   deplacerCurseurXY(106,27);
+
 
 end;
 
+
 // ----------------------- Permet d'acheter des items/objets auprès du marchands
 procedure acheterIHM();
+
+var
+  i,y : integer;
+
 begin
 
      viderCadreMarchand();
      deplacerCurseurXY(6,21);
      couleurtexte(4);
-     writeln('Marc, le marchand'); // write(random(item))
+     writeln('Marc, le marchand');
+     texteXY(15,22,'BOMBES',3);
      couleurtexte(15);
-     deplacerCurseurXY(7,22);
-     writeln('Foudre Hurlante : 110 po');
-     deplacerCurseurXY(7,23);
-     writeln('Potion : 66 po');
-     deplacerCurseurXY(7,24);
-     writeln('bombe barile : 13O po');
-     deplacerCurseurXY(7,24);
-     writeln('super bombe barile : 200 po');
-     deplacerCurseurXY(6,27);
-     writeln('1 : Retour');
+     y:=23;
+     deplacerCurseurXY(15,y);
+     for i:=1 to 3 do
+         begin
+              writeln(stuffDispo.invBombeDispo[i].nomBombe, ' | prix : ',stuffDispo.invBombeDispo[i].prix);
+              y:=(y+1);
+              deplacerCurseurXY(15,y);
+         end;
+
+     texteXY(65,22,'POTIONS',3);
+     couleurtexte(15);
+     y:=23;
+     deplacerCurseurXY(65,y);
+     for i:=1 to 3 do
+         begin
+              writeln(stuffDispo.invPotionDispo[i].nomPotion, ' | prix : ',stuffDispo.invPotionDispo[i].prix);
+              y:=(y+1);
+              deplacerCurseurXY(65,y);
+         end;
+
+     texteXY(6,27,'Appuyer sur echap pour revenir en arriere',7);
      deplacerCurseurXY(106,27);
 
 end;
 
-// affiche l'inventaire avec une option vendre en +
+// affiche l'inventaire avec une option vente - Potions, Loots, Bombes
 procedure vendre();
 
-begin
+var
+  x : integer;
+  j : integer;
+  i : integer;
 
-     //inventaire pour vendre
+begin
+     dessinercadreXY(3,2,115,4,double,15,0);
+     texteXY(45,3,'INVENTAIRE CONSOMMABLE ET DROP',15);
+     dessinercadreXY(3,7,115,28,simple,15,0);
+
+     couleurtexte(15);
+     x:=8;
+     deplacerCurseurXY(4,x);
+     for i:= 0 to 3 do
+         begin
+              for j:=0 to 3 do
+                  begin
+                       texteXY(76,x,personnage1.inventaire.invDrop[i][j].nomDrop,15);
+                       //write(personnage1.inventaire.invArme[i][j].nomArme);
+                       x:=(x+1);
+                       deplacerCurseurXY(76,x);
+                  end;
+         end;
+     readln;
      // if item=vendu alors ValeurOr va dans OrJoueur
 
 end;
@@ -118,17 +165,20 @@ begin
     couleurtexte(15);
     deplacerCurseurXY(7,22);
     texteAtemps('De quoi voulez-vous parler ?',10,15);
-    deplacerCurseurXY(7,23);
-    texteAtemps('1 : Il fait beau aujourd''hui, n''est-ce pas ?',10,15);
     deplacerCurseurXY(7,24);
-    texteAtemps('2 : Parlez-moi de la ville',10,15);
+    texteAtemps('    Il fait beau aujourd''hui, n''est-ce pas ?',10,15);
     deplacerCurseurXY(7,25);
-    texteAtemps('3 : Auriez-vous des informations qui pourrait m''etre utile ?',10,15);
+    texteAtemps('    Parlez-moi de la ville',10,15);
     deplacerCurseurXY(7,26);
-    texteAtemps('4 : Non rien, ca ira',10,15);
+    texteAtemps('    Auriez-vous des informations qui pourrait m''etre utile ?',10,15);
+    deplacerCurseurXY(7,27);
+    texteAtemps('    Non rien, ca ira',10,15);
     deplacerCurseurXY(106,27);
 
+    choixDiscussions();
+
 end;
+
 
 // réponse à la question "il fait beau aujourd'hui, n'est-ce pas ?"
 procedure Sujet1IHM();
@@ -144,8 +194,10 @@ begin
     deplacerCurseurXY(7,23);
     texteAtemps('parfait pour une chasse. J''ai meme parfaitement ce qu''il vous faut pour une bonne chasse',10,15);
     deplacerCurseurXY(6,27);
-    texteAtemps('1 : Retour',10,3);
+    texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
+
+    ChoixSujet1et3();
 
 end;
 
@@ -181,8 +233,10 @@ begin
     deplacerCurseurXY(55,11);
     writeln('\  =  /');
     deplacerCurseurXY(7,27);
-    texteAtemps('1 : Retour  2 : Suivant',10,3);
+    texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
+
+    ChoixSujet2();
 
 end;
 
@@ -205,8 +259,10 @@ begin
     deplacerCurseurXY(7,26);
     texteAtemps('j''espere que cette histoire vous aura inspire',10,15);
     deplacerCurseurXY(7,27);
-    texteAtemps('1 : Retour  2 : Suivant',10,3);
+    texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
+
+    choixSujet2P2();
 
 end;
 
@@ -227,8 +283,10 @@ begin
     deplacerCurseurXY(7,25);
     texteAtemps('Mais vous-y trouverez de tout dans cette ville, Forgeron, Cantine, Chambre ',10,15);
     deplacerCurseurXY(7,27);
-    texteAtemps('1 : Retour  2 : Quitter',10,3);
+    texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
+
+    choixSujet2P3();
 
 end;
 
@@ -250,8 +308,10 @@ begin
     deplacerCurseurXY(7,26);
     texteAtemps('les resources necessaire',10,15);
 
-    deplacerCurseurXY(6,27);
-    texteAtemps('1 : Retour',10,3);
+    deplacerCurseurXY(7,27);
+    texteAtemps('Appuyer sur entrer pour continuer',10,7);
+    deplacerCurseurXY(106,27);
+    ChoixSujet1et3();
 
     deplacerCurseurXY(106,27);
 end;
@@ -293,6 +353,95 @@ begin
   write(getOrActuelle(personnage1), ' piece d''or');
 
 end;
+
+procedure DessinFleche(rep : integer);
+begin
+if (rep = 1) then
+                 begin
+                     texteXY(9,24,'>>',White);
+                     texteXY(9,25,'  ',White);
+                     texteXY(9,26,'  ',White);
+                     texteXY(9,27,'  ',White);
+                     deplacerCurseurXY(8,24);
+                 end;
+              if (rep = 2) then
+                 begin
+                     texteXY(9,24,'  ',White);
+                     texteXY(9,25,'>>',White);
+                     texteXY(9,26,'  ',White);
+                     texteXY(9,27,'  ',White);
+                     deplacerCurseurXY(8,25);
+                 end;
+              if (rep = 3) then
+                 begin
+                     texteXY(9,24,'  ',White);
+                     texteXY(9,25,'  ',White);
+                     texteXY(9,26,'>>',White);
+                     texteXY(9,27,'  ',White);
+                     deplacerCurseurXY(8,26);
+                 end;
+              if (rep=4) then
+                 begin
+                     texteXY(9,24,'  ',White);
+                     texteXY(9,25,'  ',White);
+                     texteXY(9,26,'  ',White);
+                     texteXY(9,27,'>>',White);
+                     deplacerCurseurXY(8,27);
+                 end;
+
+end;
+
+procedure DessinFlecheAchat(rep : integer);
+begin
+             if (rep = 1) then
+                 begin
+                     texteXY(63,25,'  ',White);
+                     texteXY(13,23,'>>',White);
+                     texteXY(13,24,'  ',White);
+                     texteXY(13,25,'  ',White);
+                     deplacerCurseurXY(13,23);
+                 end;
+              if (rep = 2) then
+                 begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'>>',White);
+                     texteXY(13,25,'  ',White);
+                     deplacerCurseurXY(13,24);
+                 end;
+              if (rep = 3) then
+                 begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',White);
+                     texteXY(13,25,'>>',White);
+                     deplacerCurseurXY(13,25);
+                 end;
+              if (rep=4) then
+                 begin
+                     texteXY(13,25,'  ',White);
+                     texteXY(63,23,'>>',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
+                     deplacerCurseurXY(63,23);
+                 end;
+              if (rep=5) then
+                 begin
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'>>',White);
+                     texteXY(63,25,'  ',White);
+                     deplacerCurseurXY(63,24);
+                 end;
+
+              if (rep=6) then
+                 begin
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'>>',White);
+                     deplacerCurseurXY(63,25);
+                 end;
+
+end;
+
+
 
 end.
 
