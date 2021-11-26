@@ -23,10 +23,10 @@ begin
      if not DirectoryExists('C:\MHNewWorld') then
         begin
              MkDir('C:\MHNewWorld');
-             miseAjourLVL(1);
-             miseAjourExp(0);
-             miseAjourOr(0);
-             miseAjourPersonnage(0);
+             miseAjourLVL(personnage1,1);
+             miseAjourExp(personnage1,0);
+             miseAjourOr(personnage1,0);
+             miseAjourPersonnage(personnage1,0);
         end;
 
 end;

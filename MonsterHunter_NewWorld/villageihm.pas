@@ -29,7 +29,7 @@ procedure descriptionMenu();
 implementation
 
 uses
-  Classes, SysUtils,GestionEcran,gestionTexte,crtPerso,menu,chasseIHM, cantineIHM, chambreIHM;;
+  Classes, SysUtils,GestionEcran,gestionTexte,crtPerso,menu,chasseIHM,chambreIHM,marchandLogic,inventaireLogic,cantineIHM,forgeronLogic;
 
 
 procedure descriptionChasse();
@@ -239,12 +239,17 @@ begin
      // On part en chasse
      deplacementJoueur()
   else if (rep = 2) then
+     // On part dans la chambre
      chambre()
   else if (rep = 3) then
+     DemarrageMarchand()
+
      // On part dans chez le marchand
   else if (rep = 4) then
-     // On part dans la froge
+     // On part dans la forge
+     DemarrageForgeron()
   else if (rep = 5) then
+     // On part dans la cantine
      cantine()
   else if (rep = 6) then
     creationChoix();
