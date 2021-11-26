@@ -21,14 +21,12 @@ procedure SujetArgentIHM();
 procedure viderCadreMarchand();
 procedure DessinFleche(rep : integer);
 procedure DessinFlecheAchat(rep : integer);
-
-
+procedure AchatImpossible();
 
 implementation
 
 uses
    SysUtils, GestionEcran, gestionTexte, crtPerso, marchandLogic, Personnage, VillageIHM, inventaireLogic;
-
 
 // -------------- Design du marchand ainsi que ce qui se trouve dans la boutique
 procedure MarchandDesignIHM();
@@ -83,6 +81,16 @@ begin
 
 end;
 
+// ----------------------------------- Affiche le cadre où l'argent sera affiché
+procedure CadreArgentIHM();
+
+begin
+
+  dessinerCadreXY(90,0,115,2,simple,15,0);
+  deplacerCurseurXY(97,1);
+  write(getOrActuelle(personnage1), ' piece d''or');
+
+end;
 
 // ----------------------- Permet d'acheter des items/objets auprès du marchands
 procedure acheterIHM();
@@ -123,7 +131,7 @@ begin
 
 end;
 
-// affiche l'inventaire avec une option vente - Potions, Loots, Bombes
+// affiche l'inventaire avec une option vente - Potions, Loots, Bombes --------------------------------------------- A FAIRE
 procedure vendre();
 
 var
@@ -174,11 +182,9 @@ begin
     deplacerCurseurXY(7,27);
     texteAtemps('    Non rien, ca ira',10,15);
     deplacerCurseurXY(106,27);
-
     choixDiscussions();
 
 end;
-
 
 // réponse à la question "il fait beau aujourd'hui, n'est-ce pas ?"
 procedure Sujet1IHM();
@@ -196,12 +202,12 @@ begin
     deplacerCurseurXY(6,27);
     texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
-
     ChoixSujet1et3();
 
 end;
 
-procedure Sujet2IHM(); // réponse à la demande "Parlez-moi de cette ville" - Partie 1
+// réponse à la demande "Parlez-moi de cette ville" - Partie 1
+procedure Sujet2IHM();
 begin
 
     viderCadreMarchand();
@@ -235,12 +241,12 @@ begin
     deplacerCurseurXY(7,27);
     texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
-
     ChoixSujet2();
 
 end;
 
-procedure Sujet2partie2IHM(); //réponse à la demande "Parlez-moi de cette ville" partie 2
+//réponse à la demande "Parlez-moi de cette ville" partie 2
+procedure Sujet2partie2IHM();
 begin
 
     viderCadreMarchand();
@@ -261,12 +267,12 @@ begin
     deplacerCurseurXY(7,27);
     texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
-
     choixSujet2P2();
 
 end;
 
-procedure Sujet2partie3IHM(); //réponse à la demande "Parlez-moi de cette ville" partie 3
+//réponse à la demande "Parlez-moi de cette ville" partie 3
+procedure Sujet2partie3IHM();
 begin
 
     viderCadreMarchand();
@@ -285,38 +291,39 @@ begin
     deplacerCurseurXY(7,27);
     texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
-
     choixSujet2P3();
 
 end;
 
-procedure Sujet3IHM(); // Réponse à la question : "Auriez-vous des informations utiles ?"
+// Réponse à la question : "Auriez-vous des informations utiles ?"
+procedure Sujet3IHM();
 begin
+
     viderCadreMarchand();
     deplacerCurseurXY(6,21);
     couleurtexte(4);
     writeln('Marc, le marchand');
     couleurtexte(15);
     deplacerCurseurXY(7,22);
-    texteAtemps('Vous pouvez acheter des items chez moi, je change regulierement ce que je propose donc n''hesitez pas a ',10,15);
+    texteAtemps('Vous pouvez acheter des items chez moi, n''hesitez pas a revenir apres chaque chasse ',10,15);
     deplacerCurseurXY(7,23);
-    texteAtemps('revenir apres une chasse. Si vous avez des choses à vendre, c''est avec plaisir que je pourrais les acheter ',10,15);
+    texteAtemps('Si vous avez des choses à vendre, c''est avec plaisir que je pourrais les acheter ',10,15);
     deplacerCurseurXY(7,24);
     texteAtemps('si cela m''interesse Vous pouvez aussi vous reposer dans une chambre ou bien acheter de quoi vous retablir',10,15);
     deplacerCurseurXY(7,25);
     texteAtemps('dans la cantine Si vous avez de quoi, le forgeron pourra aussi vous fabriquer des choses tant que vous avez ',10,15);
     deplacerCurseurXY(7,26);
     texteAtemps('les resources necessaire',10,15);
-
     deplacerCurseurXY(7,27);
     texteAtemps('Appuyer sur entrer pour continuer',10,7);
     deplacerCurseurXY(106,27);
     ChoixSujet1et3();
-
     deplacerCurseurXY(106,27);
+
 end;
 
-procedure SujetArgentIHM(); //Réponse du marchand si vous avez "0" d'or
+// --------------------------- Réponse du marchand si l'utilisateur n'a pas d'or
+procedure SujetArgentIHM();
 begin
 
     viderCadreMarchand();
@@ -331,6 +338,21 @@ begin
 
 end;
 
+// Reponse du marchand si pas assez d'or ou de place dans inventaire lors de l'achat
+procedure AchatImpossible();
+begin
+
+    viderCadreMarchand();
+    if (isinventaireplein('bombe',personnage1).xA=-1) then
+       texteXY(40,24,'Vous n''avez plus de place dans votre inventaire',4)
+    else
+    texteXY(50,24,'Vous n''avez pas assez d''or',4);
+    readln;
+    choixAchat();
+
+end;
+
+// ----------------------------------- Vide ce qui se trouve dans cadre marchand
 procedure viderCadreMarchand();
 var
   i : integer;
@@ -342,21 +364,11 @@ begin
 
 end;
 
-
-// Affiche le cadre où l'argent sera affiché
-procedure CadreArgentIHM();
-
-begin
-
-  dessinerCadreXY(90,0,115,2,simple,15,0);
-  deplacerCurseurXY(97,1);
-  write(getOrActuelle(personnage1), ' piece d''or');
-
-end;
-
+// --------------------------------------------------------- affiche les flèches
 procedure DessinFleche(rep : integer);
 begin
-if (rep = 1) then
+
+              if (rep = 1) then
                  begin
                      texteXY(9,24,'>>',White);
                      texteXY(9,25,'  ',White);
@@ -391,8 +403,10 @@ if (rep = 1) then
 
 end;
 
+// ------------------------------- affiche les flèches pour les choix dans achat
 procedure DessinFlecheAchat(rep : integer);
 begin
+
              if (rep = 1) then
                  begin
                      texteXY(63,25,'  ',White);
@@ -440,8 +454,6 @@ begin
                  end;
 
 end;
-
-
 
 end.
 

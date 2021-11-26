@@ -17,16 +17,13 @@ implementation
 uses
   SysUtils,MarchandIHM, Personnage, GestionEcran, crtPerso, GestionTexte, villageIHM, inventaireLogic;
 
-
-
-
-
 // ------------------ Permet de faire un choix parmis ce que propose le marchand
 procedure ChoixMarchand();
 var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
+
 begin
     MarchandDesignIHM();
     CadreMarchandIHM();
@@ -66,8 +63,10 @@ begin
         3 : discussionIHM();
         4 : ChoixMenuVillage();
     end;
+
 end;
 
+// ----------------------- permet de choisir ce que l'on veut acheter dans achat
 procedure choixAchat();
 
 var
@@ -75,7 +74,9 @@ var
     rep : integer = 1;
     ch  : char;
     i : integer;
+
 begin
+
      acheterIHM();
      deplacerCurseurXY(13,23);
      write('>>');
@@ -102,43 +103,39 @@ begin
                    begin
                        ChoixMarchand();
                    end;
-              #13 : cho := False;  //la touche entrer
+              #13 : begin
+              cho := False;  //la touche entrer
+                     if rep<4 then
+                        begin
+                          if (getOrActuelle(personnage1) < stuffDispo.invBombeDispo[rep].prix) or (isinventaireplein('bombe',personnage1).xA=-1) then
+                                  AchatImpossible()
+                          else
+                            begin
+                              MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[rep].prix);
+                              cadreArgent();
+                              ajoutItemToPersonnage('bombe',rep,personnage1);
+                              choixAchat();
+                            end;
+                        end
+                     else
+                       begin
+                         if (getOrActuelle(personnage1) < stuffDispo.invpotionDispo[rep].prix) or (isinventaireplein('potion',personnage1).xA=-1) then
+                             AchatImpossible()
+                         else
+                           begin
+                             MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invpotionDispo[rep].prix);
+                             cadreArgent();
+                             ajoutItemToPersonnage('potion',rep,personnage1);
+                             choixAchat();
+                           end;
+                      end;
+
+                  end;
           end;
           DessinFlecheAchat(rep);
-
-          case rep of
-                   1 : begin
-                       // alors GetOrActuelle - Valeur objet
-                       // ajoute objet dans inventaire
-                       MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[1].prix);
-                       cadreArgent();
-                       ajoutItemToPersonnage(
-                       choixAchat();
-                       readln;
-
-                       end;
-                   2 : begin
-
-                       end;
-                   3 : begin
-
-                       end;
-                   4 : begin
-
-                       end;
-                   5 : begin
-
-                       end;
-                   6 : begin
-
-                       end;
-          end;
-
-
       end;
 
-     end;
-
+end;
 
 // ----------------- permet de faire un choix aux types de discussions possibles
 procedure choixDiscussions();
@@ -147,6 +144,7 @@ var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
+
 begin
     deplacerCurseurXY(9,24);
     write('>>');
@@ -182,14 +180,18 @@ begin
         3 : sujet3IHM();
         4 : ChoixMarchand();
     end;
+
 end;
 
+// -------------- permet de revenir au choix de discussion pour le sujet 1 et  2
 procedure ChoixSujet1et3();
+
 var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
     i : integer;
+
 begin
 
      cho := True;
@@ -198,18 +200,22 @@ begin
           ch := ReadKey;
           case ch of
               #13 : begin  //la touche entrer
-              cho := True;
-              DiscussionIHM();
-              end;
-              end;
+                      cho := True;
+                      DiscussionIHM();
+                    end;
           end;
       end;
 
+end;
+
+// ---------------- permet de passer a la partie 2 de la conversation du sujet 2
 procedure ChoixSujet2();
+
 var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
+
 begin
 
      cho := True;
@@ -218,18 +224,22 @@ begin
           ch := ReadKey;
           case ch of
               #13 : begin  //la touche entrer
-              cho := True;
-              Sujet2partie2IHM();
-              end;
-              end;
+                      cho := True;
+                      Sujet2partie2IHM();
+                    end;
           end;
       end;
 
+end;
+
+// ---------------- permet de passer a la partie 3 de la conversation du sujet 2
 procedure ChoixSujet2P2();
+
 var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
+
 begin
 
      cho := True;
@@ -238,18 +248,22 @@ begin
           ch := ReadKey;
           case ch of
               #13 : begin  //la touche entrer
-              cho := True;
-              Sujet2partie3IHM();
-              end;
-              end;
+                      cho := True;
+                      Sujet2partie3IHM();
+                    end;
           end;
       end;
 
+end;
+
+// ------------------------------------ permet de revenir au choix de discussion
 procedure ChoixSujet2P3();
+
 var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
+
 begin
 
      cho := True;
@@ -258,18 +272,21 @@ begin
           ch := ReadKey;
           case ch of
               #13 : begin  //la touche entrer
-              cho := True;
-              DiscussionIHM();
-              end;
-              end;
+                      cho := True;
+                      DiscussionIHM();
+                    end;
           end;
       end;
 
+end;
+
+// --------------------------------------------------------- affiche cadreArgent
 procedure CadreArgent();
 begin
     cadreArgentIHM();
 end;
 
+// -------------------------------------------------  Afin d'acceder au marchand
 procedure DemarrageMarchand();
 begin
 
@@ -278,7 +295,6 @@ begin
      choixMarchand();
 
 end;
-
 
 end.
 
