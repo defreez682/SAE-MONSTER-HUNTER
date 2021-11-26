@@ -5,7 +5,7 @@ unit forgeronIHM;
 interface
 
 uses
-  Classes, SysUtils, GestionEcran, GestionTexte, crtPerso, VillageIHM;
+  Classes, SysUtils, GestionEcran, GestionTexte, crtPerso, villageIHM, inventaireLogic;
 
 procedure ForgeronDesignIHM();
 procedure ForgeronCadreIHM();
@@ -13,6 +13,9 @@ procedure ChoixForgeron();
 procedure ForgerArmeIHM();
 procedure ChoixForgerArme();
 procedure ForgerArmureIHM();
+procedure ChoixForgerArmure();
+procedure listerArmes(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);
+procedure listerArmures(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);
 
 implementation
 
@@ -138,37 +141,18 @@ begin
           end;
     case rep of
         1 : ChoixForgerArme();
-        2 : ForgerArmureIHM();
+        2 : ChoixForgerArmure();
         3 : ChoixMenuVillage();
     end;
 end;
-
+//___________________________________________________________IHM et choix forgeur Armes
 procedure ForgerArmeIHM();
 begin
     //Cadre des armes
     effacerEcran();
-   dessinerCadreXY(2,2,70,23, double,15,0);
-   texteXY(3,3,'Conbustion wywerne Argent',4);
-   texteXY(3,5,'X',15);
-   texteXY(3,7,'X',15);
-   texteXY(3,9,'X',15);
-   texteXY(3,11,'X',15);
-   texteXY(3,13,'X',15);
-   texteXY(3,15,'X',15);
-   texteXY(3,17,'X',15);
-   texteXY(3,19,'X',15);
-   texteXY(3,21,'X',15);
+    dessinerCadreXY(2,2,70,23, double,15,0);
+    listerArmes(3,38, stuffDispo,1);
 
-   texteXY(38,3,'X',15);
-   texteXY(38,5,'X',15);
-   texteXY(38,7,'X',15);
-   texteXY(38,9,'X',15);
-   texteXY(38,11,'X',15);
-   texteXY(38,13,'X',15);
-   texteXY(38,15,'X',15);
-   texteXY(38,17,'X',15);
-   texteXY(38,19,'X',15);
-   texteXY(38,21,'X',15);
 
    // Cadre des loots possdés
    dessinercadreXY(75,2,115,20,double,15,0);
@@ -233,535 +217,141 @@ begin
 
           case rep of
               1 :begin
-                    texteXY(3,3,'Conbustion wywerne Argent',4);
-                    texteXY(3,5,'X',15);
-                    texteXY(3,7,'X',15);
-                    texteXY(3,9,'X',15);
-                    texteXY(3,11,'X',15);
-                    texteXY(3,13,'X',15);
-                    texteXY(3,15,'X',15);
-                    texteXY(3,17,'X',15);
-                    texteXY(3,19,'X',15);
-                    texteXY(3,21,'X',15);
-                    texteXY(38,3,'X',15);
-                    texteXY(38,5,'X',15);
-                    texteXY(38,7,'X',15);
-                    texteXY(38,9,'X',15);
-                    texteXY(38,11,'X',15);
-                    texteXY(38,13,'X',15);
-                    texteXY(38,15,'X',15);
-                    texteXY(38,17,'X',15);
-                    texteXY(38,19,'X',15);
-                    texteXY(38,21,'X',15);
+
+                    listerArmes(3,38, stuffDispo,1);
+
                     texteXY(77,22,'Poids',10);
                     texteXY(77,23,'Ratio A/D',10);
                     texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                     ColorierZone(0,15,3,19,26);
                  end;
               2 :begin
-                    texteXY(3,3,'Conbustion wywerne Argent',15);
-                    texteXY(3,5,'X',4);
-                    texteXY(3,7,'X',15);
-                    texteXY(3,9,'X',15);
-                    texteXY(3,11,'X',15);
-                    texteXY(3,13,'X',15);
-                    texteXY(3,15,'X',15);
-                    texteXY(3,17,'X',15);
-                    texteXY(3,19,'X',15);
-                    texteXY(3,21,'X',15);
-                    texteXY(38,3,'X',15);
-                    texteXY(38,5,'X',15);
-                    texteXY(38,7,'X',15);
-                    texteXY(38,9,'X',15);
-                    texteXY(38,11,'X',15);
-                    texteXY(38,13,'X',15);
-                    texteXY(38,15,'X',15);
-                    texteXY(38,17,'X',15);
-                    texteXY(38,19,'X',15);
-                    texteXY(38,21,'X',15);
+
+                    listerArmes(3,38, stuffDispo,2);
+
                     texteXY(77,22,'Poids',10);
                     texteXY(77,23,'Ratio A/D',10);
                     texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                  end;
               3 :begin
-                    texteXY(3,3,'Conbustion wywerne Argent',15);
-                    texteXY(3,5,'X',15);
-                    texteXY(3,7,'X',4);
-                    texteXY(3,9,'X',15);
-                    texteXY(3,11,'X',15);
-                    texteXY(3,13,'X',15);
-                    texteXY(3,15,'X',15);
-                    texteXY(3,17,'X',15);
-                    texteXY(3,19,'X',15);
-                    texteXY(3,21,'X',15);
-                    texteXY(38,3,'X',15);
-                    texteXY(38,5,'X',15);
-                    texteXY(38,7,'X',15);
-                    texteXY(38,9,'X',15);
-                    texteXY(38,11,'X',15);
-                    texteXY(38,13,'X',15);
-                    texteXY(38,15,'X',15);
-                    texteXY(38,17,'X',15);
-                    texteXY(38,19,'X',15);
-                    texteXY(38,21,'X',15);
+                    listerArmes(3,38, stuffDispo,3);
+
                     texteXY(77,22,'Poids',10);
                     texteXY(77,23,'Ratio A/D',10);
                     texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                  end;
               4:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',4);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,4);
+
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                  end;
               5:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',4);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
+
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                  end;
               6:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',4);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                  end;
               7:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',4);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :  ZZZZZZ   Loot 2 :      ',4);
                  end;
               8:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',4);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
 
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                                  end;
               9:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',4);
-                   texteXY(3,21,'X',15);
-
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
 
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                  end;
               10:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',4);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
               end;
               11:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',4);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                 end;
               12:
                    begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',4);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
               end;
               13:
                    begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',4);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
               end;
               14:
                    begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',4);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                 end;
               15: begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',4);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                 end;
               16: begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',4);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
               end;
               17: begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',4);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
               end;
               18: begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',4);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                 end;
               19: begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',4);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                 end;
               20:begin
-                   texteXY(3,3,'Conbustion wywerne Argent',15);
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',4);
+                   listerArmes(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids',10);
                    texteXY(77,23,'Ratio A/D',10);
                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
                    ColorierZone(0,15,3,19,26);
                 end;
               21: begin
-                   texteXY(3,5,'X',15);
-                   texteXY(3,7,'X',15);
-                   texteXY(3,9,'X',15);
-                   texteXY(3,11,'X',15);
-                   texteXY(3,13,'X',15);
-                   texteXY(3,15,'X',15);
-                   texteXY(3,17,'X',15);
-                   texteXY(3,19,'X',15);
-                   texteXY(3,21,'X',15);
-
-                   texteXY(38,3,'X',15);
-                   texteXY(38,5,'X',15);
-                   texteXY(38,7,'X',15);
-                   texteXY(38,9,'X',15);
-                   texteXY(38,11,'X',15);
-                   texteXY(38,13,'X',15);
-                   texteXY(38,15,'X',15);
-                   texteXY(38,17,'X',15);
-                   texteXY(38,19,'X',15);
-                   texteXY(38,21,'X',15);
+                   listerArmes(3,38, stuffDispo,0);
                    ColorierZone(4,15,3,19,26);
               end;
           end;
@@ -771,10 +361,269 @@ begin
 
 end;
 
+//___________________________________________________________IHM et choix forgeur Armures
 procedure ForgerArmureIHM();
 begin
-  effacerEcran();
+    effacerEcran();
+    dessinerCadreXY(2,2,70,23, double,15,0);
+    listerArmures(3,38, stuffDispo,1);
+
+
+   // Cadre des loots possdés
+   dessinercadreXY(75,2,115,20,double,15,0);
+   //faire appel à une fonction contenu de l'inventaire(loots)
+
+   // Cadre des informations
+   dessinerCadreXY(75,21,115,26,double,15,0);
+   texteXY(77,22,'Poids',10);
+   texteXY(77,23,'Ratio A/D',10);
+   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+
+   // Cadre pour quitter
+   dessinerCadreXY(2,25,20,27,double,15,0);
+   texteXY(8,26,'RETOUR',15);
 end;
 
-end.
+procedure ChoixForgerArmure();
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+    i : integer;
+begin
+     ForgerArmureIHM();
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #72 :   //Indique la fleche en huat
+                  begin
+                      if (rep > 1) then
+                         rep := rep - 1
+                      else
+                         rep := 21;
+                  end;
+              #80 :  //Indique la felche en bas
+                   begin
+                        if (rep < 21) then
+                           rep := rep + 1
+                        else
+                           rep := 1;
+                   end;
+              #77 :  //Droite
+                   begin
+                       if (rep <= 10) then
+                          rep := rep + 10
+                       else
+                           rep := (rep-10);
+                   end;
+              #75 :  //Gauche
+                   begin
+                       if (rep <= 10) then
+                          rep := rep + 10
+                       else
+                           rep := (rep-10);
+                   end;
+              #13 : cho := False;  //la touche entrer
+          end;
 
+          case rep of
+              1 :begin
+
+                    listerArmures(3,38, stuffDispo,1);
+
+                    texteXY(77,22,'Poids',10);
+                    texteXY(77,23,'Ratio A/D',10);
+                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                    ColorierZone(0,15,3,19,26);
+                 end;
+              2 :begin
+
+                    listerArmures(3,38, stuffDispo,2);
+
+                    texteXY(77,22,'Poids',10);
+                    texteXY(77,23,'Ratio A/D',10);
+                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                 end;
+              3 :begin
+                    listerArmures(3,38, stuffDispo,3);
+
+                    texteXY(77,22,'Poids',10);
+                    texteXY(77,23,'Ratio A/D',10);
+                    texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                 end;
+              4:begin
+                   listerArmures(3,38, stuffDispo,4);
+
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                 end;
+              5:begin
+                   listerArmures(3,38, stuffDispo,rep);
+
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                 end;
+              6:begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                 end;
+              7:begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :  ZZZZZZ   Loot 2 :      ',4);
+                 end;
+              8:begin
+                   listerArmures(3,38, stuffDispo,rep);
+
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                                 end;
+              9:begin
+                   listerArmures(3,38, stuffDispo,rep);
+
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                 end;
+              10:begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+              end;
+              11:begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                end;
+              12:
+                   begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+              end;
+              13:
+                   begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+              end;
+              14:
+                   begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                end;
+              15: begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                end;
+              16: begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+              end;
+              17: begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+              end;
+              18: begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                end;
+              19: begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                end;
+              20:begin
+                   listerArmures(3,38, stuffDispo,rep);
+                   texteXY(77,22,'Poids',10);
+                   texteXY(77,23,'Ratio A/D',10);
+                   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+                   ColorierZone(0,15,3,19,26);
+                end;
+              21: begin
+                   listerArmures(3,38, stuffDispo,0);
+                   ColorierZone(4,15,3,19,26);
+              end;
+          end;
+      end;
+     if rep=21 then
+     ChoixForgeron();
+
+end;
+
+//___________________________________________________________Procedure pour remplire la table des armes
+procedure listerArmes(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);
+   var
+       i,y : integer;
+   begin
+        y := 3;
+	for i:=1 to 10 do
+          begin
+            if ( indiceAcolorer <> i) then
+		  texteXY(x1,y,stuffDispo.invArmeDispo[i].nomArme,15)
+	    else
+		  texteXY(x1,y,stuffDispo.invArmeDispo[i].nomArme,red);
+	    y := y + 2;
+          end;
+
+	y := 3;
+	for i:=11 to 20 do
+         begin
+          if ( indiceAcolorer <> i) then
+		  texteXY(x2,y,stuffDispo.invArmeDispo[i].nomArme,15)
+	  else
+		  texteXY(x2,y,stuffDispo.invArmeDispo[i].nomArme,red);
+	  y := y + 2;
+         end;
+    end;
+
+//___________________________________________________________Procedure pour remplire la table des armes
+procedure listerArmures(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);
+   var
+       i,y : integer;
+   begin
+        y := 3;
+	for i:=1 to 10 do
+          begin
+            if ( indiceAcolorer <> i) then
+		  texteXY(x1,y,stuffDispo.invArmureDispo[i].nomArmure,15)
+	    else
+		  texteXY(x1,y,stuffDispo.invArmureDispo[i].nomArmure,red);
+	    y := y + 2;
+          end;
+
+	y := 3;
+	for i:=11 to 20 do
+         begin
+          if ( indiceAcolorer <> i) then
+		  texteXY(x2,y,stuffDispo.invArmureDispo[i].nomArmure,15)
+	  else
+		  texteXY(x2,y,stuffDispo.invArmureDispo[i].nomArmure,red);
+	  y := y + 2;
+         end;
+    end;
+
+end.
