@@ -18,7 +18,7 @@ procedure creationChoix();
 implementation
 
 uses
-  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso,villageIHM;
+  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso,villageIHM,inventaireLogic;
 
 
 
@@ -208,7 +208,7 @@ begin
        menuAvertissement()
     else if (rep = 2) then
        begin
-       creationInventaire(personnage1);
+       recupInventaire(personnage1);
        choixMenuVillage();
 
 
