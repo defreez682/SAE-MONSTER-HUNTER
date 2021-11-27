@@ -316,6 +316,7 @@ begin
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
+
 end;
 
 // Remplis un tableau de tous les items disponibles - BASE DE DONNEE A NE PAS OUVRIR
@@ -528,6 +529,7 @@ begin
      stuffDispo.invBombeDispo[0].nomBombe:='EMPTY';
      stuffDispo.invBombeDispo[0].degat:=0;
      stuffDispo.invBombeDispo[0].prix:=0;
+
      stuffDispo.invBombeDispo[1].nomBombe:='Bombe Barile';
      stuffDispo.invBombeDispo[1].degat:=30;
      stuffDispo.invBombeDispo[1].prix:=130;

@@ -466,8 +466,9 @@ begin
     if (rep = 1) then
         begin
              miseAjourPersonnage(personnage1,1);
-             choixMenuVillage();
              creationInventaire(personnage1);
+             choixMenuVillage();
+
              // Village
         end
     else

@@ -130,7 +130,7 @@ procedure affichageInventaireDrops(var personnage:typePersonnage;position:typePo
 
 
 // Renvoie les coordonnées actuelles dans l'inventaire après un déplacement z
-procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition);
+procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var personnage:typePersonnage);
 
 // Appelle la procédure relative à l'endroit ou la touche entrée est pressée
 procedure entreePressee(var position:typePosition;var personnage:typePersonnage);
@@ -144,7 +144,7 @@ function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoords
 procedure recupInventaire(var personnage:typePersonnage);
 
 // Permet de drop une armure/arme
-procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
+procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
 // Permet de déséquipper un équipement
 procedure unequipEquipement(var personnage:typePersonnage;i,j:integer);
@@ -285,7 +285,7 @@ end;
 
 
 // Renvoie les coordonnées actuelles dans l'inventaire après un déplacement z
-procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition);
+procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var personnage:typePersonnage);
 
 
 begin
@@ -391,7 +391,7 @@ begin
                      position.cadreInventaires:=true;
                      position.armes:=false;
 
-                     reinitialisationArmes();
+                     reinitialisationArmes(personnage);
                      deplacementEntreInventaires(position);
 
                    end;
@@ -424,7 +424,7 @@ begin
                      position.cadreInventaires:=true;
                      position.drops:=false;
 
-                     reinitialisationDrops();
+                     reinitialisationDrops(personnage);
                      deplacementEntreInventaires(position);
 
                    end;
@@ -457,7 +457,7 @@ begin
                      position.cadreInventaires:=true;
                      position.armures:=false;
 
-                     reinitialisationArmures();
+                     reinitialisationArmures(personnage);
                      deplacementEntreInventaires(position);
 
                    end;
@@ -489,7 +489,7 @@ begin
                      position.cadreInventaires:=true;
                      position.consommables:=false;
 
-                     reinitialisationConso();
+                     reinitialisationConso(personnage);
                      deplacementEntreInventaires(position);
 
                    end;
@@ -525,6 +525,8 @@ end;
 
 // Appelle la procédure relative à l'endroit ou la touche entrée est pressée
 procedure entreePressee(var position:typePosition;var personnage:typePersonnage);
+var
+  q:integer;
 begin
      if (Position.equipement)then
         begin
@@ -556,37 +558,74 @@ begin
 
      else if (position.infoItem) then
      begin
+         if (position.precedPos='equipement') then
+         begin
+         reinitilisationMur();
+         position.equipement:=true;
+         q:=58;
+         end
+         else if (position.precedPos='arme') then
+         begin
+         reinitialisationArmes(personnage);
+         position.armes:=true;
+         q:=27;
+         end
+         else if (position.precedPos='armure') then
+         begin
+         reinitialisationArmures(personnage);
+         position.armures:=true;
+         q:=27;
+         end
+         else if (position.precedPos='potion') or (position.precedPos='bombe') then
+         begin
+         reinitialisationConso(personnage);
+         position.consommables:=true;
+         q:=27;
+         end
+         else if (position.precedPos='drop') then
+         begin
+         reinitialisationDrops(personnage);
+         position.drops:=true;
+         q:=27;
+
+
+
+         end;
+
         case position.coordsActuelsInventaire.yA of
         0:
           begin
-               reinitilisationMur();
-               position.equipement:=true;
                position.infoItem:=false;
                position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
                position.coordsActuelsInventaire.yA:=position.coordsActuelsItem.yA;
-               deplacementInventaireIHM(position,personnage,58);
+               deplacementInventaireIHM(position,personnage,q);
 
           end;
         1:
           begin
-          dropEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA);
-          reinitilisationMur();
-          position.equipement:=true;
+          dropEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,position.precedPos);
+          if (position.precedPos='arme') then
+          affichageArme(personnage)
+          else if (position.precedPos='armure') then
+          affichageArmure(personnage)
+          else if (position.precedPos='potion') or (position.precedPos='bombe')  then
+          affichageConso(personnage)
+          else if (position.precedPos='drop') then
+          affichageDrops(personnage);
+
           position.infoItem:=false;
           position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
           position.coordsActuelsInventaire.yA:=position.coordsActuelsItem.yA;
-          deplacementInventaireIHM(position,personnage,58);
+          deplacementInventaireIHM(position,personnage,q);
 
           end;
         2:
           begin
           unequipEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA);
-          reinitilisationMur();
-          position.equipement:=true;
           position.infoItem:=false;
           position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
           position.coordsActuelsInventaire.yA:=position.coordsActuelsItem.yA;
-          deplacementInventaireIHM(position,personnage,58);
+          deplacementInventaireIHM(position,personnage,q);
           end;
 
 
@@ -594,6 +633,24 @@ begin
 
      end
      else if (position.armes) then
+     begin
+                     position.infoItem:=true;
+                     affichageInfoItem(personnage,position);
+
+     end
+     else if (position.armures) then
+     begin
+                     position.infoItem:=true;
+                     affichageInfoItem(personnage,position);
+
+     end
+     else if (position.consommables) then
+     begin
+                     position.infoItem:=true;
+                     affichageInfoItem(personnage,position);
+
+     end
+     else if (position.drops) then
      begin
                      position.infoItem:=true;
                      affichageInfoItem(personnage,position);
@@ -668,9 +725,13 @@ begin
      end;
 end;
 
+// Permet de récuperer la sauvegarde de l'inventaire
 procedure recupInventaire(var personnage:typePersonnage);
 var
-  s,i,j:integer;
+  s:integer; // Représente le slot dans le fichier data.bin
+  i,j:integer;
+
+// Ajoute pour chaque cellule de l'inventaire, l'ID de l'item stocké dans le fichier data.bin
 begin
      s:=0;
      for i:=0 to 3 do
@@ -722,8 +783,22 @@ begin
           end;
      end;
 
+     for i:=1 to 2 do
+     begin
+          for j:= 0 to 2 do
+          begin
+
+          if ((i=1) and (j=2)) then
+             personnage.inventaire.ArmeEquipee:=stuffDispo.invArmeDispo[0]
+          else
+              personnage.inventaire.ArmureEquipee[i][j]:=stuffDispo.invArmureDispo[0];
+          end;
+     end;
 
 end;
+
+
+
 
 // Ajoute un item à l'inventaire du personnage
 procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
@@ -773,7 +848,10 @@ begin
 
           end;
      end;
-     modificationInventaireItem(numItem,slotFromCoordonne(dispoX,dispoY,typeItem));
+     if (dispoX <> -1) then
+     modificationInventaireItem(numItem,slotFromCoordonne(dispoX,dispoY,typeItem)); // Modifie l'ID de l'item contenu au slot demandé
+     // Ici le slot est calculé en fonction des coordoonnées de l'item ajouté et son type
+
 
 end;
 
@@ -880,46 +958,13 @@ begin
 end;
 
 // Drop une armure/arme
-procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
+procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 var
   i:integer;
   j:integer;
 begin
-     if ((x=1) and (y=2)) then
-     begin
-     for i:=0 to 3 do
-         begin
-         for j:=0 to 3 do
-             begin
-             if (personnage.inventaire.ArmeEquipee.nomArme=personnage.inventaire.invArme[i][j].nomArme) then
-             begin
-                  personnage.inventaire.ArmeEquipee.nomArme:='EMPTY';
-                  personnage.inventaire.invArme[i][j].nomArme:='EMPTY';
-
-             end;
-             end;
-
-         end;
-
-     end
-     else
-     begin
-     for i:=0 to 3 do
-         begin
-         for j:=0 to 3 do
-             begin
-             if (personnage.inventaire.ArmureEquipee[x][y].nomArmure=personnage.inventaire.invArmure[i][j].nomArmure) then
-             begin
-                  personnage.inventaire.ArmureEquipee[x][y].nomArmure:='EMPTY';
-                  personnage.inventaire.invArmure[i][j].nomArmure:='EMPTY';
-
-             end;
-             end;
-
-         end;
-
-     //dropEquipementIHM(); // Affichage ---- Drop de l'item -----
-end;
+     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+     recupInventaire(personnage);
 end;
 
 // Permet de déséquipper un équipement

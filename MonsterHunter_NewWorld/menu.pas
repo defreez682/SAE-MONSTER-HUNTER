@@ -209,6 +209,7 @@ begin
     else if (rep = 2) then
        begin
        recupInventaire(personnage1);
+
        choixMenuVillage();
 
 

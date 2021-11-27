@@ -26,13 +26,13 @@ procedure affichageInventaireConsoIHM(personnage:typePersonnage);
 //---------- DEPLACEMENT / COORDONNE INVENTAIRE / POSITION ---------------------
 
 // Permet de se déplacer dans l'inventaire à l'aide des flèches directionnelles
-procedure deplacementInventaireIHM(var position:typePosition;personnage:typePersonnage;q:integer);
+procedure deplacementInventaireIHM(var position:typePosition;var personnage:typePersonnage;q:integer);
 
 // Créer un cadre qui permet de se déplacer entre les différents inventaires
 procedure deplacementEntreInventaires(position:typePosition);
 
 // Affiche sur les coordonnées ou l'utilisateur est, un cadre gris
-procedure dessinCadreCoords(position:typePosition;q:integer);
+procedure dessinCadreCoords(position:typePosition;q:integer;var personnage:typePersonnage);
 
 
 //--------- CORRECTION GRAPHIQUES ----------------------------------------------
@@ -42,13 +42,13 @@ procedure reinitialisationInventaireGeneral();
 
 procedure reinitilisationMur();
 
-procedure reinitialisationArmes();
+procedure reinitialisationArmes(personnage:typePersonnage);
 
-procedure reinitialisationArmures();
+procedure reinitialisationArmures(personnage:typePersonnage);
 
-procedure reinitialisationDrops();
+procedure reinitialisationDrops(personnage:typePersonnage);
 
-procedure reinitialisationConso();
+procedure reinitialisationConso(personnage:typePersonnage);
 
 //--------- INFORMATION INVENTAIRE --------------------------------------------
 
@@ -109,9 +109,7 @@ end;
 procedure affichageInventaireArmesIHM(personnage:typePersonnage);
 begin
      effacerecran();
-     dessinerCadreXY(25,0,95,2,double,15,0);
-     deplacerCurseurXY(56,1);
-     write('Armes');
+
      ColorierZoneRemix(15,15,20,95,29);
 
      affichageArme(personnage);
@@ -123,11 +121,7 @@ end;
 procedure affichageInventaireArmuresIHM(personnage:typePersonnage);
 begin
      effacerecran();
-     dessinerCadreXY(25,0,95,2,double,15,0);
-     deplacerCurseurXY(56,1);
-     write('Armures');
      ColorierZoneRemix(15,15,20,95,29);
-
      affichageArmure(personnage);
 end;
 
@@ -135,9 +129,6 @@ end;
 procedure affichageInventaireDropsIHM(personnage:typePersonnage);
 begin
      effacerecran();
-     dessinerCadreXY(25,0,95,2,double,15,0);
-     deplacerCurseurXY(56,1);
-     write('Drops');
      ColorierZoneRemix(15,15,20,95,29);
 
      affichageDrops(personnage);
@@ -147,16 +138,13 @@ end;
 procedure affichageInventaireConsoIHM(personnage:typePersonnage);
 begin
      effacerecran();
-     dessinerCadreXY(25,0,95,2,double,15,0);
-     deplacerCurseurXY(54,1);
-     write('Consommables');
      ColorierZoneRemix(15,15,20,95,29);
 
      affichageConso(personnage);
 end;
 
 // Permet de se déplacer dans l'inventaire à l'aide des flèches directionnelles
-procedure deplacementInventaireIHM(var position:typePosition;personnage:typePersonnage;q:integer);
+procedure deplacementInventaireIHM(var position:typePosition;var personnage:typePersonnage;q:integer);
 
 var
   Ch : Char;
@@ -169,22 +157,22 @@ Begin
     case Ch of
     #0: case ReadKey of    { Le code est #0, on appelle à nouveau ReadKey }
         #72:    begin
-                     calculerCoordsApresDeplacement(1,position);      // Haut
-                     dessinCadreCoords(position,q);
+                     calculerCoordsApresDeplacement(1,position,personnage);      // Haut
+                     dessinCadreCoords(position,q,personnage);
 
                 end;
 
         #80:    begin
-                     calculerCoordsApresDeplacement(2,position);    // Bas
-                     dessinCadreCoords(position,q);
+                     calculerCoordsApresDeplacement(2,position,personnage);    // Bas
+                     dessinCadreCoords(position,q,personnage);
                 end;
         #77:    begin
-                     calculerCoordsApresDeplacement(3,position);   // Droite
-                     dessinCadreCoords(position,q);
+                     calculerCoordsApresDeplacement(3,position,personnage);   // Droite
+                     dessinCadreCoords(position,q,personnage);
                 end;
         #75:    begin
-                     calculerCoordsApresDeplacement(4,position);   // Gauche
-                     dessinCadreCoords(position,q);
+                     calculerCoordsApresDeplacement(4,position,personnage);   // Gauche
+                     dessinCadreCoords(position,q,personnage);
                 end;
 
         end;
@@ -194,7 +182,7 @@ Begin
 end;
 
 // Affiche sur les coordonnées ou l'utilisateur est, un cadre gris
-procedure dessinCadreCoords(position:typePosition;q:integer);
+procedure dessinCadreCoords(position:typePosition;q:integer;var personnage:typePersonnage);
 var
   y:Integer;
 begin
@@ -298,38 +286,38 @@ begin
                    end
      else if (position.infoItem) then
           begin
-          deplacerCurseurXY(49,44);
+          deplacerCurseurXY(49,q);
           write('  ');
-          deplacerCurseurXY(49,46);
+          deplacerCurseurXY(49,q-2);
           write('  ');
-          deplacerCurseurXY(49,48);
+          deplacerCurseurXY(49,q-4);
           write('  ');
           if (position.coordsActuelsInventaire.yA=0) then
                begin
-               deplacerCurseurXY(49,48);
+               deplacerCurseurXY(49,q);
                write('>>');
                end
           else if (position.coordsActuelsInventaire.yA=1) then
                begin
-               deplacerCurseurXY(49,46);
+               deplacerCurseurXY(49,q-2);
                write('>>');
                end
           else if (position.coordsActuelsInventaire.yA=2) then
                begin
-               deplacerCurseurXY(49,44);
+               deplacerCurseurXY(49,q-4);
                write('>>');
                end;
           end
      else if (position.armes) or (position.armures) or (position.drops) or (position.consommables) then                                        // Cadre changement d'inventaire
                    begin
                    if (position.armes) then
-                   reinitialisationArmes()
+                   reinitialisationArmes(personnage)
                    else if (position.armures) then
-                   reinitialisationArmures()
+                   reinitialisationArmures(personnage)
                    else if (position.drops) then
-                   reinitialisationDrops()
+                   reinitialisationDrops(personnage)
                    else if (position.consommables) then
-                   reinitialisationConso();
+                   reinitialisationConso(personnage);
 
                    if (position.coordsActuelsInventaire.xA<=1) then
                    begin
@@ -427,16 +415,17 @@ begin
      ColorierZoneRemix(15,15,20,95,60);
 end;
 
-procedure reinitialisationArmes();
+procedure reinitialisationArmes(personnage:typePersonnage);
 var
   y,i,j:integer;
 
 begin
+
      for i:=0 to 3 do
      begin
           for j:=0 to 3 do
           begin
-          if (personnage1.inventaire.invArme[i][j].nomArme='EMPTY') then
+          if (personnage.inventaire.invArme[i][j].nomArme='EMPTY') then
           begin
                if (i<=1) then
                begin
@@ -450,7 +439,64 @@ begin
                end;
           end
 
-          else if (personnage1.inventaire.invArme[i][j].nomArme<>'EMPTY') then
+          else if (personnage.inventaire.invArme[i][j].nomArme<>'EMPTY') then
+          begin
+               if (i<=1) then
+               begin
+                    ColorierZoneRemix(0,15,4+22*i,23+22*i,20-5*j);
+                    ColorierZoneRemix(0,12,4+22*i,23+22*i,21-5*j);
+               end
+               else if (i>1) then
+               begin
+                    ColorierZoneRemix(0,15,28+23*i,47+23*i,20-5*j);
+                    ColorierZoneRemix(0,12,28+23*i,47+23*i,21-5*j);
+               end;
+          end;
+
+
+
+
+          end;
+     end;
+
+
+     for y:=4 to 22 do
+     ColorierZoneRemix(0,0,47,68,y);
+
+     for y:=25 to 29 do
+     ColorierZoneRemix(0,0,20,100,y);
+
+     ColorierZoneRemix(15,15,20,95,29);
+
+
+end;
+
+procedure reinitialisationArmures(personnage:typePersonnage);
+var
+  y,i,j:integer;
+
+begin
+
+     for i:=0 to 3 do
+     begin
+          for j:=0 to 3 do
+          begin
+          if (personnage.inventaire.invArmure[i][j].nomArmure='EMPTY') then
+          begin
+
+               if (i<=1) then
+               begin
+               for y:=(20-5*j) to (23-5*j) do
+                    ColorierZoneRemix(0,8,4+22*i,23+22*i,y);
+               end
+               else if (i>1) then
+               begin
+               for y:=(20-5*j) to (23-5*j) do
+                    ColorierZoneRemix(0,8,28+23*i,47+23*i,y);
+               end;
+          end
+
+          else if (personnage.inventaire.invArmure[i][j].nomArmure<>'EMPTY') then
           begin
                if (i<=1) then
                begin
@@ -471,7 +517,8 @@ begin
      end;
 
 
-
+     for y:=4 to 22 do
+     ColorierZoneRemix(0,0,47,68,y);
 
      for y:=25 to 29 do
      ColorierZoneRemix(0,0,20,100,y);
@@ -481,7 +528,7 @@ begin
 
 end;
 
-procedure reinitialisationArmures();
+procedure reinitialisationDrops(personnage:typePersonnage);
 var
   y,i,j:integer;
 
@@ -491,7 +538,7 @@ begin
      begin
           for j:=0 to 3 do
           begin
-          if (personnage1.inventaire.invArmure[i][j].nomArmure='EMPTY') then
+          if (personnage.inventaire.invDrop[i][j].nomDrop='EMPTY') then
           begin
                if (i<=1) then
                begin
@@ -505,61 +552,7 @@ begin
                end;
           end
 
-          else if (personnage1.inventaire.invArmure[i][j].nomArmure<>'EMPTY') then
-          begin
-               if (i<=1) then
-               begin
-                    ColorierZoneRemix(0,15,4+22*i,23+22*i,20-5*j);
-                    ColorierZoneRemix(0,12,4+22*i,23+22*i,21-5*j);
-               end
-               else if (i>1) then
-               begin
-                    ColorierZoneRemix(0,15,28+23*i,47+23*i,20-5*j);
-                    ColorierZoneRemix(0,12,28+23*i,47+23*i,20-5*j);
-               end;
-          end;
-
-
-
-
-          end;
-     end;
-
-
-
-
-     for y:=25 to 29 do
-     ColorierZoneRemix(0,0,20,100,y);
-
-     ColorierZoneRemix(15,15,20,95,29);
-
-
-end;
-
-procedure reinitialisationDrops();
-var
-  y,i,j:integer;
-
-begin
-     for i:=0 to 3 do
-     begin
-          for j:=0 to 3 do
-          begin
-          if (personnage1.inventaire.invDrop[i][j].nomDrop='EMPTY') then
-          begin
-               if (i<=1) then
-               begin
-               for y:=(20-5*j) to (23-5*j) do
-                    ColorierZoneRemix(0,8,4+22*i,23+22*i,y);
-               end
-               else if (i>1) then
-               begin
-               for y:=(20-5*j) to (23-5*j) do
-                    ColorierZoneRemix(0,8,28+23*i,47+23*i,y);
-               end;
-          end
-
-          else if (personnage1.inventaire.invDrop[i][j].nomDrop<>'EMPTY') then
+          else if (personnage.inventaire.invDrop[i][j].nomDrop<>'EMPTY') then
           begin
                if (i<=1) then
                begin
@@ -578,7 +571,8 @@ begin
      end;
 
 
-
+     for y:=4 to 22 do
+     ColorierZoneRemix(0,0,47,68,y);
 
      for y:=25 to 29 do
      ColorierZoneRemix(0,0,20,100,y);
@@ -588,16 +582,17 @@ begin
 
 end;
 
-procedure reinitialisationConso();
+procedure reinitialisationConso(personnage:typePersonnage);
 var
   y,i,j:integer;
 
 begin
+
      for i:=0 to 1 do
      begin
           for j:=0 to 3 do
           begin
-               if (personnage1.inventaire.invPotion[i][j].nomPotion='EMPTY') then
+               if (personnage.inventaire.invPotion[i][j].nomPotion='EMPTY') then
                begin
                     ColorierZoneRemix(0,8,4+22*i,23+22*i,20-5*j);
                     ColorierZoneRemix(0,8,4+22*i,23+22*i,21-5*j);
@@ -608,7 +603,7 @@ begin
                     ColorierZoneRemix(0,12,4+22*i,23+22*i,21-5*j);
                end;
 
-               if (personnage1.inventaire.invBombe[i][j].nomBombe='EMPTY') then
+               if (personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') then
                begin
                     ColorierZoneRemix(0,8,75+23*i,85+23*i,20-5*j);
                     ColorierZoneRemix(0,8,75+23*i,85+23*i,21-5*j);
@@ -623,7 +618,8 @@ begin
      end;
 
 
-
+     for y:=4 to 22 do
+     ColorierZoneRemix(0,0,47,68,y);
 
      for y:=25 to 29 do
      ColorierZoneRemix(0,0,20,100,y);
@@ -647,22 +643,30 @@ end;
 
 // Affiche les infos de l'item sur lequel le curseur se trouve
 procedure affichageInfoItem(personnage:typePersonnage;var position:typePosition);
-
+var
+  deplacer,deplacer2:boolean;
+  q:integer;
 begin
 
 // ----- Affichage des infos de l'item dans l'équipement -------------------------
-
+  deplacer:=false;
+  deplacer2:=false;
   position.coordsActuelsItem.xA:=position.coordsActuelsInventaire.xA;    // Avoir une Backup des coordonées de l'item
   position.coordsActuelsItem.yA:=position.coordsActuelsInventaire.yA;
+  q:=19;
   if (Position.equipement) then
      begin
+     position.equipement:=false;
+     position.precedPos:='equipement';
+     q:=48;
      dessinerCadreXY(47,34,68,50,double,15,0);
      couleurTexte(20);
-     if ((position.coordsActuelsInventaire.xA=1) and (position.coordsActuelsInventaire.yA=2)) then
+     if ((position.coordsActuelsItem.xA=1) and (position.coordsActuelsItem.yA=2)) then
         begin
 
         if (personnage.inventaire.ArmeEquipee.nomArme<>'EMPTY' ) then
         begin
+             deplacer:=true;
              deplacerCurseurXY(48,37);
              write(personnage.inventaire.ArmeEquipee.nomArme);
              deplacerCurseurXY(48,39);
@@ -688,16 +692,17 @@ begin
 
      else
          begin
-         if (personnage.inventaire.ArmureEquipee[position.coordsActuelsInventaire.xA][position.coordsActuelsInventaire.yA].nomArmure<>'EMPTY') then
+         if (personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY') then
          begin
+         deplacer:=true;
          deplacerCurseurXY(48,35);
-         write(personnage.inventaire.ArmureEquipee[position.coordsActuelsInventaire.xA][position.coordsActuelsInventaire.yA].typeArmure);
+         write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].typeArmure);
          deplacerCurseurXY(48,37);
-         write(personnage.inventaire.ArmureEquipee[position.coordsActuelsInventaire.xA][position.coordsActuelsInventaire.yA].nomArmure);
+         write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
          deplacerCurseurXY(48,39);
-         write('Defense : ',personnage.inventaire.ArmureEquipee[position.coordsActuelsInventaire.xA][position.coordsActuelsInventaire.yA].defense);
+         write('Defense : ',personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].defense);
          deplacerCurseurXY(48,41);
-         write('Poids : ',personnage.inventaire.ArmureEquipee[position.coordsActuelsInventaire.xA][position.coordsActuelsInventaire.yA].poids);
+         write('Poids : ',personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].poids);
          couleurTexte(15);
          deplacerCurseurXY(52,44);
          write('Unequip');
@@ -709,45 +714,162 @@ begin
          else
              begin
              deplacerCurseurXY(48,37);
-             write(personnage.inventaire.ArmureEquipee[position.coordsActuelsInventaire.xA][position.coordsActuelsInventaire.yA].nomArmure);
+             write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
              deplacerCurseurXY(52,48);
              write('Close');
              end;
              end;
-     position.Equipement:=false;
+
      end
 
 //-------------- INFO INVENTAIRE ARME
   else if (position.armes) then
   begin
+  position.armes:=false;
+  position.precedPos:='arme';
   dessinerCadreXY(47,4,68,22,double,15,0);
   couleurTexte(20);
   if (personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArme<>'EMPTY' ) then
         begin
+             deplacer:=true;
              deplacerCurseurXY(48,6);
              write(personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArme);
              deplacerCurseurXY(48,8);
-             write('Attaque : ',personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].ratioAD);
+             write('Attaque : ',personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].ratioAD:2:2);
              deplacerCurseurXY(48,10);
              write('Poids : ',personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].poids);
              couleurTexte(15);
-             deplacerCurseurXY(52,13);
-             write('Unequip');
              deplacerCurseurXY(52,15);
-             write('Drop');
+             write('Equip');
              deplacerCurseurXY(52,17);
+             write('Drop');
+             deplacerCurseurXY(52,19);
              write('Close');
         end
         else
             begin
-             deplacerCurseurXY(48,13);
+             deplacerCurseurXY(48,5);
              write(personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArme);
-             deplacerCurseurXY(52,22);
+             deplacerCurseurXY(52,20);
              write('Close');
              end;
-        end;
+        end
+  //-------------- INFO INVENTAIRE ARMURE
+    else if (position.armures) then
+    begin
+    position.armures:=false;
+    position.precedPos:='armure';
+    dessinerCadreXY(47,4,68,22,double,15,0);
+    couleurTexte(20);
+    if (personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY' ) then
+          begin
+               deplacer:=true;
+               deplacerCurseurXY(48,6);
+               write(personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
+               deplacerCurseurXY(48,8);
+               write('Defense : ',personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].defense);
+               deplacerCurseurXY(48,10);
+               write('Poids : ',personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].poids);
+               couleurTexte(15);
+               deplacerCurseurXY(52,15);
+               write('Equip');
+               deplacerCurseurXY(52,17);
+               write('Drop');
+               deplacerCurseurXY(52,19);
+               write('Close');
+          end
+          else
+              begin
+               deplacerCurseurXY(48,5);
+               write(personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
+               deplacerCurseurXY(52,20);
+               write('Close');
+               end;
+          end
+ //-------------- INFO INVENTAIRE DROPS
+  else if (position.drops) then
+  begin
+  position.drops:=false;
+  position.precedPos:='drop';
+  dessinerCadreXY(47,4,68,22,double,15,0);
+  couleurTexte(20);
+  if (personnage.inventaire.invDrop[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomDrop<>'EMPTY' ) then
+        begin
+             deplacer2:=true;
+             deplacerCurseurXY(48,6);
+             write(personnage.inventaire.invDrop[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomDrop);
 
+             couleurTexte(15);
+             deplacerCurseurXY(52,17);
+             write('Drop');
+             deplacerCurseurXY(52,19);
+             write('Close');
+        end
+        else
+            begin
+             deplacerCurseurXY(48,5);
+             write(personnage.inventaire.invDrop[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomDrop);
+             deplacerCurseurXY(52,20);
+             write('Close');
+             end;
+        end
+ //-------------- INFO INVENTAIRE CONSOMMABLES
+  else if (position.consommables) then
+  begin
+  position.consommables:=false;
 
+  dessinerCadreXY(47,4,68,22,double,15,0);
+  couleurTexte(20);
+  if position.coordsActuelsItem.xA<=1 then
+  begin
+  position.precedPos:='potion';
+     if (personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion<>'EMPTY' ) then
+        begin
+             deplacer2:=true;
+             deplacerCurseurXY(48,6);
+             write(personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion);
+             deplacerCurseurXY(48,8);
+             write('Soin : ',personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].healHP,' HP');
+             couleurTexte(15);
+             deplacerCurseurXY(52,17);
+             write('Drop');
+             deplacerCurseurXY(52,19);
+             write('Close');
+        end
+     else
+         begin
+             deplacerCurseurXY(48,5);
+             write(personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion);
+             deplacerCurseurXY(52,20);
+             write('Close');
+         end;
+     end
+  else
+  begin
+  position.precedPos:='bombe';
+     if (personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe<>'EMPTY' ) then
+        begin
+             deplacer2:=true;
+             deplacerCurseurXY(48,6);
+             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe);
+             deplacerCurseurXY(48,8);
+             write('Degats : ',personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].degat);
+             couleurTexte(15);
+             deplacerCurseurXY(52,17);
+             write('Drop');
+             deplacerCurseurXY(52,19);
+             write('Close');
+        end
+     else
+         begin
+             deplacerCurseurXY(48,5);
+             write(personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion);
+             deplacerCurseurXY(52,20);
+             write('Close');
+         end;
+     end
+
+  end;
 
 
   position.coordsActuelsInventaire.yA:=0;
@@ -755,27 +877,45 @@ begin
         begin
 
 
-        if ((personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY') or ((personnage.inventaire.ArmeEquipee.nomArme<>'EMPTY' ) and ((position.coordsActuelsItem.xA=1) and
-        (position.coordsActuelsItem.yA=2))))  then
-           begin
+        if (deplacer)  then
+        begin
+
         case Readkey of
         #72:         begin
 
-                     calculerCoordsApresDeplacement(1,position); // Haut
-                     dessinCadreCoords(position,58);
+                     calculerCoordsApresDeplacement(1,position,personnage); // Haut
+                     dessinCadreCoords(position,q,personnage);
 
                      end;
 
         #80:         begin
 
-                     calculerCoordsApresDeplacement(2,position); // Bas
+                     calculerCoordsApresDeplacement(2,position,personnage); // Bas
 
-                     dessinCadreCoords(position,58);
+                     dessinCadreCoords(position,q,personnage);
 
                      end;
         end;
-             end;
+             end
+        else if (deplacer2) then
+        begin
+        case Readkey of
+        #72:         begin
 
+                     position.coordsActuelsInventaire.yA:=1; // Haut
+                     dessinCadreCoords(position,q,personnage);
+
+                     end;
+
+        #80:         begin
+
+                     position.coordsActuelsInventaire.yA:=0; // Bas
+
+                     dessinCadreCoords(position,q,personnage);
+
+                     end;
+        end;
+        end;
         end;
 
       entreePressee(position,personnage);
@@ -788,7 +928,10 @@ var
   j:integer;
   couleur:integer;
 begin
-     couleur:=12;
+     effacerecran();
+     dessinerCadreXY(25,0,95,2,double,15,0);
+     deplacerCurseurXY(56,1);
+     write('Armes');
      for i:=0 to 3 do
          begin
          for j:=0 to 3 do
@@ -798,7 +941,9 @@ begin
               begin
               couleur:=8;
               couleurtexte(8);
-              end;
+              end
+         else
+             couleur:=12;
          if (i>1) then
          begin
               deplacerCurseurXY(28+23*i,20-5*j);
@@ -842,17 +987,24 @@ var
    couleur:integer;
 
 begin
-       couleur:=12;
+       effacerecran();
+       dessinerCadreXY(25,0,95,2,double,15,0);
+       deplacerCurseurXY(56,1);
+       write('Armures');
+
        for i:=0 to 3 do
            begin
            for j:=0 to 3 do
            begin
            couleurtexte(15);
+
            if (personnage.inventaire.invArmure[i][j].nomArmure='EMPTY') then
               begin
               couleur:=8;
               couleurtexte(8);
-              end;
+              end
+           else
+               couleur:=12;
            if (i>1) then
            begin
                 deplacerCurseurXY(28+23*i,20-5*j);
@@ -892,9 +1044,11 @@ var
    i:integer;
    j:integer;
 
-
 begin
-
+         effacerecran();
+         dessinerCadreXY(25,0,95,2,double,15,0);
+         deplacerCurseurXY(56,1);
+         write('Drops');
          for i:=0 to 3 do
          begin
              for j:=0 to 3 do
@@ -928,22 +1082,28 @@ var
   j:integer;
   couleur:integer;
 begin
-     couleur:=12;
+     effacerecran();
+     dessinerCadreXY(25,0,95,2,double,15,0);
+     deplacerCurseurXY(54,1);
+     write('Consommables');
      for i:=0 to 1 do
      begin
          for j:=0 to 3 do
          begin
          couleurtexte(15);
          if (personnage.inventaire.invPotion[i][j].nomPotion='EMPTY') then
-              begin
+         begin
               couleur:=8;
               couleurtexte(8);
-              end;
-              deplacerCurseurXY(4+22*i,20-5*j);
-              write(personnage.inventaire.invPotion[i][j].nomPotion);
-              couleurtexte(couleur);
-              deplacerCurseurXY(4+22*i,21-5*j);
-              write('Soin : ',personnage.inventaire.invPotion[i][j].healHP);
+         end
+         else
+             couleur:=12;
+
+         deplacerCurseurXY(4+22*i,20-5*j);
+         write(personnage.inventaire.invPotion[i][j].nomPotion);
+         couleurtexte(couleur);
+         deplacerCurseurXY(4+22*i,21-5*j);
+         write('Soin : ',personnage.inventaire.invPotion[i][j].healHP);
          end;
      end;
 
@@ -966,6 +1126,7 @@ begin
          write('Degats : ',personnage.inventaire.invBombe[i][j].degat);
          end;
      end;
+
 end;
 
 // Affiche les infos du perso
