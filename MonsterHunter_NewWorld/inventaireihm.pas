@@ -154,6 +154,7 @@ begin
 
      affichageConso(personnage);
 end;
+
 // Permet de se déplacer dans l'inventaire à l'aide des flèches directionnelles
 procedure deplacementInventaireIHM(var position:typePosition;personnage:typePersonnage;q:integer);
 
@@ -485,6 +486,7 @@ var
   y,i,j:integer;
 
 begin
+
      for i:=0 to 3 do
      begin
           for j:=0 to 3 do
@@ -816,6 +818,7 @@ begin
 
               deplacerCurseurXY(4+22*i,20-5*j);
               write(personnage.inventaire.invArme[i][j].nomArme);
+
               couleurtexte(couleur);
               deplacerCurseurXY(4+22*i,21-5*j);
               write('Attaque : ',personnage.inventaire.invArme[i][j].ratioAD:2:2);
@@ -964,7 +967,8 @@ begin
          end;
      end;
 end;
- // Affiche les infos du perso
+
+// Affiche les infos du perso
 procedure affichageInfoPerso(position:typePosition;personnage:typePersonnage);
 begin
      dessinerCadreXY(35,34,56,50,double,15,0);

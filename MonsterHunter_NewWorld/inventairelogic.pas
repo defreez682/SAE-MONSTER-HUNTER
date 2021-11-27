@@ -65,12 +65,12 @@ type
     ArmeEquipee : arme;
     end;
 typeStuffDisponible = record
-    invArmeDispo : array[1..20] of arme;    // 20 ARMES DISPO
-    invArmureDispo : array[1..20] of armure;  // 20 ARMURES
-    invPotionDispo : array[1..3] of potion;   // 3 POTIONS
-    invBombeDispo : array[1..3] of bombe;     // 3 BOMBES
+    invArmeDispo : array[0..20] of arme;    // 20 ARMES DISPO
+    invArmureDispo : array[0..20] of armure;  // 20 ARMURES
+    invPotionDispo : array[0..3] of potion;   // 3 POTIONS
+    invBombeDispo : array[0..3] of bombe;     // 3 BOMBES
     invCuisineDispo : array[1..6] of cuisine;  // 6 PLATS
-    invDropDispo : array[1..20] of drop;   // 20 DROPS
+    invDropDispo : array[0..20] of drop;   // 20 DROPS
     end;
 
 
@@ -140,6 +140,8 @@ function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoords
 
 
 //--------------------- FONCTIONNALITE INVENTAIRE ------------------------------
+
+procedure recupInventaire(var personnage:typePersonnage);
 
 // Permet de drop une armure/arme
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
@@ -604,44 +606,175 @@ end;
 //-------------------FONCTIONNALITE INVENTAIRE ------------------------------
 
 
-// Ajoute un item à l'inventaire du personnage
-procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
+// Renvoie le slot correspondant aux coordonnées données en paramètre
+function slotFromCoordonne(x,y:integer;typeItem:string): integer;
 begin
+
      if (typeItem='arme') then
      begin
-          if (isInventairePlein('arme',personnage).xA <> -1) then
-          begin
-          personnage.inventaire.invArme[isInventairePlein('arme',personnage).xA][isInventairePlein('arme',personnage).yA]:=stuffDispo.invArmeDispo[numItem];
-          end;
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5
+          else if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+          slotFromCoordonne:=x+y;
      end
      else if (typeItem='armure') then
      begin
-     if (isInventairePlein('armure',personnage1).xA <> -1) then
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5
+          else if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+          slotFromCoordonne:=16+x+y;
+     end
+     else if (typeItem='potion') then
+     begin
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5;
+
+          slotFromCoordonne:=32+x+y;
+
+     end
+     else if (typeItem='bombe') then
+     begin
+          if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+
+          slotFromCoordonne:=32+x+y;
+     end
+     else if (typeItem='drop') then
+     begin
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5
+          else if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+
+          slotFromCoordonne:=48+x+y;
+     end;
+end;
+
+procedure recupInventaire(var personnage:typePersonnage);
+var
+  s,i,j:integer;
+begin
+     s:=0;
+     for i:=0 to 3 do
+     begin
+          for j:= 0 to 3 do
           begin
-          personnage.inventaire.invArmure[isInventairePlein('armure',personnage).xA][isInventairePlein('armure',personnage).yA]:=stuffDispo.invArmureDispo[numItem];
+          s:=s+1;
+          personnage.inventaire.invArme[i][j]:=stuffDispo.invArmeDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=16;
+     for i:=0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invArmure[i][j]:=stuffDispo.invArmureDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=32;
+     for i:=0 to 1 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invPotion[i][j]:=stuffDispo.invPotionDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=40;
+     for i:=0 to 1 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invBombe[i][j]:=stuffDispo.invBombeDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=48;
+     for i:=0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invDrop[i][j]:=stuffDispo.invDropDispo[ItemSlot(s)];
+          end;
+     end;
+
+
+end;
+
+// Ajoute un item à l'inventaire du personnage
+procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
+var
+  dispoX:integer;
+  dispoY:integer;
+
+begin
+     dispoX:=isInventairePlein(typeItem,personnage).xA;
+     dispoY:=isInventairePlein(typeItem,personnage).yA;
+
+     if (typeItem='arme') then
+     begin
+          if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invArme[dispoX][dispoY]:=stuffDispo.invArmeDispo[numItem];
+          end;
+
+
+     end
+     else if (typeItem='armure') then
+     begin
+     if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invArmure[dispoX][dispoY]:=stuffDispo.invArmureDispo[numItem];
           end;
      end
      else if (typeItem='drop') then
      begin
-     if (isInventairePlein('drop',personnage1).xA <> -1) then
+     if (dispoX <> -1) then
           begin
-          personnage.inventaire.invDrop[isInventairePlein('drop',personnage).xA][isInventairePlein('drop',personnage).yA]:=stuffDispo.invDropDispo[numItem];
+          personnage.inventaire.invDrop[dispoX][dispoY]:=stuffDispo.invDropDispo[numItem];
           end;
      end
      else if (typeItem='bombe') then
      begin
-     if (isInventairePlein('bombe',personnage1).xA <> -1) then
+     if (dispoX <> -1) then
           begin
-          personnage.inventaire.invBombe[isInventairePlein('bombe',personnage).xA][isInventairePlein('bombe',personnage).yA]:=stuffDispo.invBombeDispo[numItem];
+          personnage.inventaire.invBombe[dispoX][dispoY]:=stuffDispo.invBombeDispo[numItem];
           end;
      end
      else if (typeItem='potion') then
      begin
-     if (isInventairePlein('potion',personnage1).xA <> -1) then
+     if (dispoX <> -1) then
           begin
-          personnage.inventaire.invPotion[isInventairePlein('potion',personnage).xA][isInventairePlein('potion',personnage).yA]:=stuffDispo.invPotionDispo[numItem];
+          personnage.inventaire.invPotion[dispoX][dispoY]:=stuffDispo.invPotionDispo[numItem];
+
           end;
      end;
+     modificationInventaireItem(numItem,slotFromCoordonne(dispoX,dispoY,typeItem));
+
 end;
 
 // Renvoie les coordonnées du premier emplacement vide de l'inventaire ou -1 si l'inventaire est plein

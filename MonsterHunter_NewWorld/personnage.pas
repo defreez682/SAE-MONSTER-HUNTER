@@ -258,6 +258,7 @@ end;
 procedure creationInventaire(var personnage:typePersonnage);
 begin
      initialisationInventaireVide(personnage);
+     creationInventaireItem(0,64);
      ajoutStuffDepart(personnage);
 end;
 
@@ -268,13 +269,13 @@ var
   j:integer;
 begin
 
-     for i:=0 to 4 do
+     for i:=0 to 3 do
          begin
          for j:=0 to 3 do
              begin
-              personnage.inventaire.invArme[i][j].nomArme:='EMPTY';
-              personnage.inventaire.invArmure[i][j].nomArmure:='EMPTY';
-              personnage.inventaire.invDrop[i][j].nomDrop:='EMPTY';
+              personnage.inventaire.invArme[i][j]:=stuffDispo.invArmeDispo[0];
+              personnage.inventaire.invArmure[i][j]:=stuffDispo.invArmureDispo[0];
+              personnage.inventaire.invDrop[i][j]:=stuffDispo.invDropDispo[0];
 
              end;
          end;
@@ -283,9 +284,8 @@ begin
      begin
          for j:=0 to 3 do
              begin
-              personnage.inventaire.invPotion[i][j].nomPotion:='EMPTY';
-              personnage.inventaire.invPotion[i][j].healHP:=0;
-              personnage.inventaire.invBombe[i][j].nomBombe:='EMPTY';
+              personnage.inventaire.invPotion[i][j]:=stuffDispo.invPotionDispo[0];
+              personnage.inventaire.invBombe[i][j]:=stuffDispo.invBombeDispo[0];
              end;
      end;
 
@@ -294,11 +294,11 @@ begin
          begin
          for j:=0 to 2 do
              begin
-              personnage.inventaire.ArmureEquipee[i][j].nomArmure:='EMPTY';
+              personnage.inventaire.ArmureEquipee[i][j]:=stuffDispo.invArmureDispo[0];
 
               end;
          end;
-     personnage.inventaire.ArmeEquipee.nomArme:='EMPTY';
+     personnage.inventaire.ArmeEquipee:=stuffDispo.invArmeDispo[0];
 
 
 
@@ -307,21 +307,24 @@ end;
 // Ajout du stuff de départ
 procedure ajoutStuffDepart(var personnage:typePersonnage);
 begin
-     ajoutItemToPersonnage('arme',4,personnage1);
-     ajoutItemToPersonnage('armure',1,personnage1);
-     ajoutItemToPersonnage('armure',2,personnage1);
-     ajoutItemToPersonnage('armure',3,personnage1);
-     ajoutItemToPersonnage('armure',4,personnage1);
-     ajoutItemToPersonnage('armure',5,personnage1);
-     ajoutItemToPersonnage('potion',1,personnage1);
-     ajoutItemToPersonnage('potion',1,personnage1);
-     ajoutItemToPersonnage('potion',1,personnage1);
+     ajoutItemToPersonnage('arme',4,personnage);
+     ajoutItemToPersonnage('armure',1,personnage);
+     ajoutItemToPersonnage('armure',2,personnage);
+     ajoutItemToPersonnage('armure',3,personnage);
+     ajoutItemToPersonnage('armure',4,personnage);
+     ajoutItemToPersonnage('armure',5,personnage);
+     ajoutItemToPersonnage('potion',1,personnage);
+     ajoutItemToPersonnage('potion',1,personnage);
+     ajoutItemToPersonnage('potion',1,personnage);
 end;
 
 // Remplis un tableau de tous les items disponibles - BASE DE DONNEE A NE PAS OUVRIR
 procedure initialisationItemDisponibles();
 begin
-
+     stuffDispo.invArmeDispo[0].nomArme:='EMPTY';
+     stuffDispo.invArmeDispo[0].poids:=0;
+     stuffDispo.invArmeDispo[0].ratioAD:=0;
+     stuffDispo.invArmeDispo[0].prix:=0;
      stuffDispo.invArmeDispo[1].nomArme:='Grande epee';
      stuffDispo.invArmeDispo[1].poids:=60;
      stuffDispo.invArmeDispo[1].ratioAD:=0.25;
@@ -402,6 +405,11 @@ begin
      stuffDispo.invArmeDispo[20].poids:=35;
      stuffDispo.invArmeDispo[20].ratioAD:=0.25;
      stuffDispo.invArmeDispo[20].prix:=200;
+
+     stuffDispo.invArmureDispo[0].nomArmure:='EMPTY';
+     stuffDispo.invArmureDispo[0].poids:=0;
+     stuffDispo.invArmureDispo[0].defense:=0;
+     stuffDispo.invArmureDispo[0].prix:=0;
 
      stuffDispo.invArmureDispo[1].nomArmure:='Casque de chasseur';
      stuffDispo.invArmureDispo[1].poids:=3;
@@ -504,6 +512,9 @@ begin
      stuffDispo.invArmureDispo[20].prix:=150;
      stuffDispo.invArmureDispo[20].typeArmure:='Gants';
 
+     stuffDispo.invPotionDispo[0].nomPotion:='EMPTY';
+     stuffDispo.invPotionDispo[0].HealHP:=0;
+     stuffDispo.invPotionDispo[0].prix:=0;
      stuffDispo.invPotionDispo[1].nomPotion:='Potion';
      stuffDispo.invPotionDispo[1].HealHP:=30;
      stuffDispo.invPotionDispo[1].prix:=66;
@@ -514,6 +525,9 @@ begin
      stuffDispo.invPotionDispo[3].HealHP:=70;
      stuffDispo.invPotionDispo[3].prix:=100;
 
+     stuffDispo.invBombeDispo[0].nomBombe:='EMPTY';
+     stuffDispo.invBombeDispo[0].degat:=30;
+     stuffDispo.invBombeDispo[0].prix:=130;
      stuffDispo.invBombeDispo[1].nomBombe:='Bombe Barile';
      stuffDispo.invBombeDispo[1].degat:=30;
      stuffDispo.invBombeDispo[1].prix:=130;
@@ -524,6 +538,7 @@ begin
      stuffDispo.invBombeDispo[3].degat:=200;
      stuffDispo.invBombeDispo[3].prix:=500;
 
+     stuffDispo.invDropDispo[0].nomDrop:='EMPTY';
      stuffDispo.invDropDispo[1].nomDrop:='Ecaille';
      stuffDispo.invDropDispo[2].nomDrop:='Oeil de Monstre';
      stuffDispo.invDropDispo[3].nomDrop:='Cuir de Cheval';
