@@ -4,144 +4,335 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="8">
+    <Units Count="25">
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos X="5"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="53" Y="29"/>
+        <UsageCount Value="206"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="menu.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="gestionTexte"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="59"/>
+        <TopLine Value="10"/>
+        <CursorPos X="100" Y="34"/>
+        <UsageCount Value="200"/>
       </Unit1>
       <Unit2>
         <Filename Value="gestiontexte.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionTexte"/>
-        <EditorIndex Value="3"/>
-        <CursorPos X="59" Y="12"/>
-        <UsageCount Value="26"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="35"/>
+        <CursorPos X="5" Y="57"/>
+        <UsageCount Value="232"/>
       </Unit2>
       <Unit3>
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Personnage"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="43"/>
-        <CursorPos X="6" Y="54"/>
-        <FoldState Value=" T4a01 T3i2067B"/>
-        <UsageCount Value="26"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="476"/>
+        <CursorPos X="60" Y="487"/>
+        <UsageCount Value="232"/>
       </Unit3>
       <Unit4>
-        <Filename Value="GestionEcran.pas"/>
-        <EditorIndex Value="4"/>
-        <CursorPos X="22" Y="18"/>
-        <UsageCount Value="30"/>
-        <Loaded Value="True"/>
-      </Unit4>
-      <Unit5>
-        <Filename Value="..\..\..\Downloads\Clav_Tact\affclavier.lfm"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="60"/>
-        <UsageCount Value="7"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
-      </Unit5>
-      <Unit6>
         <Filename Value="gestionfichier.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionFichier"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="14"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="63" Y="38"/>
+        <UsageCount Value="228"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="personageihm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="personageIHM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="472"/>
+        <CursorPos X="44" Y="434"/>
+        <UsageCount Value="225"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="crtperso.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="crtPerso"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="13"/>
+        <CursorPos X="21" Y="50"/>
+        <UsageCount Value="204"/>
       </Unit6>
       <Unit7>
-        <Filename Value="backup\menu.pas"/>
+        <Filename Value="villageihm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="villageIHM"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="218"/>
+        <CursorPos X="35" Y="228"/>
+        <UsageCount Value="200"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="chasseihm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="chasseIHM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="755"/>
+        <CursorPos X="68" Y="797"/>
+        <UsageCount Value="131"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="chassefuitelogic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="chasseFuiteLogic"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="147"/>
+        <CursorPos X="79" Y="43"/>
+        <UsageCount Value="67"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="GestionEcran.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="38"/>
+        <CursorPos X="44" Y="50"/>
+        <UsageCount Value="103"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="inventaireihm.pas"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="988"/>
+        <CursorPos X="68" Y="1051"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="inventairelogic.pas"/>
+        <UnitName Value="inventaireLogic"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="992"/>
+        <CursorPos X="62" Y="86"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="dessinbaton.pas"/>
+        <UnitName Value="dessinBaton"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="217"/>
+        <CursorPos X="34" Y="181"/>
+        <UsageCount Value="8"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\..\dessinbaton.pas"/>
+        <UnitName Value="dessinBaton"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="175"/>
+        <UsageCount Value="8"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="..\..\..\dessinbaton.pas"/>
+        <UnitName Value="dessinBaton"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="60"/>
+        <UsageCount Value="8"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="chambreihm.pas"/>
+        <UnitName Value="chambreIHM"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="95" Y="8"/>
+        <UsageCount Value="11"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="marchandlogic.pas"/>
+        <UnitName Value="marchandLogic"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="37" Y="43"/>
+        <UsageCount Value="9"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="marchandihm.pas"/>
+        <UnitName Value="marchandIHM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="256"/>
+        <CursorPos X="34" Y="293"/>
+        <UsageCount Value="11"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="cantineihm.pas"/>
+        <UnitName Value="cantineIHM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="19"/>
+        <CursorPos X="39" Y="9"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="forgeronihm.pas"/>
+        <UnitName Value="forgeronIHM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="106"/>
+        <CursorPos X="70" Y="8"/>
+        <UsageCount Value="10"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="forgeronlogic.pas"/>
+        <UnitName Value="forgeronLogic"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3"/>
+        <CursorPos X="95" Y="3"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="bestiairelogic.pas"/>
+        <UnitName Value="bestiaireLogic"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="28"/>
+        <CursorPos X="34" Y="102"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="combatihm.pas"/>
+        <UnitName Value="combatIHM"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="49" Y="7"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="combatlogic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="combatLogic"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="45" Y="49"/>
+        <UsageCount Value="44"/>
+        <Loaded Value="True"/>
+      </Unit24>
     </Units>
-    <JumpHistory Count="18" HistoryIndex="17">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="8" Column="34"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="45" Column="26" TopLine="25"/>
       </Position1>
       <Position2>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="29" Column="23" TopLine="12"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="49" Column="25" TopLine="29"/>
       </Position2>
       <Position3>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="31" Column="25" TopLine="15"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="54" Column="86" TopLine="32"/>
       </Position3>
       <Position4>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="29" Column="41" TopLine="11"/>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="19" Column="44"/>
       </Position4>
       <Position5>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="32" Column="27" TopLine="11"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="70" Column="64" TopLine="41"/>
       </Position5>
       <Position6>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="29" Column="2" TopLine="14"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="76" Column="59" TopLine="41"/>
       </Position6>
       <Position7>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="31" Column="10" TopLine="14"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="33" Column="28" TopLine="23"/>
       </Position7>
       <Position8>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="27" Column="19" TopLine="15"/>
+        <Filename Value="bestiairelogic.pas"/>
+        <Caret Line="235" Column="38" TopLine="227"/>
       </Position8>
       <Position9>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="26" Column="35" TopLine="11"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="83" Column="3" TopLine="48"/>
       </Position9>
       <Position10>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="27" Column="14" TopLine="15"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="98" Column="126" TopLine="66"/>
       </Position10>
       <Position11>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="29" Column="14" TopLine="14"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="97" Column="127" TopLine="70"/>
       </Position11>
       <Position12>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="30" Column="23" TopLine="15"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="103" Column="101" TopLine="70"/>
       </Position12>
       <Position13>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="27" Column="24" TopLine="20"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="97" Column="125" TopLine="70"/>
       </Position13>
       <Position14>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="28" Column="28" TopLine="14"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="28" Column="20" TopLine="22"/>
       </Position14>
       <Position15>
-        <Filename Value="GestionEcran.pas"/>
-        <Caret Line="18" Column="27" TopLine="227"/>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="29" Column="40"/>
       </Position15>
       <Position16>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="52" Column="23" TopLine="14"/>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="97" Column="132" TopLine="70"/>
       </Position16>
       <Position17>
-        <Filename Value="gestionfichier.pas"/>
-        <Caret Line="14" Column="47"/>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="29" Column="71"/>
       </Position17>
       <Position18>
-        <Filename Value="personnage.pas"/>
-        <Caret Line="107" Column="27" TopLine="31"/>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="24" Column="30"/>
       </Position18>
+      <Position19>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="106" Column="52" TopLine="71"/>
+      </Position19>
+      <Position20>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="18" Column="16"/>
+      </Position20>
+      <Position21>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="40" Column="16" TopLine="34"/>
+      </Position21>
+      <Position22>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="100" Column="5" TopLine="73"/>
+      </Position22>
+      <Position23>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="105" Column="64" TopLine="71"/>
+      </Position23>
+      <Position24>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="106" Column="21" TopLine="81"/>
+      </Position24>
+      <Position25>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="96" Column="111" TopLine="83"/>
+      </Position25>
+      <Position26>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="26" Column="20"/>
+      </Position26>
+      <Position27>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="96" Column="7" TopLine="84"/>
+      </Position27>
+      <Position28>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="30" Column="4"/>
+      </Position28>
+      <Position29>
+        <Filename Value="MonsterHunter_NewWorld.pas"/>
+        <Caret Line="26" Column="38"/>
+      </Position29>
+      <Position30>
+        <Filename Value="combatlogic.pas"/>
+        <Caret Line="99" Column="15" TopLine="90"/>
+      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
