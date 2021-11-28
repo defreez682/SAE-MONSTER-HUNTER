@@ -15,7 +15,7 @@ procedure DemarrageMarchand();
 
 implementation
 uses
-  SysUtils,MarchandIHM, Personnage, GestionEcran, crtPerso, GestionTexte, villageIHM, inventaireLogic;
+  SysUtils,MarchandIHM, Personnage, GestionEcran, crtPerso, villageIHM, inventaireLogic;
 
 // ------------------ Permet de faire un choix parmis ce que propose le marchand
 procedure ChoixMarchand();
@@ -73,7 +73,6 @@ var
     cho : boolean;
     rep : integer = 1;
     ch  : char;
-    i : integer;
 
 begin
 
@@ -99,13 +98,27 @@ begin
                         else
                            rep := 1;
                    end;
+              #77 :  //Droite
+                   begin
+                       if (rep <= 3) then
+                          rep := rep + 3
+                       else
+                           rep := (rep-3);
+                   end;
+              #75 :  //Gauche
+                   begin
+                       if (rep <= 3) then
+                          rep := rep + 3
+                       else
+                           rep := (rep-3);
+                   end;
               #27 : //la touche echap
                    begin
                        ChoixMarchand();
                    end;
               #13 : begin
               cho := False;  //la touche entrer
-                     if rep<4 then
+                     if rep<3 then
                         begin
                           if (getOrActuelle(personnage1) < stuffDispo.invBombeDispo[rep].prix) or (isinventaireplein('bombe',personnage1).xA=-1) then
                                   AchatImpossible()
@@ -188,9 +201,7 @@ procedure ChoixSujet1et3();
 
 var
     cho : boolean;
-    rep : integer = 1;
     ch  : char;
-    i : integer;
 
 begin
 
@@ -213,7 +224,6 @@ procedure ChoixSujet2();
 
 var
     cho : boolean;
-    rep : integer = 1;
     ch  : char;
 
 begin
@@ -237,7 +247,6 @@ procedure ChoixSujet2P2();
 
 var
     cho : boolean;
-    rep : integer = 1;
     ch  : char;
 
 begin
@@ -261,7 +270,6 @@ procedure ChoixSujet2P3();
 
 var
     cho : boolean;
-    rep : integer = 1;
     ch  : char;
 
 begin

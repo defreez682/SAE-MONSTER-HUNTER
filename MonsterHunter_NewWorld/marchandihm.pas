@@ -409,10 +409,12 @@ begin
 
              if (rep = 1) then
                  begin
-                     texteXY(63,25,'  ',White);
                      texteXY(13,23,'>>',White);
                      texteXY(13,24,'  ',White);
                      texteXY(13,25,'  ',White);
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
                      deplacerCurseurXY(13,23);
                  end;
               if (rep = 2) then
@@ -420,6 +422,9 @@ begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'>>',White);
                      texteXY(13,25,'  ',White);
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
                      deplacerCurseurXY(13,24);
                  end;
               if (rep = 3) then
@@ -427,10 +432,15 @@ begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'  ',White);
                      texteXY(13,25,'>>',White);
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
                      deplacerCurseurXY(13,25);
                  end;
               if (rep=4) then
                  begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',white);
                      texteXY(13,25,'  ',White);
                      texteXY(63,23,'>>',White);
                      texteXY(63,24,'  ',White);
@@ -439,6 +449,9 @@ begin
                  end;
               if (rep=5) then
                  begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',white);
+                     texteXY(13,25,'  ',White);
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'>>',White);
                      texteXY(63,25,'  ',White);
@@ -447,6 +460,9 @@ begin
 
               if (rep=6) then
                  begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',white);
+                     texteXY(13,25,'  ',White);
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'>>',White);
