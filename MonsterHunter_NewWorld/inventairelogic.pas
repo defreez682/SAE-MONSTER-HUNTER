@@ -823,7 +823,7 @@ end;
 procedure recupArmeArmureEquipee(var personnage:typePersonnage);
 var
   i,j:integer;
-  boucle:boolean;
+  boucle,boucle1,boucle2,boucle3,boucle4:boolean;
 begin
      j:=0;
      i:=0;
@@ -832,7 +832,7 @@ begin
      begin
           for j:= 0 to 3 do
           begin
-               if (j=3) and (i=3) then
+               if (i>4) then
                boucle:=false
 
                else if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'EMPTY') and (boucle=true)  then
@@ -842,6 +842,69 @@ begin
                     end;
 
           end;
+
+     end;
+     boucle1:=true;
+     boucle2:=true;
+     boucle3:=true;
+     boucle4:=true;
+     for i:= 0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+            if (i>4) then
+            boucle1:=false;
+            boucle2:=false;
+            boucle3:=false;
+            boucle4:=false;
+
+            if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
+            begin
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[1][1].nomArmure) then
+                 begin
+                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                 boucle1:=false;
+                 end;
+            end
+
+            else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
+            begin
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[1][0].nomArmure) then
+                 begin
+                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                 boucle:=false;
+                 end;
+            end
+
+            else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
+            begin
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[2][0].nomArmure) then
+                 begin
+                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                 boucle:=false;
+                 end;
+            end
+
+            else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
+            begin
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[2][1].nomArmure) then
+                 begin
+                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                 boucle:=false;
+                 end;
+            end
+
+            else if personnage.inventaire.invArmure[i][j].typeArmure='Casque' then
+            begin
+            if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[2][3].nomArmure) then
+            begin
+            personnage.inventaire.invArmure[i][j].estEquipee:=true;
+            boucle:=false;
+            end;
+            end
+
+          end;
+
 
      end;
 
