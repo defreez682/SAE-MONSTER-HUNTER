@@ -4,21 +4,21 @@ unit menu;
 
 interface
 
-{}
+{Appelle le menu avertissement }
 procedure menuAvertissement();
-{}
+{Création des choix pour le menu avertissement }
 procedure creationChoixAvertissement(vitesse : integer);
-{}
+{création de l’interface du menu, on peut choisir la vitesse de création}
 procedure creationMenuInterface(vitesse : integer);
-{}
+{création des choix pour le menu interface, on peut choisir la vitesse de création}
 procedure creationChoixMenuInterface(vitesse : integer);
-{}
+{Créer le menu}
 procedure creationChoix();
 
 implementation
 
 uses
-  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso,villageIHM;
+  Classes, SysUtils,personnage,personageIHM,GestionEcran,gestionTexte,crtPerso,villageIHM,inventaireLogic;
 
 
 
@@ -84,7 +84,7 @@ begin
      texteAtemps('Nouvelle partie',vitesse,White);
      dessinerCadreXY (50,16,70,20,double,White,Black);
      deplacerCurseurXY(60-9,18);
-     if not (StrToInt(getPersonnageActuelle()) = 1) then
+     if not (StrToInt(getPersonnageActuelle(personnage1)) = 1) then
          texteAtemps('Continuer la partie',vitesse,DarkGray)
      else
          texteAtemps('Continuer la partie',vitesse,White);
@@ -150,7 +150,7 @@ begin
           begin
               ch := ReadKey;
               case ch of
-                  #80 : if not (StrToInt(getPersonnageActuelle()) = 1) then
+                  #80 : if not (StrToInt(getPersonnageActuelle(personnage1)) = 1) then
                             begin
                                 if (rep < 3) then
                                    rep := rep + 2
@@ -165,7 +165,7 @@ begin
                                    rep := 1;
 
                             end;
-                  #72 : if not (StrToInt(getPersonnageActuelle()) = 1) then
+                  #72 : if not (StrToInt(getPersonnageActuelle(personnage1)) = 1) then
                            begin
                                 if (rep > 1) then
                                    rep := rep - 2
@@ -205,10 +205,16 @@ begin
                  end;
           end;
     if (rep = 1) then
-       menuAvertissement();
-    if (rep = 2) then
+       menuAvertissement()
+    else if (rep = 2) then
+       begin
+       recupInventaire(personnage1);
+
        choixMenuVillage();
-    if (rep = 3) then
+
+
+       end
+    //else if (rep = 3) then
 
 end;
 

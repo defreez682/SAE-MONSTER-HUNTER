@@ -5,7 +5,7 @@ unit cantineIHM;
 interface
 
 uses
-  Classes, SysUtils ,GestionEcran, gestiontexte, crtPerso, Personnage, villageIHM;
+  Classes, SysUtils ,GestionEcran, gestiontexte, crtPerso, Personnage,villageIHM;
 
   procedure cantineInterface();
   procedure cantineChoix();
@@ -22,7 +22,7 @@ begin
 
      //Cadre indique le total d'or possédé
      dessinerCadreXY(76,0,113,2, double, 10, black);
-     deplacerCurseurXY(93,1); texteEnCouleur('OR : ', 10); write(getOrActuelle());
+     deplacerCurseurXY(93,1); texteEnCouleur('OR : ', 10); write(getOrActuelle(personnage1));
 
      //cadres des repas
      dessinerCadreXY(1,3,37,12, simple, white, black);
@@ -235,55 +235,54 @@ begin
 
      if (rep = 1) then
         begin
-          if ((getOrActuelle() - 50) < 0) then
+          if ((getOrActuelle(personnage1) - 50) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 50) ;
+             miseAjourOr(personnage1,getOrActuelle(personnage1) - 50) ;
              cantine();
         end
      else if (rep = 2) then
          begin
-          if ((getOrActuelle() - 70) < 0) then
+          if ((getOrActuelle(personnage1) - 70) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 70) ;
+             miseAjourOr(personnage1,getOrActuelle(personnage1) - 70) ;
              cantine();
          end
      else if (rep = 3) then
         begin
-          if ((getOrActuelle() - 80) < 0) then
+          if ((getOrActuelle(personnage1) - 80) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 80) ;
+             miseAjourOr(personnage1,getOrActuelle(personnage1) - 80) ;
              cantine();
         end
      else if (rep = 4) then
         begin
-          if ((getOrActuelle() - 65) < 0) then
+          if ((getOrActuelle(personnage1) - 65) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 65) ;
+             miseAjourOr(personnage1,getOrActuelle(personnage1) - 65) ;
              cantine();
         end
      else if (rep = 5) then
         begin
-          if ((getOrActuelle() - 82) < 0) then
+          if ((getOrActuelle(personnage1) - 82) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 82) ;
+             miseAjourOr(personnage1,getOrActuelle(personnage1) - 82) ;
              cantine();
         end
      else if (rep = 6) then
        begin
-         if ((getOrActuelle() - 55) < 0) then
+         if ((getOrActuelle(personnage1) - 55) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 55) ;
+             miseAjourOr(personnage1,getOrActuelle(personnage1) - 55) ;
              cantine();
-          end
-          else if (rep = 7) then
-               choixMenuVillage();
-
+       end
+     else if (rep = 7) then
+          choixMenuVillage();
 end;
 
 //Cantine Complet

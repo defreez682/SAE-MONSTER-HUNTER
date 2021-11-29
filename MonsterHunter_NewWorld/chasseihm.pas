@@ -6,6 +6,7 @@ interface
 
 var Orange : Integer = 150;
     fuite : Boolean = False;
+    combat : Integer = 0;
 
 procedure creationFuiteInterface();
 procedure deplacementJoueur();
@@ -21,7 +22,7 @@ procedure creationZone5();
 implementation
 
 uses
-  Classes, SysUtils,gestionTexte,GestionEcran,crtPerso,chasseFuiteLogic,villageIHM;
+  Classes, SysUtils,gestionTexte,GestionEcran,crtPerso,chasseFuiteLogic,villageIHM,combatIHM;
 
 
 
@@ -95,7 +96,7 @@ begin
      texteEnCouleur('........',DarkGray);
      texteXY(50,20,'*',Orange);
      texteEnCouleur('...............',DarkGray);
-     texteXY(57,14,'****************',Orange);
+     texteXY(57,14,'**************',Orange);
      texteXY(53,21,'............',DarkGray);
      texteXY(54,22,'........',DarkGray);
      texteXY(55,23,'......',DarkGray);
@@ -258,6 +259,10 @@ end;
 
 procedure legende();
 begin
+     texteXY(1,4,'X',Red);
+     texteEnCouleur(' sont des ',White);
+     texteEnCouleur('dragons anciens',Red);
+
      texteXY(1,5,'X',LightMagenta);
      texteEnCouleur(' sont des ',White);
      texteEnCouleur('monstres',LightMagenta);
@@ -308,6 +313,18 @@ var x : integer = 45;
     choix : Boolean = False;
     rep : Integer = 1;
     ox : Integer = 0;
+    monstreal : Integer;
+
+    // On vérifira plus tard via la sauvegarde si le monstre a été vaincu ou non
+    boss1 : Boolean = True;
+    boss2 : Boolean = True;
+    boss3 : Boolean = True;
+
+    affboss1 : Boolean = False;
+    affboss2 : Boolean = False;
+    affboss3 : Boolean = False;
+
+
 begin
      randomize;
      creationFuiteInterface();
@@ -317,7 +334,16 @@ begin
      if (fuite = True) then
         mstr := 1
      else
-        mstr := random(8) + 1;
+        begin
+             mstr := random(8)+1;
+             if (combat >= 10) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+                texteXY(50,15,'X',Red);
+             if (combat >= 20) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+                texteXY(55,14,'X',Red);
+             if (combat >= 30) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+                texteXY(65,16,'X',Red);
+        end;
+
 
      // On créer les monstres dans chaque zone
      for i := 1 to mstr do
@@ -431,6 +457,16 @@ begin
                                     texteXY(x,y,'X',LightBlue);
                                     for i := 1 to mstr do
                                         texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
+                                    if (combat >= 10) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+                                       texteXY(50,15,'X',Red);
+                                    if (combat >= 20) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+                                       texteXY(55,14,'X',Red);
+                                    if (combat >= 30) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+                                       texteXY(65,16,'X',Red);
+                                    affboss1 := False;
+                                    affboss2 := False;
+                                    affboss3 := False;
+
                                     deplacerCurseurXY(x,y);
                                     choix := False;
                                end ;
@@ -693,7 +729,12 @@ begin
 
                for i := 1 to mstr do
                    texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-
+               if (combat >= 10) and (boss1 = True) then
+                   texteXY(50,15,'X',Red);
+               if (combat >= 20) and (boss2 = True) then
+                  texteXY(55,14,'X',Red);
+               if (combat >= 30) and (boss3 = True) then
+                  texteXY(65,16,'X',Red);
 
                if (choix = False) then
                   begin
@@ -706,7 +747,26 @@ begin
                                        else
                                            ox := x-1;
                                        choix := True;
+                                  end
+                               else if (x = 50) and (y = 15) and (boss1 = True) and (combat >= 20) then
+                                  begin
+                                      ox := x-1;
+                                      choix := True;
+                                      affboss1 := True;
+                                  end
+                               else if (x = 55) and (y = 14) and (boss2 = True) and (combat >= 40) then
+                                  begin
+                                    ox := x-1;
+                                    choix := True;
+                                    affboss2 := True;
+                                  end
+                               else if (x = 65) and (y = 16) and (boss3 = True) and (combat >= 60) then
+                                  begin
+                                    ox := x-1;
+                                    choix := True;
+                                    affboss3 := True;
                                   end;
+
                            end;
                   end;
 
@@ -714,10 +774,19 @@ begin
                   begin
                       dessinerCadreXY(35,13,84,16,simple,white,black);
                       if (fuite = False) then
-                              texteXY(37,14,'Vous etes sur le point d''affronter un monstre.',White)
-                         else                                                                          
-                              texteXY(37,14,'Vous etes sur le point d''affronter le monstre.',White);
+                         begin
 
+                              if (affboss1 = True) then
+                                      texteXY(44,14,'le Teostra se dresse devant vous.',LightRed)
+                              else if (affboss2 = True) then
+                                      texteXY(41,14,'Le Kushala Daora se dresse devant vous.',LightRed)
+                              else if (affboss3 = True) then
+                                      texteXY(42,14,'Le Nergigante se dresse devant vous.',LightRed)
+                              else
+                                  texteXY(37,14,'Vous etes sur le point d''affronter un monstre.',White);
+                         end
+                      else
+                          texteXY(37,14,'Vous etes sur le point d''affronter le monstre.',White);
 
                       if (rep = 1) then
                          begin
@@ -738,10 +807,29 @@ begin
            end;
 
      if (fuite = True) then
+        combatQFQ()
      else
         begin
              if (rep = 3) then
-                choixMenuVillage();
+                choixMenuVillage()
+             else
+                begin
+                     if (affboss1 = True) then
+                        introduction(13)
+                     else if (affboss2 = True) then
+                        introduction(14)
+                     else if (affboss3 = True) then
+                        introduction(15)
+                     else
+                         begin
+                              monstreal := random(12)+1;
+                              introduction(monstreal);
+                         end;
+
+                     // On le met de façon temporaire ici, mais il faudra le mettre à la fin du combat.
+                     combat := combat + 1;
+                end;
+
         end;
 
 

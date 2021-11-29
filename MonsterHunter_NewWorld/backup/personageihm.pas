@@ -69,15 +69,15 @@ end;
 procedure interfaceSaisieSexe();
 begin
      texteXY(15,4,'Quel est votre sexe, ',White);
-     texteEnCouleur(getNomActuelle(),Red);
+     texteEnCouleur(getNomActuelle(personnage1),Red);
      texteEnCouleur('?',White);
      texteXY(15,5,'(30 Lettres MAX)',White);
-     texteXY(15,7,getSexeActuelle(),White);
+     texteXY(15,7,getSexeActuelle(personnage1),White);
      texteXY(15,9,'Votre sexe est "',White);
-     texteEnCouleur(getSexeActuelle(),Yellow);
+     texteEnCouleur(getSexeActuelle(personnage1),Yellow);
      texteEnCouleur('"',White);
      texteXY(15,10,'Correcte?',White);
-     texteXY(81,6,getNomActuelle(),Black);
+     texteXY(81,6,getNomActuelle(personnage1),Black);
 end;
 
 procedure saisieNom();
@@ -99,10 +99,10 @@ begin
                   begin
                       if (Length(nomsaisie) < 20) then
                       begin
-                           miseAjourNom(nomsaisie);
+                           miseAjourNom(personnage1,nomsaisie);
                            deplacerCurseurXY(15,8);
                            texteAtemps('Votre nom est "',25,White);
-                           texteAtemps(getNomActuelle(),50,Red);
+                           texteAtemps(getNomActuelle(personnage1),50,Red);
                            texteAtemps('"',25,White);
                            deplacerCurseurXY(15,9);
                            texteAtemps('Correcte?',40,White);
@@ -164,10 +164,10 @@ begin
                CreationInterfaceFormulaire();
                deplacerCurseurXY(81,6);
                couleurTexte(Black);
-               write(getNomActuelle());
+               write(getNomActuelle(personnage1));
                deplacerCurseurXY(15,4);
                texteAtemps('Quel est votre sexe, ',25,White);
-               texteAtemps(getNomActuelle(),25,Red);
+               texteAtemps(getNomActuelle(personnage1),25,Red);
                texteAtemps('?',25,White);
                deplacerCurseurXY(15,5);
                texteAtemps('(30 Lettres MAX)',25,White);
@@ -177,10 +177,10 @@ begin
                   begin
                       if (Length(sexesaisie) < 30) then
                       begin
-                           miseAjourSexe(sexesaisie);
+                           miseAjourSexe(personnage1,sexesaisie);
                            deplacerCurseurXY(15,9);
                            texteAtemps('Votre sexe est "',25,White);
-                           texteAtemps(getSexeActuelle(),50,Yellow);
+                           texteAtemps(getSexeActuelle(personnage1),50,Yellow);
                            texteAtemps('"',25,White);
                            deplacerCurseurXY(15,10);
                            texteAtemps('Correcte?',40,White);
@@ -230,7 +230,7 @@ begin
                                                        creationInterfaceFormulaire();
                                                        interfaceSaisieSexe();
                                                        deplacerCurseurXY(15,11);
-                                                       texteAtemps(getSexeActuelle,30,Yellow);
+                                                       texteAtemps(getSexeActuelle(personnage1),30,Yellow);
                                                        texteAtemps('... ',700,Yellow);
                                                        deplacerCurseurXY(15,12);
                                                        texteAtemps('Je ne connaissais pas ce sexe...',15,White);
@@ -266,13 +266,13 @@ begin
                CreationInterfaceFormulaire();
                deplacerCurseurXY(81,6);
                couleurTexte(Black);
-               write(getNomActuelle());
+               write(getNomActuelle(personnage1));
                deplacerCurseurXY(81,8);
                couleurTexte(Black);
-               write(getSexeActuelle());
+               write(getSexeActuelle(personnage1));
                deplacerCurseurXY(15,4);
                texteAtemps('Quel est votre taille (m), ',25,White);
-               texteAtemps(getNomActuelle(),25,Red);
+               texteAtemps(getNomActuelle(personnage1),25,Red);
                texteAtemps('?',25,White);
                choixtaille := True;
                taillesaisieaff := taillesaisie/100;
@@ -311,7 +311,7 @@ begin
                         end;
 
                              texteXY(15,4,'Quel est votre taille (m), ',White);
-                             texteEnCouleur(getNomActuelle(),Red);
+                             texteEnCouleur(getNomActuelle(personnage1),Red);
                              texteEnCouleur('?',White);;
                              taillesaisieaff := taillesaisie/100;
                              texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
@@ -322,10 +322,10 @@ begin
 
 
                      end;
-               miseAjourTaille(taillesaisie);
+               miseAjourTaille(personnage1,taillesaisie);
                deplacerCurseurXY(15,10);
                texteAtemps('Votre taille est de ',25,White);
-               texteAtemps(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),50,LightMagenta);
+               texteAtemps(FloatToStrF(getTailleActuelle(personnage1)/100,fffixed,1,2),50,LightMagenta);
                texteAtemps(' m',25,White);
                deplacerCurseurXY(15,11);
                texteAtemps('Correcte?',40,White);
@@ -355,7 +355,7 @@ begin
                              begin
                                  texteXY(24,18,'Oui',Red);
                                  texteXY(44,18,'Non',White);
-                                  deplacerCurseurXY(27,18);
+                                 deplacerCurseurXY(27,18);
                              end
                           else
                               begin
@@ -383,19 +383,19 @@ begin
      dessinerCadreXY(40,3,80,30,double,White,Black);
      deplacerCurseurXY(41,5);
      texteAtemps('Nom : ',20,White);
-     texteAtemps(getNomActuelle(),20,White);
+     texteAtemps(getNomActuelle(personnage1),20,White);
      deplacerCurseurXY(41,7);
      texteAtemps('Sexe : ',20,White);
-     texteAtemps(getSexeActuelle(),20,White);
+     texteAtemps(getSexeActuelle(personnage1),20,White);
      deplacerCurseurXY(41,9);
      texteAtemps('Taille : ',20,White);
-     texteAtemps(FloatToStrF(getTailleActuelle()/100,fffixed,1,2),20,White);
+     texteAtemps(FloatToStrF(getTailleActuelle(personnage1)/100,fffixed,1,2),20,White);
      texteAtemps(' m',20,White);
      deplacerCurseurXY(41,10);
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,12);
      texteAtemps('Niveau : ',20,White);
-     texteAtemps(IntToStr(getLvlActuelle()),20,White);
+     texteAtemps(IntToStr(getLvlActuelle(personnage1)),20,White);
      deplacerCurseurXY(41,13);
      texteAtemps('Experience necessaire avant niveau',10,White);
      deplacerCurseurXY(41,14);
@@ -405,23 +405,23 @@ begin
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,17);
      texteAtemps('Argent : ',20,White);
-     texteAtemps(IntToStr(getOrActuelle()),20,White);
+     texteAtemps(IntToStr(getOrActuelle(personnage1)),20,White);
      deplacerCurseurXY(41,18);
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,20);
      texteAtemps('Equipement : ',20,White);
      deplacerCurseurXY(41,21);
-     texteAtemps('- Epee Basique',10,White);
+     texteAtemps('- Epee simple',10,White);
      deplacerCurseurXY(41,22);
-     texteAtemps('- Casque de chasseur simple',10,White);
+     texteAtemps('- Casque de chasseur',10,White);
      deplacerCurseurXY(41,23);
-     texteAtemps('- Plastron de chasseur simple',10,White);
+     texteAtemps('- Plastron de chasseur',10,White);
      deplacerCurseurXY(41,24);
-     texteAtemps('- Gants de chasseur simple',10,White);
+     texteAtemps('- Gants de chasseur',10,White);
      deplacerCurseurXY(41,25);
-     texteAtemps('- Taille de chasseur simple',10,White);
+     texteAtemps('- Jambiere de chasseur',10,White);
      deplacerCurseurXY(41,26);
-     texteAtemps('- Jambiere de chasseur simple',10,White);
+     texteAtemps('- Botte de chasseur',10,White);
      deplacerCurseurXY(41,27);
      texteAtemps('- 3 Potions simples',10,White);
      deplacerCurseurXY(60-9,1);
@@ -465,8 +465,10 @@ begin
            end;
     if (rep = 1) then
         begin
-             miseAjourPersonnage(1);
+             miseAjourPersonnage(personnage1,1);
+             creationInventaire(personnage1);
              choixMenuVillage();
+
              // Village
         end
     else
@@ -482,28 +484,28 @@ begin
      texteAtemps('Aventurier.',40,White);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                         ',White);
      deplacerCurseurXY(60-34,15);
      texteAtemps('Vous faites partie de la sixieme grande expedition du nouveau monde.',20,White);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                         ',White);
      deplacerCurseurXY(60-23,15);
      texteAtemps('Une nouvelle ile mysterieuse a ete decouverte :',30,White);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                         ',White);
      deplacerCurseurXY(60-4,15);
      texteAtemps('Aeternum',60,LightCyan);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                         ',White);
      deplacerCurseurXY(60-32,15);
      texteAtemps('Vous y etes envoye pour decouvrir tous les ',25,White);
      texteAtemps('mysteres de cette ile.',25,Cyan);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                         ',White);
      deplacerCurseurXY(60-37,15);
      texteAtemps('Mais avant tout, j''ai besoin que vous remplissiez cette ',25,White);
      texteAtemps('fiche d''information.',25,Red);
