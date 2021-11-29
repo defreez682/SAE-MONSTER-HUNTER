@@ -844,6 +844,7 @@ begin
           end;
 
      end;
+
      boucle1:=true;
      boucle2:=true;
      boucle3:=true;
@@ -860,7 +861,7 @@ begin
 
             if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
             begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[1][1].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][1].nomArmure) then
                  begin
                  personnage.inventaire.invArmure[i][j].estEquipee:=true;
                  boucle1:=false;
@@ -869,7 +870,7 @@ begin
 
             else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
             begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[1][0].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][0].nomArmure) then
                  begin
                  personnage.inventaire.invArmure[i][j].estEquipee:=true;
                  boucle:=false;
@@ -878,7 +879,7 @@ begin
 
             else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
             begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[2][0].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][0].nomArmure) then
                  begin
                  personnage.inventaire.invArmure[i][j].estEquipee:=true;
                  boucle:=false;
@@ -887,7 +888,7 @@ begin
 
             else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
             begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[2][1].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][1].nomArmure) then
                  begin
                  personnage.inventaire.invArmure[i][j].estEquipee:=true;
                  boucle:=false;
@@ -896,7 +897,7 @@ begin
 
             else if personnage.inventaire.invArmure[i][j].typeArmure='Casque' then
             begin
-            if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.invArmure[2][3].nomArmure) then
+            if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][3].nomArmure) then
             begin
             personnage.inventaire.invArmure[i][j].estEquipee:=true;
             boucle:=false;
