@@ -166,17 +166,17 @@ end;
 
 function calculHpMaxBase() : Integer;
 begin
-    calculHpMaxBase := 300+(10*getlvlActuelle(personnage1));
+    calculHpMaxBase := 300+(150*getlvlActuelle(personnage1));
 end;
 
 function calculArmureBase() : Integer;
 begin
-    calculArmureBase := 30+(4*getlvlActuelle(personnage1));
+    calculArmureBase := 5+(1*getlvlActuelle(personnage1));
 end;
 
 function calculADBase() : Integer;
 begin
-    calculADBase := 75+(5*getlvlActuelle(personnage1));
+    calculADBase := 75+(15*getlvlActuelle(personnage1));
 end;
 
 //__________________________________________________ Création personnage

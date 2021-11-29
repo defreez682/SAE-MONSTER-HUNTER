@@ -17,14 +17,15 @@ procedure initStat(num : Integer);
 
 // On fait attaquer le monstre
 function monstreAttaque() : Integer;
+// On fait attaque le joueur
+procedure joueurAttaque();
+
 // Principalement utiliser pour les effets de poison ou autre
 procedure degatDebutTour(num : integer);
 
 
-var armuretemp : Integer = 40;
-    poidsarmetemp : Integer = 15;
-    poidsarmuretemp : Integer = 30;
-    defensearmuretemp : Integer = 30;
+var poidsarmetemp : Integer = 25;
+    poidsarmuretemp : Integer = 40;
     monstreEnCours : Integer;
 
 
@@ -35,10 +36,15 @@ var armuretemp : Integer = 40;
     ArmureJoueur : Integer;
     AdJoueur : Integer;
     MobiliteJoueur : Integer;
+    defenseJoueur : Integer = 40;
+    ratioArme : Real = 0.25;
     // Monstre
-    HPMonstre : Integer;
+    HPMonstre : Real;
     ArmureMonstre : Real;
     AdMonstre : Integer;
+
+    //fuite
+    chancefuite : Integer = 0;
 
 implementation
 
@@ -65,7 +71,7 @@ begin
     difficulte := random(2);
     //Joueur
     HPJoueur := calculHpMaxBase();
-    ArmureJoueur := calculArmureBase() + armuretemp;
+    ArmureJoueur := calculArmureBase() + defenseJoueur;
     AdJoueur := calculADBase();
     MobiliteJoueur := 100 - (poidsarmuretemp+poidsarmetemp);
 
@@ -108,7 +114,7 @@ begin
     esquive := random(100) + 1;
     cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
 
-    if (esquive >= cesquive) then
+    if (esquive <= cesquive) then
        begin
             attaque := random(100) + 1;
             if (attaque < EnvoyerMonstre(monstreEnCours).attaque1Chance) then
@@ -122,17 +128,42 @@ begin
 
 
             if (nattaque = 1) then
-               HPJoueur := HPJoueur - ((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque1)) / (1+(Int(ArmureJoueur)/500)));
+               HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque1)) / (1+(Int(ArmureJoueur)/500)));
             if (nattaque = 2) then
-               HPJoueur := HPJoueur - ((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque2)) / (1+(Int(ArmureJoueur)/500)));
+               HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque2)) / (1+(Int(ArmureJoueur)/500)));
             if (nattaque = 3) then
-               HPJoueur := HPJoueur - ((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque3)) / (1+(Int(ArmureJoueur)/500)));
+               HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque3)) / (1+(Int(ArmureJoueur)/500)));
             if (nattaque = 4) then
-               HPJoueur := HPJoueur - ((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque4)) / (1+(Int(ArmureJoueur)/500))) ;
+               HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque4)) / (1+(Int(ArmureJoueur)/500))) ;
 
 
-       end;
+       end
+    else
+        writeln('Equive !');
+
     monstreAttaque := nattaque;
+end;
+
+
+
+procedure joueurAttaque();
+
+var
+    esquive : Integer;
+    cesquive : Integer;
+begin
+    randomize;
+    esquive := random(100) + 1;
+    writeln(esquive);
+    cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
+    if (esquive >= cesquive) then
+       begin
+            HPMonstre := HPMonstre - Int((adJoueur + (adJoueur * ratioArme)) / (1+(Int(EnvoyerMonstre(monstreEnCours).armureBase))/500));
+            chancefuite := chancefuite + 2;
+       end
+
+    else writeln('Equive !');
+
 end;
 
 

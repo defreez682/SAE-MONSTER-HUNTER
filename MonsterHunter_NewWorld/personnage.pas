@@ -176,7 +176,7 @@ end;
 
 function calculADBase() : Integer;
 begin
-    calculADBase := 75+(15*getlvlActuelle(personnage1));
+    calculADBase := 50+(15*getlvlActuelle(personnage1));
 end;
 
 //__________________________________________________ Création personnage

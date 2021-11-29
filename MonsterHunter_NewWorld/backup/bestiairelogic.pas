@@ -65,7 +65,7 @@ begin
             monstre.attaque1Desc := 'Le Tigrex rugit avec une puissance phénoménal !';
 
             monstre.attaque2 := 0.4;
-            monstre.attaque1Chance := 60; // 20 % de chance
+            monstre.attaque2Chance := 60; // 20 % de chance
             monstre.attaque2Desc := 'Le Tigrex charge sur vous !';
 
             monstre.attaque3 := 0.3;

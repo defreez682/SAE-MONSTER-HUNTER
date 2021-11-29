@@ -1,13 +1,12 @@
 program MonsterHunter_NewWorld;
 
 
-uses sysutils, menu, personnage, gestionFichier, combatLogic;
+uses sysutils, menu, personnage, gestionFichier, combatLogic,gestionEcran;
 
-var tour : Integer = 0;
-    b : Integer;
 
 begin
    initialisationItemDisponibles(); // Crée la base de données des items
+
    checkUp();
    //creationChoix();
    initStat(1);
@@ -17,24 +16,10 @@ begin
    writeln('MobiliteJoueur : ',MobiliteJoueur);
    writeln('____________________________');
    // Monstre
-   writeln('HPMonstre : ',HPMonstre);
+   writeln('HPMonstre : ',Int(HPMonstre):2:0);
    writeln('ArmureMonstre : ',Int(ArmureMonstre):2:0);
    writeln('AdMonstre : ',AdMonstre);
    readln();
 
-
-   b := monstreAttaque();
-   writeln('Attaque : ',monstreAttaque());
-   if (b = 0) then
-      writeln('Esquive !');
-
-
-   writeln('HPJoueur : ',Int(HPJoueur):2:0);
-   writeln(calculHpMaxBase()-Int(HPJoueur):2:0,' de degats');
-   tour := tour + 1;
-   writeln('Tour ',tour);
-   writeln('_________________________________________________');
-
-   readln();
 end.
 
