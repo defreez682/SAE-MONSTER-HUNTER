@@ -56,7 +56,7 @@ begin
             monstre.mobilite := 40;
             monstre.ratioHP := 150;
             monstre.ratioArmure := 0.5;
-            monstre.ad := 65;
+            monstre.ad := 95;
             monstre.ratioAd := 15;
             monstre.xpgagne := random(2500) + 2000;
 
@@ -88,7 +88,7 @@ begin
             monstre.mobilite := 85;
             monstre.ratioHP := 100;
             monstre.ratioArmure := 0.5;
-            monstre.ad := 45;
+            monstre.ad := 85;
             monstre.ratioAd := 20;
             monstre.xpgagne := random(4000) + 3000;
 
@@ -120,7 +120,7 @@ begin
             monstre.mobilite := 90;
             monstre.ratioHP := 110;
             monstre.ratioArmure := 0.55;
-            monstre.ad := 45;
+            monstre.ad := 85;
             monstre.ratioAd := 15;
             monstre.xpgagne := random(2000) + 5000;
 
@@ -152,7 +152,7 @@ begin
             monstre.mobilite := 30;
             monstre.ratioHP := 180;
             monstre.ratioArmure := 0.7;
-            monstre.ad := 75;
+            monstre.ad := 105;
             monstre.ratioAd := 10;
             monstre.xpgagne := random(2000) + 7000;
 
@@ -184,7 +184,7 @@ begin
             monstre.mobilite := 40;
             monstre.ratioHP := 160;
             monstre.ratioArmure := 0.85; 
-            monstre.ad := 58;
+            monstre.ad := 95;
             monstre.ratioAd := 12;
             monstre.xpgagne := random(2000) + 6000;
 
@@ -248,7 +248,7 @@ begin
             monstre.mobilite := 50;
             monstre.ratioHP := 115;
             monstre.ratioArmure := 1;
-            monstre.ad := 70;
+            monstre.ad := 75;
             monstre.ratioAd := 10;
             monstre.xpgagne := random(4000) + 3000;
 
@@ -280,7 +280,7 @@ begin
             monstre.mobilite := 35;
             monstre.ratioHP := 140;
             monstre.ratioArmure := 1;
-            monstre.ad := 69;
+            monstre.ad := 105;
             monstre.ratioAd := 15;
             monstre.xpgagne := random(8000) + 10000;
 
@@ -312,7 +312,7 @@ begin
             monstre.mobilite := 40;
             monstre.ratioHP := 165;
             monstre.ratioArmure := 0.7;
-            monstre.ad := 80;
+            monstre.ad := 110;
             monstre.ratioAd := 13;
             monstre.xpgagne := random(8000) + 6000;
 
@@ -338,13 +338,13 @@ begin
      else if (num = 10) then
         begin
              monstre.nom := 'Barroth';
-             monstre.description := 'Animal imposant et très résistant a l''image d''un rhinoceros... mais rocheux';
+             monstre.description := 'Animal imposant et tres resistant a l''image d''un rhinoceros... mais rocheux';
              monstre.hpBase := 900;
              monstre.armureBase := 60;
              monstre.mobilite := 40;
              monstre.ratioHP := 220;
              monstre.ratioArmure := 0.5;
-             monstre.ad := 75;
+             monstre.ad := 95;
              monstre.ratioAd := 11;
              monstre.xpgagne := random(8000) + 4500;
 
@@ -408,7 +408,7 @@ begin
              monstre.mobilite := 80;
              monstre.ratioHP := 150;
              monstre.ratioArmure := 0.6;
-             monstre.ad := 70;
+             monstre.ad := 80;
              monstre.ratioAd := 15;
              monstre.xpgagne := random(8000) + 7500;
 

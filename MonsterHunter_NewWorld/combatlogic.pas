@@ -22,7 +22,8 @@ procedure joueurAttaque();
 
 // Principalement utiliser pour les effets de poison ou autre
 procedure degatDebutTour(num : integer);
-
+procedure rendreVie(valeur : integer);
+procedure utiliserBombeExplo(valeur : integer);
 
 var poidsarmetemp : Integer = 25;
     poidsarmuretemp : Integer = 40;
@@ -52,7 +53,22 @@ uses
   Classes, SysUtils,personnage,bestiaireLogic,combatIHM;
 
 
+procedure utiliserBombeExplo(valeur : integer);
+var esquive,cesquive : integer;
+begin
+    randomize;
+    esquive := random(100) + 1;
+    cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
+    if (esquive <= cesquive) then
+       HPMonstre := HPMonstre - valeur
+    else writeln('Esquive ! (Bombe)');
 
+end;
+
+procedure rendreVie(valeur : integer);
+begin
+    HPJoueur := HPJoueur + valeur;
+end;
 
 procedure initStat(num : Integer);
 var i : Integer;
@@ -139,7 +155,7 @@ begin
 
        end
     else
-        writeln('Equive !');
+        writeln('Esquive ! (Joueur)');
 
     monstreAttaque := nattaque;
 end;
@@ -159,10 +175,11 @@ begin
     if (esquive >= cesquive) then
        begin
             HPMonstre := HPMonstre - Int((adJoueur + (adJoueur * ratioArme)) / (1+(Int(EnvoyerMonstre(monstreEnCours).armureBase))/500));
-            chancefuite := chancefuite + 2;
+            if not (chancefuite >= 40) then
+               chancefuite := chancefuite + 1;
        end
 
-    else writeln('Equive !');
+    else writeln('Esquive ! (Sur monstre)');
 
 end;
 

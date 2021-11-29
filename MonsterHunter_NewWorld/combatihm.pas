@@ -79,7 +79,16 @@ begin
                            fuite := True;
                            deplacementJoueur();
                       end;
-             end;
+             end
+             else if (cho = 2) then
+                 rendreVie(calculHpMaxBase() div 2)
+             else if (cho = 3) then
+                 begin
+                      utiliserBombeExplo(500);
+                      writeln('HPMonstre : ',Int(HPMonstre):2:0);
+                      writeln('_____________________________')
+                 end;
+
 
              a := monstreAttaque();
              writeln('Attaque : ',a);

@@ -807,7 +807,7 @@ begin
            end;
 
      if (fuite = True) then
-        combatQFQ();
+        combatQFQ()
      else
         begin
              if (rep = 3) then

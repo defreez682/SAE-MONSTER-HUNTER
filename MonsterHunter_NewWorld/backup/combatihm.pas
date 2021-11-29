@@ -79,7 +79,12 @@ begin
                            fuite := True;
                            deplacementJoueur();
                       end;
-             end;
+             end
+             else if (cho = 2) then
+                 rendreVie(calculHpMaxBase() div 2)
+             else if (cho = 3) then
+                 utiliserBombeExplo(500);
+
 
              a := monstreAttaque();
              writeln('Attaque : ',a);
@@ -89,9 +94,9 @@ begin
              if (Int(HPJoueur) <= 0) or (Int(HPMonstre) <= 0) then
              begin
                  if (Int(HPJoueur) <= 0) then
-                     writeln('Gagne !')
+                     writeln('Perdu !')
                  else
-                     writeln('Perdu !');
+                     writeln('Gagne !');
                  readln();
                  cmb := False;
              end;
