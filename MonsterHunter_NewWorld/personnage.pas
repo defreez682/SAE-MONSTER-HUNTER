@@ -258,7 +258,7 @@ end;
 procedure creationInventaire(var personnage:typePersonnage);
 begin
      initialisationInventaireVide(personnage);
-     creationInventaireItem(0,64);
+     creationInventaireItem(0,70);
      ajoutStuffDepart(personnage);
 end;
 
