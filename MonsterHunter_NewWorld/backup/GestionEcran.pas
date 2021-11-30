@@ -1,7 +1,5 @@
 unit GestionEcran;
 
-{$codepage UTF8}
-
 interface
     uses SysUtils, Windows;
 

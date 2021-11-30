@@ -336,11 +336,11 @@ begin
      else
         begin
              mstr := random(8)+1;
-             if (combat >= 20) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+             if (combat >= 10) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
                 texteXY(50,15,'X',Red);
-             if (combat >= 40) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+             if (combat >= 20) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
                 texteXY(55,14,'X',Red);
-             if (combat >= 60) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+             if (combat >= 30) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
                 texteXY(65,16,'X',Red);
         end;
 
@@ -457,11 +457,11 @@ begin
                                     texteXY(x,y,'X',LightBlue);
                                     for i := 1 to mstr do
                                         texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-                                    if (combat >= 20) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+                                    if (combat >= 10) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
                                        texteXY(50,15,'X',Red);
-                                    if (combat >= 40) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+                                    if (combat >= 20) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
                                        texteXY(55,14,'X',Red);
-                                    if (combat >= 60) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+                                    if (combat >= 30) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
                                        texteXY(65,16,'X',Red);
                                     affboss1 := False;
                                     affboss2 := False;
@@ -729,11 +729,11 @@ begin
 
                for i := 1 to mstr do
                    texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-               if (combat >= 20) and (boss1 = True) then
+               if (combat >= 10) and (boss1 = True) then
                    texteXY(50,15,'X',Red);
-               if (combat >= 40) and (boss2 = True) then
+               if (combat >= 20) and (boss2 = True) then
                   texteXY(55,14,'X',Red);
-               if (combat >= 60) and (boss3 = True) then
+               if (combat >= 30) and (boss3 = True) then
                   texteXY(65,16,'X',Red);
 
                if (choix = False) then
@@ -822,7 +822,7 @@ begin
                         introduction(15)
                      else
                          begin
-                              monstreal := random(12)+1;
+                              monstreal := 7;//random(12)+1;
                               introduction(monstreal);
                          end;
 

@@ -21,9 +21,10 @@ function monstreAttaque() : Integer;
 procedure joueurAttaque();
 
 // Principalement utiliser pour les effets de poison ou autre
-procedure degatDebutTour(num : integer);
+procedure degatDebutTour(num : Real);
 procedure rendreVie(valeur : integer);
 procedure utiliserBombeExplo(valeur : integer);
+function bombeFlash() : Boolean;
 
 var poidsarmetemp : Integer = 25;
     poidsarmuretemp : Integer = 40;
@@ -52,6 +53,12 @@ implementation
 uses
   Classes, SysUtils,personnage,bestiaireLogic,combatIHM;
 
+
+
+function bombeFlash() : Boolean;
+begin
+     bombeFlash := True;
+end;
 
 procedure utiliserBombeExplo(valeur : integer);
 var esquive,cesquive : integer;
@@ -114,9 +121,9 @@ begin
 end;
 
 
-procedure degatDebutTour(num : integer);
+procedure degatDebutTour(num : real);
 begin
-    HPJoueur := HPJoueur - (num*calculHpMaxBase())
+    HPJoueur := HPJoueur - Int(num*calculHpMaxBase());
 end;
 
 function monstreAttaque() : Integer;

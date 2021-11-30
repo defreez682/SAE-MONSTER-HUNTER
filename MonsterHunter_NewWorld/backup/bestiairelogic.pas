@@ -16,7 +16,7 @@ type
             ratioArmure : Real;
             ad : Integer;
             ratioAd : Integer;
-            // loot
+            orgagne : Integer;
             xpgagne : Integer;
             attaque1 : Real;
             attaque1Chance : Integer;
@@ -30,6 +30,7 @@ type
             attaque4 : Real;
             attaque4Chance : Integer;
             attaque4Desc : string;
+            //loot
 
   end;
 
@@ -56,8 +57,9 @@ begin
             monstre.mobilite := 40;
             monstre.ratioHP := 150;
             monstre.ratioArmure := 0.5;
-            monstre.ad := 95;
+            monstre.ad := 115;
             monstre.ratioAd := 15;
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(2500) + 2000;
 
             monstre.attaque1 := 0.1;
@@ -88,8 +90,9 @@ begin
             monstre.mobilite := 85;
             monstre.ratioHP := 100;
             monstre.ratioArmure := 0.5;
-            monstre.ad := 85;
-            monstre.ratioAd := 20;
+            monstre.ad := 105;
+            monstre.ratioAd := 20; 
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(4000) + 3000;
 
             monstre.attaque1 := 0.2;
@@ -120,13 +123,14 @@ begin
             monstre.mobilite := 90;
             monstre.ratioHP := 110;
             monstre.ratioArmure := 0.55;
-            monstre.ad := 85;
+            monstre.ad := 105;
             monstre.ratioAd := 15;
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(2000) + 5000;
 
             monstre.attaque1 := 0.3;
             monstre.attaque1Chance := 40; // 40 % de chance
-            monstre.attaque1Desc := 'Le Rathalos vous envoie une boule de feu !';
+            monstre.attaque1Desc := 'Le Rathalos vous envoie une boule de feu !'; // enflamme
 
             monstre.attaque2 := 0.2;
             monstre.attaque2Chance := 60; // 20 % de chance
@@ -138,7 +142,7 @@ begin
 
             monstre.attaque4 := 0.3 ;
             monstre.attaque4Chance := 100; // 20 % de chance
-            monstre.attaque4Desc := 'Le Rathalos projette un souffle de flamme !';
+            monstre.attaque4Desc := 'Le Rathalos projette un souffle de flamme !'; // enflamme
 
 
             envoyerMonstre := monstre;
@@ -152,8 +156,9 @@ begin
             monstre.mobilite := 30;
             monstre.ratioHP := 180;
             monstre.ratioArmure := 0.7;
-            monstre.ad := 105;
-            monstre.ratioAd := 10;
+            monstre.ad := 125;
+            monstre.ratioAd := 10; 
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(2000) + 7000;
 
             monstre.attaque1 := 0.4;
@@ -162,7 +167,7 @@ begin
 
             monstre.attaque2 := 0.45;
             monstre.attaque2Chance := 30; // 10 % de chance
-            monstre.attaque2Desc := 'Le Glavenus balaye la zone avec des flames !';
+            monstre.attaque2Desc := 'Le Glavenus balaye la zone avec des flames !'; // enflamme
 
             monstre.attaque3 := 0.3;
             monstre.attaque3Chance := 70; // 40 % de chance
@@ -170,7 +175,7 @@ begin
 
             monstre.attaque4 := 0.3 ;
             monstre.attaque4Chance := 100; // 30 % de chance
-            monstre.attaque4Desc := 'Le Glavenus crache une boule de lave !';
+            monstre.attaque4Desc := 'Le Glavenus crache une boule de lave !'; // enflamme
 
 
             envoyerMonstre := monstre;
@@ -184,8 +189,9 @@ begin
             monstre.mobilite := 40;
             monstre.ratioHP := 160;
             monstre.ratioArmure := 0.85; 
-            monstre.ad := 95;
+            monstre.ad := 115;
             monstre.ratioAd := 12;
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(2000) + 6000;
 
             monstre.attaque1 := 0.3;
@@ -216,8 +222,9 @@ begin
             monstre.mobilite := 30;
             monstre.ratioHP := 165;
             monstre.ratioArmure := 0.9;
-            monstre.ad := 80;
-            monstre.ratioAd := 15;
+            monstre.ad := 100;
+            monstre.ratioAd := 15; 
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(2000) + 4000;
 
             monstre.attaque1 := 0.3;
@@ -230,7 +237,7 @@ begin
 
             monstre.attaque3 := 0.25;
             monstre.attaque3Chance := 80; // 20 % de chance
-            monstre.attaque3Desc := 'Le Anjanath crache une boule de feu ! ';
+            monstre.attaque3Desc := 'Le Anjanath crache une boule de feu ! '; // enflamme
 
             monstre.attaque4 := 0.4 ;
             monstre.attaque4Chance := 100; // 20 % de chance
@@ -244,12 +251,13 @@ begin
             monstre.nom := 'Pukei-Pukei';
             monstre.description := 'Creature volante physiquement ressemblant a un dragon et fan de poison';
             monstre.hpBase := 600;
-            monstre.armureBase := 20;
-            monstre.mobilite := 50;
+            monstre.armureBase := 50;
+            monstre.mobilite := 70;
             monstre.ratioHP := 115;
             monstre.ratioArmure := 1;
-            monstre.ad := 70;
+            monstre.ad := 95;
             monstre.ratioAd := 10;
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(4000) + 3000;
 
             monstre.attaque1 := 0.1;
@@ -280,8 +288,9 @@ begin
             monstre.mobilite := 35;
             monstre.ratioHP := 140;
             monstre.ratioArmure := 1;
-            monstre.ad := 69;
-            monstre.ratioAd := 15;
+            monstre.ad := 125;
+            monstre.ratioAd := 15; 
+            monstre.orgagne := random(250) + 250;
             monstre.xpgagne := random(8000) + 10000;
 
             monstre.attaque1 := 0.4;
@@ -312,7 +321,7 @@ begin
             monstre.mobilite := 40;
             monstre.ratioHP := 165;
             monstre.ratioArmure := 0.7;
-            monstre.ad := 80;
+            monstre.ad := 130;
             monstre.ratioAd := 13;
             monstre.xpgagne := random(8000) + 6000;
 
@@ -338,14 +347,15 @@ begin
      else if (num = 10) then
         begin
              monstre.nom := 'Barroth';
-             monstre.description := 'Animal imposant et très résistant a l''image d''un rhinoceros... mais rocheux';
+             monstre.description := 'Animal imposant et tres resistant a l''image d''un rhinoceros... mais rocheux';
              monstre.hpBase := 900;
              monstre.armureBase := 60;
              monstre.mobilite := 40;
              monstre.ratioHP := 220;
              monstre.ratioArmure := 0.5;
-             monstre.ad := 75;
+             monstre.ad := 115;
              monstre.ratioAd := 11;
+             monstre.orgagne := random(250) + 250;
              monstre.xpgagne := random(8000) + 4500;
 
              monstre.attaque1 := 0.15;
@@ -376,8 +386,9 @@ begin
              monstre.mobilite := 80;
              monstre.ratioHP := 130;
              monstre.ratioArmure := 0.6;
-             monstre.ad := 75;
+             monstre.ad := 95;
              monstre.ratioAd := 20;
+             monstre.orgagne := random(250) + 250;
              monstre.xpgagne := random(8000) + 7500;
 
              monstre.attaque1 := 0.2;
@@ -408,8 +419,9 @@ begin
              monstre.mobilite := 80;
              monstre.ratioHP := 150;
              monstre.ratioArmure := 0.6;
-             monstre.ad := 70;
+             monstre.ad := 100;
              monstre.ratioAd := 15;
+             monstre.orgagne := random(250) + 250;
              monstre.xpgagne := random(8000) + 7500;
 
              monstre.attaque1 := 0.2;
@@ -441,12 +453,13 @@ begin
              monstre.ratioHP := 0; // Boss, pas de ratio
              monstre.ratioArmure := 0; // même chsoe
              monstre.ratioAd := 0;
-             monstre.ad := 170;
+             monstre.ad := 170;    
+             monstre.orgagne := 3000;
              monstre.xpgagne := 30000;
 
              monstre.attaque1 := 0.4;
              monstre.attaque1Chance := 30; // 30 % de chance
-             monstre.attaque1Desc := 'Le Teostra utilise son souffle de flame !';
+             monstre.attaque1Desc := 'Le Teostra utilise son souffle de flame !'; // enflamme
 
              monstre.attaque2 := 0.4;
              monstre.attaque2Chance := 55; // 25 % de chance
@@ -454,11 +467,11 @@ begin
 
              monstre.attaque3 := 0.5;
              monstre.attaque3Chance := 85; // 25 % de chance
-             monstre.attaque3Desc := 'Le Teostra s''enflamme et fait une roulade sur vous !';
+             monstre.attaque3Desc := 'Le Teostra s''enflamme et fait une roulade sur vous !'; //enflamme
 
              monstre.attaque4 := 0.7 ;
              monstre.attaque4Chance := 90; // 15 % de chance
-             monstre.attaque4Desc := 'Le Tesotra vous fouette avec sa queue enflammee ! ';
+             monstre.attaque4Desc := 'Le Tesotra vous fouette avec sa queue enflammee ! '; //enflamme
 
 
              envoyerMonstre := monstre;
@@ -473,7 +486,8 @@ begin
              monstre.ratioHP := 0; // Boss, pas de ratio
              monstre.ratioArmure := 0; // même chsoe
              monstre.ratioAd := 0;
-             monstre.ad := 290;
+             monstre.ad := 290;   
+             monstre.orgagne := 5000;
              monstre.xpgagne := 45000;
 
              monstre.attaque1 := 0.4;
@@ -506,6 +520,7 @@ begin
              monstre.ratioArmure := 0; // même chsoe
              monstre.ratioAd := 0;
              monstre.ad := 320;
+             monstre.orgagne := 7000;
              monstre.xpgagne := 100000;
 
              monstre.attaque1 := 0.4;

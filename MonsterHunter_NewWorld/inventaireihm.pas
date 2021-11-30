@@ -445,11 +445,13 @@ begin
                begin
                     ColorierZoneRemix(0,15,4+22*i,23+22*i,20-5*j);
                     ColorierZoneRemix(0,12,4+22*i,23+22*i,21-5*j);
+                    ColorierZoneRemix(0,12,4+22*i,23+22*i,22-5*j);
                end
                else if (i>1) then
                begin
                     ColorierZoneRemix(0,15,28+23*i,47+23*i,20-5*j);
                     ColorierZoneRemix(0,12,28+23*i,47+23*i,21-5*j);
+                    ColorierZoneRemix(0,12,28+23*i,47+23*i,22-5*j);
                end;
           end;
 
@@ -502,11 +504,13 @@ begin
                begin
                     ColorierZoneRemix(0,15,4+22*i,23+22*i,20-5*j);
                     ColorierZoneRemix(0,12,4+22*i,23+22*i,21-5*j);
+                    ColorierZoneRemix(0,12,4+22*i,23+22*i,22-5*j);
                end
                else if (i>1) then
                begin
                     ColorierZoneRemix(0,15,28+23*i,47+23*i,20-5*j);
-                    ColorierZoneRemix(0,12,28+23*i,47+23*i,20-5*j);
+                    ColorierZoneRemix(0,12,28+23*i,47+23*i,21-5*j);
+                    ColorierZoneRemix(0,12,28+23*i,47+23*i,22-5*j);
                end;
           end;
 
@@ -605,13 +609,13 @@ begin
 
                if (personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') then
                begin
-                    ColorierZoneRemix(0,8,75+23*i,85+23*i,20-5*j);
-                    ColorierZoneRemix(0,8,75+23*i,85+23*i,21-5*j);
+                    ColorierZoneRemix(0,8,75+23*i,91+23*i,20-5*j);
+                    ColorierZoneRemix(0,8,75+23*i,91+23*i,21-5*j);
                end
                else
                begin
-                    ColorierZoneRemix(0,15,75+23*i,85+23*i,20-5*j);
-                    ColorierZoneRemix(0,12,75+23*i,85+23*i,21-5*j);
+                    ColorierZoneRemix(0,15,75+23*i,91+23*i,20-5*j);
+                    ColorierZoneRemix(0,12,75+23*i,91+23*i,21-5*j);
                end;
 
           end;
@@ -664,13 +668,13 @@ begin
      if ((position.coordsActuelsItem.xA=1) and (position.coordsActuelsItem.yA=2)) then
         begin
 
-        if (personnage.inventaire.ArmeEquipee.nomArme<>'EMPTY' ) then
+        if (itemSlot(67)<>0) then
         begin
              deplacer:=true;
              deplacerCurseurXY(48,37);
              write(personnage.inventaire.ArmeEquipee.nomArme);
              deplacerCurseurXY(48,39);
-             write('Attaque : ',personnage.inventaire.ArmeEquipee.ratioAD);
+             write('Attaque : ',personnage.inventaire.ArmeEquipee.ratioAD:2:2);
              deplacerCurseurXY(48,41);
              write('Poids : ',personnage.inventaire.ArmeEquipee.poids);
              couleurTexte(15);
@@ -695,8 +699,6 @@ begin
          if (personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY') then
          begin
          deplacer:=true;
-         deplacerCurseurXY(48,35);
-         write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].typeArmure);
          deplacerCurseurXY(48,37);
          write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
          deplacerCurseurXY(48,39);
@@ -1118,7 +1120,10 @@ begin
               begin
               couleur:=8;
               couleurtexte(8);
-              end;
+              end
+         else
+             couleur:=12;
+
          deplacerCurseurXY(75+23*i,20-5*j);
          write(personnage.inventaire.invBombe[i][j].nomBombe);
          couleurtexte(couleur);

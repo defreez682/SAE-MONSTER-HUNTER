@@ -1,6 +1,6 @@
 unit marchandIHM;
 
-{$mode objfpc}{$H+}
+{$mode objfpc}{$H+}{$codepage UTF8}
 
 interface
 
@@ -9,7 +9,7 @@ interface
 procedure MarchandDesignIHM();
 procedure CadreMarchandIHM();
 procedure acheterIHM();
-procedure vendre();
+procedure vendreIHM();
 procedure discussionIHM();
 procedure Sujet1IHM();
 procedure Sujet2IHM();
@@ -21,6 +21,7 @@ procedure SujetArgentIHM();
 procedure viderCadreMarchand();
 procedure DessinFleche(rep : integer);
 procedure DessinFlecheAchat(rep : integer);
+procedure DessinFlecheVendre(rep : integer);
 procedure AchatImpossible();
 
 implementation
@@ -132,7 +133,7 @@ begin
 end;
 
 // affiche l'inventaire avec une option vente - Potions, Loots, Bombes --------------------------------------------- A FAIRE
-procedure vendre();
+procedure vendreIHM();
 
 var
   x : integer;
@@ -140,24 +141,32 @@ var
   i : integer;
 
 begin
-     dessinercadreXY(3,2,115,4,double,15,0);
-     texteXY(45,3,'INVENTAIRE CONSOMMABLE ET DROP',15);
+     dessinercadreXY(3,4,115,6,double,15,0);
+     texteXY(45,5,'INVENTAIRE CONSOMMABLE ET DROP',15);
      dessinercadreXY(3,7,115,28,simple,15,0);
+     texteXY(7,8,'Potions',3);
+     texteXY(53,8,'Bombes',3);
 
      couleurtexte(15);
-     x:=8;
-     deplacerCurseurXY(4,x);
-     for i:= 0 to 3 do
+     x:=10;
+     for i:= 0 to 1 do
          begin
               for j:=0 to 3 do
                   begin
-                       texteXY(76,x,personnage1.inventaire.invDrop[i][j].nomDrop,15);
-                       //write(personnage1.inventaire.invArme[i][j].nomArme);
-                       x:=(x+1);
-                       deplacerCurseurXY(76,x);
+                       deplacerCurseurXY(4,x);
+                       texteXY(8,x,personnage1.inventaire.invPotion[i][j].nomPotion,15);
+                       deplacerCurseurXY(28,x);
+                       writeln('| Valeur : ',personnage1.inventaire.invPotion[i][j].prix);
+                       texteXY(54,x,personnage1.inventaire.invBombe[i][j].nomBombe,15);
+                       deplacerCurseurXY(74,x);
+                       writeln('| Valeur : ', personnage1.inventaire.invBombe[i][j].prix);
+                       x:=(x+2)
+
                   end;
          end;
-     readln;
+
+     texteXY(4,27,'Appuyer sur echap pour quitter',7);
+
      // if item=vendu alors ValeurOr va dans OrJoueur
 
 end;
@@ -333,6 +342,7 @@ begin
     couleurtexte(15);
     deplacerCurseurXY(6,22);
     texteAtemps('Vous n''avez pas d''argent, revenez une prochaine fois...',40,15);
+    ReadKey;
     effacerEcran();
     DemarrageMarchand();
 
@@ -343,10 +353,10 @@ procedure AchatImpossible();
 begin
 
     viderCadreMarchand();
-    if (isinventaireplein('bombe',personnage1).xA=-1) then
-       texteXY(40,24,'Vous n''avez plus de place dans votre inventaire',4)
+    if (isinventaireplein('bombe',personnage1).xA=-1) or (isinventaireplein('potion',personnage1).xA=-1) then
+       texteXY(40,24,'Vous ne pouvez plus en acheter',4)
     else
-    texteXY(50,24,'Vous n''avez pas assez d''or',4);
+       texteXY(50,24,'Vous n''avez pas assez d''or',4);
     readln;
     choixAchat();
 
@@ -409,10 +419,12 @@ begin
 
              if (rep = 1) then
                  begin
-                     texteXY(63,25,'  ',White);
                      texteXY(13,23,'>>',White);
                      texteXY(13,24,'  ',White);
                      texteXY(13,25,'  ',White);
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
                      deplacerCurseurXY(13,23);
                  end;
               if (rep = 2) then
@@ -420,6 +432,9 @@ begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'>>',White);
                      texteXY(13,25,'  ',White);
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
                      deplacerCurseurXY(13,24);
                  end;
               if (rep = 3) then
@@ -427,10 +442,15 @@ begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'  ',White);
                      texteXY(13,25,'>>',White);
+                     texteXY(63,23,'  ',White);
+                     texteXY(63,24,'  ',White);
+                     texteXY(63,25,'  ',White);
                      deplacerCurseurXY(13,25);
                  end;
               if (rep=4) then
                  begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',white);
                      texteXY(13,25,'  ',White);
                      texteXY(63,23,'>>',White);
                      texteXY(63,24,'  ',White);
@@ -439,6 +459,9 @@ begin
                  end;
               if (rep=5) then
                  begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',white);
+                     texteXY(13,25,'  ',White);
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'>>',White);
                      texteXY(63,25,'  ',White);
@@ -447,12 +470,121 @@ begin
 
               if (rep=6) then
                  begin
+                     texteXY(13,23,'  ',White);
+                     texteXY(13,24,'  ',white);
+                     texteXY(13,25,'  ',White);
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'>>',White);
                      deplacerCurseurXY(63,25);
                  end;
 
+end;
+
+procedure DessinFlecheVendre(rep : integer);
+begin
+
+texteXY(4,10,'  ',White);
+texteXY(4,12,'  ',White);
+texteXY(4,14,'  ',White);
+texteXY(4,16,'  ',White);
+texteXY(4,18,'  ',White);
+texteXY(4,20,'  ',White);
+texteXY(4,22,'  ',White);
+texteXY(4,24,'  ',White);
+texteXY(50,10,'  ',White);
+texteXY(50,12,'  ',White);
+texteXY(50,14,'  ',White);
+texteXY(50,16,'  ',White);
+texteXY(50,18,'  ',White);
+texteXY(50,20,'  ',White);
+texteXY(50,22,'  ',White);
+texteXY(50,24,'  ',White);
+
+             if (rep = 1) then
+                 begin
+                    texteXY(4,10,'>>',White);
+                    deplacerCurseurXY(4,10);
+                 end
+             else if (rep = 2) then
+                 begin
+                     texteXY(4,12,'>>',White);
+                    deplacerCurseurXY(4,12);
+                 end
+             else if (rep = 3) then
+                 begin
+                    texteXY(4,14,'>>',White);
+                    deplacerCurseurXY(4,14);
+                 end
+             else if (rep=4) then
+                 begin
+                    texteXY(4,16,'>>',White);
+                    deplacerCurseurXY(4,16);
+                 end
+              else if (rep=5) then
+                 begin
+                    texteXY(4,18,'>>',White);
+                    deplacerCurseurXY(4,18);
+                 end
+
+              else if (rep=6) then
+                 begin
+                   texteXY(4,20,'>>',White);
+                    deplacerCurseurXY(4,20);
+                 end
+
+             else if (rep=7) then
+                 begin
+                    texteXY(4,22,'>>',White);
+                    deplacerCurseurXY(4,22);
+                 end
+
+             else if (rep=8) then
+                 begin
+                    texteXY(4,24,'>>',White);
+                    deplacerCurseurXY(4,24);
+                 end
+
+              else if (rep=9) then
+                 begin
+                    texteXY(50,10,'>>',White);
+                    deplacerCurseurXY(50,10);
+                 end
+              else if (rep=10) then
+                 begin
+                    texteXY(50,12,'>>',White);
+                    deplacerCurseurXY(50,12);
+                 end
+              else if (rep=11) then
+                 begin
+                    texteXY(50,14,'>>',White);
+                    deplacerCurseurXY(50,14);
+                 end
+              else if (rep=12) then
+                 begin
+                    texteXY(50,16,'>>',White);
+                    deplacerCurseurXY(50,16);
+                 end
+              else if (rep=13) then
+                 begin
+                    texteXY(50,18,'>>',White);
+                    deplacerCurseurXY(50,18);
+                 end
+              else if (rep=14) then
+                 begin
+                    texteXY(50,20,'>>',White);
+                    deplacerCurseurXY(50,20);
+                 end
+              else if (rep=15) then
+                 begin
+                    texteXY(50,22,'>>',White);
+                    deplacerCurseurXY(50,22);
+                 end
+              else if (rep=16) then
+                 begin
+                    texteXY(50,24,'>>',White);
+                    deplacerCurseurXY(50,24);
+                 end;
 end;
 
 end.

@@ -1,7 +1,7 @@
 program MonsterHunter_NewWorld;
 
 
-uses sysutils, menu, personnage, gestionFichier, combatLogic,gestionEcran;
+uses sysutils, menu, personnage, gestionFichier, combatLogic,combatIHM,gestionEcran;
 
 
 begin
@@ -9,6 +9,6 @@ begin
 
    checkUp();
    creationChoix();
-
+   //combatQFQ();
 end.
 
