@@ -335,7 +335,7 @@ end;
 // Remplis un tableau de tous les items disponibles - BASE DE DONNEE A NE PAS OUVRIR
 procedure initialisationItemDisponibles();
 begin
-     stuffDispo.invArmeDispo[0].nomArme:='EMPTY';
+     stuffDispo.invArmeDispo[0].nomArme:='VIDE';
      stuffDispo.invArmeDispo[0].poids:=0;
      stuffDispo.invArmeDispo[0].ratioAD:=0;
      stuffDispo.invArmeDispo[0].prix:=0;
@@ -420,7 +420,7 @@ begin
      stuffDispo.invArmeDispo[20].ratioAD:=0.25;
      stuffDispo.invArmeDispo[20].prix:=200;
 
-     stuffDispo.invArmureDispo[0].nomArmure:='EMPTY';
+     stuffDispo.invArmureDispo[0].nomArmure:='VIDE';
      stuffDispo.invArmureDispo[0].poids:=0;
      stuffDispo.invArmureDispo[0].defense:=0;
      stuffDispo.invArmureDispo[0].prix:=0;
@@ -526,7 +526,7 @@ begin
      stuffDispo.invArmureDispo[20].prix:=150;
      stuffDispo.invArmureDispo[20].typeArmure:='Gants';
 
-     stuffDispo.invPotionDispo[0].nomPotion:='EMPTY';
+     stuffDispo.invPotionDispo[0].nomPotion:='VIDE';
      stuffDispo.invPotionDispo[0].HealHP:=0;
      stuffDispo.invPotionDispo[0].prix:=0;
      stuffDispo.invPotionDispo[1].nomPotion:='Potion';
@@ -539,7 +539,7 @@ begin
      stuffDispo.invPotionDispo[3].HealHP:=70;
      stuffDispo.invPotionDispo[3].prix:=100;
 
-     stuffDispo.invBombeDispo[0].nomBombe:='EMPTY';
+     stuffDispo.invBombeDispo[0].nomBombe:='VIDE';
      stuffDispo.invBombeDispo[0].degat:=0;
      stuffDispo.invBombeDispo[0].prix:=0;
 
@@ -553,7 +553,7 @@ begin
      stuffDispo.invBombeDispo[3].degat:=200;
      stuffDispo.invBombeDispo[3].prix:=500;
 
-     stuffDispo.invDropDispo[0].nomDrop:='EMPTY';
+     stuffDispo.invDropDispo[0].nomDrop:='VIDE';
      stuffDispo.invDropDispo[1].nomDrop:='Ecaille';
      stuffDispo.invDropDispo[2].nomDrop:='Oeil de Monstre';
      stuffDispo.invDropDispo[3].nomDrop:='Cuir de Cheval';
