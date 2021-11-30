@@ -3,9 +3,11 @@ unit marchandLogic;
 {$mode objfpc}{$H+}
 
 interface
-procedure ChoixAchat();
+
 procedure ChoixDiscussions();
 procedure choixMarchand();
+procedure ChoixAchat();
+procedure choixVente();
 procedure ChoixSujet1et3();
 procedure ChoixSujet2();
 procedure ChoixSujet2P2();
@@ -26,6 +28,7 @@ var
 
 begin
     MarchandDesignIHM();
+    cadreArgent();
     CadreMarchandIHM();
     deplacerCurseurXY(9,24);
     write('>>');
@@ -59,7 +62,7 @@ begin
                 sujetArgentIHM()
             else
                 choixAchat();
-        2 : vendre();
+        2 : choixVente();
         3 : discussionIHM();
         4 : ChoixMenuVillage();
     end;
@@ -156,6 +159,138 @@ begin
       end;
 
 end;
+
+procedure choixVente();
+
+var
+    cho : boolean;
+    rep : integer = 1;
+    ch  : char;
+
+begin
+
+     VendreIHM();
+     deplacerCurseurXY(4,10);
+     write('>>');
+     cho := True;
+     while (cho= True) do
+      begin
+          ch := ReadKey;
+          case ch of
+              #72 :   //Indique la fleche en haut
+                  begin
+                      if (rep > 1) then
+                         rep := rep - 1
+                      else
+                         rep := 16;
+                  end;
+              #80 :  //Indique la felche en bas
+                   begin
+                        if (rep < 16) then
+                           rep := rep + 1
+                        else
+                           rep := 1;
+                   end;
+              #77 :  //Droite
+                   begin
+                       if (rep <= 8) then
+                          rep := rep + 8
+                       else
+                           rep := (rep-8);
+                   end;
+              #75 :  //Gauche
+                   begin
+                       if (rep <= 8) then
+                          rep := rep + 8
+                       else
+                           rep := (rep-8);
+                   end;
+              #27 : //la touche echap
+                   begin
+                       effacerEcran();
+                       ChoixMarchand();
+                   end;
+              #13 : begin
+              cho := False;  //la touche entrer
+
+              {if (rep<=8) do
+                  begin
+                    dropEquipement(Personnage1,
+                  end;}
+              end;
+              {case rep of
+                  1 :
+                    begin
+
+                    end;
+                  2 :
+                    begin
+
+                    end;
+                  3 :
+                    begin
+
+                    end;
+                  4 :
+                    begin
+
+                    end;
+                  5 :
+                    begin
+
+                    end;
+                  6 :
+                    begin
+
+                    end;
+                  7 :
+                    begin
+
+                    end;
+                  8 :
+                    begin
+
+                    end;
+                  9 :
+                    begin
+
+                    end;
+                  10:
+                    begin
+
+                    end;
+                  11:
+                    begin
+
+                    end;
+                  12:
+                    begin
+
+                    end;
+                  13:
+                    begin
+
+                    end;
+                  14:
+                    begin
+
+                    end;
+                  15:
+                    begin
+
+                    end;
+                  16:
+                    begin
+
+                    end;
+
+              end;}
+          end;
+
+      DessinFlecheVendre(rep);
+      end;
+end;
+
 
 // ----------------- permet de faire un choix aux types de discussions possibles
 procedure choixDiscussions();
