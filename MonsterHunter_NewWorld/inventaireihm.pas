@@ -609,13 +609,13 @@ begin
 
                if (personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') then
                begin
-                    ColorierZoneRemix(0,8,75+23*i,85+23*i,20-5*j);
-                    ColorierZoneRemix(0,8,75+23*i,85+23*i,21-5*j);
+                    ColorierZoneRemix(0,8,75+23*i,91+23*i,20-5*j);
+                    ColorierZoneRemix(0,8,75+23*i,91+23*i,21-5*j);
                end
                else
                begin
-                    ColorierZoneRemix(0,15,75+23*i,85+23*i,20-5*j);
-                    ColorierZoneRemix(0,12,75+23*i,85+23*i,21-5*j);
+                    ColorierZoneRemix(0,15,75+23*i,91+23*i,20-5*j);
+                    ColorierZoneRemix(0,12,75+23*i,91+23*i,21-5*j);
                end;
 
           end;
