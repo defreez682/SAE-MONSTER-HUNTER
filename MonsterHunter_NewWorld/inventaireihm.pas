@@ -699,8 +699,6 @@ begin
          if (personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY') then
          begin
          deplacer:=true;
-         deplacerCurseurXY(48,35);
-         write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].typeArmure);
          deplacerCurseurXY(48,37);
          write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
          deplacerCurseurXY(48,39);

@@ -151,8 +151,8 @@ procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:stri
 // Permet d'équipper un équipement
 procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
-// Actualise l'equipement d'après la valeur du boolean estEquipe   INUTILE POUR INSTANT
-procedure actualisationEquipement(var personnage:typePersonnage);
+// Permet de déséquipper un équipement
+procedure desequipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
 // Ajoute un item à l'inventaire du personnage
 procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
@@ -634,6 +634,11 @@ begin
           begin
           equipEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,'armure');
           AffichageArmure(personnage);
+          end
+          else if (position.precedPos='equipement') then
+          begin
+          desequipEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,'equipement');
+          reinitilisationMur();
           end;
 
           position.infoItem:=false;
@@ -736,6 +741,14 @@ begin
           x:=13;
 
           slotFromCoordonne:=48+x+y;
+     end
+     else if (typeItem='equipement') then
+     begin
+          if  (x=2) then
+          x:=4;
+
+
+          slotFromCoordonne:=64+x+y;
      end;
 end;
 
@@ -823,7 +836,7 @@ end;
 procedure recupArmeArmureEquipee(var personnage:typePersonnage);
 var
   i,j:integer;
-  boucle,boucle1,boucle2,boucle3,boucle4:boolean;
+  boucle,boucle1,boucle2,boucle3,boucle4,boucle5:boolean;
 begin
      j:=0;
      i:=0;
@@ -839,72 +852,87 @@ begin
                     begin
                     personnage.inventaire.invArme[i][j].estEquipee:=true;
                     boucle:=false;
-                    end;
+                    end
+               else
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
+
 
           end;
 
      end;
 
+
      boucle1:=true;
      boucle2:=true;
      boucle3:=true;
      boucle4:=true;
+     boucle5:=true;
      for i:= 0 to 3 do
      begin
           for j:= 0 to 3 do
           begin
-            if (i>4) then
-            boucle1:=false;
-            boucle2:=false;
-            boucle3:=false;
-            boucle4:=false;
+            if (i>3) then
 
-            if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
+            else
             begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][1].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
                  begin
-                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                 boucle1:=false;
-                 end;
-            end
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][1].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle1:=false;
+                      end;
+                 end
+                 else
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-            else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
-            begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][0].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
                  begin
-                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                 boucle:=false;
-                 end;
-            end
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][0].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle2:=false;
+                      end;
+                 end
+                 else
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-            else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
-            begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][0].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
                  begin
-                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                 boucle:=false;
-                 end;
-            end
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][0].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle3:=false;
+                      end;
+                 end
+                 else
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-            else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
-            begin
-                 if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][1].nomArmure) then
+                 if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
                  begin
-                 personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                 boucle:=false;
-                 end;
-            end
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][1].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle4:=false;
+                      end;
+                 end
+                 else
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-            else if personnage.inventaire.invArmure[i][j].typeArmure='Casque' then
-            begin
-            if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][3].nomArmure) then
-            begin
-            personnage.inventaire.invArmure[i][j].estEquipee:=true;
-            boucle:=false;
+                 if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
+                 begin
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][2].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle5:=false;
+                      end;
+                 end
+                 else
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
+
             end;
-            end
 
-          end;
+     end;
 
 
      end;
@@ -1118,7 +1146,6 @@ begin
    end
    else if typeItem='armure' then
    begin
-
             if personnage.inventaire.invArmure[x][y].typeArmure='Gants' then
             modificationInventaireItem(itemSlot(slotFromCoordonne(x,y,typeItem)),66)
             else if personnage.inventaire.invArmure[x][y].typeArmure='Bottes' then
@@ -1129,57 +1156,19 @@ begin
             modificationInventaireItem(itemSlot(slotFromCoordonne(x,y,typeItem)),69)
             else if personnage.inventaire.invArmure[x][y].typeArmure='Casque' then
             modificationInventaireItem(itemSlot(slotFromCoordonne(x,y,typeItem)),70);
+
             recupInventaire(personnage);
-            personnage.inventaire.invArmure[x][y].estEquipee:=true;
+
           end;
 
 end;
 
-// Actualise l'equipement d'après la valeur du boolean estEquipe   INUTILE POUR INSTANT
-procedure actualisationEquipement(var personnage:typePersonnage);
-var
-   i:integer;
-   j:integer;
+// Permet de déséquipper un équipement
+procedure desequipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 begin
-//----------------------------- EQUIP
-     for i:=0 to 3 do
-     begin
-         for j:=0 to 3 do
-         begin
-             if (personnage.inventaire.invArmure[i][j].estEquipee=true) then
-             case personnage.inventaire.invArmure[i][j].typeArmure of
-             'Gants':personnage.inventaire.ArmureEquipee[1][1]:=personnage.inventaire.invArmure[i][j];
-             'Bottes':personnage.inventaire.ArmureEquipee[1][0]:=personnage.inventaire.invArmure[i][j];
-             'Jambiere':personnage.inventaire.ArmureEquipee[2][0]:=personnage.inventaire.invArmure[i][j];
-             'Plastron':personnage.inventaire.ArmureEquipee[2][1]:=personnage.inventaire.invArmure[i][j];
-             'Casque':personnage.inventaire.ArmureEquipee[2][2]:=personnage.inventaire.invArmure[i][j];
-             end;
-         end;
-     end;
-
-
-     for i:=0 to 3 do
-     begin
-         for j:=0 to 3 do
-         begin
-             if (personnage.inventaire.invArme[i][j].estEquipee=true) then
-                personnage.inventaire.ArmeEquipee:=personnage.inventaire.invArme[i][j];
-         end;
-
-      end;
-     //----------------------------   UNEQUIP
-     for i:=1 to 2 do
-     begin
-         for j:=0 to 2 do
-         begin
-             if ((personnage.inventaire.ArmureEquipee[i][j].estEquipee=false) and ((j<>2) or (i<>1))) then
-             personnage.inventaire.ArmureEquipee[i][j].nomArmure:='EMPTY';
-
-             end;
-         end;
-
-     if (personnage.inventaire.ArmeEquipee.estEquipee=false) then
-        personnage.inventaire.ArmeEquipee.nomArme:='EMPTY';
+   modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+   recupInventaire(personnage);
 end;
+
 end.
 
