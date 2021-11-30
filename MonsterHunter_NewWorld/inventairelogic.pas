@@ -146,7 +146,9 @@ procedure recupArmeArmureEquipee(var personnage:typePersonnage);
 procedure recupInventaire(var personnage:typePersonnage);
 
 // Permet de drop une armure/arme
-procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
+
+procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
 
 // Permet d'équipper un équipement
 procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
@@ -607,7 +609,7 @@ begin
           end;
         1:
           begin
-          dropEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,position.precedPos);
+          dropInventaire(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,position.precedPos);
           if (position.precedPos='arme') then
           affichageArme(personnage)
           else if (position.precedPos='armure') then
@@ -616,6 +618,7 @@ begin
           affichageConso(personnage)
           else if (position.precedPos='drop') then
           affichageDrops(personnage);
+
 
           position.infoItem:=false;
           position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
@@ -1101,8 +1104,98 @@ begin
      isInventairePlein.yA:=res.yA;
 end;
 
-// Drop une armure/arme
-procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
+var
+   i,j:integer;
+   boucle,boucle1,boucle2,boucle3,boucle4,boucle5:boolean;
+begin
+     j:=0;
+     i:=0;
+     boucle:=true;
+
+     if (x=1) and (y=2) then
+     begin
+        for i:= 0 to 3 do
+        begin
+             for j:= 0 to 3 do
+             begin
+                  if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'EMPTY') and (boucle=true)  then
+                  begin
+                  dropInventaire(personnage,i,j,'arme');
+                  boucle:=false;
+                  end
+             end;
+
+        end;
+     end
+     else
+
+     begin
+     boucle1:=true;
+     boucle2:=true;
+     boucle3:=true;
+     boucle4:=true;
+     boucle5:=true;
+
+     for i:= 0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+               if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
+               begin
+                    if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                    begin
+                    dropInventaire(personnage,i,j,'armure');
+                    boucle1:=false;
+                    end;
+               end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle2:=false;
+                         end;
+                    end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle3:=false;
+                         end;
+                    end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle4:=false;
+                         end;
+                    end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle5:=false;
+                         end;
+                    end
+
+               end;
+
+        end;
+
+
+        end;
+end;
+
+// Drop un item de l'inventaire
+procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
 begin
      if typeItem='arme' then
@@ -1132,6 +1225,11 @@ begin
 
           modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
 
+     end
+     else if typeItem='equipement' then
+     begin
+     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+     dropEquipement(personnage,x,y);
      end
      else
      modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
