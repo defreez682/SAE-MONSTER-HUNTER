@@ -1,6 +1,7 @@
 unit gestionTexte;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
@@ -17,6 +18,11 @@ implementation
 uses
   Classes, SysUtils,GestionEcran;
 
+procedure texteEnCouleur(texte :string; couleur : integer);
+begin
+     couleurTexte(couleur);
+     write(texte);
+end;
 
 
 procedure texteAtemps(texte : string; temps : Integer; couleur : integer);
@@ -27,19 +33,13 @@ begin
      for i := 1 to Length(texte) do
          begin
 
-             couleurTexte(couleur);
-             write(texte[i]);
+             texteEnCouleur(texte[i],couleur);
              // On met en pause le programme pour avoir l'impression que les lettres s'écrivent une par une
              attendre(temps);
 
          end;
 end;
 
-procedure texteEnCouleur(texte :string; couleur : integer);
-begin
-     couleurTexte(couleur);
-     write(texte);
-end;
 
 
 procedure texteXY(x,y : Integer; texte : string; couleur : integer);

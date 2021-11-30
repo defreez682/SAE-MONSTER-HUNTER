@@ -1,6 +1,7 @@
 unit combatLogic;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 

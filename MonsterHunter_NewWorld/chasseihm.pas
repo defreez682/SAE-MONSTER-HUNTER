@@ -822,7 +822,7 @@ begin
                         introduction(15)
                      else
                          begin
-                              monstreal := 3;//random(12)+1;
+                              monstreal := random(12)+1;
                               introduction(monstreal);
                          end;
 

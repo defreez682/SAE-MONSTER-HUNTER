@@ -36,7 +36,7 @@ var cho : boolean;
     rep : integer = 1;
     ch : char;
 begin
-    creationChoixAvertissement(50);
+    creationChoixAvertissement(80);
     texteXY(44,14,'Oui',Red);
     texteXY(74,14,'Non',White);
     deplacerCurseurXY(47,14);

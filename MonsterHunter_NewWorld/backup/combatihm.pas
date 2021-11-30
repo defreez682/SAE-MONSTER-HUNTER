@@ -8,6 +8,7 @@ interface
 procedure introduction(num : integer);
 procedure combatQFQ();
 procedure creationInterface();
+procedure viderBarre();
 
 implementation
 uses
@@ -37,6 +38,15 @@ end;
 
 
 
+procedure viderBarre();
+var i : Integer;
+begin
+   for i := 1 to 7 do
+       begin
+           texteXY(11,13+i,'                                                    ',white);
+       end;
+end;
+
 procedure creationInterface();
 begin
    effacerEcran;
@@ -48,6 +58,7 @@ begin
 end;
 
 procedure combatQFQ();
+
 var cho: boolean = True;
     choInf: boolean = True;
     choComb : boolean = True;
@@ -55,7 +66,6 @@ var cho: boolean = True;
     choBombe : boolean = True;
     ch : char;
     rep : integer = 1;
-    i : integer;
 
     //
 
@@ -106,10 +116,7 @@ begin
 
    if (rep = 1) then
        begin
-            for i := 1 to 7 do
-                begin
-                    texteXY(11,13+i,'                                                    ',white);
-                end;
+            viderBarre();
             texteXY(14,14,'Attaquer',White);
             texteXY(14,16,'Potion',White);
             texteXY(14,18,'Bombe',White);
@@ -172,10 +179,7 @@ begin
             if (rep = 1) then;
             if (rep = 2) then
                 begin
-                     for i := 1 to 7 do
-                         begin
-                             texteXY(11,13+i,'                                                    ',white);
-                         end;
+                     viderBarre();
                      texteXY(11,14,'>>',White);
 
                      texteXY(13,14,stuffDispo.invPotionDispo[itemSlot(33)].nomPotion,White);
@@ -187,6 +191,7 @@ begin
                      texteXY(33,18,stuffDispo.invPotionDispo[itemSlot(39)].nomPotion,White);
                      texteXY(33,20,stuffDispo.invPotionDispo[itemSlot(40)].nomPotion,White);
                      texteXY(53,14,'Retour',White);
+                     deplacerCurseurXY(13,14);
 
                      while (choPot = True) do
                            begin
@@ -326,30 +331,495 @@ begin
                                     end;
 
                            end;
-                     if (rep = 1) then;
-                     if (rep = 2) then;
-                     if (rep = 3) then;
-                     if (rep = 4) then;
-                     if (rep = 5) then;
-                     if (rep = 6) then;
-                     if (rep = 7) then;
-                     if (rep = 8) then;
+                     if (rep = 1) then
+                         begin
+                              if (itemSlot(33) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(33)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(33)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green);
+                                       modificationInventaireItem(0,33);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 2) then
+                         begin
+                               if (itemSlot(34) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(34)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(34)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green);
+                                       modificationInventaireItem(0,34);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 3) then
+                         begin
+                              if (itemSlot(35) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(35)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(35)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green);
+                                       modificationInventaireItem(0,35);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 4) then
+                         begin
+                              if (itemSlot(36) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(36)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(36)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green); 
+                                       modificationInventaireItem(0,36);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 5) then
+                         begin
+                              if (itemSlot(37) = 0) then
+                                  begin 
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(37)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(37)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green); 
+                                       modificationInventaireItem(0,37);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 6) then
+                         begin
+                              if (itemSlot(38) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(38)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(38)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green);
+                                       modificationInventaireItem(0,38);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 7) then
+                         begin
+                              if (itemSlot(39) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(39)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(39)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green);  
+                                       modificationInventaireItem(0,39);
+                                       readKey;
+                                  end;
+                         end;
+                     if (rep = 8) then
+                         begin
+                              if (itemSlot(40) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       rendreVie(stuffDispo.invPotionDispo[itemSlot(40)].HealHP);
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('Vous avez regagne : ',5,white);
+                                       texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(40)].HealHP),5,green);
+                                       texteAtemps(' HP !',5,green);   
+                                       modificationInventaireItem(0,40);
+                                       readKey;
+                                  end;
+                         end;
                      if (rep = 9) then
                          combatQFQ;
 
                 end;
             if (rep = 3) then;
-            if (rep = 4) then;
+            begin
+                 viderBarre();
+                 texteXY(11,14,'>>',White);
+
+                 texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,White);
+                 texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,White);
+                 texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,White);
+                 texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,White);
+                 texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,White);
+                 texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,White);
+                 texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,White);
+                 texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,White);
+                 texteXY(53,14,'Retour',White);
+                 deplacerCurseurXY(13,14);
+
+                 while (choPot = True) do
+                       begin
+                            ch := ReadKey;
+                            case ch of
+                                  #80 : begin
+                                             if (rep < 9) then
+                                                 rep := rep + 1
+                                             else
+                                                 rep := 1;
+                                        end;
+                                  #72 : begin
+                                             if (rep > 1) then
+                                                 rep := rep - 1
+                                             else
+                                                 rep := 9;
+                                        end;
+                                  #13 : choPot := False;
+                            end;
+
+                            if (rep = 1) then
+                                begin
+                                     texteXY(11,14,'>>',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(13,14);
+                                end;
+                            if (rep = 2) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'>>',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(13,16);
+                                end;
+                            if (rep = 3) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'>>',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(13,18);
+                                end;
+                            if (rep = 4) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'>>',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(13,20);
+                                end;
+                            if (rep = 5) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'>>',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(33,14);
+                                end;
+                            if (rep = 6) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'>>',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(33,16);
+                                end;
+                            if (rep = 7) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'>>',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(33,18);
+                                end;
+                            if (rep = 8) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'>>',White);
+                                     texteXY(51,14,'  ',White);
+                                     deplacerCurseurXY(33,20);
+                                end;
+                            if (rep = 9) then
+                                begin
+                                     texteXY(11,14,'  ',White);
+                                     texteXY(11,16,'  ',White);
+                                     texteXY(11,18,'  ',White);
+                                     texteXY(11,20,'  ',White);
+                                     texteXY(31,14,'  ',White);
+                                     texteXY(31,16,'  ',White);
+                                     texteXY(31,18,'  ',White);
+                                     texteXY(31,20,'  ',White);
+                                     texteXY(51,14,'>>',White);
+                                     deplacerCurseurXY(53,14);
+                                end;
+
+                       end;
+                 if (rep = 1) then
+                     begin
+                          if (itemSlot(41) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,41);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 2) then
+                     begin
+                           if (itemSlot(42) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,42);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 3) then
+                     begin
+                          if (itemSlot(43) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,43);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 4) then
+                     begin
+                          if (itemSlot(44) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,44);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 5) then
+                     begin
+                          if (itemSlot(45) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,45);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 6) then
+                     begin
+                          if (itemSlot(46) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,46);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 7) then
+                     begin
+                          if (itemSlot(47) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,47);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 8) then
+                     begin
+                          if (itemSlot(48) = 0) then
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   texteAtemps('L''emplacement est vide.',5,white);
+                                   readKey;
+                                   combatQFQ();
+                              end
+                          else
+                              begin
+                                   viderBarre();
+                                   deplacerCurseurXY(11,14);
+                                   modificationInventaireItem(0,48);
+                                   readKey;
+                              end;
+                     end;
+                 if (rep = 9) then
+                     combatQFQ;
+            end;
+            if (rep = 4) then
                combatQFQ();
 
 
        end
    else
        begin
-           for i := 1 to 7 do
-               begin
-                   texteXY(11,13+i,'                                                    ',white);
-               end;
+               viderBarre();
                deplacerCurseurXY(11,14);
                texteATemps(envoyerMonstre(monstreactuelle).nom,10,red);
                texteATemps(' : ',10,red);

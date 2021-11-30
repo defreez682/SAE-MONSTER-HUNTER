@@ -24,6 +24,7 @@ procedure joueurAttaque();
 procedure degatDebutTour(num : Real);
 procedure rendreVie(valeur : integer);
 procedure utiliserBombeExplo(valeur : integer);
+function bombeFlash() : Boolean;
 
 var poidsarmetemp : Integer = 25;
     poidsarmuretemp : Integer = 40;

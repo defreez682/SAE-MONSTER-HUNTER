@@ -26,9 +26,9 @@ begin
              MkDir('C:\MHNewWorld');
              miseAjourLVL(personnage1,1);
              miseAjourExp(personnage1,0);
-             miseAjourOr(personnage1,0);
+             miseAjourOr(personnage1,500);
              miseAjourPersonnage(personnage1,0);
-             creationInventaireItem(0,100);
+             creationInventaireItem(0,65); // En rajouter si on ajoute des slots
         end;
 
 end;
