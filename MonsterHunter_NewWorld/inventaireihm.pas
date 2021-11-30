@@ -1120,7 +1120,10 @@ begin
               begin
               couleur:=8;
               couleurtexte(8);
-              end;
+              end
+         else
+             couleur:=12;
+
          deplacerCurseurXY(75+23*i,20-5*j);
          write(personnage.inventaire.invBombe[i][j].nomBombe);
          couleurtexte(couleur);

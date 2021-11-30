@@ -120,25 +120,32 @@ begin
               cho := False;  //la touche entrer
                      if (rep<=3) then
                         begin
+                          recupInventaire(personnage1);
                           if (getOrActuelle(personnage1) < stuffDispo.invBombeDispo[rep].prix) or (isinventaireplein('bombe',personnage1).xA=-1) then
                                   AchatImpossible()
                           else
                             begin
                                 MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[rep].prix);
                                 cadreArgent();
+
                                 ajoutItemToPersonnage('bombe',rep,personnage1);
+                                recupInventaire(personnage1);
+
                                 choixAchat();
                             end;
                         end
                      else
                        begin
+                           recupInventaire(personnage1);
                          if (getOrActuelle(personnage1) < stuffDispo.invpotionDispo[rep].prix) or (isinventaireplein('potion',personnage1).xA=-1) then
                                AchatImpossible()
                          else
                            begin
                                MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invpotionDispo[rep-3].prix);
                                cadreArgent();
-                               ajoutItemToPersonnage('potion',rep,personnage1);
+
+                               ajoutItemToPersonnage('potion',rep-3,personnage1);
+                               recupInventaire(personnage1);
                                choixAchat();
                            end;
                       end;

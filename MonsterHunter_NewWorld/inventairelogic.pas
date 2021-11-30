@@ -722,9 +722,9 @@ begin
      end
      else if (typeItem='bombe') then
      begin
-          if x=2 then
+          if x=0 then
           x:=9
-          else if x=3 then
+          else if x=1 then
           x:=13;
 
           slotFromCoordonne:=32+x+y;
@@ -977,6 +977,7 @@ begin
      if (dispoX <> -1) then
           begin
           personnage.inventaire.invBombe[dispoX][dispoY]:=stuffDispo.invBombeDispo[numItem];
+
           end;
      end
      else if (typeItem='potion') then
@@ -988,7 +989,11 @@ begin
           end;
      end;
      if (dispoX <> -1) then
+     begin
+
      modificationInventaireItem(numItem,slotFromCoordonne(dispoX,dispoY,typeItem)); // Modifie l'ID de l'item contenu au slot demandé
+
+     end
      // Ici le slot est calculé en fonction des coordoonnées de l'item ajouté et son type
 
 
