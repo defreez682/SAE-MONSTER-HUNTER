@@ -118,28 +118,28 @@ begin
                    end;
               #13 : begin
               cho := False;  //la touche entrer
-                     if rep<3 then
+                     if (rep<=3) then
                         begin
                           if (getOrActuelle(personnage1) < stuffDispo.invBombeDispo[rep].prix) or (isinventaireplein('bombe',personnage1).xA=-1) then
                                   AchatImpossible()
                           else
                             begin
-                              MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[rep].prix);
-                              cadreArgent();
-                              ajoutItemToPersonnage('bombe',rep,personnage1);
-                              choixAchat();
+                                MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[rep].prix);
+                                cadreArgent();
+                                ajoutItemToPersonnage('bombe',rep,personnage1);
+                                choixAchat();
                             end;
                         end
                      else
                        begin
                          if (getOrActuelle(personnage1) < stuffDispo.invpotionDispo[rep].prix) or (isinventaireplein('potion',personnage1).xA=-1) then
-                             AchatImpossible()
+                               AchatImpossible()
                          else
                            begin
-                             MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invpotionDispo[rep].prix);
-                             cadreArgent();
-                             ajoutItemToPersonnage('potion',rep,personnage1);
-                             choixAchat();
+                               MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invpotionDispo[rep-3].prix);
+                               cadreArgent();
+                               ajoutItemToPersonnage('potion',rep,personnage1);
+                               choixAchat();
                            end;
                       end;
 

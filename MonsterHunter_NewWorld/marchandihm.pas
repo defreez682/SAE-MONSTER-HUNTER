@@ -140,21 +140,22 @@ var
   i : integer;
 
 begin
-     dessinercadreXY(3,2,115,4,double,15,0);
-     texteXY(45,3,'INVENTAIRE CONSOMMABLE ET DROP',15);
+     dessinercadreXY(3,4,115,6,double,15,0);
+     texteXY(45,5,'INVENTAIRE CONSOMMABLE ET DROP',15);
      dessinercadreXY(3,7,115,28,simple,15,0);
 
      couleurtexte(15);
      x:=8;
-     deplacerCurseurXY(4,x);
-     for i:= 0 to 3 do
+     for i:= 0 to 1 do
          begin
               for j:=0 to 3 do
                   begin
-                       texteXY(76,x,personnage1.inventaire.invDrop[i][j].nomDrop,15);
-                       //write(personnage1.inventaire.invArme[i][j].nomArme);
-                       x:=(x+1);
-                       deplacerCurseurXY(76,x);
+                       deplacerCurseurXY(4,x);
+                       texteXY(5,x,personnage1.inventaire.invPotion[i][j].nomPotion,15);
+                       deplacerCurseurXY(30,x);
+                       texteXY(30,x,personnage1.inventaire.invBombe[i][j].nomBombe,15);
+                       x:=(x+1)
+
                   end;
          end;
      readln;
@@ -333,6 +334,7 @@ begin
     couleurtexte(15);
     deplacerCurseurXY(6,22);
     texteAtemps('Vous n''avez pas d''argent, revenez une prochaine fois...',40,15);
+    ReadKey;
     effacerEcran();
     DemarrageMarchand();
 
@@ -343,10 +345,10 @@ procedure AchatImpossible();
 begin
 
     viderCadreMarchand();
-    if (isinventaireplein('bombe',personnage1).xA=-1) then
+    if (isinventaireplein('bombe',personnage1).xA=-1) or (isinventaireplein('potion',personnage1).xA=-1) then
        texteXY(40,24,'Vous n''avez plus de place dans votre inventaire',4)
     else
-    texteXY(50,24,'Vous n''avez pas assez d''or',4);
+       texteXY(50,24,'Vous n''avez pas assez d''or',4);
     readln;
     choixAchat();
 
