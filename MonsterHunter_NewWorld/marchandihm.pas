@@ -1,6 +1,7 @@
 unit marchandIHM;
 
-{$mode objfpc}{$H+}{$codepage UTF8}
+{$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
@@ -316,7 +317,7 @@ begin
     deplacerCurseurXY(7,22);
     texteAtemps('Vous pouvez acheter des items chez moi, n''hesitez pas a revenir apres chaque chasse ',10,15);
     deplacerCurseurXY(7,23);
-    texteAtemps('Si vous avez des choses à vendre, c''est avec plaisir que je pourrais les acheter ',10,15);
+    texteAtemps('Si vous avez des choses a vendre, c''est avec plaisir que je pourrais les acheter ',10,15);
     deplacerCurseurXY(7,24);
     texteAtemps('si cela m''interesse Vous pouvez aussi vous reposer dans une chambre ou bien acheter de quoi vous retablir',10,15);
     deplacerCurseurXY(7,25);
