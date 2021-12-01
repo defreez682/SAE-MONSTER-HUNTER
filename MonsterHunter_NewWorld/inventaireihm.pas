@@ -859,17 +859,17 @@ begin
              deplacerCurseurXY(52,20);
              write('Fermer');
          end;
-     end
+  end
   else
   begin
   position.precedPos:='bombe';
-     if (personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe<>'VIDE' ) then
+     if (personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].nomBombe<>'VIDE' ) then
         begin
              deplacer2:=true;
              deplacerCurseurXY(48,6);
-             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe);
+             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].nomBombe);
              deplacerCurseurXY(48,8);
-             write('Degats : ',personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].degat);
+             write('Degats : ',personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].degat);
              couleurTexte(15);
              deplacerCurseurXY(52,17);
              write('Jeter');
@@ -879,7 +879,7 @@ begin
      else
          begin
              deplacerCurseurXY(48,5);
-             write(personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion);
+             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].nomBombe);
              deplacerCurseurXY(52,20);
              write('Fermer');
          end;

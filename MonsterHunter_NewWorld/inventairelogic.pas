@@ -1231,6 +1231,8 @@ begin
      modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
      dropEquipement(personnage,x,y);
      end
+     else if typeItem='bombe' then
+     modificationInventaireItem(0,slotFromCoordonne(x-2,y,typeItem))
      else
      modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
 
