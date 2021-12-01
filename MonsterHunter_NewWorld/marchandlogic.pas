@@ -1,6 +1,7 @@
 unit marchandLogic;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
@@ -213,7 +214,20 @@ begin
               #13 : begin
               cho := False;  //la touche entrer
 
-              {if (rep<=8) do
+              { if rep="VIDE" then
+                 choixVente()
+              else if rep>=8 then
+                   begin
+                      dropEquipement();
+                      miseaourOr(personnage1,getOrActuelle(personnage1)+valeurObjetInventaire;
+                      cadreArgent();
+                   end;
+              else
+
+
+                 }
+
+              {if (rep<=8) then
                   begin
                     dropEquipement(Personnage1,
                   end;}
