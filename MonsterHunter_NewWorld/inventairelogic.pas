@@ -135,7 +135,7 @@ procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var
 // Appelle la procédure relative à l'endroit ou la touche entrée est pressée
 procedure entreePressee(var position:typePosition;var personnage:typePersonnage);
 
-// Renvoie les coordonnées du premier emplacement vide de l'inventaire ou -1 si l'inventaire est plein
+// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire ou -1 si l'inventaire est plein
 function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoordsInventaire;
 
 
@@ -851,7 +851,7 @@ begin
                if (i>4) then
                boucle:=false
 
-               else if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'EMPTY') and (boucle=true)  then
+               else if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'VIDE') and (boucle=true)  then
                     begin
                     personnage.inventaire.invArme[i][j].estEquipee:=true;
                     boucle:=false;
@@ -1002,7 +1002,7 @@ begin
 
 end;
 
-// Renvoie les coordonnées du premier emplacement vide de l'inventaire ou -1 si l'inventaire est plein
+// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire ou -1 si l'inventaire est plein
 function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoordsInventaire;
 var
    i,j:integer;
@@ -1020,7 +1020,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invArme[i][j].nomArme='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invArme[i][j].nomArme='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1038,7 +1038,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invArmure[i][j].nomArmure='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invArmure[i][j].nomArmure='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1056,7 +1056,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invDrop[i][j].nomDrop='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invDrop[i][j].nomDrop='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1073,7 +1073,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invPotion[i][j].nomPotion='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invPotion[i][j].nomPotion='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1090,7 +1090,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invBombe[i][j].nomBombe='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;

@@ -262,7 +262,7 @@ begin
      ajoutStuffDepart(personnage);
 end;
 
-// Remplie tout l'inventaire de 'EMPTY'
+// Remplie tout l'inventaire de 'VIDE'
 procedure initialisationInventaireVide( var personnage:typePersonnage);
 var
   i:Integer;
@@ -308,6 +308,7 @@ end;
 procedure ajoutStuffDepart(var personnage:typePersonnage);
 begin
      ajoutItemToPersonnage('arme',4,personnage);
+
      equipEquipement(personnage,0,0,'arme');
 
      ajoutItemToPersonnage('armure',1,personnage);
@@ -328,7 +329,8 @@ begin
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
-     equipEquipement(personnage1,0,0,'arme');
+     equipEquipement(personnage,0,0,'arme');
+
 
 end;
 
