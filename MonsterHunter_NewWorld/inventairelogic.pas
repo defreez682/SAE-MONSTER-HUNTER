@@ -1104,6 +1104,24 @@ begin
      isInventairePlein.yA:=res.yA;
 end;
 
+function slotBombePotionDispo():integer;
+var
+   s,res:integer;
+   boucle:boolean;
+begin
+     boucle:=true;
+     res:=-1;
+     for s:= 32 to 48 do
+     begin
+          if (itemSlot(s)<>0) and (boucle = true) then
+          begin
+          slotBombePotionDispo:=res;
+          boucle:=false;
+          end;
+     end;
+     slotBombePotionDispo:=res;
+end;
+
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
 var
    i,j:integer;
@@ -1192,6 +1210,12 @@ begin
 
 
         end;
+end;
+
+procedure dropConsommable(var personnage:typePersonnage;s:integer);
+begin
+     if slotBombePotionDispo()<>-1 then
+     modificationInventaireItem(0,slotBombePotionDispo());
 end;
 
 // Drop un item de l'inventaire
