@@ -7,7 +7,7 @@ interface
 
 procedure ChoixDiscussions();
 procedure choixMarchand();
-procedure ChoixAchat();
+procedure ChoixAchat(var rep : integer);
 procedure choixVente();
 procedure ChoixSujet1et3();
 procedure ChoixSujet2();
@@ -62,7 +62,10 @@ begin
         1 : if (getOrActuelle(personnage1)=0) then
                 sujetArgentIHM()
             else
-                choixAchat();
+                begin
+                  rep:=1;
+                  choixAchat(rep);
+                end;
         2 : choixVente();
         3 : discussionIHM();
         4 : ChoixMenuVillage();
@@ -71,11 +74,10 @@ begin
 end;
 
 // ----------------------- permet de choisir ce que l'on veut acheter dans achat
-procedure choixAchat();
+procedure choixAchat(var rep : integer);
 
 var
     cho : boolean;
-    rep : integer = 1;
     ch  : char;
 
 begin
@@ -135,7 +137,7 @@ begin
                                 ajoutItemToPersonnage('bombe',rep,personnage1);
                                 recupInventaire(personnage1);
 
-                                choixAchat();
+                                choixAchat(rep);
                             end;
                         end
                      else
@@ -150,13 +152,13 @@ begin
 
                                ajoutItemToPersonnage('potion',rep-3,personnage1);
                                recupInventaire(personnage1);
-                               choixAchat();
+                               choixAchat(rep);
                            end;
                       end;
 
                   end;
           end;
-          DessinFlecheAchat(rep);
+      DessinFlecheAchat(rep);
       end;
 
 end;
