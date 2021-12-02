@@ -312,7 +312,7 @@ begin
 
                              texteXY(15,4,'Quel est votre taille (m), ',White);
                              texteEnCouleur(getNomActuelle(personnage1),Red);
-                             texteEnCouleur('?',White);;
+                             texteEnCouleur('?',White);
                              taillesaisieaff := taillesaisie/100;
                              texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
                              texteXY(14,7,'[---------------------------------------]',White);
@@ -395,7 +395,7 @@ begin
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,12);
      texteAtemps('Niveau : ',20,White);
-     texteAtemps(IntToStr(getLvlActuelle(personnage1)),20,White);
+     texteAtemps(IntToStr(getLvlActuelle()),20,White);
      deplacerCurseurXY(41,13);
      texteAtemps('Experience necessaire avant niveau',10,White);
      deplacerCurseurXY(41,14);
@@ -484,28 +484,28 @@ begin
      texteAtemps('Aventurier.',40,White);
      ReadKey;
 
-     texteXY(21,15,'                                                                         ',White);
+     creationInterfaceDialogue();
      deplacerCurseurXY(60-34,15);
      texteAtemps('Vous faites partie de la sixieme grande expedition du nouveau monde.',20,White);
      ReadKey;
 
-     texteXY(21,15,'                                                                         ',White);
+     creationInterfaceDialogue();
      deplacerCurseurXY(60-23,15);
      texteAtemps('Une nouvelle ile mysterieuse a ete decouverte :',30,White);
      ReadKey;
 
-     texteXY(21,15,'                                                                         ',White);
+     creationInterfaceDialogue();
      deplacerCurseurXY(60-4,15);
      texteAtemps('Aeternum',60,LightCyan);
      ReadKey;
 
-     texteXY(21,15,'                                                                         ',White);
+     creationInterfaceDialogue();
      deplacerCurseurXY(60-32,15);
      texteAtemps('Vous y etes envoye pour decouvrir tous les ',25,White);
      texteAtemps('mysteres de cette ile.',25,Cyan);
      ReadKey;
 
-     texteXY(21,15,'                                                                         ',White);
+     creationInterfaceDialogue();
      deplacerCurseurXY(60-37,15);
      texteAtemps('Mais avant tout, j''ai besoin que vous remplissiez cette ',25,White);
      texteAtemps('fiche d''information.',25,Red);

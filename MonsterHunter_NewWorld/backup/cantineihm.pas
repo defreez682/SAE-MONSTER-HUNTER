@@ -275,7 +275,7 @@ begin
         end
      else if (rep = 6) then
        begin
-         if ((getOrActuelle() - 55) < 0) then
+         if ((getOrActuelle(personnage1) - 55) < 0) then
              messageOrInsuffisant()
           else
              miseAjourOr(getOrActuelle() - 55) ;

@@ -312,7 +312,7 @@ begin
 
                              texteXY(15,4,'Quel est votre taille (m), ',White);
                              texteEnCouleur(getNomActuelle(personnage1),Red);
-                             texteEnCouleur('?',White);;
+                             texteEnCouleur('?',White);
                              taillesaisieaff := taillesaisie/100;
                              texteXY(33,6,FloatToStrF(taillesaisieaff,fffixed,1,2),LightMagenta);
                              texteXY(14,7,'[---------------------------------------]',White);
@@ -395,7 +395,7 @@ begin
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,12);
      texteAtemps('Niveau : ',20,White);
-     texteAtemps(IntToStr(getLvlActuelle(personnage1)),20,White);
+     texteAtemps(IntToStr(getLvlActuelle()),20,White);
      deplacerCurseurXY(41,13);
      texteAtemps('Experience necessaire avant niveau',10,White);
      deplacerCurseurXY(41,14);
@@ -405,7 +405,7 @@ begin
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,17);
      texteAtemps('Argent : ',20,White);
-     texteAtemps(IntToStr(getOrActuelle(personnage1)),20,White);
+     texteAtemps(IntToStr(getOrActuelle()),20,White);
      deplacerCurseurXY(41,18);
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,20);

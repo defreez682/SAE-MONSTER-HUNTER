@@ -9,19 +9,20 @@ uses
 
 var
 personnage1:typePersonnage;
+data : file of Integer;
 // Lvl
 
 {Modifie le fichier LVL ce qui permet de mettre à jour le lvl du joueur.}
-procedure miseAjourLVL(var personnageAct:typePersonnage;valeur : Integer);
+procedure miseAjourLVL(valeur : Integer);
 {Renvoie le niveau actuelle du joueur contenu dans son fichier}
-function getlvlActuelle(personnageAct:typePersonnage) : Integer;
+function getlvlActuelle() : Integer;
 
 // Exp
 
 {Modifie le fichier exp ce qui permet de mettre à jour l’EXP du joueur.}
-procedure miseAjourExp(var personnageAct:typePersonnage;valeur : Integer);
+procedure miseAjourExp(valeur : Integer);
 {Renvoie l’exp actuelle du joueur contenu dans son fichier}
-function getExpActuelle(personnageAct:typePersonnage) : Integer;
+function getExpActuelle() : Integer;
 {Vérifie si le joueur à passer un niveau, s’il a passé un niveau, le passe automatiquement}
 procedure verifLvlUp();
 {Calcule l’exp nécessaire pour le niveau suivant}
@@ -30,9 +31,9 @@ function calculLvlSuivant() : Integer;
 // Or
 
 {Modifie le fichier or ce qui permet de mettre à jour l’or du joueur. }
-procedure miseAjourOr(var personnageAct:typePersonnage;valeur : Integer);
+procedure miseAjourOr(valeur : Integer);
 {Renvoie l’or actuelle du joueur contenu dans son fichier}
-function getOrActuelle(personnageAct:typePersonnage) : Integer;
+function getOrActuelle() : Integer;
 
 // Stats de base
 
@@ -51,7 +52,7 @@ function calculADBase() : Integer;
 On utilise 0 et 1 (0 -> il n’a pas de personnage, 1 ->  il a un personnage)}
 procedure miseAjourPersonnage (var personnageAct:typePersonnage;valeur : integer);
 {Renvoie si le joueur à un personnage (0 -> il n’a pas, 1 -> il a)}
-function getPersonnageActuelle (personnageAct:typePersonnage) : String;
+function getPersonnageActuelle (personnageAct:typePersonnage) : Integer;
 {Modifie le fichier nom qui contient le nom du joueur}
 procedure miseAjourNom(var personnageAct:typePersonnage;valeur : String);
 {Renvoie le nom actuelle du joueur contenu dans son fichier}
@@ -79,7 +80,20 @@ procedure ajoutStuffDepart(var personnage:typePersonnage);
 // Remplis un tableau de tous les items disponibles - BASE DE DONNEE A NE PAS OUVRIR
 procedure initialisationItemDisponibles();
 
+//------------------------- DATA -------------------------------
 
+{Principe :
+1 : LVL
+2 : EXP
+3 : GOLD
+4 : PERSONNAGE
+5 : Combats
+6 : skiptour}
+procedure creationDataJoueur(val,pos : Integer);
+
+procedure modificationDataJoueur(val,pos : Integer);
+
+function dataJoueur(pos : Integer) : Integer;
 
 implementation
 
@@ -89,76 +103,54 @@ uses
 
 
 //________________________________________________ Zone Lvl
-procedure miseAjourLVL(var personnageAct:typePersonnage;valeur : Integer);
+procedure miseAjourLVL(valeur : Integer);
 begin
-  Assign(personnageAct.lvlglobal,'C:\MHNewWorld\lvl.txt');
-  Rewrite(personnageAct.lvlglobal);
-  Writeln(personnageAct.lvlglobal,valeur) ;
-  Close(personnageAct.lvlglobal);
+     modificationDataJoueur(valeur,1);
 end;
 
-function getlvlActuelle(personnageAct:typePersonnage) : Integer;
-var lvl : string;
+function getlvlActuelle() : Integer;
 begin
-     Assign(personnageAct.lvlglobal,'C:\MHNewWorld\lvl.txt');
-     reset(personnageAct.lvlglobal);
-     Readln(personnageAct.lvlglobal,lvl);
-     getlvlActuelle := StrToInt(lvl);
-     Close(personnageAct.lvlglobal);
+     getlvlActuelle := dataJoueur(1);
 end;
 
 
 //________________________________________________ Zone EXP
-procedure miseAjourExp(var personnageAct:typePersonnage;valeur : Integer);
+procedure miseAjourExp(valeur : Integer);
 begin
-  Assign(personnageAct.lvlexp,'C:\MHNewWorld\lvlexp.txt');
-  Rewrite(personnageAct.lvlexp);
-  Writeln(personnageAct.lvlexp,valeur) ;
-  Close(personnageAct.lvlexp);
+     modificationDataJoueur(valeur,2);
 end;
 
-function getExpActuelle(personnageAct:typePersonnage) : Integer;
-var exp : string;
+function getExpActuelle() : Integer;
 begin
-     Assign(personnageAct.lvlexp,'C:\MHNewWorld\lvlexp.txt');
-     reset(personnageAct.lvlexp);
-     Readln(personnageAct.lvlexp,exp);
-     getExpActuelle := StrToInt(exp);
-     Close(personnageAct.lvlexp);
+     getExpActuelle := dataJoueur(2);
 end;
 
 function calculLvlSuivant() : Integer;
 begin
-     calculLvlSuivant := 900+100*getlvlActuelle(personnage1);
+     calculLvlSuivant := 900+100*getlvlActuelle();
 end;
 
 procedure verifLvlUp();
 begin
-     if (getExpActuelle(personnage1) >= calculLvlSuivant()) then
+     if (getExpActuelle() >= calculLvlSuivant()) then
         begin
-              miseAjourLVL(personnage1,getlvlActuelle(personnage1)+1);
-              miseAjourExp(personnage1,0+getExpActuelle(personnage1)-(calculLvlSuivant()-100));
+              miseAjourLVL(getlvlActuelle()+1);
+              miseAjourExp(0+getExpActuelle()-(calculLvlSuivant()-100));
         end;
 end;
 
 //________________________________________________ Zone Or
 
-procedure miseAjourOr(var personnageAct:typePersonnage;valeur : Integer);
+procedure miseAjourOr(valeur : Integer);
 begin
-  Assign(personnageAct.orActuel,'C:\MHNewWorld\Or.txt');
-  Rewrite(personnageAct.orActuel);
-  Writeln(personnageAct.orActuel,valeur) ;
-  Close(personnageAct.orActuel);
+
+     modificationDataJoueur(valeur,3);
 end;
 
-function getOrActuelle(personnageAct:typePersonnage) : Integer;
-var oract : string;
+function getOrActuelle() : Integer;
 begin
-     Assign(personnageAct.orActuel,'C:\MHNewWorld\Or.txt');
-     reset(personnageAct.orActuel);
-     Readln(personnageAct.orActuel,oract);
-     getOrActuelle := StrToInt(oract);
-     Close(personnageAct.orActuel);
+
+     getOrActuelle := dataJoueur(3);
 end;
 
 
@@ -166,38 +158,29 @@ end;
 
 function calculHpMaxBase() : Integer;
 begin
-    calculHpMaxBase := 300+(10*getlvlActuelle(personnage1));
+    calculHpMaxBase := 300+(10*getlvlActuelle());
 end;
 
 function calculArmureBase() : Integer;
 begin
-    calculArmureBase := 30+(4*getlvlActuelle(personnage1));
+    calculArmureBase := 30+(4*getlvlActuelle());
 end;
 
 function calculADBase() : Integer;
 begin
-    calculADBase := 75+(5*getlvlActuelle(personnage1));
+    calculADBase := 95+(5*getlvlActuelle());
 end;
 
 //__________________________________________________ Création personnage
 
 procedure miseAjourPersonnage(var personnageAct:typePersonnage;valeur : integer);
 begin
-  Assign(personnageAct.existe,'C:\MHNewWorld\personnage.txt');
-  Rewrite(personnageAct.existe);
-  Writeln(personnageAct.existe,valeur) ;
-  Close(personnageAct.existe);
+     modificationDataJoueur(valeur,4);
 end;
 
-function getPersonnageActuelle(personnageAct:typePersonnage) : String;
-var
-  personnage : string;
+function getPersonnageActuelle(personnageAct:typePersonnage) : integer;
 begin
-     Assign(personnageAct.existe,'C:\MHNewWorld\personnage.txt');
-     reset(personnageAct.existe);
-     Readln(personnageAct.existe,personnage);
-     getPersonnageActuelle := personnage;
-     Close(personnageAct.existe);
+     getPersonnageActuelle := dataJoueur(4);
 end;
 
 procedure miseAjourNom(var personnageAct:typePersonnage;valeur : String);
@@ -238,10 +221,10 @@ end;
 
 procedure miseAjourTaille(var personnageAct:typePersonnage;valeur : integer);
 begin
-  Assign(personnageAct.taille,'C:\MHNewWorld\taille.txt');
-  Rewrite(personnageAct.taille);
-  Writeln(personnageAct.taille,valeur);
-  Close(personnageAct.taille);
+    Assign(personnageAct.taille,'C:\MHNewWorld\taille.txt');
+    Rewrite(personnageAct.taille);
+    Writeln(personnageAct.taille,valeur);
+    Close(personnageAct.taille);
 end;
 
 function getTailleActuelle(personnageAct:typePersonnage) : Integer;
@@ -322,7 +305,7 @@ end;
 // Remplis un tableau de tous les items disponibles - BASE DE DONNEE A NE PAS OUVRIR
 procedure initialisationItemDisponibles();
 begin
-     stuffDispo.invArmeDispo[0].nomArme:='EMPTY';
+     stuffDispo.invArmeDispo[0].nomArme:='VIDE';
      stuffDispo.invArmeDispo[0].poids:=0;
      stuffDispo.invArmeDispo[0].ratioAD:=0;
      stuffDispo.invArmeDispo[0].prix:=0;
@@ -407,7 +390,7 @@ begin
      stuffDispo.invArmeDispo[20].ratioAD:=0.25;
      stuffDispo.invArmeDispo[20].prix:=200;
 
-     stuffDispo.invArmureDispo[0].nomArmure:='EMPTY';
+     stuffDispo.invArmureDispo[0].nomArmure:='VIDE';
      stuffDispo.invArmureDispo[0].poids:=0;
      stuffDispo.invArmureDispo[0].defense:=0;
      stuffDispo.invArmureDispo[0].prix:=0;
@@ -513,7 +496,7 @@ begin
      stuffDispo.invArmureDispo[20].prix:=150;
      stuffDispo.invArmureDispo[20].typeArmure:='Gants';
 
-     stuffDispo.invPotionDispo[0].nomPotion:='EMPTY';
+     stuffDispo.invPotionDispo[0].nomPotion:='VIDE';
      stuffDispo.invPotionDispo[0].HealHP:=0;
      stuffDispo.invPotionDispo[0].prix:=0;
      stuffDispo.invPotionDispo[1].nomPotion:='Potion';
@@ -526,41 +509,75 @@ begin
      stuffDispo.invPotionDispo[3].HealHP:=300;
      stuffDispo.invPotionDispo[3].prix:=100;
 
-     stuffDispo.invBombeDispo[0].nomBombe:='EMPTY';
+     stuffDispo.invBombeDispo[0].nomBombe:='VIDE';
      stuffDispo.invBombeDispo[0].degat:=0;
      stuffDispo.invBombeDispo[0].prix:=0;
 
      stuffDispo.invBombeDispo[1].nomBombe:='Bombe Barile';
      stuffDispo.invBombeDispo[1].degat:=30;
-     stuffDispo.invBombeDispo[1].prix:=130;
-     stuffDispo.invBombeDispo[2].nomBombe:='Mega Bombe Barile';
-     stuffDispo.invBombeDispo[2].degat:=60;
-     stuffDispo.invBombeDispo[2].prix:=200;
-     stuffDispo.invBombeDispo[3].nomBombe:='Destruction';
-     stuffDispo.invBombeDispo[3].degat:=200;
-     stuffDispo.invBombeDispo[3].prix:=500;
+     stuffDispo.invBombeDispo[1].prix:=250;
+     stuffDispo.invBombeDispo[2].nomBombe:='Bombe Flash';
+     stuffDispo.invBombeDispo[2].degat:= 0;
+     stuffDispo.invBombeDispo[2].prix:= 700;
+     stuffDispo.invBombeDispo[3].nomBombe:='Mega Bombe Barile';
+     stuffDispo.invBombeDispo[3].degat:= 500;
+     stuffDispo.invBombeDispo[3].prix:=1000;
 
-     stuffDispo.invDropDispo[0].nomDrop:='EMPTY';
+     stuffDispo.invDropDispo[0].nomDrop:='VIDE';
      stuffDispo.invDropDispo[1].nomDrop:='Ecaille';
-     stuffDispo.invDropDispo[2].nomDrop:='Oeil de Monstre';
-     stuffDispo.invDropDispo[3].nomDrop:='Cuir de Cheval';
-     stuffDispo.invDropDispo[4].nomDrop:='Queue de limpantin';
-     stuffDispo.invDropDispo[5].nomDrop:='Pattes brullées';
+     stuffDispo.invDropDispo[2].nomDrop:='Oeil';
+     stuffDispo.invDropDispo[3].nomDrop:='Cuir';
+     stuffDispo.invDropDispo[4].nomDrop:='Queue';
+     stuffDispo.invDropDispo[5].nomDrop:='Pattes brullees';
      stuffDispo.invDropDispo[6].nomDrop:='Os de squelette';
      stuffDispo.invDropDispo[7].nomDrop:='Sang fibreux';
-     stuffDispo.invDropDispo[8].nomDrop:='Salive de hornetaur';
+     stuffDispo.invDropDispo[8].nomDrop:='Salive';
      stuffDispo.invDropDispo[9].nomDrop:='Minerais d or';
-     stuffDispo.invDropDispo[10].nomDrop:='Poils du vespoid';
-     stuffDispo.invDropDispo[11].nomDrop:='Cornes de taureau';
+     stuffDispo.invDropDispo[10].nomDrop:='Poils';
+     stuffDispo.invDropDispo[11].nomDrop:='Corne';
      stuffDispo.invDropDispo[12].nomDrop:='Langue de chat';
-     stuffDispo.invDropDispo[13].nomDrop:='Carapace de tortue';
+     stuffDispo.invDropDispo[13].nomDrop:='Carapace';
      stuffDispo.invDropDispo[14].nomDrop:='Plumes';
      stuffDispo.invDropDispo[15].nomDrop:='Crocs de crocodile';
      stuffDispo.invDropDispo[16].nomDrop:='Cristal';
      stuffDispo.invDropDispo[17].nomDrop:='Glandes de venin';
      stuffDispo.invDropDispo[18].nomDrop:='Perle rare';
-     stuffDispo.invDropDispo[19].nomDrop:='Bec à pointes';
+     stuffDispo.invDropDispo[19].nomDrop:='Bec a pointes';
      stuffDispo.invDropDispo[20].nomDrop:='Larme de phoenix';
 end;
+
+
+
+procedure creationDataJoueur(val,pos : Integer);
+begin
+     assign(data, 'C:/MHNewWorld/dataJoueur.bin');
+     rewrite(data);
+     seek(data,pos);
+     write(data,val);
+     close(data);
+end;
+
+
+procedure modificationDataJoueur(val,pos : Integer);
+begin
+     assign(data, 'C:/MHNewWorld/dataJoueur.bin');
+     reset(data);
+     seek(data,pos);
+     write(data,val);
+     close(data);
+end;
+
+function dataJoueur(pos : Integer) : Integer;
+var val : Integer;
+begin
+     assign(data, 'C:/MHNewWorld/dataJoueur.bin');
+     reset(data);
+     seek(data, pos);
+     read(data,val);
+     dataJoueur := val;
+     close(data);
+end;
+
+
 end.
 

@@ -425,7 +425,7 @@ begin
      begin
           for j:=0 to 3 do
           begin
-          if (personnage.inventaire.invArme[i][j].nomArme='EMPTY') then
+          if (personnage.inventaire.invArme[i][j].nomArme='VIDE') then
           begin
                if (i<=1) then
                begin
@@ -439,7 +439,7 @@ begin
                end;
           end
 
-          else if (personnage.inventaire.invArme[i][j].nomArme<>'EMPTY') then
+          else if (personnage.inventaire.invArme[i][j].nomArme<>'VIDE') then
           begin
                if (i<=1) then
                begin
@@ -483,7 +483,7 @@ begin
      begin
           for j:=0 to 3 do
           begin
-          if (personnage.inventaire.invArmure[i][j].nomArmure='EMPTY') then
+          if (personnage.inventaire.invArmure[i][j].nomArmure='VIDE') then
           begin
 
                if (i<=1) then
@@ -498,7 +498,7 @@ begin
                end;
           end
 
-          else if (personnage.inventaire.invArmure[i][j].nomArmure<>'EMPTY') then
+          else if (personnage.inventaire.invArmure[i][j].nomArmure<>'VIDE') then
           begin
                if (i<=1) then
                begin
@@ -542,7 +542,7 @@ begin
      begin
           for j:=0 to 3 do
           begin
-          if (personnage.inventaire.invDrop[i][j].nomDrop='EMPTY') then
+          if (personnage.inventaire.invDrop[i][j].nomDrop='VIDE') then
           begin
                if (i<=1) then
                begin
@@ -556,7 +556,7 @@ begin
                end;
           end
 
-          else if (personnage.inventaire.invDrop[i][j].nomDrop<>'EMPTY') then
+          else if (personnage.inventaire.invDrop[i][j].nomDrop<>'VIDE') then
           begin
                if (i<=1) then
                begin
@@ -596,7 +596,7 @@ begin
      begin
           for j:=0 to 3 do
           begin
-               if (personnage.inventaire.invPotion[i][j].nomPotion='EMPTY') then
+               if (personnage.inventaire.invPotion[i][j].nomPotion='VIDE') then
                begin
                     ColorierZoneRemix(0,8,4+22*i,23+22*i,20-5*j);
                     ColorierZoneRemix(0,8,4+22*i,23+22*i,21-5*j);
@@ -607,15 +607,15 @@ begin
                     ColorierZoneRemix(0,12,4+22*i,23+22*i,21-5*j);
                end;
 
-               if (personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') then
+               if (personnage.inventaire.invBombe[i][j].nomBombe='VIDE') then
                begin
-                    ColorierZoneRemix(0,8,75+23*i,85+23*i,20-5*j);
-                    ColorierZoneRemix(0,8,75+23*i,85+23*i,21-5*j);
+                    ColorierZoneRemix(0,8,75+23*i,91+23*i,20-5*j);
+                    ColorierZoneRemix(0,8,75+23*i,91+23*i,21-5*j);
                end
                else
                begin
-                    ColorierZoneRemix(0,15,75+23*i,85+23*i,20-5*j);
-                    ColorierZoneRemix(0,12,75+23*i,85+23*i,21-5*j);
+                    ColorierZoneRemix(0,15,75+23*i,91+23*i,20-5*j);
+                    ColorierZoneRemix(0,12,75+23*i,91+23*i,21-5*j);
                end;
 
           end;
@@ -696,7 +696,7 @@ begin
 
      else
          begin
-         if (personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY') then
+         if (personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'VIDE') then
          begin
          deplacer:=true;
          deplacerCurseurXY(48,37);
@@ -707,18 +707,18 @@ begin
          write('Poids : ',personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].poids);
          couleurTexte(15);
          deplacerCurseurXY(52,44);
-         write('Unequip');
+         write('Desequipper');
          deplacerCurseurXY(52,46);
-         write('Drop');
+         write('Jeter');
          deplacerCurseurXY(52,48);
-         write('Close');
+         write('Fermer');
          end
          else
              begin
              deplacerCurseurXY(48,37);
              write(personnage.inventaire.ArmureEquipee[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
              deplacerCurseurXY(52,48);
-             write('Close');
+             write('Fermer');
              end;
              end;
 
@@ -731,7 +731,7 @@ begin
   position.precedPos:='arme';
   dessinerCadreXY(47,4,68,22,double,15,0);
   couleurTexte(20);
-  if (personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArme<>'EMPTY' ) then
+  if (personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArme<>'VIDE' ) then
         begin
              deplacer:=true;
              deplacerCurseurXY(48,6);
@@ -742,18 +742,26 @@ begin
              write('Poids : ',personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].poids);
              couleurTexte(15);
              deplacerCurseurXY(52,15);
-             write('Equip');
+             if (personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].estEquipee=false) then
+             write('Equiper')
+             else
+             begin
+             deplacer:=false;
+             deplacer2:=true;
+             end;
+
+
              deplacerCurseurXY(52,17);
-             write('Drop');
+             write('Jeter');
              deplacerCurseurXY(52,19);
-             write('Close');
+             write('Fermer');
         end
         else
             begin
              deplacerCurseurXY(48,5);
              write(personnage.inventaire.invArme[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArme);
              deplacerCurseurXY(52,20);
-             write('Close');
+             write('Fermer');
              end;
         end
   //-------------- INFO INVENTAIRE ARMURE
@@ -763,7 +771,7 @@ begin
     position.precedPos:='armure';
     dessinerCadreXY(47,4,68,22,double,15,0);
     couleurTexte(20);
-    if (personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'EMPTY' ) then
+    if (personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure<>'VIDE' ) then
           begin
                deplacer:=true;
                deplacerCurseurXY(48,6);
@@ -774,18 +782,24 @@ begin
                write('Poids : ',personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].poids);
                couleurTexte(15);
                deplacerCurseurXY(52,15);
-               write('Equip');
+               if (personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].estEquipee=false) then
+               write('Equiper')
+               else
+               begin
+               deplacer:=false;
+               deplacer2:=true;
+               end;
                deplacerCurseurXY(52,17);
-               write('Drop');
+               write('Jeter');
                deplacerCurseurXY(52,19);
-               write('Close');
+               write('Fermer');
           end
           else
               begin
                deplacerCurseurXY(48,5);
                write(personnage.inventaire.invArmure[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomArmure);
                deplacerCurseurXY(52,20);
-               write('Close');
+               write('Fermer');
                end;
           end
  //-------------- INFO INVENTAIRE DROPS
@@ -795,7 +809,7 @@ begin
   position.precedPos:='drop';
   dessinerCadreXY(47,4,68,22,double,15,0);
   couleurTexte(20);
-  if (personnage.inventaire.invDrop[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomDrop<>'EMPTY' ) then
+  if (personnage.inventaire.invDrop[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomDrop<>'VIDE' ) then
         begin
              deplacer2:=true;
              deplacerCurseurXY(48,6);
@@ -803,16 +817,16 @@ begin
 
              couleurTexte(15);
              deplacerCurseurXY(52,17);
-             write('Drop');
+             write('Jeter');
              deplacerCurseurXY(52,19);
-             write('Close');
+             write('Fermer');
         end
         else
             begin
              deplacerCurseurXY(48,5);
              write(personnage.inventaire.invDrop[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomDrop);
              deplacerCurseurXY(52,20);
-             write('Close');
+             write('Fermer');
              end;
         end
  //-------------- INFO INVENTAIRE CONSOMMABLES
@@ -825,7 +839,7 @@ begin
   if position.coordsActuelsItem.xA<=1 then
   begin
   position.precedPos:='potion';
-     if (personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion<>'EMPTY' ) then
+     if (personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion<>'VIDE' ) then
         begin
              deplacer2:=true;
              deplacerCurseurXY(48,6);
@@ -834,40 +848,40 @@ begin
              write('Soin : ',personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].healHP,' HP');
              couleurTexte(15);
              deplacerCurseurXY(52,17);
-             write('Drop');
+             write('Jeter');
              deplacerCurseurXY(52,19);
-             write('Close');
+             write('Fermer');
         end
      else
          begin
              deplacerCurseurXY(48,5);
              write(personnage.inventaire.invPotion[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomPotion);
              deplacerCurseurXY(52,20);
-             write('Close');
+             write('Fermer');
          end;
-     end
+  end
   else
   begin
   position.precedPos:='bombe';
-     if (personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe<>'EMPTY' ) then
+     if (personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].nomBombe<>'VIDE' ) then
         begin
              deplacer2:=true;
              deplacerCurseurXY(48,6);
-             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe);
+             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].nomBombe);
              deplacerCurseurXY(48,8);
-             write('Degats : ',personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].degat);
+             write('Degats : ',personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].degat);
              couleurTexte(15);
              deplacerCurseurXY(52,17);
-             write('Drop');
+             write('Jeter');
              deplacerCurseurXY(52,19);
-             write('Close');
+             write('Fermer');
         end
      else
          begin
              deplacerCurseurXY(48,5);
-             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA][position.coordsActuelsItem.yA].nomBombe);
+             write(personnage.inventaire.invBombe[position.coordsActuelsItem.xA-2][position.coordsActuelsItem.yA].nomBombe);
              deplacerCurseurXY(52,20);
-             write('Close');
+             write('Fermer');
          end;
      end
 
@@ -939,7 +953,7 @@ begin
          for j:=0 to 3 do
          begin
          couleurtexte(15);
-         if (personnage.inventaire.invArme[i][j].nomArme='EMPTY') then
+         if (personnage.inventaire.invArme[i][j].nomArme='VIDE') then
               begin
               couleur:=8;
               couleurtexte(8);
@@ -1000,7 +1014,7 @@ begin
            begin
            couleurtexte(15);
 
-           if (personnage.inventaire.invArmure[i][j].nomArmure='EMPTY') then
+           if (personnage.inventaire.invArmure[i][j].nomArmure='VIDE') then
               begin
               couleur:=8;
               couleurtexte(8);
@@ -1056,7 +1070,7 @@ begin
              for j:=0 to 3 do
              begin
 
-             if (personnage.inventaire.invDrop[i][j].nomDrop='EMPTY') then
+             if (personnage.inventaire.invDrop[i][j].nomDrop='VIDE') then
               begin
               couleurtexte(8);
               end
@@ -1093,7 +1107,7 @@ begin
          for j:=0 to 3 do
          begin
          couleurtexte(15);
-         if (personnage.inventaire.invPotion[i][j].nomPotion='EMPTY') then
+         if (personnage.inventaire.invPotion[i][j].nomPotion='VIDE') then
          begin
               couleur:=8;
               couleurtexte(8);
@@ -1116,7 +1130,7 @@ begin
          begin
 
          couleurtexte(15);
-         if (personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') then
+         if (personnage.inventaire.invBombe[i][j].nomBombe='VIDE') then
               begin
               couleur:=8;
               couleurtexte(8);
@@ -1144,7 +1158,7 @@ begin
      deplacerCurseurXY(36,37);
      write('Sexe : ',getSexeActuelle(personnage1));
      deplacerCurseurXY(36,39);
-     write('Argent : ',getOrActuelle(personnage1));
+     write('Argent : ',getOrActuelle());
      while (Readkey <> #13) do
            begin
 

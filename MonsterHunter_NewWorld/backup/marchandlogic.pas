@@ -1,12 +1,13 @@
 unit marchandLogic;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
 procedure ChoixDiscussions();
 procedure choixMarchand();
-procedure ChoixAchat();
+procedure ChoixAchat(var rep : integer);
 procedure choixVente();
 procedure ChoixSujet1et3();
 procedure ChoixSujet2();
@@ -58,10 +59,13 @@ begin
               dessinFleche(rep);
           end;
     case rep of
-        1 : if (getOrActuelle(personnage1)=0) then
+        1 : if (getOrActuelle()=0) then
                 sujetArgentIHM()
             else
-                choixAchat();
+                begin
+                  rep:=1;
+                  choixAchat(rep);
+                end;
         2 : choixVente();
         3 : discussionIHM();
         4 : ChoixMenuVillage();
@@ -70,11 +74,10 @@ begin
 end;
 
 // ----------------------- permet de choisir ce que l'on veut acheter dans achat
-procedure choixAchat();
+procedure choixAchat(var rep : integer);
 
 var
     cho : boolean;
-    rep : integer = 1;
     ch  : char;
 
 begin
@@ -124,38 +127,38 @@ begin
                      if (rep<=3) then
                         begin
                           recupInventaire(personnage1);
-                          if (getOrActuelle(personnage1) < stuffDispo.invBombeDispo[rep].prix) or (isinventaireplein('bombe',personnage1).xA=-1) then
+                          if (getOrActuelle() < stuffDispo.invBombeDispo[rep].prix) or (isinventaireplein('bombe',personnage1).xA=-1) then
                                   AchatImpossible()
                           else
                             begin
-                                MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invBombeDispo[rep].prix);
+                                MiseajourOr(getOrActuelle()-stuffDispo.invBombeDispo[rep].prix);
                                 cadreArgent();
 
                                 ajoutItemToPersonnage('bombe',rep,personnage1);
                                 recupInventaire(personnage1);
 
-                                choixAchat();
+                                choixAchat(rep);
                             end;
                         end
                      else
                        begin
                            recupInventaire(personnage1);
-                         if (getOrActuelle(personnage1) < stuffDispo.invpotionDispo[rep].prix) or (isinventaireplein('potion',personnage1).xA=-1) then
+                         if (getOrActuelle() < stuffDispo.invpotionDispo[rep].prix) or (isinventaireplein('potion',personnage1).xA=-1) then
                                AchatImpossible()
                          else
                            begin
-                               MiseajourOr(personnage1,getOrActuelle(personnage1)-stuffDispo.invpotionDispo[rep-3].prix);
+                               MiseajourOr(getOrActuelle()-stuffDispo.invpotionDispo[rep-3].prix);
                                cadreArgent();
 
                                ajoutItemToPersonnage('potion',rep-3,personnage1);
                                recupInventaire(personnage1);
-                               choixAchat();
+                               choixAchat(rep);
                            end;
                       end;
 
                   end;
           end;
-          DessinFlecheAchat(rep);
+      DessinFlecheAchat(rep);
       end;
 
 end;
@@ -213,7 +216,20 @@ begin
               #13 : begin
               cho := False;  //la touche entrer
 
-              {if (rep<=8) do
+              { if rep="VIDE" then
+                 choixVente()
+              else if rep>=8 then
+                   begin
+                      dropEquipement();
+                      miseaourOr(personnage1,getOrActuelle(personnage1)+valeurObjetInventaire;
+                      cadreArgent();
+                   end;
+              else
+
+
+                 }
+
+              {if (rep<=8) then
                   begin
                     dropEquipement(Personnage1,
                   end;}

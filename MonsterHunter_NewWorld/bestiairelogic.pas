@@ -30,7 +30,9 @@ type
             attaque4 : Real;
             attaque4Chance : Integer;
             attaque4Desc : string;
-            //loot
+            loot1 : Integer;
+            loot2 : Integer;
+            loot3 : Integer;
 
   end;
 
@@ -52,7 +54,7 @@ begin
         begin
             monstre.nom := 'Tigrex';
             monstre.description := 'Un monstre violent et sans pitie. physiquement, un melange d''un tigre et d''un t-rex';
-            monstre.hpBase := 800;
+            monstre.hpBase := 1;//800;
             monstre.armureBase := 70;
             monstre.mobilite := 40;
             monstre.ratioHP := 150;
@@ -78,6 +80,9 @@ begin
             monstre.attaque4Chance := 100; // 20% de chance
             monstre.attaque4Desc := 'Le Tigrex plante ses griffes dans un rocher et le lance sur vous !';
 
+            monstre.loot1 := 2;
+            monstre.loot2 := 5;
+            monstre.loot3 := 10;
 
             envoyerMonstre := monstre;
         end
@@ -111,6 +116,9 @@ begin
             monstre.attaque4Chance := 80; // 20 % de chance
             monstre.attaque4Desc := 'Le Nargacuga projette une pluie d''eccaille !';
 
+            monstre.loot1 := 12;
+            monstre.loot2 := 4;
+            monstre.loot3 := 6;
 
             envoyerMonstre := monstre;
         end
@@ -144,6 +152,9 @@ begin
             monstre.attaque4Chance := 100; // 20 % de chance
             monstre.attaque4Desc := 'Le Rathalos projette un souffle de flamme !'; // enflamme
 
+            monstre.loot1 := 3;
+            monstre.loot2 := 1;
+            monstre.loot3 := 7;
 
             envoyerMonstre := monstre;
         end
@@ -177,6 +188,9 @@ begin
             monstre.attaque4Chance := 100; // 30 % de chance
             monstre.attaque4Desc := 'Le Glavenus crache une boule de lave !'; // enflamme
 
+            monstre.loot1 := 9;
+            monstre.loot2 := 16;
+            monstre.loot3 := 18;
 
             envoyerMonstre := monstre;
         end
@@ -210,6 +224,9 @@ begin
             monstre.attaque4Chance := 100; // 10 % de chance
             monstre.attaque4Desc := 'Le Banbaro vous charge dessus avec un rocher !';
 
+            monstre.loot1 := 3;
+            monstre.loot2 := 8;
+            monstre.loot3 := 11;
 
             envoyerMonstre := monstre;
         end
@@ -243,6 +260,9 @@ begin
             monstre.attaque4Chance := 100; // 20 % de chance
             monstre.attaque4Desc := 'Le Anjanath essaye de vous ecraser !';
 
+            monstre.loot1 := 1;
+            monstre.loot2 := 14;
+            monstre.loot3 := 4;
 
             envoyerMonstre := monstre;
         end
@@ -276,6 +296,9 @@ begin
             monstre.attaque4Chance := 100; // 10 % de chance
             monstre.attaque4Desc := 'Le Pukei-Pukei essaye de vous ecraser !';
 
+            monstre.loot1 := 17;
+            monstre.loot2 := 14;
+            monstre.loot3 := 19;
 
             envoyerMonstre := monstre;
         end
@@ -309,6 +332,9 @@ begin
             monstre.attaque4Chance := 100; // 5 % de chance
             monstre.attaque4Desc := 'Le Bazelgeuse essaye de vous ecraser !';
 
+            monstre.loot1 := 1;
+            monstre.loot2 := 9;
+            monstre.loot3 := 7;
 
             envoyerMonstre := monstre;
         end
@@ -341,6 +367,9 @@ begin
             monstre.attaque4Chance := 10; // 10 % de chance
             monstre.attaque4Desc := 'Le Deviljho utilise son souffle draconique !';
 
+            monstre.loot1 := 15;
+            monstre.loot2 := 5;
+            monstre.loot3 := 13;
 
             envoyerMonstre := monstre;
         end
@@ -374,6 +403,9 @@ begin
              monstre.attaque4Chance := 30; // 30 % de chance
              monstre.attaque4Desc := 'Le Barroth rugit !';
 
+             monstre.loot1 := 18;
+             monstre.loot2 := 9;
+             monstre.loot3 := 3;
 
              envoyerMonstre := monstre;
         end
@@ -407,6 +439,9 @@ begin
              monstre.attaque4Chance := 30; // 30 % de chance
              monstre.attaque4Desc := 'Le Legiana glace le sol ou vous êtes !';
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
 
              envoyerMonstre := monstre;
         end

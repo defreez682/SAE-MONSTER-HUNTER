@@ -135,18 +135,24 @@ procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var
 // Appelle la procédure relative à l'endroit ou la touche entrée est pressée
 procedure entreePressee(var position:typePosition;var personnage:typePersonnage);
 
-// Renvoie les coordonnées du premier emplacement vide de l'inventaire ou -1 si l'inventaire est plein
+// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire ou -1 si l'inventaire est plein
 function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoordsInventaire;
 
 
 //--------------------- FONCTIONNALITE INVENTAIRE ------------------------------
+
+function slotBombePotionDispo(typeItem:string):integer;
 
 procedure recupArmeArmureEquipee(var personnage:typePersonnage);
 
 procedure recupInventaire(var personnage:typePersonnage);
 
 // Permet de drop une armure/arme
-procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
+
+procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
+
+procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 
 // Permet d'équipper un équipement
 procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
@@ -607,7 +613,7 @@ begin
           end;
         1:
           begin
-          dropEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,position.precedPos);
+          dropInventaire(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,position.precedPos);
           if (position.precedPos='arme') then
           affichageArme(personnage)
           else if (position.precedPos='armure') then
@@ -616,6 +622,7 @@ begin
           affichageConso(personnage)
           else if (position.precedPos='drop') then
           affichageDrops(personnage);
+
 
           position.infoItem:=false;
           position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
@@ -848,7 +855,7 @@ begin
                if (i>4) then
                boucle:=false
 
-               else if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'EMPTY') and (boucle=true)  then
+               else if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'VIDE') and (boucle=true)  then
                     begin
                     personnage.inventaire.invArme[i][j].estEquipee:=true;
                     boucle:=false;
@@ -999,7 +1006,7 @@ begin
 
 end;
 
-// Renvoie les coordonnées du premier emplacement vide de l'inventaire ou -1 si l'inventaire est plein
+// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire ou -1 si l'inventaire est plein
 function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoordsInventaire;
 var
    i,j:integer;
@@ -1017,7 +1024,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invArme[i][j].nomArme='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invArme[i][j].nomArme='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1035,7 +1042,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invArmure[i][j].nomArmure='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invArmure[i][j].nomArmure='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1053,7 +1060,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invDrop[i][j].nomDrop='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invDrop[i][j].nomDrop='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1070,7 +1077,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invPotion[i][j].nomPotion='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invPotion[i][j].nomPotion='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1087,7 +1094,7 @@ begin
           begin
               for j:=0 to 3 do
               begin
-              if ((personnage.inventaire.invBombe[i][j].nomBombe='EMPTY') and (boucle<>true)) then
+              if ((personnage.inventaire.invBombe[i][j].nomBombe='VIDE') and (boucle<>true)) then
                   begin
                   boucle:=true;
                   res.xA:=i;
@@ -1101,8 +1108,137 @@ begin
      isInventairePlein.yA:=res.yA;
 end;
 
-// Drop une armure/arme
-procedure dropEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+function slotBombePotionDispo(typeItem:string):integer;
+var
+   s,res:integer;
+   boucle:boolean;
+begin
+     boucle:=true;
+     res:=-1;
+     if typeItem='potion' then
+     begin
+          for s:= 33 to 40 do
+          begin
+               if (itemSlot(s)<>0) and (boucle = true) then
+               begin
+               slotBombePotionDispo:=res;
+               boucle:=false;
+               end;
+          end;
+     slotBombePotionDispo:=res;
+     end
+
+     else if typeItem='bombe' then
+     begin
+     for s:= 41 to 48 do
+     begin
+          if (itemSlot(s)<>0) and (boucle = true) then
+          begin
+          slotBombePotionDispo:=res;
+          boucle:=false;
+          end;
+     end;
+     end;
+end;
+
+procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
+var
+   i,j:integer;
+   boucle,boucle1,boucle2,boucle3,boucle4,boucle5:boolean;
+begin
+     j:=0;
+     i:=0;
+     boucle:=true;
+
+     if (x=1) and (y=2) then
+     begin
+        for i:= 0 to 3 do
+        begin
+             for j:= 0 to 3 do
+             begin
+                  if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'EMPTY') and (boucle=true)  then
+                  begin
+                  dropInventaire(personnage,i,j,'arme');
+                  boucle:=false;
+                  end
+             end;
+
+        end;
+     end
+     else
+
+     begin
+     boucle1:=true;
+     boucle2:=true;
+     boucle3:=true;
+     boucle4:=true;
+     boucle5:=true;
+
+     for i:= 0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+               if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
+               begin
+                    if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                    begin
+                    dropInventaire(personnage,i,j,'armure');
+                    boucle1:=false;
+                    end;
+               end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle2:=false;
+                         end;
+                    end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle3:=false;
+                         end;
+                    end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle4:=false;
+                         end;
+                    end
+
+               else if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
+                    begin
+                         if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[x][y].nomArmure) then
+                         begin
+                         dropInventaire(personnage,i,j,'armure');
+                         boucle5:=false;
+                         end;
+                    end
+
+               end;
+
+        end;
+
+
+        end;
+end;
+
+procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
+begin
+     if slotBombePotionDispo(typeItem)<>-1 then
+     modificationInventaireItem(0,slotBombePotionDispo(typeitem));
+end;
+
+// Drop un item de l'inventaire
+procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
 begin
      if typeItem='arme' then
@@ -1133,6 +1269,13 @@ begin
           modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
 
      end
+     else if typeItem='equipement' then
+     begin
+     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+     dropEquipement(personnage,x,y);
+     end
+     else if typeItem='bombe' then
+     modificationInventaireItem(0,slotFromCoordonne(x-2,y,typeItem))
      else
      modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
 
