@@ -152,6 +152,8 @@ procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:stri
 
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
 
+procedure drop2Loots(numeroItem,numeroItem2:integer);
+
 procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 
 // Permet d'équipper un équipement
@@ -968,6 +970,7 @@ begin
      end
      else if (typeItem='drop') then
      begin
+
      if (dispoX <> -1) then
           begin
           personnage.inventaire.invDrop[dispoX][dispoY]:=stuffDispo.invDropDispo[numItem];
@@ -1049,13 +1052,13 @@ begin
 
       else if (typeItem='drop') then
         begin
-
           for i:=0 to 3 do
           begin
               for j:=0 to 3 do
               begin
               if ((personnage.inventaire.invDrop[i][j].nomDrop='VIDE') and (boucle<>true)) then
                   begin
+
                   boucle:=true;
                   res.xA:=i;
                   res.yA:=j;
@@ -1133,6 +1136,23 @@ begin
           end;
      end;
      end;
+end;
+
+function slotDropsForge(numeroItem:integer):integer;
+var
+   s,res:integer;
+   boucle:boolean;
+begin
+     boucle:=true;
+     for s:=49 to 64 do
+     begin
+          if (itemSlot(s)=numeroItem) and (boucle=true) then
+          begin
+          boucle:=false;
+          res:=s;
+          end;
+     end;
+     slotDropsForge:=res;
 end;
 
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
@@ -1229,6 +1249,13 @@ procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 begin
      if slotBombePotionDispo(typeItem)<>-1 then
      modificationInventaireItem(0,slotBombePotionDispo(typeItem));
+end;
+
+procedure drop2Loots(numeroItem,numeroItem2:integer);
+begin
+     modificationInventaireItem(0,slotDropsForge(numeroItem));
+     modificationInventaireItem(0,slotDropsForge(numeroItem2));
+     recupInventaire(personnage1);
 end;
 
 // Drop un item de l'inventaire
