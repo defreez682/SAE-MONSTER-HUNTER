@@ -853,16 +853,18 @@ begin
      begin
           for j:= 0 to 3 do
           begin
-               if (i>4) then
-               boucle:=false
-
-               else if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.ArmeEquipee.nomArme <>'VIDE') and (boucle=true)  then
+                if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.invArme[i][j].nomArme <>'VIDE') and (boucle=true)  then
                     begin
+
                     personnage.inventaire.invArme[i][j].estEquipee:=true;
+
                     boucle:=false;
                     end
                else
+               begin
                   personnage.inventaire.invArme[i][j].estEquipee:=false;
+
+               end;
 
 
           end;
@@ -891,10 +893,9 @@ begin
                       boucle1:=false;
                       end;
                  end
-                 else
-                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-                 if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
+
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
                  begin
                       if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][0].nomArmure) then
                       begin
@@ -902,10 +903,8 @@ begin
                       boucle2:=false;
                       end;
                  end
-                 else
-                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-                 if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
                  begin
                       if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][0].nomArmure) then
                       begin
@@ -913,10 +912,8 @@ begin
                       boucle3:=false;
                       end;
                  end
-                 else
-                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-                 if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
                  begin
                       if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][1].nomArmure) then
                       begin
@@ -924,19 +921,15 @@ begin
                       boucle4:=false;
                       end;
                  end
-                 else
-                  personnage.inventaire.invArme[i][j].estEquipee:=false;
 
-                 if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
                  begin
                       if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][2].nomArmure) then
                       begin
                       personnage.inventaire.invArmure[i][j].estEquipee:=true;
                       boucle5:=false;
                       end;
-                 end
-                 else
-                  personnage.inventaire.invArme[i][j].estEquipee:=false;
+                 end;
 
             end;
 

@@ -965,6 +965,7 @@ begin
               couleurtexte(couleur);
               deplacerCurseurXY(28+23*i,21-5*j);
               write('Attaque : ',personnage.inventaire.invArme[i][j].ratioAD:2:2);
+
               if (personnage.inventaire.invArme[i][j].estEquipee=true) then
               begin
                    deplacerCurseurXY(28+23*i,22-5*j);
@@ -981,6 +982,7 @@ begin
               couleurtexte(couleur);
               deplacerCurseurXY(4+22*i,21-5*j);
               write('Attaque : ',personnage.inventaire.invArme[i][j].ratioAD:2:2);
+
               if (personnage.inventaire.invArme[i][j].estEquipee=true) then
               begin
                    deplacerCurseurXY(4+22*i,22-5*j);
@@ -1151,7 +1153,7 @@ procedure affichageInfoPerso(position:typePosition;personnage:typePersonnage);
 begin
      dessinerCadreXY(36,34,57,50,double,15,0);
      deplacerCurseurXY(37,35);
-     couleurTexte(20);
+
      write(getNomActuelle(personnage1));
      deplacerCurseurXY(37,37);
      write('Sexe : ',getSexeActuelle(personnage));
