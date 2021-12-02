@@ -141,6 +141,8 @@ function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoords
 
 //--------------------- FONCTIONNALITE INVENTAIRE ------------------------------
 
+function slotBombePotionDispo(typeItem:string):integer;
+
 procedure recupArmeArmureEquipee(var personnage:typePersonnage);
 
 procedure recupInventaire(var personnage:typePersonnage);
@@ -149,6 +151,8 @@ procedure recupInventaire(var personnage:typePersonnage);
 procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
+
+procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 
 // Permet d'équipper un équipement
 procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
@@ -1104,14 +1108,29 @@ begin
      isInventairePlein.yA:=res.yA;
 end;
 
-function slotBombePotionDispo():integer;
+function slotBombePotionDispo(typeItem:string):integer;
 var
    s,res:integer;
    boucle:boolean;
 begin
      boucle:=true;
      res:=-1;
-     for s:= 32 to 48 do
+     if typeItem='potion' then
+     begin
+          for s:= 33 to 40 do
+          begin
+               if (itemSlot(s)<>0) and (boucle = true) then
+               begin
+               slotBombePotionDispo:=res;
+               boucle:=false;
+               end;
+          end;
+     slotBombePotionDispo:=res;
+     end
+
+     else if typeItem='bombe' then
+     begin
+     for s:= 41 to 48 do
      begin
           if (itemSlot(s)<>0) and (boucle = true) then
           begin
@@ -1119,7 +1138,7 @@ begin
           boucle:=false;
           end;
      end;
-     slotBombePotionDispo:=res;
+     end;
 end;
 
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
@@ -1212,9 +1231,9 @@ begin
         end;
 end;
 
-procedure dropConsommable(var personnage:typePersonnage;s:integer);
+procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 begin
-     if slotBombePotionDispo()<>-1 then
+     if slotBombePotionDispo(typeItem)<>-1 then
      modificationInventaireItem(0,slotBombePotionDispo());
 end;
 
