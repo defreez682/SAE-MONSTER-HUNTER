@@ -160,6 +160,9 @@ procedure affichageInventaireDrops(var personnage:typePersonnage;position:typePo
 //--------------------- POSITION DANS INVENTAIRE ------------------------------
 
 
+// Detecte les touches directionnelles et appelle les procédure calculerCoordsApresDeplacement et dessinCadreCoords
+procedure deplacementInventaire(var position:typePosition;var personnage:typePersonnage;q:integer);
+
 // Modifie les coordonnées actuelles dans l'inventaire après un déplacement z
 procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var personnage:typePersonnage);
 
@@ -220,7 +223,7 @@ function slotDropsForge(numeroItem:integer):integer;
 
 implementation
 uses
-    SysUtils,inventaireihm,personnage,chambreIHM;
+    SysUtils,inventaireihm,personnage,chambreIHM,crtPerso;
 
 
 
@@ -460,7 +463,7 @@ begin
      position.infoItem:=false;
      position.Armes:=false;
      affichageInventaireIHM(personnage);
-     deplacementInventaireIHM(position,personnage,58);
+     deplacementInventaire(position,personnage,58);
 
 
 end;
@@ -473,7 +476,7 @@ begin
      Position.cadreInventaires:=false;
      position.armes:=true;
      affichageInventaireArmesIHM(personnage);
-     deplacementInventaireIHM(position,personnage,27);
+     deplacementInventaire(position,personnage,27);
 end;
 
 // Affiche l'inventaire des armures d'un joueur
@@ -484,7 +487,7 @@ begin
      Position.cadreInventaires:=false;
      position.armures:=true;
      affichageInventaireArmuresIHM(personnage);
-     deplacementInventaireIHM(position,personnage,27);
+     deplacementInventaire(position,personnage,27);
 end;
 
 // Affiche l'inventaire des consommables d'un joueur
@@ -495,7 +498,7 @@ begin
      Position.cadreInventaires:=false;
      position.consommables:=true;
      affichageInventaireConsoIHM(personnage);
-     deplacementInventaireIHM(position,personnage,27);
+     deplacementInventaire(position,personnage,27);
 end;
 
 // Affiche l'inventaire des drops d'un joueur
@@ -506,12 +509,50 @@ begin
      Position.cadreInventaires:=false;
      position.drops:=true;
      affichageInventaireDropsIHM(personnage);
-     deplacementInventaireIHM(position,personnage,27);
+     deplacementInventaire(position,personnage,27);
 end;
 
 
 //--------------------- POSITION DANS INVENTAIRE ------------------------------
 
+
+// Detecte les touches directionnelles et appelle les procédure calculerCoordsApresDeplacement et dessinCadreCoords
+procedure deplacementInventaire(var position:typePosition;var personnage:typePersonnage;q:integer);
+
+var
+  Ch : Char;
+
+Begin
+
+   position.precedPos:='';
+  repeat
+    Ch := ReadKey;
+    case Ch of
+    #0: case ReadKey of    { Le code est #0, on appelle à nouveau ReadKey }
+        #72:    begin
+                     calculerCoordsApresDeplacement(1,position,personnage);      // Haut
+                     dessinCadreCoords(position,q,personnage);
+
+                end;
+
+        #80:    begin
+                     calculerCoordsApresDeplacement(2,position,personnage);    // Bas
+                     dessinCadreCoords(position,q,personnage);
+                end;
+        #77:    begin
+                     calculerCoordsApresDeplacement(3,position,personnage);   // Droite
+                     dessinCadreCoords(position,q,personnage);
+                end;
+        #75:    begin
+                     calculerCoordsApresDeplacement(4,position,personnage);   // Gauche
+                     dessinCadreCoords(position,q,personnage);
+                end;
+
+        end;
+    end;
+  until Ch = #13; { On quitte avec Entrée }
+  EntreePressee(position,personnage);
+end;
 
 // Modifie les coordonnées actuelles dans l'inventaire après un déplacement z
 procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var personnage:typePersonnage);
@@ -827,26 +868,26 @@ begin
                position.infoItem:=false;
                position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
                position.coordsActuelsInventaire.yA:=position.coordsActuelsItem.yA;
-               deplacementInventaireIHM(position,personnage,q);
+               deplacementInventaire(position,personnage,q);
 
           end;
         1:
           begin
           dropInventaire(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,position.precedPos);
           if (position.precedPos='arme') then
-          affichageArme(personnage)
+          affichageInventaireArmesIHM(personnage)
           else if (position.precedPos='armure') then
-          affichageArmure(personnage)
+          affichageInventaireArmuresIHM(personnage)
           else if (position.precedPos='potion') or (position.precedPos='bombe')  then
-          affichageConso(personnage)
+          affichageInventaireConsoIHM(personnage)
           else if (position.precedPos='drop') then
-          affichageDrops(personnage);
+          affichageInventaireDropsIHM(personnage);
 
 
           position.infoItem:=false;
           position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
           position.coordsActuelsInventaire.yA:=position.coordsActuelsItem.yA;
-          deplacementInventaireIHM(position,personnage,q);
+          deplacementInventaire(position,personnage,q);
 
           end;
         2:
@@ -854,12 +895,12 @@ begin
           if (position.precedPos='arme') then
           begin
           equipEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,'arme');
-          AffichageArme(personnage);
+          affichageInventaireArmesIHM(personnage);
           end
           else if (position.precedPos='armure') then
           begin
           equipEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,'armure');
-          AffichageArmure(personnage);
+          affichageInventaireArmuresIHM(personnage);
           end
           else if (position.precedPos='equipement') then
           begin
@@ -870,7 +911,7 @@ begin
           position.infoItem:=false;
           position.coordsActuelsInventaire.xA:=position.coordsActuelsItem.xA;
           position.coordsActuelsInventaire.yA:=position.coordsActuelsItem.yA;
-          deplacementInventaireIHM(position,personnage,q);
+          deplacementInventaire(position,personnage,q);
           end;
 
 

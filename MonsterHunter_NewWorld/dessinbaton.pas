@@ -7,18 +7,44 @@ interface
 uses
   Classes, SysUtils,GestionEcran,windows;
 
+// Dessine un personnage
 procedure dessinPersonnage(x,y:Integer);
+
+// Dessine une épée
 procedure dessinEpee(x,y:Integer);
+
+// Dessine un plastron
 procedure dessinPlastron(x,y:Integer);
+
+// Dessine des jambières
 procedure dessinJambiere(x,y:Integer);
+
+// Dessine des bottes
 procedure dessinBotte(x,y:Integer);
+
+// Dessine un casque
 procedure dessinCasque(x,y:Integer);
+
+// Dessine des gants
 procedure dessinGants(x,y:Integer);
+
+// Dessine le cube autour du personnage
 procedure dessin3D(x,y:integer);
+
+// Utilise la même procédure que dans Gestion Ecran mais sans remettre le curseur à 0;0
 procedure ColorierZoneRemix(couleur : Byte ;couleurT : Byte; xStart,xEnd,y:Integer);
+
+// Utilise la même procédure que dans Gestion Ecran mais sans effacer le contenu du cadre
 procedure dessinerCadreRemix(c1, c2 : coordonnees; t : typeBordure; ct, cf : byte);
+
+// Utilise la même procédure que dans Gestion Ecran mais en appelant la procédure dessinerCadreRemix
 procedure dessinerCadreXYRemix(x,y,x2,y2 : integer; t : typeBordure; coulTrait, coulFond : byte);
+
+
 implementation
+
+
+// Dessine le cube autour du personnage
 procedure dessin3D(x,y:integer);
 begin
   deplacerCurseurXY(x,y);
@@ -55,6 +81,7 @@ begin
 
 end;
 
+// Dessine un personnage
 procedure dessinPersonnage(x,y:Integer);
 begin
 
@@ -86,6 +113,7 @@ begin
 
 end;
 
+// Dessine une épée
 procedure dessinEpee(x,y:Integer);
 begin
 
@@ -102,6 +130,7 @@ begin
 
 end;
 
+// Dessine un plastron
 procedure dessinPlastron(x,y:Integer);
 begin
 
@@ -120,6 +149,7 @@ begin
 
 end;
 
+// Dessine des jambières
 procedure dessinJambiere(x,y:Integer);
 begin
      deplacerCurseurXY(x,y);
@@ -135,6 +165,7 @@ begin
 
 end;
 
+// Dessine des bottes
 procedure dessinBotte(x,y:Integer);
 begin
      deplacerCurseurXY(x,y);
@@ -151,6 +182,7 @@ begin
      write('    (_-____)');
 end;
 
+// Dessine un casque
 procedure dessinCasque(x,y:Integer);
 begin
      deplacerCurseurXY(x,y);
@@ -165,6 +197,7 @@ begin
 
 end;
 
+// Dessine des gants
 procedure dessinGants(x,y:Integer);
 begin
      deplacerCurseurXY(x,y);
@@ -182,8 +215,6 @@ begin
      write('`---.________/');
 
 end;
-
-
 
 // Utilise la même procédure que dans Gestion Ecran mais sans remettre le curseur à 0;0
 procedure ColorierZoneRemix(couleur : Byte ;couleurT : Byte; xStart,xEnd,y:Integer);
@@ -265,4 +296,6 @@ procedure dessinerCadreXYRemix(x,y,x2,y2 : integer; t : typeBordure; coulTrait, 
       c2.y := y2;
       dessinerCadreRemix(c1, c2, t, coulTrait, coulFond);
     end;
+
+
 end.
