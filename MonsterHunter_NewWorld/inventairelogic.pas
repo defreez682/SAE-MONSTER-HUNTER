@@ -360,7 +360,7 @@ begin
                if (position.precedPos='equipement') then
                begin
                position.equipement:=true;
-               position.precedPos:='';
+               reinitialisationCadreBlanc();
                end
                else if (position.precedPos='armes') then
                position.armes:=true
@@ -371,6 +371,7 @@ begin
                else if (position.precedPos='conso') then
                position.consommables:=true;
 
+               position.precedPos:='';
 
           end
           else if (z=3) then // Si Déplacement Droite
@@ -570,7 +571,7 @@ begin
      begin
          if (position.precedPos='equipement') then
          begin
-         reinitilisationMur();
+         reinitilisationInfoItem();
          position.equipement:=true;
          q:=58;
          end
@@ -645,7 +646,7 @@ begin
           else if (position.precedPos='equipement') then
           begin
           desequipEquipement(personnage,position.coordsActuelsItem.xA,position.coordsActuelsItem.yA,'equipement');
-          reinitilisationMur();
+          reinitilisationInfoItem();
           end;
 
           position.infoItem:=false;
@@ -1234,7 +1235,7 @@ end;
 procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 begin
      if slotBombePotionDispo(typeItem)<>-1 then
-     modificationInventaireItem(0,slotBombePotionDispo());
+     modificationInventaireItem(0,slotBombePotionDispo(typeItem));
 end;
 
 // Drop un item de l'inventaire

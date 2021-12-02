@@ -40,6 +40,8 @@ procedure dessinCadreCoords(position:typePosition;q:integer;var personnage:typeP
 // Reinitialise certains éléments de l'inventaire à son origine
 procedure reinitialisationInventaireGeneral();
 
+procedure reinitialisationCadreBlanc();
+
 procedure reinitilisationInfoItem();
 
 procedure reinitialisationArmes(personnage:typePersonnage);
@@ -87,21 +89,22 @@ begin
 
 //----------- Cadres Principaux ---------------------
 effacerecran();
-cadresPrincipauxInventaire(personnage);
+ cadresPrincipauxInventaire(personnage);
 
 //----------- DessinBaton ---------------------------------------------
+     dessin3D(15,38);
      dessinPersonnage(20,40);
+
      dessinEpee(70,34);
      dessinPlastron(96,41);
      dessinJambiere(97,51);
-     dessinBotte(78,50);
+     dessinBotte(77,50);
      dessinCasque(99,33);
-     dessinGants(76,40);
-
-
+     dessinGants(75,40);
+     dessinerCadreXYRemix(67,32,113,57,double,3,0);
 //---------------------------------------
 
-
+deplacerCurseurXY(97,60);
 
 
 end;
@@ -194,13 +197,13 @@ begin
         if ((position.coordsActuelsInventaire.xA=1) and (position.coordsActuelsInventaire.yA=2)) then     // Cadre Epee
                    begin
                    reinitialisationInventaireGeneral();
-                   for y:=32 to 36 do
+                   for y:=33 to 36 do
                     ColorierZoneRemix(0,12,69,92,y);
                    end
         else if ((position.coordsActuelsInventaire.xA=2) and (position.coordsActuelsInventaire.yA=2)) then // Cadre Casque
                    begin
                    reinitialisationInventaireGeneral();
-                   for y:=32 to 36 do
+                   for y:=33 to 36 do
                     ColorierZoneRemix(0,12,98,109,y);
                    end
         else if ((position.coordsActuelsInventaire.xA=1) and (position.coordsActuelsInventaire.yA=1)) then // Cadre Gant
@@ -231,9 +234,13 @@ begin
                    begin
                    reinitialisationInventaireGeneral();
                    position.coordsActuelsInventaire.yA:=0;                                   // Cadre Personnage
-                   for y:=39 to 52 do
+                   for y:=39 to 51 do
                     ColorierZoneRemix(0,12,19,30,y);
                    end;
+                   ColorierZoneRemix(0,15,19,30,41);
+                   ColorierZoneRemix(0,15,28,31,49);
+                   ColorierZoneRemix(0,15,19,21,49);
+        deplacerCurseurXY(97,60);
         end
 
      else if (position.cadreInventaires) then                                        // Cadre changement d'inventaire
@@ -365,11 +372,11 @@ end;
 // Créer les graphismes de l'inventaire principal
 procedure cadresPrincipauxInventaire(personnage:typePersonnage);
 begin
-     dessinerCadreXY(67,32,112,57,simple,11,0);
+
 
      dessinerCadreXY(0,31,25,33,simple,15,0);
      deplacerCurseurXY(1,32);
-     write('Inventaire de ', getNomActuelle(personnage1));
+     write('Inventaire de ', getNomActuelle(personnage));
      ColorierZoneRemix(15,15,20,95,60);
 
 end;
@@ -378,26 +385,25 @@ end;
 procedure reinitialisationInventaireGeneral();
 var
   y:Integer;
-  x:integer;
-  z:Integer;
 begin
-     for y:=0 to 55 do
+     for y:=33 to 55 do
          ColorierZoneRemix(0,15,69,110,y);
      for y:=39 to 55 do
          ColorierZoneRemix(0,15,19,33,y);
 
-
-
-
+end;
+procedure reinitialisationCadreBlanc();
+var
+   y:integer;
+begin
 
      for y:=56 to 60 do
      ColorierZoneRemix(0,0,20,100,y);
-                                             // CADRE
-     couleurFond(0);
-     couleurTexte(6);
 
+     couleurFond(0);
      deplacerCurseurXY(25,32);
      ColorierZoneRemix(15,15,20,95,60);
+     dessinerCadreXYRemix(67,32,113,57,double,3,0);
 end;
 
 procedure reinitialisationArmes(personnage:typePersonnage);
@@ -624,11 +630,15 @@ var
   y:Integer;
 begin
   for y:=34 to 50 do
-         ColorierZoneRemix(0,0,35,56,y);
+         ColorierZoneRemix(0,0,36,57,y);
   for y:=34 to 50 do
          ColorierZoneRemix(0,0,47,68,y);
 
-  dessinerCadreXY(67,32,112,57,simple,11,0);
+  dessinerCadreXYRemix(67,32,113,57,double,3,0);
+
+
+
+
 
 
 end;
@@ -1139,29 +1149,26 @@ end;
 // Affiche les infos du perso
 procedure affichageInfoPerso(position:typePosition;personnage:typePersonnage);
 begin
-     dessinerCadreXY(35,34,56,50,double,15,0);
-     deplacerCurseurXY(36,35);
+     dessinerCadreXY(36,34,57,50,double,15,0);
+     deplacerCurseurXY(37,35);
      couleurTexte(20);
      write(getNomActuelle(personnage1));
-     deplacerCurseurXY(36,37);
-     write('Sexe : ',getSexeActuelle(personnage1));
-     deplacerCurseurXY(36,39);
-     write('Argent : ',getOrActuelle(personnage1));
+     deplacerCurseurXY(37,37);
+     write('Sexe : ',getSexeActuelle(personnage));
+     deplacerCurseurXY(37,39);
+     write('Argent : ',getOrActuelle(personnage));
      while (Readkey <> #13) do
            begin
 
            end;
 
-
+      reinitilisationInfoItem();
       deplacementInventaireIHM(position,personnage,58);
 
 
 end;
 
-procedure dropEquipementIHM();
-begin
 
-end;
 
 end.
 
