@@ -51,6 +51,7 @@ end;
 
 procedure dessinEpee(x,y:Integer);
 begin
+
      deplacerCurseurXY(x,y);
      write('      /| ___________');
      deplacerCurseurXY(x,y+1);
@@ -145,141 +146,6 @@ begin
 
 end;
 
-procedure dessinMur();
-var
-  y:Integer;
-  j:Integer;
-  i:integer;
-  z:Integer;
-begin
-     couleurTexte(6);
-     j:=0;
-     for y:=31 to 59 do
-         begin
-              deplacerCurseurXY(65,y);
-              write('|');
-         end;
-
-     for y:=59 downto 31 do
-         begin
-              j:=j+1;
-              deplacerCurseurXY(64-j,y);
-              write('\');
-         end;
-     j:=0;
-
-     for y:=55 downto 31 do
-         begin
-              j:=j+1;
-              deplacerCurseurXY(65-j,y);
-              write('\');
-         end;
-     j:=0;
-     for y:=50 downto 31 do
-         begin
-              j:=j+1;
-              deplacerCurseurXY(65-j,y);
-              write('\');
-         end;
-     j:=0;
-     for y:=45 downto 31 do
-         begin
-              j:=j+1;
-              deplacerCurseurXY(65-j,y);
-              write('\');
-         end;
-     j:=0;
-     for y:=40 downto 31 do
-         begin
-              j:=j+1;
-              deplacerCurseurXY(65-j,y);
-              write('\');
-         end;
-     j:=0;
-     for y:=35 downto 31 do
-         begin
-              j:=j+1;
-              deplacerCurseurXY(65-j,y);
-              write('\');
-         end;
-//---------------------------
-     j:=65;
-     i:=60;
-     for y:=5 downto 1 do
-         begin
-              j:=j-5;
-              i:=i-5;
-              for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(j,i-z);
-                       write('|');
-                  end;
-         end;
-
-
-
-     for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(58,48-z);
-                       write('|');
-                  end;
-     for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(52,42-z);
-                       write('|');
-                  end;
-     for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(46,36-z);
-                       write('|');
-                  end;
-
-
-
-
-
-
-     j:=65;
-     i:=50;
-     for y:=3 downto 1 do
-         begin
-              j:=j-5;
-              i:=i-5;
-              for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(j,i-z);
-                       write('|');
-                  end;
-         end;
-
-     for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(58,38-z);
-                       write('|');
-                  end;
-     for z:=0 to 1 do
-                  begin
-                       deplacerCurseurXY(52,32-z);
-                       write('|');
-                  end;
-
-
-
-
-     j:=65;
-     i:=40;
-     for y:=1 downto 1 do
-         begin
-              j:=j-5;
-              i:=i-5;
-              for z:=0 to 3 do
-                  begin
-                       deplacerCurseurXY(j,i-z);
-                       write('|');
-                  end;
-         end;
-     deplacerCurseurXY(65,60);
-end;
 
 procedure ColorierZoneRemix(couleur : Byte ;couleurT : Byte; xStart,xEnd,y:Integer);
     var

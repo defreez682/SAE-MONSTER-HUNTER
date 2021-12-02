@@ -40,7 +40,7 @@ procedure dessinCadreCoords(position:typePosition;q:integer;var personnage:typeP
 // Reinitialise certains éléments de l'inventaire à son origine
 procedure reinitialisationInventaireGeneral();
 
-procedure reinitilisationMur();
+procedure reinitilisationInfoItem();
 
 procedure reinitialisationArmes(personnage:typePersonnage);
 
@@ -91,12 +91,13 @@ cadresPrincipauxInventaire(personnage);
 
 //----------- DessinBaton ---------------------------------------------
      dessinPersonnage(20,40);
-     dessinEpee(70,33);
-     dessinPlastron(96,40);
-     dessinJambiere(97,50);
-     dessinBotte(78,49);
-     dessinCasque(99,32);
-     dessinGants(76,39);
+     dessinEpee(70,34);
+     dessinPlastron(96,41);
+     dessinJambiere(97,51);
+     dessinBotte(78,50);
+     dessinCasque(99,33);
+     dessinGants(76,40);
+
 
 //---------------------------------------
 
@@ -364,7 +365,7 @@ end;
 // Créer les graphismes de l'inventaire principal
 procedure cadresPrincipauxInventaire(personnage:typePersonnage);
 begin
-     dessinMur();
+     dessinerCadreXY(67,32,112,57,simple,11,0);
 
      dessinerCadreXY(0,31,25,33,simple,15,0);
      deplacerCurseurXY(1,32);
@@ -394,22 +395,6 @@ begin
                                              // CADRE
      couleurFond(0);
      couleurTexte(6);
-     for y:=55 to 60 do
-     begin
-          deplacerCurseurXY(65,y);
-          write('|');
-
-     end;
-     x:=64;
-     y:=60;
-     for z:=5 downto 1 do
-         begin
-         deplacerCurseurXY(x,y);
-         write('\');
-         x:=x-1;
-         y:=y-1;
-
-         end;
 
      deplacerCurseurXY(25,32);
      ColorierZoneRemix(15,15,20,95,60);
@@ -633,8 +618,8 @@ begin
 
 end;
 
-// Reinitialise les murs à l'endroit ou les infos items apparaissent
-procedure reinitilisationMur();
+
+procedure reinitilisationInfoItem();
 var
   y:Integer;
 begin
@@ -642,7 +627,10 @@ begin
          ColorierZoneRemix(0,0,35,56,y);
   for y:=34 to 50 do
          ColorierZoneRemix(0,0,47,68,y);
-  dessinMur();
+
+  dessinerCadreXY(67,32,112,57,simple,11,0);
+
+
 end;
 
 // Affiche les infos de l'item sur lequel le curseur se trouve
@@ -679,11 +667,11 @@ begin
              write('Poids : ',personnage.inventaire.ArmeEquipee.poids);
              couleurTexte(15);
              deplacerCurseurXY(52,44);
-             write('Unequip');
+             write('Desequipper');
              deplacerCurseurXY(52,46);
-             write('Drop');
+             write('Jeter');
              deplacerCurseurXY(52,48);
-             write('Close');
+             write('Fermer');
         end
         else
             begin
@@ -1164,7 +1152,7 @@ begin
 
            end;
 
-      reinitilisationMur();
+
       deplacementInventaireIHM(position,personnage,58);
 
 
