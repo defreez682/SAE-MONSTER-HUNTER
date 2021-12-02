@@ -9,7 +9,6 @@ interface
 type
 
 //------------- Arme -------------------
-
   arme = record
     nomArme:String;
     poids:Integer;
@@ -19,7 +18,6 @@ type
     end;
 
  //------------ Armure -----------------
-
   armure = record
     typeArmure:String;
     nomArmure:String;
@@ -42,42 +40,39 @@ type
     prix:integer;
     end;
 
-  cuisine = record
-    nomPlat:String;
-    bonusEffet:String;
-    bonusValeur:Integer;
-    end;
-
 //----------- Drops ------------------
   drop = record
     nomDrop:String;
     end;
 
-
-//----------- Inventaires ------------
+//----------- Inventaires du joueur ------------
   typeInventaire = record
     invArme : array[0..3,0..3] of arme;
     invArmure : array[0..3,0..3] of armure;
-    invPotion : array[0..1,0..3] of potion;   // A CHANGER ( coordonnées )
-    invBombe : array[0..1,0..3] of bombe;     // A CHANGER ( coordonnées )
+    invPotion : array[0..1,0..3] of potion;
+    invBombe : array[0..1,0..3] of bombe;
     invDrop : array[0..3,0..3] of drop;
     ArmureEquipee : array[1..2,0..2] of armure;
     ArmeEquipee : arme;
     end;
+
+//----------- Base de donnée de stuff disponibles ------------
 typeStuffDisponible = record
-    invArmeDispo : array[0..20] of arme;    // 20 ARMES DISPO
+    invArmeDispo : array[0..20] of arme;      // 20 ARMES
     invArmureDispo : array[0..20] of armure;  // 20 ARMURES
     invPotionDispo : array[0..3] of potion;   // 3 POTIONS
     invBombeDispo : array[0..3] of bombe;     // 3 BOMBES
-    invCuisineDispo : array[1..6] of cuisine;  // 6 PLATS
-    invDropDispo : array[0..20] of drop;   // 20 DROPS
+    invDropDispo : array[0..20] of drop;      // 20 DROPS
     end;
 
-
-  typeCoordsInventaire=record
+//------------ Type Coordonnée --------------------------
+  typeCoords=record
    xA:Integer;
    yA:Integer;
    end;
+
+//---- Permet de savoir la position de l'utilisateur dans l'inventaire ---------
+
   typePosition=record
       equipement:boolean;
       cadreInventaires:boolean;
@@ -86,10 +81,13 @@ typeStuffDisponible = record
       armures:boolean;
       drops:boolean;
       consommables:boolean;
-      precedPos:string;
-      coordsActuelsInventaire:typeCoordsInventaire;
-      coordsActuelsItem:typeCoordsInventaire;
+      precedPos:string;               // Stocke la position de l'inventaire ou l'utilisateur se trouvait
+
+      coordsActuelsInventaire:typeCoords; // Représente les coordonnées de l'utilisateur
+      coordsActuelsItem:typeCoords;   // Stocke les coordonnées ou l'utilisateur se trouvait
   end;
+
+//---- Informations du personnage ---------
   typePersonnage=record
     pseudo:Text;
     Sexe:Text;
@@ -98,83 +96,127 @@ typeStuffDisponible = record
     lvlglobal : Text;
     lvlexp : Text;
     Taille:Text;
-    existe:Text;
+    existe:Text;  // 0 si le personnage n'existe pas , 1 si il existe
   end;
+
+
 var
-   stuffDispo:typeStuffDisponible;
-   invItem : file of Integer;
+   stuffDispo:typeStuffDisponible; // Variable contenant la base de donnée
+   invItem : file of Integer;      // Fichier contenant l'inventaire du joueur
 
 
+
+
+//-------------------- SAUVEGARDE INVENTAIRE -----------------------------------
+
+
+{Principe : Il y a 16 slots pour les armes, 16 pour les armures, 8 pour les potions et 8 pour les bombes , 16 pour les drops,1 pour l'arme équipée et 5 pour l'armure équipée
+ce qui nous fait 70 slots.
+- 1-16 premières lignes : Armes
+- 17-32 : Armure
+- 33 à 40 : Potion
+- 41 à 48 : Bombes
+- 49 à 64 : Drops
+- 67 : Arme Equipee
+- 65 66 68 69 70 ( Armure Equipee )}
+
+
+
+// Crée un fichier avec un nombre de ligne donné en paramètre avec pour chaque ligne un IDItem donné (ici 0 car vide ) |  Représente l'inventaire du personnage sauvegardé
+procedure creationInventaireItem(idItem,Slot : Integer);
+
+// Modifie à la ligne donnée , l'ID de l'item  | Quand il y a un changement d'inventaire on change l'ID de l'item à l'emplacement voulu
+procedure modificationInventaireItem(idItem,Slot : Integer);
+
+// Renvoie l'ID de l'item à la ligne voulue
+function itemSlot(Slot : Integer) : Integer;
+
+// Recupère les ID des items dans le fichier contenant l'inventaire,les associe à la base de donnée, et les affecte à l'inventaire du personnage en fonction du slot
+procedure recupInventaire(var personnage:typePersonnage);
+
+// Change estEquipee à true pour les armes et armures équipées après avoir récuper les items dans les fichiers
+procedure recupArmeArmureEquipee(var personnage:typePersonnage);
 
 
 //-------------------- AFFICHAGE INVENTAIRES -----------------------------------
 
 
-// Affichage de l'inventaire d'un joueur
+// Affiche l'inventaire d'un joueur
 procedure affichageInventaire(personnage:typePersonnage);
 
-// Affichage de l'inventaire des armes d'un joueur
+// Affiche l'inventaire des armes d'un joueur
 procedure affichageInventaireArmes(var personnage:typePersonnage;position:typePosition);
 
-// Affichage de l'inventaire des armures d'un joueur
+// Affiche l'inventaire des armures d'un joueur
 procedure affichageInventaireArmures(var personnage:typePersonnage;position:typePosition);
 
-// Affichage de l'inventaire des consommables d'un joueur
+// Affiche l'inventaire des consommables d'un joueur
 procedure affichageInventaireConsommables(var personnage:typePersonnage;position:typePosition);
 
-// Affichage de l'inventaire des drops d'un joueur
+// Affiche l'inventaire des drops d'un joueur
 procedure affichageInventaireDrops(var personnage:typePersonnage;position:typePosition);
 
 
 //--------------------- POSITION DANS INVENTAIRE ------------------------------
 
 
-// Renvoie les coordonnées actuelles dans l'inventaire après un déplacement z
+// Modifie les coordonnées actuelles dans l'inventaire après un déplacement z
 procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var personnage:typePersonnage);
 
 // Appelle la procédure relative à l'endroit ou la touche entrée est pressée
 procedure entreePressee(var position:typePosition;var personnage:typePersonnage);
 
-// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire ou -1 si l'inventaire est plein
-function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoordsInventaire;
+// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire donné en paramètre ou -1 si l'inventaire est plein
+function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoords;
 
 
-//--------------------- FONCTIONNALITE INVENTAIRE ------------------------------
+//--------------------- SUPPRIMER UN OBJET -------------------------------------
 
-function slotBombePotionDispo(typeItem:string):integer;
 
-procedure recupArmeArmureEquipee(var personnage:typePersonnage);
-
-procedure recupInventaire(var personnage:typePersonnage);
-
-// Permet de drop une armure/arme
+// Permet de supprimer l'item aux coordoonnées données en paramètres
 procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
+// Permet de supprimer l'équipement aux coordonnées données en paramètres
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
 
+// Permet de supprimer 2 loots données en paramètres ( FORGE )
 procedure drop2Loots(numeroItem,numeroItem2:integer);
 
+// Permet de supprimer 1 consommable envoyé en paramètres ( MARCHAND VENDRE )
 procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 
-// Permet d'équipper un équipement
-procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 
-// Permet de déséquipper un équipement
-procedure desequipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+//--------------------- AJOUTER UN OBJET ---------------------------------------
 
-// Ajoute un item à l'inventaire du personnage
+
+// Ajoute l'item donné en paramètre à l'inventaire du personnage si il y a de la place
 procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
 
 
+//--------------------- EQUIPEMENT ---------------------------------------------
 
-// Sauvegarde
 
-{On créer le fichier et le slot utiliser}
-procedure creationInventaireItem(idItem,Slot : Integer);
-{Modifie le slot de l'inventaire avec l'id de l'arme}
-procedure modificationInventaireItem(idItem,Slot : Integer);
-{Renvoie l'id de l'arme sur le slot indiqué}
-function itemSlot(Slot : Integer) : Integer;
+// Permet d'équiper l'arme ou l'armure aux coordonnées données en paramètres
+procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+
+// Permet de déséquiper l'arme ou l'armure aux coordonnées données en paramètres
+procedure desequipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
+
+
+//---------- TRADUCTION    COORDONNEES  >>>>   SLOTS DU FICHIERS  --------------
+
+
+// Renvoie le slot correspondant aux coordonnées et à la position de l'inventaire données en paramètre
+function slotFromCoordonne(x,y:integer;typeItem:string): integer;
+
+// Renvoie le slot correspondant du premier emplacement contenant un consommable spécifié en paramètre
+function slotBombePotionDispo(typeItem:string):integer;
+
+// Renvoie le slot correspondant de l'IDitem de drop donnés en paramètres si le joueur le possède ou -1 si il n'en possède pas
+function slotDropsForge(numeroItem:integer):integer;
+
+
+
 
 implementation
 uses
@@ -182,18 +224,15 @@ uses
 
 
 
-//-------------------Sauvegarde inventaire
 
-{Principe : Il y a 16 slots pour les armes, 16 pour les armures, 8 pour les potions et 8 pour les bombes (16 pour les drops je suppose?)
-ce qui nous fait 64 slots (un stack, comme dans  minecraft)
-- 1-16 première ligne : Armes
-- 17-32 : Armure
-- 33 à 40 : Potion
-- 41 à 48 : Bombes
-- 49 à 64 : Drops
-- 67 : arme equipee
-- 65 66 68 69 70 ( armure equippe )}
 
+
+
+
+//-------------------- SAUVEGARDE INVENTAIRE -----------------------------------
+
+
+// Crée un fichier avec un nombre de ligne donné en paramètre avec pour chaque ligne un IDItem donné (ici 0 car vide ) |  Représente l'inventaire du personnage sauvegardé
 procedure creationInventaireItem(idItem,Slot : Integer);
 begin
      assign(invItem, 'C:/MHNewWorld/data.bin');
@@ -203,7 +242,7 @@ begin
      close(invItem);
 end;
 
-
+// Modifie à la ligne donnée , l'ID de l'item  | Quand il y a un changement d'inventaire on change l'ID de l'item à l'emplacement voulu
 procedure modificationInventaireItem(idItem,Slot : Integer);
 begin
      assign(invItem, 'C:/MHNewWorld/data.bin');
@@ -213,6 +252,7 @@ begin
      close(invItem);
 end;
 
+// Renvoie l'ID de l'item à la ligne voulue
 function itemSlot(Slot : Integer) : Integer;
 var val : Integer;
 begin
@@ -224,13 +264,191 @@ begin
      close(invItem);
 end;
 
+// Recupère les ID des items dans le fichier contenant l'inventaire,les associe à la base de donnée, et les affecte à l'inventaire du personnage en fonction du slot
+procedure recupInventaire(var personnage:typePersonnage);
+var
+  s:integer; // Représente le slot dans le fichier data.bin
+  i,j:integer;
 
+// Ajoute pour chaque cellule de l'inventaire, l'ID de l'item stocké dans le fichier data.bin
+begin
+     s:=0;
+     for i:=0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invArme[i][j]:=stuffDispo.invArmeDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=16;
+     for i:=0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invArmure[i][j]:=stuffDispo.invArmureDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=32;
+     for i:=0 to 1 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invPotion[i][j]:=stuffDispo.invPotionDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=40;
+     for i:=0 to 1 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invBombe[i][j]:=stuffDispo.invBombeDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=48;
+     for i:=0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+          s:=s+1;
+          personnage.inventaire.invDrop[i][j]:=stuffDispo.invDropDispo[ItemSlot(s)];
+          end;
+     end;
+
+     s:=64;
+     for i:=1 to 2 do
+     begin
+          for j:= 0 to 2 do
+          begin
+          s:=s+1;
+          if ((i=1) and (j=2)) then
+             begin
+             personnage.inventaire.ArmeEquipee:=stuffDispo.invArmeDispo[ItemSlot(s)];
+             personnage.inventaire.ArmeEquipee.estEquipee:=true;
+             end
+          else
+             begin
+              personnage.inventaire.ArmureEquipee[i][j]:=stuffDispo.invArmureDispo[ItemSlot(s)];
+              personnage.inventaire.ArmureEquipee[i][j].estEquipee:=true;
+             end;
+          end;
+     end;
+     recupArmeArmureEquipee(personnage);
+
+end;
+
+// Change estEquipee à true pour les armes et armures équipées après avoir récuper les items dans les fichiers
+procedure recupArmeArmureEquipee(var personnage:typePersonnage);
+var
+  i,j:integer;
+  boucle,boucle1,boucle2,boucle3,boucle4,boucle5:boolean;
+begin
+     j:=0;
+     i:=0;
+     boucle:=true;
+     for i:= 0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+                if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.invArme[i][j].nomArme <>'VIDE') and (boucle=true)  then
+                    begin
+
+                    personnage.inventaire.invArme[i][j].estEquipee:=true;
+
+                    boucle:=false;
+                    end
+               else
+               begin
+                  personnage.inventaire.invArme[i][j].estEquipee:=false;
+
+               end;
+
+
+          end;
+
+     end;
+
+
+     boucle1:=true;
+     boucle2:=true;
+     boucle3:=true;
+     boucle4:=true;
+     boucle5:=true;
+     for i:= 0 to 3 do
+     begin
+          for j:= 0 to 3 do
+          begin
+            if (i>3) then
+
+            else
+            begin
+                 if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
+                 begin
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][1].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle1:=false;
+                      end;
+                 end
+
+
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
+                 begin
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][0].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle2:=false;
+                      end;
+                 end
+
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
+                 begin
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][0].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle3:=false;
+                      end;
+                 end
+
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
+                 begin
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][1].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle4:=false;
+                      end;
+                 end
+
+                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
+                 begin
+                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][2].nomArmure) then
+                      begin
+                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
+                      boucle5:=false;
+                      end;
+                 end;
+
+            end;
+
+     end;
+
+
+     end;
+
+end;
 
 
 //-------------------AFFICHAGE INVENTAIRES------------------------------
 
 
-// Affichage de l'inventaire d'un joueur
+// Affiche l'inventaire d'un joueur
 procedure affichageInventaire(personnage:typePersonnage);
 var
   Position:typePosition;
@@ -247,7 +465,7 @@ begin
 
 end;
 
-// Affichage de l'inventaire des armes d'un joueur
+// Affiche l'inventaire des armes d'un joueur
 procedure affichageInventaireArmes(var personnage:typePersonnage;position:typePosition);
 begin
      position.coordsActuelsInventaire.yA:=0;
@@ -258,7 +476,7 @@ begin
      deplacementInventaireIHM(position,personnage,27);
 end;
 
-// Affichage de l'inventaire des armures d'un joueur
+// Affiche l'inventaire des armures d'un joueur
 procedure affichageInventaireArmures(var personnage:typePersonnage;position:typePosition);
 begin
      position.coordsActuelsInventaire.yA:=0;
@@ -269,7 +487,7 @@ begin
      deplacementInventaireIHM(position,personnage,27);
 end;
 
-// Affichage de l'inventaire des consommables d'un joueur
+// Affiche l'inventaire des consommables d'un joueur
 procedure affichageInventaireConsommables(var personnage:typePersonnage;position:typePosition);
 begin
      position.coordsActuelsInventaire.yA:=0;
@@ -280,7 +498,7 @@ begin
      deplacementInventaireIHM(position,personnage,27);
 end;
 
-// Affichage de l'inventaire des drops d'un joueur
+// Affiche l'inventaire des drops d'un joueur
 procedure affichageInventaireDrops(var personnage:typePersonnage;position:typePosition);
 begin
      position.coordsActuelsInventaire.yA:=0;
@@ -292,11 +510,10 @@ begin
 end;
 
 
-
 //--------------------- POSITION DANS INVENTAIRE ------------------------------
 
 
-// Renvoie les coordonnées actuelles dans l'inventaire après un déplacement z
+// Modifie les coordonnées actuelles dans l'inventaire après un déplacement z
 procedure calculerCoordsApresDeplacement(z:Integer;var position:typePosition;var personnage:typePersonnage);
 
 
@@ -535,7 +752,6 @@ begin
 
 end;
 
-
 // Appelle la procédure relative à l'endroit ou la touche entrée est pressée
 procedure entreePressee(var position:typePosition;var personnage:typePersonnage);
 var
@@ -687,327 +903,11 @@ begin
      end;
 end;
 
-
-
-//-------------------FONCTIONNALITE INVENTAIRE ------------------------------
-
-
-// Renvoie le slot correspondant aux coordonnées données en paramètre
-function slotFromCoordonne(x,y:integer;typeItem:string): integer;
-begin
-
-     if (typeItem='arme') then
-     begin
-          if x=0 then
-          x:=1
-          else if x=1 then
-          x:=5
-          else if x=2 then
-          x:=9
-          else if x=3 then
-          x:=13;
-          slotFromCoordonne:=x+y;
-     end
-     else if (typeItem='armure') then
-     begin
-          if x=0 then
-          x:=1
-          else if x=1 then
-          x:=5
-          else if x=2 then
-          x:=9
-          else if x=3 then
-          x:=13;
-          slotFromCoordonne:=16+x+y;
-     end
-     else if (typeItem='potion') then
-     begin
-          if x=0 then
-          x:=1
-          else if x=1 then
-          x:=5;
-
-          slotFromCoordonne:=32+x+y;
-
-     end
-     else if (typeItem='bombe') then
-     begin
-          if x=0 then
-          x:=9
-          else if x=1 then
-          x:=13;
-
-          slotFromCoordonne:=32+x+y;
-     end
-     else if (typeItem='drop') then
-     begin
-          if x=0 then
-          x:=1
-          else if x=1 then
-          x:=5
-          else if x=2 then
-          x:=9
-          else if x=3 then
-          x:=13;
-
-          slotFromCoordonne:=48+x+y;
-     end
-     else if (typeItem='equipement') then
-     begin
-          if  (x=2) then
-          x:=4;
-
-
-          slotFromCoordonne:=64+x+y;
-     end;
-end;
-
-// Permet de récuperer la sauvegarde de l'inventaire
-procedure recupInventaire(var personnage:typePersonnage);
-var
-  s:integer; // Représente le slot dans le fichier data.bin
-  i,j:integer;
-
-// Ajoute pour chaque cellule de l'inventaire, l'ID de l'item stocké dans le fichier data.bin
-begin
-     s:=0;
-     for i:=0 to 3 do
-     begin
-          for j:= 0 to 3 do
-          begin
-          s:=s+1;
-          personnage.inventaire.invArme[i][j]:=stuffDispo.invArmeDispo[ItemSlot(s)];
-          end;
-     end;
-
-     s:=16;
-     for i:=0 to 3 do
-     begin
-          for j:= 0 to 3 do
-          begin
-          s:=s+1;
-          personnage.inventaire.invArmure[i][j]:=stuffDispo.invArmureDispo[ItemSlot(s)];
-          end;
-     end;
-
-     s:=32;
-     for i:=0 to 1 do
-     begin
-          for j:= 0 to 3 do
-          begin
-          s:=s+1;
-          personnage.inventaire.invPotion[i][j]:=stuffDispo.invPotionDispo[ItemSlot(s)];
-          end;
-     end;
-
-     s:=40;
-     for i:=0 to 1 do
-     begin
-          for j:= 0 to 3 do
-          begin
-          s:=s+1;
-          personnage.inventaire.invBombe[i][j]:=stuffDispo.invBombeDispo[ItemSlot(s)];
-          end;
-     end;
-
-     s:=48;
-     for i:=0 to 3 do
-     begin
-          for j:= 0 to 3 do
-          begin
-          s:=s+1;
-          personnage.inventaire.invDrop[i][j]:=stuffDispo.invDropDispo[ItemSlot(s)];
-          end;
-     end;
-
-     s:=64;
-     for i:=1 to 2 do
-     begin
-          for j:= 0 to 2 do
-          begin
-          s:=s+1;
-          if ((i=1) and (j=2)) then
-             begin
-             personnage.inventaire.ArmeEquipee:=stuffDispo.invArmeDispo[ItemSlot(s)];
-             personnage.inventaire.ArmeEquipee.estEquipee:=true;
-             end
-          else
-             begin
-              personnage.inventaire.ArmureEquipee[i][j]:=stuffDispo.invArmureDispo[ItemSlot(s)];
-              personnage.inventaire.ArmureEquipee[i][j].estEquipee:=true;
-             end;
-          end;
-     end;
-     recupArmeArmureEquipee(personnage);
-
-end;
-
-
-procedure recupArmeArmureEquipee(var personnage:typePersonnage);
-var
-  i,j:integer;
-  boucle,boucle1,boucle2,boucle3,boucle4,boucle5:boolean;
-begin
-     j:=0;
-     i:=0;
-     boucle:=true;
-     for i:= 0 to 3 do
-     begin
-          for j:= 0 to 3 do
-          begin
-                if (personnage.inventaire.invArme[i][j].nomArme=personnage.inventaire.ArmeEquipee.nomArme) and  (personnage.inventaire.invArme[i][j].nomArme <>'VIDE') and (boucle=true)  then
-                    begin
-
-                    personnage.inventaire.invArme[i][j].estEquipee:=true;
-
-                    boucle:=false;
-                    end
-               else
-               begin
-                  personnage.inventaire.invArme[i][j].estEquipee:=false;
-
-               end;
-
-
-          end;
-
-     end;
-
-
-     boucle1:=true;
-     boucle2:=true;
-     boucle3:=true;
-     boucle4:=true;
-     boucle5:=true;
-     for i:= 0 to 3 do
-     begin
-          for j:= 0 to 3 do
-          begin
-            if (i>3) then
-
-            else
-            begin
-                 if (personnage.inventaire.invArmure[i][j].typeArmure='Gants') and (boucle1=true) then
-                 begin
-                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][1].nomArmure) then
-                      begin
-                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                      boucle1:=false;
-                      end;
-                 end
-
-
-                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Bottes') and (boucle2=true) then
-                 begin
-                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[1][0].nomArmure) then
-                      begin
-                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                      boucle2:=false;
-                      end;
-                 end
-
-                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Jambiere') and (boucle3=true) then
-                 begin
-                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][0].nomArmure) then
-                      begin
-                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                      boucle3:=false;
-                      end;
-                 end
-
-                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Plastron') and (boucle4=true) then
-                 begin
-                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][1].nomArmure) then
-                      begin
-                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                      boucle4:=false;
-                      end;
-                 end
-
-                 else if (personnage.inventaire.invArmure[i][j].typeArmure='Casque') and (boucle5=true) then
-                 begin
-                      if (personnage.inventaire.invArmure[i][j].nomArmure=personnage.inventaire.ArmureEquipee[2][2].nomArmure) then
-                      begin
-                      personnage.inventaire.invArmure[i][j].estEquipee:=true;
-                      boucle5:=false;
-                      end;
-                 end;
-
-            end;
-
-     end;
-
-
-     end;
-
-end;
-
-// Ajoute un item à l'inventaire du personnage
-procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
-var
-  dispoX:integer;
-  dispoY:integer;
-
-begin
-     dispoX:=isInventairePlein(typeItem,personnage).xA;
-     dispoY:=isInventairePlein(typeItem,personnage).yA;
-
-     if (typeItem='arme') then
-     begin
-          if (dispoX <> -1) then
-          begin
-          personnage.inventaire.invArme[dispoX][dispoY]:=stuffDispo.invArmeDispo[numItem];
-          end;
-
-
-     end
-     else if (typeItem='armure') then
-     begin
-     if (dispoX <> -1) then
-          begin
-          personnage.inventaire.invArmure[dispoX][dispoY]:=stuffDispo.invArmureDispo[numItem];
-          end;
-     end
-     else if (typeItem='drop') then
-     begin
-
-     if (dispoX <> -1) then
-          begin
-          personnage.inventaire.invDrop[dispoX][dispoY]:=stuffDispo.invDropDispo[numItem];
-          end;
-     end
-     else if (typeItem='bombe') then
-     begin
-     if (dispoX <> -1) then
-          begin
-          personnage.inventaire.invBombe[dispoX][dispoY]:=stuffDispo.invBombeDispo[numItem];
-
-          end;
-     end
-     else if (typeItem='potion') then
-     begin
-     if (dispoX <> -1) then
-          begin
-          personnage.inventaire.invPotion[dispoX][dispoY]:=stuffDispo.invPotionDispo[numItem];
-
-          end;
-     end;
-     if (dispoX <> -1) then
-     begin
-
-     modificationInventaireItem(numItem,slotFromCoordonne(dispoX,dispoY,typeItem)); // Modifie l'ID de l'item contenu au slot demandé
-
-     end
-     // Ici le slot est calculé en fonction des coordoonnées de l'item ajouté et son type
-
-
-end;
-
-// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire ou -1 si l'inventaire est plein
-function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoordsInventaire;
+// Renvoie les coordonnées du premier emplacement VIDE de l'inventaire donné en paramètre ou -1 si l'inventaire est plein
+function isInventairePlein(typeItem:string;personnage:typePersonnage):typeCoords;
 var
    i,j:integer;
-   res:typeCoordsInventaire;
+   res:typeCoords;
    boucle:boolean;
 begin
      i:=0;
@@ -1105,56 +1005,55 @@ begin
      isInventairePlein.yA:=res.yA;
 end;
 
-function slotBombePotionDispo(typeItem:string):integer;
-var
-   s,res:integer;
-   boucle:boolean;
+
+//--------------------- SUPPRIMER UN OBJET -------------------------------------
+
+// Permet de supprimer l'item aux coordoonnées données en paramètres
+procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
+
 begin
-     boucle:=true;
-     res:=-1;
-     if typeItem='potion' then
+     if typeItem='arme' then
      begin
-          for s:= 33 to 40 do
+          if personnage.inventaire.invArme[x][y].estEquipee=true then
           begin
-               if (itemSlot(s)<>0) and (boucle = true) then
-               begin
-               slotBombePotionDispo:=res;
-               boucle:=false;
-               end;
+          modificationInventaireItem(0,67);
           end;
-     slotBombePotionDispo:=res;
+
+          modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
      end
+     else if typeItem='armure' then
+     begin
+          if personnage.inventaire.invArmure[x][y].estEquipee=true then
+          begin
+            if personnage.inventaire.invArmure[x][y].typeArmure='Gants' then
+            modificationInventaireItem(0,66)
+            else if personnage.inventaire.invArmure[x][y].typeArmure='Bottes' then
+            modificationInventaireItem(0,65)
+            else if personnage.inventaire.invArmure[x][y].typeArmure='Jambiere' then
+            modificationInventaireItem(0,68)
+            else if personnage.inventaire.invArmure[x][y].typeArmure='Plastron' then
+            modificationInventaireItem(0,69)
+            else if personnage.inventaire.invArmure[x][y].typeArmure='Casque' then
+            modificationInventaireItem(0,70);
+          end;
 
+          modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+
+     end
+     else if typeItem='equipement' then
+     begin
+     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+     dropEquipement(personnage,x,y);
+     end
      else if typeItem='bombe' then
-     begin
-     for s:= 41 to 48 do
-     begin
-          if (itemSlot(s)<>0) and (boucle = true) then
-          begin
-          slotBombePotionDispo:=res;
-          boucle:=false;
-          end;
-     end;
-     end;
+     modificationInventaireItem(0,slotFromCoordonne(x-2,y,typeItem))
+     else
+     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+
+     recupInventaire(personnage);
 end;
 
-function slotDropsForge(numeroItem:integer):integer;
-var
-   s,res:integer;
-   boucle:boolean;
-begin
-     boucle:=true;
-     for s:=49 to 64 do
-     begin
-          if (itemSlot(s)=numeroItem) and (boucle=true) then
-          begin
-          boucle:=false;
-          res:=s;
-          end;
-     end;
-     slotDropsForge:=res;
-end;
-
+// Permet de supprimer l'équipement aux coordonnées données en paramètres
 procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
 var
    i,j:integer;
@@ -1245,12 +1144,7 @@ begin
         end;
 end;
 
-procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
-begin
-     if slotBombePotionDispo(typeItem)<>-1 then
-     modificationInventaireItem(0,slotBombePotionDispo(typeItem));
-end;
-
+// Permet de supprimer 2 loots données en paramètres ( FORGE )
 procedure drop2Loots(numeroItem,numeroItem2:integer);
 begin
      modificationInventaireItem(0,slotDropsForge(numeroItem));
@@ -1258,52 +1152,85 @@ begin
      recupInventaire(personnage1);
 end;
 
-// Drop un item de l'inventaire
-procedure dropInventaire(var personnage:typePersonnage;x,y:integer;typeItem:string);
-
+// Permet de supprimer 1 consommable envoyé en paramètres ( MARCHAND VENDRE )
+procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
 begin
-     if typeItem='arme' then
-     begin
-          if personnage.inventaire.invArme[x][y].estEquipee=true then
-          begin
-          modificationInventaireItem(0,67);
-          end;
-
-          modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
-     end
-     else if typeItem='armure' then
-     begin
-          if personnage.inventaire.invArmure[x][y].estEquipee=true then
-          begin
-            if personnage.inventaire.invArmure[x][y].typeArmure='Gants' then
-            modificationInventaireItem(0,66)
-            else if personnage.inventaire.invArmure[x][y].typeArmure='Bottes' then
-            modificationInventaireItem(0,65)
-            else if personnage.inventaire.invArmure[x][y].typeArmure='Jambiere' then
-            modificationInventaireItem(0,68)
-            else if personnage.inventaire.invArmure[x][y].typeArmure='Plastron' then
-            modificationInventaireItem(0,69)
-            else if personnage.inventaire.invArmure[x][y].typeArmure='Casque' then
-            modificationInventaireItem(0,70);
-          end;
-
-          modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
-
-     end
-     else if typeItem='equipement' then
-     begin
-     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
-     dropEquipement(personnage,x,y);
-     end
-     else if typeItem='bombe' then
-     modificationInventaireItem(0,slotFromCoordonne(x-2,y,typeItem))
-     else
-     modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
+     if slotBombePotionDispo(typeItem)<>-1 then
+     modificationInventaireItem(0,slotBombePotionDispo(typeItem));
 
      recupInventaire(personnage);
 end;
 
-// Permet d'équipper un équipement
+
+//--------------------- AJOUTER UN OBJET ---------------------------------------
+
+
+// Ajoute l'item donné en paramètre à l'inventaire du personnage si il y a de la place
+procedure ajoutItemToPersonnage(typeItem:string;numItem:integer;var personnage:typePersonnage);
+var
+  dispoX:integer;
+  dispoY:integer;
+
+begin
+     dispoX:=isInventairePlein(typeItem,personnage).xA;
+     dispoY:=isInventairePlein(typeItem,personnage).yA;
+
+     if (typeItem='arme') then
+     begin
+          if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invArme[dispoX][dispoY]:=stuffDispo.invArmeDispo[numItem];
+          end;
+
+
+     end
+     else if (typeItem='armure') then
+     begin
+     if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invArmure[dispoX][dispoY]:=stuffDispo.invArmureDispo[numItem];
+          end;
+     end
+     else if (typeItem='drop') then
+     begin
+
+     if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invDrop[dispoX][dispoY]:=stuffDispo.invDropDispo[numItem];
+          end;
+     end
+     else if (typeItem='bombe') then
+     begin
+     if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invBombe[dispoX][dispoY]:=stuffDispo.invBombeDispo[numItem];
+
+          end;
+     end
+     else if (typeItem='potion') then
+     begin
+     if (dispoX <> -1) then
+          begin
+          personnage.inventaire.invPotion[dispoX][dispoY]:=stuffDispo.invPotionDispo[numItem];
+
+          end;
+     end;
+     if (dispoX <> -1) then
+     begin
+
+     modificationInventaireItem(numItem,slotFromCoordonne(dispoX,dispoY,typeItem)); // Modifie l'ID de l'item contenu au slot demandé
+
+     end
+     // Ici le slot est calculé en fonction des coordoonnées de l'item ajouté et son type
+
+
+end;
+
+
+//--------------------- EQUIPEMENT ---------------------------------------------
+
+
+// Permet d'équiper l'arme ou l'armure aux coordonnées données en paramètres
 procedure equipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 begin
 
@@ -1332,12 +1259,142 @@ begin
 
 end;
 
-// Permet de déséquipper un équipement
+
+// Permet de déséquiper l'arme ou l'armure aux coordonnées données en paramètres
 procedure desequipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:string);
 begin
    modificationInventaireItem(0,slotFromCoordonne(x,y,typeItem));
    recupInventaire(personnage);
 end;
+
+
+
+//---------- TRADUCTION    COORDONNEES  >>>>   SLOTS DU FICHIERS  --------------
+
+
+// Renvoie le slot correspondant aux coordonnées et à la position de l'inventaire données en paramètre
+function slotFromCoordonne(x,y:integer;typeItem:string): integer;
+begin
+
+     if (typeItem='arme') then
+     begin
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5
+          else if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+          slotFromCoordonne:=x+y;
+     end
+     else if (typeItem='armure') then
+     begin
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5
+          else if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+          slotFromCoordonne:=16+x+y;
+     end
+     else if (typeItem='potion') then
+     begin
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5;
+
+          slotFromCoordonne:=32+x+y;
+
+     end
+     else if (typeItem='bombe') then
+     begin
+          if x=0 then
+          x:=9
+          else if x=1 then
+          x:=13;
+
+          slotFromCoordonne:=32+x+y;
+     end
+     else if (typeItem='drop') then
+     begin
+          if x=0 then
+          x:=1
+          else if x=1 then
+          x:=5
+          else if x=2 then
+          x:=9
+          else if x=3 then
+          x:=13;
+
+          slotFromCoordonne:=48+x+y;
+     end
+     else if (typeItem='equipement') then
+     begin
+          if  (x=2) then
+          x:=4;
+
+
+          slotFromCoordonne:=64+x+y;
+     end;
+end;
+
+// Renvoie le slot correspondant du premier emplacement contenant un consommable spécifié en paramètre
+function slotBombePotionDispo(typeItem:string):integer;
+var
+   s,res:integer;
+   boucle:boolean;
+begin
+     boucle:=true;
+     res:=-1;
+     if typeItem='potion' then
+     begin
+          for s:= 33 to 40 do
+          begin
+               if (itemSlot(s)<>0) and (boucle = true) then
+               begin
+               slotBombePotionDispo:=res;
+               boucle:=false;
+               end;
+          end;
+     slotBombePotionDispo:=res;
+     end
+
+     else if typeItem='bombe' then
+     begin
+     for s:= 41 to 48 do
+     begin
+          if (itemSlot(s)<>0) and (boucle = true) then
+          begin
+          slotBombePotionDispo:=res;
+          boucle:=false;
+          end;
+     end;
+     end;
+end;
+
+// Renvoie le slot correspondant de l'IDitem de drop donnés en paramètres si le joueur le possède ou -1 si il n'en possède pas
+function slotDropsForge(numeroItem:integer):integer;
+var
+   s,res:integer;
+   boucle:boolean;
+begin
+     boucle:=true;
+     for s:=49 to 64 do
+     begin
+          if (itemSlot(s)=numeroItem) and (boucle=true) then
+          begin
+          boucle:=false;
+          res:=s;
+          end;
+     end;
+     slotDropsForge:=res;
+end;
+
+
 
 end.
 
