@@ -1,13 +1,12 @@
 unit marchandLogic;
 
 {$mode objfpc}{$H+}
-{$codepage UTF8}
 
 interface
 
 procedure ChoixDiscussions();
 procedure choixMarchand();
-procedure ChoixAchat(var rep : integer);
+procedure ChoixAchat();
 procedure choixVente();
 procedure ChoixSujet1et3();
 procedure ChoixSujet2();
@@ -62,10 +61,7 @@ begin
         1 : if (getOrActuelle(personnage1)=0) then
                 sujetArgentIHM()
             else
-                begin
-                  rep:=1;
-                  choixAchat(rep);
-                end;
+                choixAchat();
         2 : choixVente();
         3 : discussionIHM();
         4 : ChoixMenuVillage();
@@ -74,10 +70,11 @@ begin
 end;
 
 // ----------------------- permet de choisir ce que l'on veut acheter dans achat
-procedure choixAchat(var rep : integer);
+procedure choixAchat();
 
 var
     cho : boolean;
+    rep : integer = 1;
     ch  : char;
 
 begin
@@ -137,7 +134,7 @@ begin
                                 ajoutItemToPersonnage('bombe',rep,personnage1);
                                 recupInventaire(personnage1);
 
-                                choixAchat(rep);
+                                choixAchat();
                             end;
                         end
                      else
@@ -152,13 +149,13 @@ begin
 
                                ajoutItemToPersonnage('potion',rep-3,personnage1);
                                recupInventaire(personnage1);
-                               choixAchat(rep);
+                               choixAchat();
                            end;
                       end;
 
                   end;
           end;
-      DessinFlecheAchat(rep);
+          DessinFlecheAchat(rep);
       end;
 
 end;
@@ -216,20 +213,7 @@ begin
               #13 : begin
               cho := False;  //la touche entrer
 
-              { if rep="VIDE" then
-                 choixVente()
-              else if rep>=8 then
-                   begin
-                      dropEquipement();
-                      miseaourOr(personnage1,getOrActuelle(personnage1)+valeurObjetInventaire;
-                      cadreArgent();
-                   end;
-              else
-
-
-                 }
-
-              {if (rep<=8) then
+              {if (rep<=8) do
                   begin
                     dropEquipement(Personnage1,
                   end;}

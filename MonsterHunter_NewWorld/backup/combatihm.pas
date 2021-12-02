@@ -15,6 +15,9 @@ uses
   Classes, SysUtils,bestiaireLogic,gestionEcran,GestionTexte,Personnage,combatLogic,chasseIHM,crtPerso,inventaireLogic;
 
 var monstreactuelle : Integer = 1;
+    effet : boolean = False;
+    tour : integer = 0;
+    skiptour : boolean = false;
 
 
 
@@ -38,6 +41,161 @@ end;
 
 
 
+procedure AttaqueMonstre();
+var m : Integer;
+    sHPJoueur : Real;
+begin
+   if (skiptour = False) then
+      begin
+           viderBarre();
+           sHPJoueur := HPJoueur;
+           m := monstreAttaque();
+
+           deplacerCurseurXY(11,14);
+
+           if (m = 1) then
+              texteAtemps(envoyerMonstre(monstreActuelle).attaque1Desc,5,White);
+           if (m = 2) then
+              texteAtemps(envoyerMonstre(monstreActuelle).attaque2Desc,5,White);
+           if (m = 3) then
+              texteAtemps(envoyerMonstre(monstreActuelle).attaque3Desc,5,White);
+           if (m = 4) then
+              texteAtemps(envoyerMonstre(monstreActuelle).attaque4Desc,5,White);
+
+           deplacerCurseurXY(11,15);
+           if (HPJoueur = sHPJoueur) then
+              texteATemps('Vous avez esquive son attaque !',10,White)
+           else
+               begin
+                     if (m = 1) and (monstreactuelle = 7)
+                     or (m = 1) and (monstreactuelle = 3)
+                     or (m = 4) and (monstreactuelle = 3)
+                     or (m = 2) and (monstreactuelle = 4)
+                     or (m = 4) and (monstreactuelle = 4)
+                     or (m = 3) and (monstreactuelle = 6)
+                     or (m = 1) and (monstreactuelle = 12)
+                     or (m = 3) and (monstreactuelle = 12)
+                     or (m = 4) and (monstreactuelle = 12) then
+                         effet := True;
+               end;
+
+
+           deplacerCurseurXY(11,16);
+           texteATemps('Le monstre vous inflige ',5,White);
+           texteAtemps(FloatToStrF((sHPJoueur-HPJoueur),fffixed,1,0),10,Red);
+           texteAtemps(' de degats !',5,White);
+           readKey;
+      end
+   else;
+end;
+
+procedure barreHP();
+begin
+    ColorierZoneXY(lightgreen,black,62,26,72,26);
+    texteXY(46,26,'HP : ',white);
+    texteXY(51,26,'   ',white);
+    texteXY(51,26,FloatToStrF(HPJoueur,fffixed,1,0),white);
+    texteXY(54,26,'/',white);
+    texteEnCouleur(IntToStr(calculHpMaxBase()),white);
+
+    if (HPJoueur <= calculHpMaxBase()*0.9) then
+       begin
+            ColorierZoneXY(red,black,72,26,72,26);
+       end;
+
+    if (HPJoueur <= calculHpMaxBase()*0.8) then
+       begin
+            ColorierZoneXY(red,black,71,26,71,26);
+       end;
+
+    if (HPJoueur <= calculHpMaxBase()*0.7) then
+       begin
+            ColorierZoneXY(red,black,71,26,71,26);
+       end;
+
+    if (HPJoueur <= calculHpMaxBase()*0.6) then
+       begin
+            ColorierZoneXY(red,black,70,26,70,26);
+       end;                                  
+    if (HPJoueur <= calculHpMaxBase()*0.5) then
+       begin
+            ColorierZoneXY(red,black,69,26,69,26);
+       end;
+    if (HPJoueur <= calculHpMaxBase()*0.4) then
+       begin
+            ColorierZoneXY(red,black,68,26,68,26);
+       end;
+    if (HPJoueur <= calculHpMaxBase()*0.3) then
+       begin
+            ColorierZoneXY(red,black,67,26,67,26);
+       end;                                  
+    if (HPJoueur <= calculHpMaxBase()*0.2) then
+       begin
+            ColorierZoneXY(red,black,66,26,66,26);
+       end;
+    if (HPJoueur <= calculHpMaxBase()*0.1) then
+       begin
+            ColorierZoneXY(red,black,64,26,65,26);
+       end;
+    if (HPJoueur <= 0) then
+       begin
+            ColorierZoneXY(red,black,62,26,72,26);
+       end;
+
+
+end;
+
+
+
+procedure barreHPMonstre();
+begin
+    ColorierZoneXY(brown,black,50,10,70,10);
+
+    if (HPMonstre <= (HPMonstreMax*0.9)) then
+       begin
+            ColorierZoneXY(red,black,68,10,70,10);
+       end;
+
+    if (HPMonstre <= (HPMonstreMax*0.8)) then
+       begin
+            ColorierZoneXY(red,black,65,10,67,10);
+       end;
+
+    if (HPMonstre <= (HPMonstreMax*0.7)) then
+       begin
+            ColorierZoneXY(red,black,62,10,64,10);
+       end;
+
+    if (HPMonstre <= (HPMonstreMax*0.6)) then
+       begin
+            ColorierZoneXY(red,black,59,10,61,10);
+       end;
+    if (HPMonstre <= (HPMonstreMax*0.5)) then
+       begin
+            ColorierZoneXY(red,black,56,10,58,10);
+       end;
+    if (HPMonstre <= (HPMonstreMax*0.4)) then
+       begin
+            ColorierZoneXY(red,black,54,10,55,10);
+       end;
+    if (HPMonstre <= (HPMonstreMax*0.3)) then
+       begin
+            ColorierZoneXY(red,black,52,10,53,10);
+       end;
+    if (HPMonstre <= (HPMonstreMax*0.2)) then
+       begin
+            ColorierZoneXY(red,black,51,10,52,10);
+       end;
+    if (HPMonstre <= (HPMonstreMax*0.1)) then
+       begin
+            ColorierZoneXY(red,black,51,10,51,10);
+       end;
+    if (HPMonstre <= 0) then
+       begin
+            ColorierZoneXY(red,black,50,10,50,10);
+       end;
+end;
+
 procedure viderBarre();
 var i : Integer;
 begin
@@ -60,10 +218,10 @@ end;
 procedure combatQFQ();
 
 var cho: boolean = True;
-    choInf: boolean = True;
-    choComb : boolean = True;
-    choPot : boolean = True;
-    choBombe : boolean = True;
+    choInf: boolean = False;
+    choComb : boolean = False;
+    choPot : boolean = False;
+    choBombe : boolean = False;
     ch : char;
     rep : integer = 1;
 
@@ -72,9 +230,8 @@ var cho: boolean = True;
     fuitechasse : Integer;
     cmb : Boolean = False;
     a : Integer;
-    effet : boolean = false;
     skipTour : Boolean = false;
-    tour : Integer = 0;
+    sHPMonstre : Real;
 
     //
 
@@ -82,7 +239,27 @@ var cho: boolean = True;
 
 begin
    creationInterface();
-   initStat(monstreactuelle);
+   //initStat(monstreactuelle);
+   barreHP();
+   barreHPMonstre();
+
+   if (effet = True) then
+      begin
+
+           tour := tour + 1;
+           degatDebutTour(0.05);
+           if (monstreactuelle = 7) then
+              texteXY(11,15,'Vous subissez des degats de poison !',Magenta);
+           if (monstreactuelle = 3)
+           or (monstreactuelle = 4)
+           or (monstreactuelle = 6)
+           or (monstreactuelle = 12) then
+              texteXY(11,15,'Vous etes en feu !',LightRed);
+           if (tour = 2) then
+              effet := False;
+      end;
+
+
    texteXY(27,26,'Action',Red);
    texteXY(88,26,'Info',White);
    deplacerCurseurXY(33,26);
@@ -116,6 +293,7 @@ begin
 
    if (rep = 1) then
        begin
+            choComb := True;
             viderBarre();
             texteXY(14,14,'Attaquer',White);
             texteXY(14,16,'Potion',White);
@@ -176,23 +354,80 @@ begin
                           end;
 
                   end;
-            if (rep = 1) then;
+            if (rep = 1) then
+               begin
+                    choComb := False;
+                                          fuitechasse := random(100)+1;
+                      if (fuitechasse >= chancefuite) then
+                          begin
+                               viderBarre();
+                               sHPMonstre := HPMonstre;
+                               joueurAttaque();
+                               deplacerCurseurXY(11,15);
+                               texteATemps('Vous attaquez le monstre et inflige ',5,white);
+                               texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                               texteAtemps(' de degats !',10,white);
+                               barreHPMonstre();
+                               readKey;
+                               AttaqueMonstre();
+                               combatQFQ();
+                          end
+                      else
+                          begin
+                               fuite := True;
+                               deplacementJoueur();
+                          end;
+               end;
             if (rep = 2) then
                 begin
                      viderBarre();
+                     choComb := False;
+                     choPot := True;
                      texteXY(11,14,'>>',White);
 
-                     texteXY(13,14,stuffDispo.invPotionDispo[itemSlot(33)].nomPotion,White);
-                     texteXY(13,16,stuffDispo.invPotionDispo[itemSlot(34)].nomPotion,White);
-                     texteXY(13,18,stuffDispo.invPotionDispo[itemSlot(35)].nomPotion,White);
-                     texteXY(13,20,stuffDispo.invPotionDispo[itemSlot(36)].nomPotion,White);
-                     texteXY(33,14,stuffDispo.invPotionDispo[itemSlot(37)].nomPotion,White);
-                     texteXY(33,16,stuffDispo.invPotionDispo[itemSlot(38)].nomPotion,White);
-                     texteXY(33,18,stuffDispo.invPotionDispo[itemSlot(39)].nomPotion,White);
-                     texteXY(33,20,stuffDispo.invPotionDispo[itemSlot(40)].nomPotion,White);
+                     if not (itemSlot(33) = 0) then
+                        texteXY(13,14,stuffDispo.invPotionDispo[itemSlot(33)].nomPotion,LightRed)
+                     else
+                        texteXY(13,14,stuffDispo.invPotionDispo[itemSlot(33)].nomPotion,White);
+                                                                                            
+                     if not (itemSlot(34) = 0) then
+                        texteXY(13,16,stuffDispo.invPotionDispo[itemSlot(34)].nomPotion,LightRed)
+                     else
+                        texteXY(13,16,stuffDispo.invPotionDispo[itemSlot(34)].nomPotion,White);
+                                                                           
+                     if not (itemSlot(35) = 0) then
+                        texteXY(13,18,stuffDispo.invPotionDispo[itemSlot(35)].nomPotion,LightRed)
+                     else
+                        texteXY(13,18,stuffDispo.invPotionDispo[itemSlot(35)].nomPotion,White);
+                                                                           
+                     if not (itemSlot(36) = 0) then
+                        texteXY(13,20,stuffDispo.invPotionDispo[itemSlot(36)].nomPotion,LightRed)
+                     else
+                        texteXY(13,20,stuffDispo.invPotionDispo[itemSlot(36)].nomPotion,White);
+                      
+                     if not (itemSlot(37) = 0) then
+                        texteXY(33,14,stuffDispo.invPotionDispo[itemSlot(37)].nomPotion,LightRed)
+                     else
+                        texteXY(33,14,stuffDispo.invPotionDispo[itemSlot(37)].nomPotion,White);
+                                                                           
+                     if not (itemSlot(38) = 0) then
+                        texteXY(33,16,stuffDispo.invPotionDispo[itemSlot(38)].nomPotion,LightRed)
+                     else
+                        texteXY(33,16,stuffDispo.invPotionDispo[itemSlot(38)].nomPotion,White);
+                     
+                     if not (itemSlot(39) = 0) then
+                        texteXY(33,18,stuffDispo.invPotionDispo[itemSlot(39)].nomPotion,LightRed)
+                     else
+                        texteXY(33,18,stuffDispo.invPotionDispo[itemSlot(39)].nomPotion,White);
+                       
+                     if not (itemSlot(40) = 0) then
+                        texteXY(33,20,stuffDispo.invPotionDispo[itemSlot(40)].nomPotion,LightRed)
+                     else
+                        texteXY(33,20,stuffDispo.invPotionDispo[itemSlot(40)].nomPotion,White);
+
                      texteXY(53,14,'Retour',White);
                      deplacerCurseurXY(13,14);
-
+                     rep := 1;
                      while (choPot = True) do
                            begin
                                 ch := ReadKey;
@@ -209,9 +444,37 @@ begin
                                                  else
                                                      rep := 9;
                                             end;
+                                      #77 :begin
+                                                if (rep < 9) then
+                                                    begin
+                                                         rep := rep + 4;
+                                                         if (rep = 10) then
+                                                            rep := 2;
+                                                         if (rep = 11) then
+                                                            rep := 3;
+                                                         if (rep = 12) then
+                                                               rep := 4;
+                                                    end
+                                                else
+                                                    rep := 1;
+                                           end;
+                                      #75 :begin
+                                                if (rep > 1) then
+                                                    begin
+                                                         rep := rep - 4;
+                                                         if (rep = -2) then
+                                                            rep := 6;
+                                                         if (rep = -1) then
+                                                            rep := 7;
+                                                         if (rep = 0) then
+                                                               rep := 8;
+                                                    end
+                                                else
+                                                    rep := 9;
+                                           end;
                                       #13 : choPot := False;
                                 end;
-
+                                texteXY(0,0,IntToStr(rep),white);
                                 if (rep = 1) then
                                     begin
                                          texteXY(11,14,'>>',White);
@@ -349,8 +612,11 @@ begin
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(33)].HealHP),5,green);
                                        texteAtemps(' HP !',5,green);
+                                       barreHP();
                                        modificationInventaireItem(0,33);
                                        readKey;
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 2) then
@@ -370,9 +636,12 @@ begin
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(34)].HealHP),5,green);
-                                       texteAtemps(' HP !',5,green);
+                                       texteAtemps(' HP !',5,green); 
+                                       barreHP();
                                        modificationInventaireItem(0,34);
-                                       readKey;
+                                       readKey;  
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 3) then
@@ -392,9 +661,12 @@ begin
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(35)].HealHP),5,green);
-                                       texteAtemps(' HP !',5,green);
+                                       texteAtemps(' HP !',5,green); 
+                                       barreHP();
                                        modificationInventaireItem(0,35);
-                                       readKey;
+                                       readKey;  
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 4) then
@@ -414,9 +686,12 @@ begin
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(36)].HealHP),5,green);
-                                       texteAtemps(' HP !',5,green); 
+                                       texteAtemps(' HP !',5,green);   
+                                       barreHP();
                                        modificationInventaireItem(0,36);
                                        readKey;
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 5) then
@@ -436,9 +711,12 @@ begin
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(37)].HealHP),5,green);
-                                       texteAtemps(' HP !',5,green); 
+                                       texteAtemps(' HP !',5,green);
+                                       barreHP();
                                        modificationInventaireItem(0,37);
-                                       readKey;
+                                       readKey;  
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 6) then
@@ -461,6 +739,8 @@ begin
                                        texteAtemps(' HP !',5,green);
                                        modificationInventaireItem(0,38);
                                        readKey;
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 7) then
@@ -480,7 +760,8 @@ begin
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(39)].HealHP),5,green);
-                                       texteAtemps(' HP !',5,green);  
+                                       texteAtemps(' HP !',5,green);
+                                       barreHP();
                                        modificationInventaireItem(0,39);
                                        readKey;
                                   end;
@@ -502,9 +783,12 @@ begin
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('Vous avez regagne : ',5,white);
                                        texteAtemps(IntToStr(stuffDispo.invPotionDispo[itemSlot(40)].HealHP),5,green);
-                                       texteAtemps(' HP !',5,green);   
+                                       texteAtemps(' HP !',5,green);
+                                       barreHP();
                                        modificationInventaireItem(0,40);
-                                       readKey;
+                                       readKey; 
+                                       AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 9) then
@@ -513,21 +797,49 @@ begin
                 end;
             if (rep = 3) then;
             begin
+                 choComb := False;
+                 choBombe := True;
                  viderBarre();
+                 rep := 1;
                  texteXY(11,14,'>>',White);
 
-                 texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,White);
-                 texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,White);
-                 texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,White);
-                 texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,White);
-                 texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,White);
-                 texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,White);
-                 texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,White);
-                 texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,White);
+                 if not (itemSlot(41) = 0) then
+                    texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,brown)
+                 else
+                    texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,white);
+                 if not (itemSlot(42) = 0) then
+                    texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,brown)
+                 else
+                    texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,white);
+                 if not (itemSlot(43) = 0) then
+                    texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,brown)
+                 else
+                    texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,white);
+                 if not (itemSlot(44) = 0) then
+                    texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,brown)
+                 else
+                    texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,white);
+                 if not (itemSlot(45) = 0) then
+                    texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,brown)
+                 else
+                    texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,white);
+                 if not (itemSlot(46) = 0) then
+                    texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,brown)
+                 else
+                    texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,white);
+                 if not (itemSlot(47) = 0) then
+                    texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,brown)
+                 else
+                    texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,white);
+                 if not (itemSlot(48) = 0) then
+                    texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,brown)
+                 else
+                    texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,white);
+
                  texteXY(53,14,'Retour',White);
                  deplacerCurseurXY(13,14);
 
-                 while (choPot = True) do
+                 while (choBombe = True) do
                        begin
                             ch := ReadKey;
                             case ch of
@@ -543,7 +855,35 @@ begin
                                              else
                                                  rep := 9;
                                         end;
-                                  #13 : choPot := False;
+                                  #77 :begin
+                                            if (rep < 9) then
+                                                begin
+                                                     rep := rep + 4;
+                                                     if (rep = 10) then
+                                                        rep := 2;
+                                                     if (rep = 11) then
+                                                        rep := 3;
+                                                     if (rep = 12) then
+                                                           rep := 4;
+                                                end
+                                            else
+                                                rep := 1;
+                                       end;
+                                  #75 :begin
+                                            if (rep > 1) then
+                                                begin
+                                                     rep := rep - 4;
+                                                     if (rep = -2) then
+                                                        rep := 6;
+                                                     if (rep = -1) then
+                                                        rep := 7;
+                                                     if (rep = 0) then
+                                                           rep := 8;
+                                                end
+                                            else
+                                                rep := 9;
+                                       end;
+                                  #13 : choBombe := False;
                             end;
 
                             if (rep = 1) then
@@ -810,43 +1150,44 @@ begin
                               end;
                      end;
                  if (rep = 9) then
-                     combatQFQ;
+                     combatQFQ();
             end;
             if (rep = 4) then
                combatQFQ();
+
+            combatQFQ();
 
 
        end
    else
        begin
-               viderBarre();
-               deplacerCurseurXY(11,14);
-               texteATemps(envoyerMonstre(monstreactuelle).nom,10,red);
-               texteATemps(' : ',10,red);
-               texteATemps(envoyerMonstre(monstreactuelle).description,10,red);
+           choInf := True;
+           viderBarre();
+           deplacerCurseurXY(11,14);
+           texteATemps(envoyerMonstre(monstreactuelle).nom,10,red);
+           texteATemps(' : ',10,red);
+           texteATemps(envoyerMonstre(monstreactuelle).description,10,red);
 
 
-               deplacerCurseurXY(11,16);
-               texteAtemps('HPMonstre : ',10,Green);
-               texteAtemps(FloatToStrF(HPMonstre,fffixed,1,0),10,Green);
-               deplacerCurseurXY(11,18);
-               texteAtemps('ArmureMonstre : ',10,Orange);
-               texteAtemps(FloatToStrF(ArmureMonstre,fffixed,1,0),10,Orange);
-               deplacerCurseurXY(11,20);
-               texteAtemps('AdMonstre : ',10,LightRed);
-               texteAtemps(IntToStr(AdMonstre),10,LightRed);
-               deplacerCurseurXY(11,21);
-               texteAtemps('*echap pour quitter*',10,DarkGray);
-               while (choInf = True) do
-                     begin
-                         ch := ReadKey;
-                         case ch of
-                              #27 : begin
-                                         choInf := False;
-                                         combatQFQ();
-                                    end;
-                         end;
+           deplacerCurseurXY(11,16);
+           texteAtemps('HPMonstre : ',10,Green);
+           texteAtemps(FloatToStrF(HPMonstre,fffixed,1,0),10,Green);
+           deplacerCurseurXY(11,18);
+           texteAtemps('ArmureMonstre : ',10,Orange);
+           texteAtemps(FloatToStrF(ArmureMonstre,fffixed,1,0),10,Orange);
+           deplacerCurseurXY(11,20);
+           texteAtemps('AdMonstre : ',10,LightRed);
+           texteAtemps(IntToStr(AdMonstre),10,LightRed);
+           while (choInf = True) do
+                begin
+                     ch := ReadKey;
+                     case ch of
+                     #13 : begin
+                                choInf := False;
+                                combatQFQ();
+                           end;
                      end;
+                end;
 
        end;
 

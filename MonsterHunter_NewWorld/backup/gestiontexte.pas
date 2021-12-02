@@ -33,7 +33,7 @@ begin
      for i := 1 to Length(texte) do
          begin
 
-             texteEnCouleur(texte[i]);
+             texteEnCouleur(texte[i],couleur);
              // On met en pause le programme pour avoir l'impression que les lettres s'écrivent une par une
              attendre(temps);
 

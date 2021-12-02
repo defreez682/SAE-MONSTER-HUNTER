@@ -351,15 +351,17 @@ end;
 
 // Reponse du marchand si pas assez d'or ou de place dans inventaire lors de l'achat
 procedure AchatImpossible();
+var
+  rep : integer;
 begin
-
+    rep:=1;
     viderCadreMarchand();
     if (isinventaireplein('bombe',personnage1).xA=-1) or (isinventaireplein('potion',personnage1).xA=-1) then
        texteXY(40,24,'Vous ne pouvez plus en acheter',4)
     else
        texteXY(50,24,'Vous n''avez pas assez d''or',4);
     readln;
-    choixAchat();
+    choixAchat(rep);
 
 end;
 
@@ -426,9 +428,8 @@ begin
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'  ',White);
-                     deplacerCurseurXY(13,23);
-                 end;
-              if (rep = 2) then
+                 end
+              else if (rep = 2) then
                  begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'>>',White);
@@ -436,9 +437,8 @@ begin
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'  ',White);
-                     deplacerCurseurXY(13,24);
-                 end;
-              if (rep = 3) then
+                 end
+              else if (rep = 3) then
                  begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'  ',White);
@@ -446,9 +446,8 @@ begin
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'  ',White);
-                     deplacerCurseurXY(13,25);
-                 end;
-              if (rep=4) then
+                 end
+             else if (rep=4) then
                  begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'  ',white);
@@ -456,9 +455,8 @@ begin
                      texteXY(63,23,'>>',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'  ',White);
-                     deplacerCurseurXY(63,23);
-                 end;
-              if (rep=5) then
+                 end
+             else if (rep=5) then
                  begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'  ',white);
@@ -466,10 +464,9 @@ begin
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'>>',White);
                      texteXY(63,25,'  ',White);
-                     deplacerCurseurXY(63,24);
-                 end;
+                 end
 
-              if (rep=6) then
+             else if (rep=6) then
                  begin
                      texteXY(13,23,'  ',White);
                      texteXY(13,24,'  ',white);
@@ -477,7 +474,6 @@ begin
                      texteXY(63,23,'  ',White);
                      texteXY(63,24,'  ',White);
                      texteXY(63,25,'>>',White);
-                     deplacerCurseurXY(63,25);
                  end;
 
 end;
