@@ -10,7 +10,7 @@ uses
 
 procedure ForgeronDesign();                           
 procedure ForgeronCadre();                            //Choix entre forger arme ou forger armure
-procedure DemarrageForgeron();                        // 
+procedure DemarrageForgeron();                        //Procedure principale pour entrer dans la forge 
 procedure ForgerArme();                               //Partie specialisé dans la forge des armes
 procedure ForgerArmure();                             //Partie specialisé dans la forge des armures
 function dropExist(drop1, drop2 : string ) : boolean; //Renvoi vrai si les deux drop existent dans l'inventaire, si non faux
