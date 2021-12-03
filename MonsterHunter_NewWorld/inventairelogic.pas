@@ -185,9 +185,6 @@ procedure dropEquipement(var personnage:typePersonnage;x,y:integer);
 // Permet de supprimer 2 loots données en paramètres ( FORGE )
 procedure drop2Loots(numeroItem,numeroItem2:integer);
 
-// Permet de supprimer 1 consommable envoyé en paramètres ( MARCHAND VENDRE )
-procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
-
 
 //--------------------- AJOUTER UN OBJET ---------------------------------------
 
@@ -211,9 +208,6 @@ procedure desequipEquipement(var personnage:typePersonnage;x,y:integer;typeItem:
 
 // Renvoie le slot correspondant aux coordonnées et à la position de l'inventaire données en paramètre
 function slotFromCoordonne(x,y:integer;typeItem:string): integer;
-
-// Renvoie le slot correspondant du premier emplacement contenant un consommable spécifié en paramètre
-function slotBombePotionDispo(typeItem:string):integer;
 
 // Renvoie le slot correspondant de l'IDitem de drop donnés en paramètres si le joueur le possède ou -1 si il n'en possède pas
 function slotDropsForge(numeroItem:integer):integer;
@@ -1193,15 +1187,6 @@ begin
      recupInventaire(personnage1);
 end;
 
-// Permet de supprimer 1 consommable envoyé en paramètres ( MARCHAND VENDRE )
-procedure dropConsommable(var personnage:typePersonnage;typeItem:string);
-begin
-     if slotBombePotionDispo(typeItem)<>-1 then
-     modificationInventaireItem(0,slotBombePotionDispo(typeItem));
-
-     recupInventaire(personnage);
-end;
-
 
 //--------------------- AJOUTER UN OBJET ---------------------------------------
 
@@ -1383,39 +1368,6 @@ begin
      end;
 end;
 
-// Renvoie le slot correspondant du premier emplacement contenant un consommable spécifié en paramètre
-function slotBombePotionDispo(typeItem:string):integer;
-var
-   s,res:integer;
-   boucle:boolean;
-begin
-     boucle:=true;
-     res:=-1;
-     if typeItem='potion' then
-     begin
-          for s:= 33 to 40 do
-          begin
-               if (itemSlot(s)<>0) and (boucle = true) then
-               begin
-               slotBombePotionDispo:=res;
-               boucle:=false;
-               end;
-          end;
-     slotBombePotionDispo:=res;
-     end
-
-     else if typeItem='bombe' then
-     begin
-     for s:= 41 to 48 do
-     begin
-          if (itemSlot(s)<>0) and (boucle = true) then
-          begin
-          slotBombePotionDispo:=res;
-          boucle:=false;
-          end;
-     end;
-     end;
-end;
 
 // Renvoie le slot correspondant de l'IDitem de drop donnés en paramètres si le joueur le possède ou -1 si il n'en possède pas
 function slotDropsForge(numeroItem:integer):integer;
