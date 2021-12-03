@@ -510,6 +510,10 @@ begin
              monstre.attaque4Chance := 90; // 15 % de chance
              monstre.attaque4Desc := 'Le Tesotra vous fouette avec sa queue enflammee ! '; //enflamme
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
+
 
              envoyerMonstre := monstre;
         end
