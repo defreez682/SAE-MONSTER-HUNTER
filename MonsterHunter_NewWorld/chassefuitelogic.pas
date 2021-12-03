@@ -1,6 +1,7 @@
 unit chasseFuiteLogic;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 

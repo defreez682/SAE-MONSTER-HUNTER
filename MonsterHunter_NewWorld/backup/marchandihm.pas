@@ -90,7 +90,7 @@ begin
 
   dessinerCadreXY(90,0,115,2,simple,15,0);
   deplacerCurseurXY(97,1);
-  write(getOrActuelle(), ' piece d''or');
+  write(getOrActuelle(personnage1), ' piece d''or');
 
 end;
 

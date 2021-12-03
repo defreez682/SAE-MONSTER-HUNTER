@@ -122,11 +122,10 @@ end;
 procedure repose();
 begin
   dessinerCadreXY(20,9,100,16, double, black, blue);
-  deplacerCurseurXY(48, 12);
+  deplacerCurseurXY(45, 12);
   texteAtemps('C''est l''heure de dormir !', 20,15);
   deplacerCurseurXY(40, 13);
-  texteAtemps('Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z', 30,15);
-  readkey;
+  texteAtemps('Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z', 15,15);
   modificationDataJoueur(calculHpMaxBase(),13);
   chambreInterface();
   chambreChoix();

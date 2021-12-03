@@ -24,11 +24,13 @@ begin
      if not DirectoryExists('C:\MHNewWorld') then
         begin
              MkDir('C:\MHNewWorld');
-             miseAjourLVL(personnage1,1);
-             miseAjourExp(personnage1,0);
-             miseAjourOr(personnage1,0);
+             creationDataJoueur(0,20);
+             miseAjourLVL(1);
+             miseAjourExp(1);
+             miseAjourOr(500);
+             miseAjourTaille(personnage1,0);
              miseAjourPersonnage(personnage1,0);
-             creationInventaireItem(0,100);
+             creationInventaireItem(0,65); // En rajouter si on ajoute des slots
         end;
 
 end;

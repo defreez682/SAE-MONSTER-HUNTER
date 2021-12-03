@@ -1,6 +1,7 @@
 unit combatLogic;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
@@ -21,13 +22,11 @@ function monstreAttaque() : Integer;
 procedure joueurAttaque();
 
 // Principalement utiliser pour les effets de poison ou autre
-procedure degatDebutTour(num : integer);
+procedure degatDebutTour(num : Real);
 procedure rendreVie(valeur : integer);
 procedure utiliserBombeExplo(valeur : integer);
 
-var poidsarmetemp : Integer = 25;
-    poidsarmuretemp : Integer = 40;
-    monstreEnCours : Integer;
+var monstreEnCours : Integer;
 
 
     // ----------- Combat -------------
@@ -37,12 +36,14 @@ var poidsarmetemp : Integer = 25;
     ArmureJoueur : Integer;
     AdJoueur : Integer;
     MobiliteJoueur : Integer;
-    defenseJoueur : Integer = 40;
-    ratioArme : Real = 0.25;
+    defenseJoueur : Integer;
+    ratioArme : Real;
+    skiptour : boolean;
     // Monstre
     HPMonstre : Real;
     ArmureMonstre : Real;
     AdMonstre : Integer;
+    HPMonstreMax : Real;
 
     //fuite
     chancefuite : Integer = 0;
@@ -50,7 +51,7 @@ var poidsarmetemp : Integer = 25;
 implementation
 
 uses
-  Classes, SysUtils,personnage,bestiaireLogic,combatIHM;
+  Classes, SysUtils,personnage,bestiaireLogic,combatIHM,gestionEcran,gestionTexte,inventaireLogic;
 
 
 procedure utiliserBombeExplo(valeur : integer);
@@ -59,15 +60,25 @@ begin
     randomize;
     esquive := random(100) + 1;
     cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
+
+    if (dataJoueur(6) = 1) then
+       cesquive := 200;
+
     if (esquive <= cesquive) then
        HPMonstre := HPMonstre - valeur
-    else writeln('Esquive ! (Bombe)');
+    else
+        begin
+             deplacerCurseurXY(11,15);
+             texteAtemps('Le monstre l''esquive !',5,white);
+        end;
 
 end;
 
 procedure rendreVie(valeur : integer);
 begin
     HPJoueur := HPJoueur + valeur;
+    if (HPJoueur > calculHpMaxBase()) then
+       HPJoueur := calculHpMaxBase();
 end;
 
 procedure initStat(num : Integer);
@@ -86,16 +97,17 @@ begin
 
     difficulte := random(2);
     //Joueur
-    HPJoueur := calculHpMaxBase();
-    ArmureJoueur := calculArmureBase() + defenseJoueur;
-    AdJoueur := calculADBase();
-    MobiliteJoueur := 100 - (poidsarmuretemp+poidsarmetemp);
+    HPJoueur := dataJoueur(13);
+    ArmureJoueur := (calculArmureBase() + stuffDispo.invArmureDispo[ItemSlot(66)].defense + stuffDispo.invArmureDispo[ItemSlot(65)].defense + stuffDispo.invArmureDispo[ItemSlot(68)].defense + stuffDispo.invArmureDispo[ItemSlot(69)].defense+ stuffDispo.invArmureDispo[ItemSlot(70)].defense) + (dataJoueur(7)+dataJoueur(11));
+    AdJoueur := calculADBase() + (dataJoueur(8)+dataJoueur(9));
+    MobiliteJoueur := 100 - trunc(((stuffDispo.invArmureDispo[ItemSlot(66)].poids + stuffDispo.invArmureDispo[ItemSlot(65)].poids + stuffDispo.invArmureDispo[ItemSlot(68)].poids + stuffDispo.invArmureDispo[ItemSlot(69)].poids+ stuffDispo.invArmureDispo[ItemSlot(70)].poids + stuffDispo.invArmeDispo[ItemSlot(67)].poids) - (dataJoueur(10)+dataJoueur(12))) div 2);
+    ratioArme := stuffDispo.invArmeDispo[ItemSlot(67)].ratioAD;
 
 
     // Monstre
 
 
-    for i:= 1 to (getlvlActuelle(personnage1)) do//+(difficulte*facilerand)) do
+    for i:= 1 to (getlvlActuelle()) +(difficulte*facilerand) do
         begin
           if (i = 1) then
              begin
@@ -110,13 +122,14 @@ begin
                   AdMonstre := AdMonstre + EnvoyerMonstre(num).ratioAd;
              end;
         end;
+    HPMonstreMax := HPMonstre;
 
 end;
 
 
-procedure degatDebutTour(num : integer);
+procedure degatDebutTour(num : real);
 begin
-    HPJoueur := HPJoueur - (num*calculHpMaxBase())
+    HPJoueur := HPJoueur - Int(num*calculHpMaxBase());
 end;
 
 function monstreAttaque() : Integer;
@@ -129,19 +142,20 @@ begin
     randomize;
     esquive := random(100) + 1;
     cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
+    attaque := random(100) + 1;
+
+    if (attaque < EnvoyerMonstre(monstreEnCours).attaque1Chance) then
+       nattaque := 1
+    else if (attaque >= EnvoyerMonstre(monstreEnCours).attaque1Chance) and (attaque < EnvoyerMonstre(monstreEnCours).attaque2Chance) then
+       nattaque := 2
+    else if (attaque >= EnvoyerMonstre(monstreEnCours).attaque2Chance) and (attaque < EnvoyerMonstre(monstreEnCours).attaque3Chance) then
+       nattaque := 3
+    else if (attaque >= EnvoyerMonstre(monstreEnCours).attaque3Chance) then
+       nattaque := 4;
+
 
     if (esquive <= cesquive) then
        begin
-            attaque := random(100) + 1;
-            if (attaque < EnvoyerMonstre(monstreEnCours).attaque1Chance) then
-               nattaque := 1
-            else if (attaque >= EnvoyerMonstre(monstreEnCours).attaque1Chance) and (attaque < EnvoyerMonstre(monstreEnCours).attaque2Chance) then
-               nattaque := 2
-            else if (attaque >= EnvoyerMonstre(monstreEnCours).attaque2Chance) and (attaque < EnvoyerMonstre(monstreEnCours).attaque3Chance) then
-               nattaque := 3
-            else if (attaque >= EnvoyerMonstre(monstreEnCours).attaque3Chance) and (attaque < EnvoyerMonstre(monstreEnCours).attaque4Chance) then
-               nattaque := 4;
-
 
             if (nattaque = 1) then
                HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque1)) / (1+(Int(ArmureJoueur)/500)));
@@ -150,17 +164,11 @@ begin
             if (nattaque = 3) then
                HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque3)) / (1+(Int(ArmureJoueur)/500)));
             if (nattaque = 4) then
-               HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque4)) / (1+(Int(ArmureJoueur)/500))) ;
-
-
+               HPJoueur := HPJoueur - Int((adMonstre + (adMonstre * EnvoyerMonstre(monstreEnCours).attaque4)) / (1+(Int(ArmureJoueur)/500)));
        end
-    else
-        writeln('Esquive ! (monstreAttaque)');
-
+    else;
     monstreAttaque := nattaque;
 end;
-
-
 
 procedure joueurAttaque();
 
@@ -170,16 +178,23 @@ var
 begin
     randomize;
     esquive := random(100) + 1;
-    writeln(esquive);
     cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
+
+    if (dataJoueur(6) = 1) then
+       cesquive := 0;
+
     if (esquive >= cesquive) then
        begin
-            HPMonstre := HPMonstre - Int((adJoueur + (adJoueur * ratioArme)) / (1+(Int(EnvoyerMonstre(monstreEnCours).armureBase))/500));
+            HPMonstre := HPMonstre - Int((adJoueur + (adJoueur * ratioArme)) / (1+(Int(EnvoyerMonstre(monstreEnCours).armureBase))/500)) + random(10)+1;
             if not (chancefuite >= 40) then
-               chancefuite := chancefuite + 1;
+               chancefuite := chancefuite + 4;
        end
 
-    else writeln('Esquive ! (Joueur)');
+    else
+        begin
+             deplacerCurseurXY(11,14);
+             texteATemps('Le monstre a esquive votre attaque !',10,white)
+        end;
 
 end;
 

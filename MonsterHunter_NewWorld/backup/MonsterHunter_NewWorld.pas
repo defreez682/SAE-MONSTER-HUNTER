@@ -1,25 +1,18 @@
 program MonsterHunter_NewWorld;
 
+{$codepage UTF8}
 
-uses sysutils, menu, personnage, gestionFichier, combatLogic,gestionEcran;
+uses Windows,sysutils,menu,personnage,gestionFichier, chasseIHM,inventaireLogic,combatIHM;
+
 
 
 begin
    initialisationItemDisponibles(); // Crée la base de données des items
-
    checkUp();
-   //creationChoix();
-   initStat(1);
-   writeln('HPJoueur : ',Int(HPJoueur):2:0);
-   writeln('ArmureJoueur : ',ArmureJoueur);
-   writeln('AdJoueur : ',AdJoueur);
-   writeln('MobiliteJoueur : ',MobiliteJoueur);
-   writeln('____________________________');
-   // Monstre
-   writeln('HPMonstre : ',Int(HPMonstre):2:0);
-   writeln('ArmureMonstre : ',Int(ArmureMonstre):2:0);
-   writeln('AdMonstre : ',AdMonstre);
-   readln();
+   creationChoix();
+   //combatQFQ();
+
+
 
 end.
 

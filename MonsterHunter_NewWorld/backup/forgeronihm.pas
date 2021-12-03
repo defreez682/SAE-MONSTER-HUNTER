@@ -245,8 +245,7 @@ begin
    deplacerCurseurXY(50, 12);
    texteAtemps('Impossible de forger !', 70,15);
    deplacerCurseurXY(35, 13);
-   texteAtemps('Malheuresement vous ne possedez pas les drops necessaires', 40,4);
-   readkey;
+   texteAtemps('Malheuresement vous ne possedez les drops necessaires', 80,4);
 end;
 
 end.

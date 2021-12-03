@@ -282,22 +282,22 @@ begin
                                    end;
                                  13 :
                                    begin
-                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][0].prix);
+                                     miseajourOr(personnage1,getOrActuelle(personnage1)+personnage1.inventaire.invbombe[1][0].prix);
                                      dropInventaire(personnage1,3,0,'bombe');
                                    end;
                                  14 :
                                    begin
-                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][1].prix);
+                                     miseajourOr(personnage1,getOrActuelle(personnage1)+personnage1.inventaire.invbombe[1][1].prix);
                                      dropInventaire(personnage1,3,1,'bombe');
                                    end;
                                  15 :
                                    begin
-                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][2].prix);
+                                     miseajourOr(personnage1,getOrActuelle(personnage1)+personnage1.inventaire.invbombe[1][2].prix);
                                      dropInventaire(personnage1,3,2,'bombe');
                                    end;
                                  16 :
                                    begin
-                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][3].prix);
+                                     miseajourOr(personnage1,getOrActuelle(personnage1)+personnage1.inventaire.invbombe[1][3].prix);
                                      dropInventaire(personnage1,3,3,'bombe');
                                    end;
 

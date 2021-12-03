@@ -1,12 +1,13 @@
 unit chasseIHM;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
 var Orange : Integer = 150;
     fuite : Boolean = False;
-    combat : Integer = 0;
+    combat : integer;
 
 procedure creationFuiteInterface();
 procedure deplacementJoueur();
@@ -22,7 +23,7 @@ procedure creationZone5();
 implementation
 
 uses
-  Classes, SysUtils,gestionTexte,GestionEcran,crtPerso,chasseFuiteLogic,villageIHM,combatIHM;
+  Classes, SysUtils,gestionTexte,GestionEcran,crtPerso,chasseFuiteLogic,villageIHM,combatIHM,personnage;
 
 
 
@@ -327,20 +328,24 @@ var x : integer = 45;
 
 begin
      randomize;
+     combat := datajoueur(5);
      creationFuiteInterface();
      creationBordure();
      creationFrontiere();
      legende();
      if (fuite = True) then
-        mstr := 1
+        begin
+             mstr := 1;
+             texteXY(60-12,1,'Le monstre est en fuite !',Red);
+        end
      else
         begin
              mstr := random(8)+1;
-             if (combat >= 20) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+             if (combat >= 10) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
                 texteXY(50,15,'X',Red);
-             if (combat >= 40) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+             if (combat >= 20) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
                 texteXY(55,14,'X',Red);
-             if (combat >= 60) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+             if (combat >= 30) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
                 texteXY(65,16,'X',Red);
         end;
 
@@ -455,13 +460,15 @@ begin
                                     texteEnCouleur(IntToStr(zoneActuelle),LightGreen);
                                     x := ox;
                                     texteXY(x,y,'X',LightBlue);
+                                    if (fuite = True) then
+                                       texteXY(60-12,1,'Le monstre est en fuite !',Red);
                                     for i := 1 to mstr do
                                         texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-                                    if (combat >= 20) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+                                    if (combat >= 10) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
                                        texteXY(50,15,'X',Red);
-                                    if (combat >= 40) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+                                    if (combat >= 20) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
                                        texteXY(55,14,'X',Red);
-                                    if (combat >= 60) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+                                    if (combat >= 30) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
                                        texteXY(65,16,'X',Red);
                                     affboss1 := False;
                                     affboss2 := False;
@@ -729,11 +736,11 @@ begin
 
                for i := 1 to mstr do
                    texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-               if (combat >= 20) and (boss1 = True) then
+               if (combat >= 10) and (boss1 = True) then
                    texteXY(50,15,'X',Red);
-               if (combat >= 40) and (boss2 = True) then
+               if (combat >= 20) and (boss2 = True) then
                   texteXY(55,14,'X',Red);
-               if (combat >= 60) and (boss3 = True) then
+               if (combat >= 30) and (boss3 = True) then
                   texteXY(65,16,'X',Red);
 
                if (choix = False) then
@@ -825,9 +832,6 @@ begin
                               monstreal := random(12)+1;
                               introduction(monstreal);
                          end;
-
-                     // On le met de façon temporaire ici, mais il faudra le mettre à la fin du combat.
-                     combat := combat + 1;
                 end;
 
         end;
