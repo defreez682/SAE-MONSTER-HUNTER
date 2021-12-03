@@ -299,14 +299,28 @@ end;
 procedure ajoutStuffDepart(var personnage:typePersonnage);
 begin
      ajoutItemToPersonnage('arme',4,personnage);
+
+     equipEquipement(personnage,0,0,'arme');
+
      ajoutItemToPersonnage('armure',1,personnage);
+     equipEquipement(personnage,0,0,'armure');
+
      ajoutItemToPersonnage('armure',2,personnage);
+     equipEquipement(personnage,0,1,'armure');
+
      ajoutItemToPersonnage('armure',3,personnage);
+     equipEquipement(personnage,0,2,'armure');
+
      ajoutItemToPersonnage('armure',4,personnage);
+     equipEquipement(personnage,0,3,'armure');
+
      ajoutItemToPersonnage('armure',5,personnage);
+     equipEquipement(personnage,1,0,'armure');
+
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
+     equipEquipement(personnage,0,0,'arme');
 
 end;
 

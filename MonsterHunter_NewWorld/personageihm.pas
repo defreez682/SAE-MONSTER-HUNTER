@@ -504,6 +504,7 @@ begin
      texteAtemps('Aeternum',60,LightCyan);
      ReadKey;
 
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-32,15);
      texteAtemps('Vous y etes envoye pour decouvrir tous les ',25,White);
      texteAtemps('mysteres de cette ile.',25,Cyan);
