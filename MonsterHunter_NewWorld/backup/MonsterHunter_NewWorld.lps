@@ -195,8 +195,10 @@
       <Unit21>
         <Filename Value="forgeronihm.pas"/>
         <UnitName Value="forgeronIHM"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="14"/>
-        <CursorPos X="86" Y="8"/>
+        <TopLine Value="230"/>
+        <CursorPos X="12" Y="249"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit21>
@@ -211,7 +213,6 @@
       <Unit23>
         <Filename Value="bestiairelogic.pas"/>
         <UnitName Value="bestiaireLogic"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
         <CursorPos X="66" Y="519"/>
         <UsageCount Value="65"/>

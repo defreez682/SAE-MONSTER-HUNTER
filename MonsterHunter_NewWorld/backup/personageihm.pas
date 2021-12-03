@@ -428,7 +428,7 @@ begin
      deplacerCurseurXY(60-9,1);
      texteAtemps('Cela vous convient ?',30,White);
      deplacerCurseurXY(60-21,2);
-     texteAtemps('(Une fois accepte, plus de retour arriere)',100,Red);
+     texteAtemps('(Une fois accepte, plus de retour arriere)',30,Red);
      choixONInterface2();
      texteXY(94,12,'Oui',Red);
      texteXY(94,18,'Non',White);
@@ -490,16 +490,16 @@ begin
      ReadKey;
 
      texteXY(21,15,'                                                                      ',White);
-     creationInterfaceDialogue();
      deplacerCurseurXY(60-34,15);
      texteAtemps('Vous faites partie de la sixieme grande expedition du nouveau monde.',20,White);
      ReadKey;
 
-
+     texteXY(21,15,'                                                                      ',White);
      deplacerCurseurXY(60-23,15);
      texteAtemps('Une nouvelle ile mysterieuse a ete decouverte :',30,White);
      ReadKey;
 
+     texteXY(21,15,'                                                                      ',White);
      deplacerCurseurXY(60-4,15);
      texteAtemps('Aeternum',60,LightCyan);
      ReadKey;
@@ -509,6 +509,7 @@ begin
      texteAtemps('mysteres de cette ile.',25,Cyan);
      ReadKey;
 
+     texteXY(21,15,'                                                                      ',White);
      deplacerCurseurXY(60-37,15);
      texteAtemps('Mais avant tout, j''ai besoin que vous remplissiez cette ',25,White);
      texteAtemps('fiche d''information.',25,Red);
