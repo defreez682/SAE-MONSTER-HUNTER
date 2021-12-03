@@ -107,7 +107,8 @@ begin
    dessinerCadreXY(75,21,115,27,double,15,0);
    texteXY(77,22,'Poids:' ,10); write(stuffDispo.invArmeDispo[1].poids);
    texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[1].ratioAD*100:0:0, '%');
-   texteXY(77,25,'Loot 1 :     Loot 2 :      ',4);
+   texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[11].nomDrop,'             ');
+   texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[14].nomDrop,'             ');
 
    // Cadre pour quitter
    dessinerCadreXY(2,25,20,27,double,15,0);
@@ -133,7 +134,8 @@ begin
    dessinerCadreXY(75,21,115,27,double,15,0);
    texteXY(77,22,'Poids:' ,10); write(stuffDispo.invArmureDispo[1].poids);
    texteXY(77,23,'Defense: ',10); write(stuffDispo.invArmureDispo[1].defense);
-   texteXY(77,25,'Loots 1 :     Loot 2 :      ',4);
+    texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[6].nomDrop,'             ');
+    texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[1].nomDrop,'            ');
 
    // Cadre pour quitter
    dessinerCadreXY(2,25,20,27,double,15,0);
@@ -203,9 +205,12 @@ begin
      begin
      for j:=0 to 3 do
        begin
-            write(personnage1.inventaire.invDrop[i][j].nomDrop);
-            x:=(x+1);
-            deplacerCurseurXY(78,x);
+            if (personnage1.inventaire.invDrop[i][j].nomDrop <> 'VIDE') then
+               begin
+                   write(personnage1.inventaire.invDrop[i][j].nomDrop);
+                   x:=(x+1);
+                   deplacerCurseurXY(78,x);
+               end;
        end;
      end;
 
@@ -220,7 +225,7 @@ var
 begin
     effacerEcran();
     dessinerCadreXY(9,2,106,25, double,15,0);
-    for i:=1 to 7 do
+    for i:=1 to 5 do
       begin
            ForgeronDesignIHM();
            texteAtemps('..',300, 0);
@@ -238,9 +243,9 @@ procedure messageForgeImpo();
 begin
    dessinerCadreXY(20,9,100,16, double, white, black);
    deplacerCurseurXY(50, 12);
-   texteAtemps('Forge non reussi!!', 100,15);
+   texteAtemps('Forge non reussi!!', 70,15);
    deplacerCurseurXY(35, 13);
-   texteAtemps('Malheuresement vous ne possedez les drops necessaires', 100,4);
+   texteAtemps('Malheuresement vous ne possedez les drops necessaires', 80,4);
 end;
 
 end.
