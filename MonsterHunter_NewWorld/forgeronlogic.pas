@@ -1,4 +1,4 @@
-
+{Partie logique de la forge}
 unit forgeronLogic;
 
 {$mode objfpc}{$H+}
@@ -8,12 +8,12 @@ interface
 uses
   Classes, SysUtils, GestionEcran, crtPerso, villageIHM, gestionTexte, forgeronIHM, inventaireLogic, personnage;
 
-procedure ForgeronDesign();
-procedure ForgeronCadre();
-procedure DemarrageForgeron();
-procedure ForgerArme();
-procedure ForgerArmure();
-function dropExist(drop1, drop2 : string ) : boolean;
+procedure ForgeronDesign();                           
+procedure ForgeronCadre();                            //Choix entre forger arme ou forger armure
+procedure DemarrageForgeron();                        // 
+procedure ForgerArme();                               //Partie specialisé dans la forge des armes
+procedure ForgerArmure();                             //Partie specialisé dans la forge des armures
+function dropExist(drop1, drop2 : string ) : boolean; //Renvoi vrai si les deux drop existent dans l'inventaire, si non faux
 
 implementation
 
@@ -181,7 +181,7 @@ var
                      texteXY(77,23,'Ratio A/D: ',10);  write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
                      texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[4].nomDrop,'          ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[5].nomDrop,'         ');
-  ;                end;
+                 end;
                 7:begin
                      listerArmes(3,38, stuffDispo,rep);
                      texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids);
@@ -196,7 +196,7 @@ var
                      texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
                      texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[4].nomDrop,'          ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[6].nomDrop,'          ');
-  ;                                end;
+                   end;
                 9:begin
                      listerArmes(3,38, stuffDispo,rep);
 
@@ -263,7 +263,7 @@ var
                      texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
                      texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[7].nomDrop,'          ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[8].nomDrop,'          ');
-  ;             end;
+                end;
                 18: begin
                      listerArmes(3,38, stuffDispo,rep);
                      texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids);
@@ -297,9 +297,10 @@ var
             end;
         end;
        //------------------------fini de while----------------------//
+           //Ici selon le choix du joueur soit on forge ou dans le cas 21 on retourne
            case rep of
               1 :begin
-
+                    //Controle si je possede le deux drop
                     if (dropExist(stuffDispo.invDropDispo[11].nomDrop ,stuffDispo.invDropDispo[14].nomDrop)) then
                          begin
                               //supprimer deux loots
