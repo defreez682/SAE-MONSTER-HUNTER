@@ -241,7 +241,7 @@ var
                      listerArmes(3,38, stuffDispo,rep);
                      texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids);
                      texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
-                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[3].nomDrop,'          ');
+                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[3].nomDrop,'             ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[18].nomDrop,'         ');
                    end;
                 15: begin
