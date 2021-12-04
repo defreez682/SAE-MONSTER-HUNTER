@@ -35,9 +35,9 @@ uses
 
 
 procedure afficheStat();
-var ArmureJoueur : Integer;
-    AdJoueur : Integer;
-    MobiliteJoueur : Integer;
+var AJ : Integer;
+    ADJ : Integer;
+    MJ : Integer;
 
 begin
     texteXY(90,2,getNomActuelle(personnage1),white);
@@ -55,15 +55,15 @@ begin
     texteEnCouleur('/',Red);
     texteEnCouleur(IntToStr(calculHpMaxBase()),red);
 
-    ArmureJoueur := (calculArmureBase() + stuffDispo.invArmureDispo[ItemSlot(66)].defense + stuffDispo.invArmureDispo[ItemSlot(65)].defense + stuffDispo.invArmureDispo[ItemSlot(68)].defense + stuffDispo.invArmureDispo[ItemSlot(69)].defense+ stuffDispo.invArmureDispo[ItemSlot(70)].defense) + (dataJoueur(7)+dataJoueur(11));
-    AdJoueur := calculADBase() + (dataJoueur(8)+dataJoueur(9));
-    MobiliteJoueur := 100 - trunc(((stuffDispo.invArmureDispo[ItemSlot(66)].poids + stuffDispo.invArmureDispo[ItemSlot(65)].poids + stuffDispo.invArmureDispo[ItemSlot(68)].poids + stuffDispo.invArmureDispo[ItemSlot(69)].poids+ stuffDispo.invArmureDispo[ItemSlot(70)].poids + stuffDispo.invArmeDispo[ItemSlot(67)].poids) - (dataJoueur(10)+dataJoueur(12))) div 2);    texteXY(90,8,'AD : ',white);
+    AJ := (calculArmureBase() + stuffDispo.invArmureDispo[ItemSlot(66)].defense + stuffDispo.invArmureDispo[ItemSlot(65)].defense + stuffDispo.invArmureDispo[ItemSlot(68)].defense + stuffDispo.invArmureDispo[ItemSlot(69)].defense+ stuffDispo.invArmureDispo[ItemSlot(70)].defense) + (dataJoueur(7)+dataJoueur(11));
+    ADJ := calculADBase() + (dataJoueur(8)+dataJoueur(9));
+    MJ := 100 - trunc(((stuffDispo.invArmureDispo[ItemSlot(66)].poids + stuffDispo.invArmureDispo[ItemSlot(65)].poids + stuffDispo.invArmureDispo[ItemSlot(68)].poids + stuffDispo.invArmureDispo[ItemSlot(69)].poids+ stuffDispo.invArmureDispo[ItemSlot(70)].poids + stuffDispo.invArmeDispo[ItemSlot(67)].poids) - (dataJoueur(10)+dataJoueur(12))) div 2);    texteXY(90,8,'AD : ',white);
 
-    texteEnCouleur(IntToStr(AdJoueur),lightRed);
+    texteEnCouleur(IntToStr(AJ),lightRed);
     texteXY(90,9,'Armure : ',white);
-    texteEnCouleur(IntToStr(ArmureJoueur),green);
+    texteEnCouleur(IntToStr(ADJ),green);
     texteXY(90,10,'Mobilite : ',white);
-    texteEnCouleur(IntToStr(MobiliteJoueur),LightMagenta);
+    texteEnCouleur(IntToStr(MJ),LightMagenta);
 end;
 
 

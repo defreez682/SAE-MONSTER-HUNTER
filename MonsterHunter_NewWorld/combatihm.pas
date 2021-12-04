@@ -157,7 +157,7 @@ begin
            barreHP(); // On met à jour sa barre d'hp
            readKey;
            victoireDefaite(); // On vérifie si le joueur gagne ou perd
-           modificationDataJoueur(Trunc(HPJoueur),13); // On sauvegarde ses hp
+           modificationDataJoueur(Trunc(HPJoueur),13); // On sauvegarde ses hps
       end
    else
        begin
@@ -405,7 +405,7 @@ end;
 
 procedure combatQFQ();
 
-var cho: boolean = True; // Choix initiale (entre action et info)
+var choix: boolean = True; // Choix initiale (entre action et info)
     choInf: boolean = False; // Choix info
     choComb : boolean = False; // Choix combat (entre attaquer, potion, bombe et retour)
     choPot : boolean = False; // choix dans l'inventaire des potions
@@ -447,7 +447,7 @@ begin
    texteXY(27,26,'Action',Red);
    texteXY(88,26,'Info',White);
    deplacerCurseurXY(33,26);
-   while (cho= True) do
+   while (choix= True) do
          begin
               ch := ReadKey;
               case ch of
@@ -459,7 +459,7 @@ begin
                            rep := rep - 1
                          else
                              rep := 2; // si en dessous de 1 on renvoie à 2
-                   #13 : cho := False; // Le joueur à validé son choix
+                   #13 : choix := False; // Le joueur à validé son choix
               end;
               if (rep = 1) then
                  begin
@@ -1203,7 +1203,7 @@ begin
                                     end;
 
                            end;
-                     {Principe : On regarde s'il y a une bpùbe, si non on affiche qui l'emplacement est vide et on revient au combat.
+                     {Principe : On regarde s'il y a une bombe, si non on affiche que l'emplacement est vide et on revient au combat.
                      sinon, attaque avec la bombe, si c'est une bombe flash, on initialise le flash pour le prochain tour ce qui fait que notre prochaine attaque touche,
                      puis on supprime la bombe de notre inventaire. et c'est au monstre d'attaquer, on répète ça pour les 8 slots de bombe}
                      if (rep = 1) then
@@ -1213,7 +1213,7 @@ begin
                                        viderBarre();
                                        deplacerCurseurXY(11,14);
                                        texteAtemps('L''emplacement est vide.',5,white);
-                                       readKey;
+                                       readkey;
                                        combatQFQ();
                                   end
                               else
@@ -1243,6 +1243,7 @@ begin
                                        readKey;
                                        victoireDefaite();
                                        AttaqueMonstre();
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 2) then
@@ -1280,7 +1281,8 @@ begin
 
                                        modificationInventaireItem(0,42);
                                        readKey;
-                                       AttaqueMonstre();
+                                       AttaqueMonstre(); 
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 3) then
@@ -1320,6 +1322,7 @@ begin
                                       readKey;
                                        victoireDefaite();
                                       AttaqueMonstre();
+                                      combatQFQ();
                                   end;
                          end;
                      if (rep = 4) then
@@ -1358,7 +1361,8 @@ begin
                                       modificationInventaireItem(0,44);
                                       readKey;
                                       victoireDefaite();
-                                      AttaqueMonstre();
+                                      AttaqueMonstre(); 
+                                      combatQFQ();
                                   end;
                          end;
                      if (rep = 5) then
@@ -1396,8 +1400,9 @@ begin
 
                                       modificationInventaireItem(0,45);
                                       readKey;
-                                       victoireDefaite();
+                                      victoireDefaite();
                                       AttaqueMonstre();
+                                      combatQFQ();
                                   end;
                          end;
                      if (rep = 6) then
@@ -1435,8 +1440,9 @@ begin
 
                                       modificationInventaireItem(0,46);
                                       readKey;
-                                       victoireDefaite();
-                                      AttaqueMonstre();
+                                      victoireDefaite();
+                                      AttaqueMonstre(); 
+                                      combatQFQ();
                                   end;
                          end;
                      if (rep = 7) then
@@ -1474,8 +1480,9 @@ begin
 
                                       modificationInventaireItem(0,47);
                                       readKey;
-                                       victoireDefaite();
-                                      AttaqueMonstre();
+                                      victoireDefaite();
+                                      AttaqueMonstre();   
+                                      combatQFQ();
                                   end;
                          end;
                      if (rep = 8) then
@@ -1514,7 +1521,8 @@ begin
                                        modificationInventaireItem(0,48);
                                        readKey;
                                        victoireDefaite();
-                                       AttaqueMonstre();
+                                       AttaqueMonstre();   
+                                       combatQFQ();
                                   end;
                          end;
                      if (rep = 9) then
