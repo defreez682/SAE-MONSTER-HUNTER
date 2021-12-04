@@ -5,12 +5,13 @@ unit chasseFuiteLogic;
 
 interface
 
+{Vérification dès que le joueur utilise la douche du bas}
 function gestionBas(x,y : Integer) : Integer;
-                 
+{Vérification dès que le joueur utilise la douche du haut}
 function gestionHaut(x,y : Integer) : Integer;
-
+{Vérification dès que le joueur utilise la douche du droite}
 function gestionDroite(x,y : Integer) : Integer;
-
+{Vérification dès que le joueur utilise la douche du Gauche}
 function gestionGauche(x,y : Integer) : Integer;
 
 
@@ -19,6 +20,7 @@ implementation
 uses
   Classes, SysUtils;
 
+// On regarde où est le joueur et on le bloque si il essaye d'aller à un endroit où il ne peut pas
 function gestionBas(x,y : Integer) : Integer;
 begin
   if (y = 24) then
@@ -101,7 +103,7 @@ begin
 
   gestionBas := y;
 end;
-
+// On regarde où est le joueur et on le bloque si il essaye d'aller à un endroit où il ne peut pas
 function gestionHaut(x,y : Integer) : Integer;
 begin
   if (y = 8) then
@@ -161,7 +163,7 @@ begin
 
   gestionHaut := y;
 end;
-
+// On regarde où est le joueur et on le bloque si il essaye d'aller à un endroit où il ne peut pas
 function gestionDroite(x,y : Integer) : Integer;
 begin
   if (x = 77) then
@@ -185,7 +187,7 @@ begin
 
   gestionDroite := x;
 end;
-
+// On regarde où est le joueur et on le bloque si il essaye d'aller à un endroit où il ne peut pas
 function gestionGauche(x,y : Integer) : Integer;
 begin
   if (x = 41) then
