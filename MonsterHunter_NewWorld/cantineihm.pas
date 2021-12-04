@@ -9,10 +9,11 @@ interface
 uses
   Classes, SysUtils ,GestionEcran, gestiontexte, crtPerso, Personnage,villageIHM;
 
-  procedure cantineInterface();     //Interface de la cantine
-  procedure cantineChoix();         //Choisir une option à faire soit Acheter ou retourner au village
-  procedure cantine();              //Regroupe les deux procedure cantineChoix() et cantineInterface()
-  procedure messageOrInsuffisant(); // Message qui s'affiche si l'achat n'est pas reussi quand l'or est
+  procedure cantineInterface();       //Interface de la cantine
+  procedure cantineChoix();           //Choisir une option à faire soit Acheter ou retourner au village
+  procedure cantine();                //Regroupe les deux procedure cantineChoix() et cantineInterface()
+  procedure messageOrInsuffisant();   //Message qui s'affiche si l'achat n'est pas reussi quand l'or est
+  procedure messageAchatReussi(bonus : string);  //Message s'affiche si l'achat est bien reussi
 
 implementation
 //Creation de l'interface de la cantine
@@ -242,6 +243,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 50) ;
              modificationDataJoueur(5,7);
+             messageAchatReussi('DEFENSE +');
              cantine();
         end
      else if (rep = 2) then
@@ -251,6 +253,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 70) ;
              modificationDataJoueur(15,8);
+             messageAchatReussi('ATTAQUE ++');
              cantine();
          end
      else if (rep = 3) then
@@ -260,6 +263,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 80) ; 
              modificationDataJoueur(8,9);
+             messageAchatReussi('ATTAQUE +');
              cantine();
         end
      else if (rep = 4) then
@@ -269,6 +273,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 65) ;
              modificationDataJoueur(10,10);
+             messageAchatReussi('POIDS --');
              cantine();
         end
      else if (rep = 5) then
@@ -278,6 +283,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 82) ;
              modificationDataJoueur(15,11);
+             messageAchatReussi('DEFENSE +');
              cantine();
         end
      else if (rep = 6) then
@@ -287,6 +293,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 55) ;  
              modificationDataJoueur(5,12);
+             messageAchatReussi('POIDS -');
              cantine();
        end
      else if (rep = 7) then
@@ -300,7 +307,20 @@ begin
    cantineChoix();
 end;
 
-//Message que s'affiche si l'or pour acheter un repas est insuffisant
+//Message s'affiche si l'achat est bien reussi
+procedure messageAchatReussi(bonus : string);
+begin
+   dessinerCadreXY(20,9,100,16, double, white, black);
+   deplacerCurseurXY(53, 11);
+   texteAtemps('Achat reussi!!', 70,15);
+   deplacerCurseurXY(35, 13);
+   texteAtemps('Pour la prochaine chasse vuos aurez comme bonus : ', 60,3);
+   deplacerCurseurXY(55, 14);
+   texteAtemps(bonus, 100,4);
+   readkey;
+end;
+
+//Message qui s'affiche si l'or pour acheter un repas est insuffisant
 procedure messageOrInsuffisant();
 begin
    dessinerCadreXY(20,9,100,16, double, white, black);
@@ -312,4 +332,3 @@ begin
 end;
 
 end.
-
