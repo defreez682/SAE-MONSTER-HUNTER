@@ -276,7 +276,7 @@ begin
       reussite := false;
       initStat(1);
       HPJoueur := 300;
-      MobiliteJoueur := -30000;
+      MobiliteJoueur := 3000;
       sHPJoueur := trunc(HPJoueur);
       monstreAttaque();
       if not (sHPJoueur = HPJoueur) then
