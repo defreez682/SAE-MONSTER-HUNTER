@@ -366,7 +366,7 @@ begin
             monstre.attaque3Desc := 'Le Deviljho vous met un coup de queue !';
 
             monstre.attaque4 := 0.3 ;
-            monstre.attaque4Chance := 10; // 10 % de chance
+            monstre.attaque4Chance := 100; // 10 % de chance
             monstre.attaque4Desc := 'Le Deviljho utilise son souffle draconique !';
 
             monstre.loot1 := 15;
@@ -390,19 +390,19 @@ begin
              monstre.xpgagne := random(1000) + 1000;
 
              monstre.attaque1 := 0.15;
-             monstre.attaque1Chance := 30; // 30 % de chance
+             monstre.attaque1Chance := 25; // 25 % de chance
              monstre.attaque1Desc := 'Le Barroth vous charge dessus !';
 
              monstre.attaque2 := 0.1;
-             monstre.attaque2Chance := 30; // 30 % de chance
+             monstre.attaque2Chance := 50; // 25 % de chance
              monstre.attaque2Desc := 'Le Barroth vous met un coup de queue !';
 
              monstre.attaque3 := 0.2;
-             monstre.attaque3Chance := 30; // 30 % de chance
+             monstre.attaque3Chance := 75; // 25 % de chance
              monstre.attaque3Desc := 'Le Barroth vous pietinne !';
 
              monstre.attaque4 := 0.1 ;
-             monstre.attaque4Chance := 30; // 30 % de chance
+             monstre.attaque4Chance := 100; // 25 % de chance
              monstre.attaque4Desc := 'Le Barroth rugit !';
 
              monstre.loot1 := 18;
@@ -426,19 +426,19 @@ begin
             monstre.xpgagne := random(1000) + 1000;
 
              monstre.attaque1 := 0.2;
-             monstre.attaque1Chance := 30; // 30 % de chance
+             monstre.attaque1Chance := 25; // 25 % de chance
              monstre.attaque1Desc := 'Le Legiana vous charge dessus !';
 
              monstre.attaque2 := 0.2;
-             monstre.attaque2Chance := 30; // 30 % de chance
+             monstre.attaque2Chance := 50; // 25 % de chance
              monstre.attaque2Desc := 'Le Legiana vous met un coup de queue !';
 
              monstre.attaque3 := 0.3;
-             monstre.attaque3Chance := 30; // 30 % de chance
+             monstre.attaque3Chance := 50; // 25 % de chance
              monstre.attaque3Desc := 'Le Legiana vous met un coup de griffe !';
 
              monstre.attaque4 := 0.2 ;
-             monstre.attaque4Chance := 30; // 30 % de chance
+             monstre.attaque4Chance := 50; // 25 % de chance
              monstre.attaque4Desc := 'Le Legiana glace le sol ou vous êtes !';
 
              monstre.loot1 := 20;
