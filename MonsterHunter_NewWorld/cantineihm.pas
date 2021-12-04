@@ -283,7 +283,7 @@ begin
           else
              miseAjourOr(getOrActuelle() - 82) ;
              modificationDataJoueur(15,11);
-             messageAchatReussi('DEFENSE +');
+             messageAchatReussi('DEFENSE ++');
              cantine();
         end
      else if (rep = 6) then
