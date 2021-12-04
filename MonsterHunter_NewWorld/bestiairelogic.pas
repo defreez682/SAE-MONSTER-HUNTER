@@ -8,32 +8,32 @@ interface
 
 type
   bestiaire = RECORD
-            nom : string;
-            description : String;
-            hpBase : Integer;
-            armureBase : Integer;
-            mobilite : Integer;
-            ratioHP : Integer;
-            ratioArmure : Real;
-            ad : Integer;
-            ratioAd : Integer;
-            orgagne : Integer;
-            xpgagne : Integer;
-            attaque1 : Real;
-            attaque1Chance : Integer;
-            attaque1Desc : string;
-            attaque2 : Real;
-            attaque2Chance : Integer;
-            attaque2Desc : string;
-            attaque3 : Real;
-            attaque3Chance : Integer;
-            attaque3Desc : string;
-            attaque4 : Real;
-            attaque4Chance : Integer;
-            attaque4Desc : string;
-            loot1 : Integer;
-            loot2 : Integer;
-            loot3 : Integer;
+            nom : string; // Le nom du monstre
+            description : String; // sa descritpion
+            hpBase : Integer; // Ses points de vie de base
+            armureBase : Integer; // L'armure de base du monstre
+            mobilite : Integer; // Sa mobilité
+            ratioHP : Integer; // L'augmentation des hp en fonction du niveau
+            ratioArmure : Real; // L'augmentation de l'armure en fonction du niveau
+            ad : Integer; // L'attaque de base du monstre
+            ratioAd : Integer; // L'augmentation de son ad en fonction du niveau
+            orgagne : Integer; // Or gagner à la fin du combat
+            xpgagne : Integer; // Experience gagner à la fin du combat
+            attaque1 : Real; // Pourcentage d'augmentation de sa première attaque
+            attaque1Chance : Integer; // Pourcentage de chance qu'elle arrive
+            attaque1Desc : string; // Description de l'attaque
+            attaque2 : Real; // Pourcentage d'augmentation de sa deuxième attaque
+            attaque2Chance : Integer; // Pourcentage de chance qu'elle arrive
+            attaque2Desc : string; // Description de l'attaque
+            attaque3 : Real; // Pourcentage d'augmentation de sa troisième attaque
+            attaque3Chance : Integer; // Pourcentage de chance qu'elle arrive
+            attaque3Desc : string; // Description de l'attaque
+            attaque4 : Real; // Pourcentage d'augmentation de sa quatrième attaque
+            attaque4Chance : Integer; // Pourcentage de chance qu'elle arrive
+            attaque4Desc : string; // Description de l'attaque
+            loot1 : Integer; // Objet fournis par le monstre lors de sa mort
+            loot2 : Integer; // Objet fournis par le monstre lors de sa mort
+            loot3 : Integer; // Objet fournis par le monstre lors de sa mort
 
   end;
 
@@ -513,9 +513,9 @@ begin
              monstre.attaque4Chance := 90; // 15 % de chance
              monstre.attaque4Desc := 'Le Tesotra vous fouette avec sa queue enflammee ! '; //enflamme
 
-             monstre.loot1 := 20;
-             monstre.loot2 := 2;
-             monstre.loot3 := 16;
+             monstre.loot1 := 12;
+             monstre.loot2 := 5;
+             monstre.loot3 := 10;
 
 
              envoyerMonstre := monstre;
@@ -550,9 +550,9 @@ begin
              monstre.attaque4Chance := 90; // 15 % de chance
              monstre.attaque4Desc := 'Le Kushala Daora utilise un souffle invisble violent !';
 
-             monstre.loot1 := 20;
-             monstre.loot2 := 2;
-             monstre.loot3 := 16;
+             monstre.loot1 := 18;
+             monstre.loot2 := 8;
+             monstre.loot3 := 4;
 
 
              envoyerMonstre := monstre;
@@ -587,9 +587,9 @@ begin
              monstre.attaque4Chance := 100; // 10 % de chance
              monstre.attaque4Desc := 'Le Nergigante s''envolle et projette une pluie de pique !';
 
-             monstre.loot1 := 20;
+             monstre.loot1 := 11;
              monstre.loot2 := 2;
-             monstre.loot3 := 16;
+             monstre.loot3 := 3;
 
              envoyerMonstre := monstre;
         end;
