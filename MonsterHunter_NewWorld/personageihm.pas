@@ -83,10 +83,10 @@ end;
 
 procedure saisieNom();
 var nomsaisie : string;
-    rep : integer = 1;
-    ch : Char;
-    correcte: boolean = False;
-    cho : boolean = False;
+    rep : integer = 1; // Position du choix
+    ch : Char; // Contient la touche
+    correcte: boolean = False; // Permet de savoir si le joueur à accepter son nom
+    cho : boolean = False; // Permet de faire tourner la boucle du choix
 
 begin
      while (correcte = False) do
@@ -96,9 +96,9 @@ begin
                texteAtemps('Ecrivez votre nom : (20 lettres MAX)',25,White);
                deplacerCurseurXY(15,6);
                readln(nomsaisie);
-               if not (nomsaisie = '') then
+               if not (nomsaisie = '') then // On vérifie que l'on a bien tapé le nom
                   begin
-                      if (Length(nomsaisie) < 20) then
+                      if (Length(nomsaisie) < 20) then // On vérifie que le nom est moins de 20 caractères
                       begin
                            miseAjourNom(personnage1,nomsaisie);
                            deplacerCurseurXY(15,8);
@@ -116,15 +116,15 @@ begin
                                  begin
                                      ch := ReadKey;
                                      case ch of
-                                          #75 : if (rep < 2) then
+                                          #75 : if (rep < 2) then  // droite
                                                    rep := rep + 1
                                                 else
-                                                   rep := 1;
-                                          #77 : if (rep > 1) then
+                                                   rep := 1; // On retourne à 1 si on est à 2
+                                          #77 : if (rep > 1) then  // gauche
                                                    rep := rep - 1
                                                 else
-                                                   rep := 2;
-                                          #13 : cho := False;
+                                                   rep := 2; // On retourne à 2 si on est à 1
+                                          #13 : cho := False; // si le joueur appuie on arrête la saisie
                                      end;
 
 
@@ -142,7 +142,7 @@ begin
                                          end;
                                  end;
                            if (rep = 1) then
-                              correcte := True
+                              correcte := True // On arrête le choix
                            else
                               rep := 1;
 
@@ -150,15 +150,15 @@ begin
                       else;
                   end;
            end;
-     saisieSexe()
+     saisieSexe() // On appelle la saisie du sexe après que tout soit terminé
 end;
 
 procedure saisieSexe();
-var sexesaisie : string;
-    rep : integer = 1;
-    ch : Char;
-    correcte: boolean = False;
-    cho : boolean = False;
+var sexesaisie : string; // contient le sexe
+    rep : integer = 1; // Position du choix
+    ch : Char; // Contient la touche
+    correcte: boolean = False; // Permet de savoir si le joueur à accepter son sexe
+    cho : boolean = False; // Permet de faire tourner la boucle du choix
 begin
      while (correcte = False) do
            begin
@@ -174,9 +174,9 @@ begin
                texteAtemps('(30 Lettres MAX)',25,White);
                deplacerCurseurXY(15,7);
                readln(sexesaisie);
-               if not (sexesaisie = '') then
+               if not (sexesaisie = '') then  // On vérifie que ce ne soit pas vide
                   begin
-                      if (Length(sexesaisie) < 30) then
+                      if (Length(sexesaisie) < 30) then // On vérifie que e soit inférieur à 30 caractères
                       begin
                            miseAjourSexe(personnage1,sexesaisie);
                            deplacerCurseurXY(15,9);
@@ -194,15 +194,15 @@ begin
                                  begin
                                       ch := ReadKey;
                                       case ch of
-                                           #75 : if (rep < 2) then
+                                           #75 : if (rep < 2) then  // droite
                                                     rep := rep + 1
                                                  else
-                                                    rep := 1;
-                                           #77 : if (rep > 1) then
+                                                    rep := 1; // On retourne à 1 si on est à 2
+                                           #77 : if (rep > 1) then  // gauche
                                                     rep := rep - 1
                                                  else
-                                                    rep := 2;
-                                          #13 : cho := False;
+                                                    rep := 2; // On retourne à 2 si on est à 1
+                                           #13 : cho := False; // si le joueur valide on quitte la saisie
                                       end;
 
 
@@ -222,11 +222,11 @@ begin
                                  end;
                                  if (rep = 1) then
                                     begin
-                                         case sexesaisie of 'homme','Homme','Femme','femme','Garçon','garçon','garcon','Garcon' :
+                                         case sexesaisie of 'homme','Homme','Femme','femme','Garçon','garçon','garcon','Garcon' : // si tout ces sexes sont indiqué on passe,
                                               begin
-                                                  correcte := True;
+                                                  correcte := True; // On arrête le choix
                                               end
-                                              else
+                                              else // Sinon on affiche ce commentaire
                                                   begin
                                                        creationInterfaceFormulaire();
                                                        interfaceSaisieSexe();
@@ -238,7 +238,7 @@ begin
                                                        deplacerCurseurXY(15,13);
                                                        texteAtemps('Mais passons.',30,White);
                                                        ReadKey();
-                                                       correcte := True;
+                                                       correcte := True; // On arrête le choix
                                                   end;
                                          end;
                                     end
@@ -248,19 +248,19 @@ begin
                       else;
                   end;
            end;
-     saisieTaille();
+     saisieTaille(); // On appelle le saisie de l'interface
 end;
 
 procedure saisieTaille();
 
-var taillesaisie : integer = 100;
-    taillesaisieaff : real;
-    rep : integer = 1;
-    ch : Char;
-    correcte: boolean = False;
-    cho : boolean = False;
-    choixtaille : boolean = False;
-    barx : integer = 15;
+var taillesaisie : integer = 100; // On initialise la taille à 100
+    taillesaisieaff : real; // Contient la taille qui s'affiche
+    rep : integer = 1; // Position du choix
+    ch : Char; // contient la touche appuyé
+    correcte: boolean = False; // Permet de savoir si le joueur à accepter sa taille
+    cho : boolean = False; // Permet de faire tourner la boucle du choix
+    choixtaille : boolean = False; // Permet de faire tourner la sélection de taille
+    barx : integer = 15; // Position de la barre
 begin
           while (correcte = False) do
            begin
@@ -288,27 +288,27 @@ begin
                         case ch of
                              #75 : if (taillesaisie > 100) then
                                        begin
-                                           taillesaisie := taillesaisie - 1;
-                                           if (taillesaisie mod 10 = 0) then
+                                           taillesaisie := taillesaisie - 1; // On enlève 1 à la taille
+                                           if (taillesaisie mod 10 = 0) then // tout les 10 on baisse de 2 pixels
                                               barx := barx - 2;
                                        end
                                    else
                                        begin
-                                            taillesaisie := 100;
+                                            taillesaisie := 100; // Au bout d'un mètre on stop
                                             barx := 15;
                                        end;
                              #77 : if (taillesaisie < 290) then
                                       begin
-                                           taillesaisie := taillesaisie + 1;
-                                           if (taillesaisie mod 10 = 0) then
+                                           taillesaisie := taillesaisie + 1; // On ajoute 1 à la taille
+                                           if (taillesaisie mod 10 = 0) then // tout les 10 on augmente de 2 pixels
                                               barx := barx + 2;
                                       end
                                    else
                                        begin
-                                            taillesaisie := 290;
+                                            taillesaisie := 290; // Au bout de 2,90 m on stop
                                             barx := 53;
                                        end;
-                             #13 : choixtaille := False;
+                             #13 : choixtaille := False; // Si le joueur valide on arrête le choix de la taille
                         end;
 
                              texteXY(15,4,'Quel est votre taille (m), ',White);
@@ -339,15 +339,15 @@ begin
                      begin
                           ch := ReadKey;
                           case ch of
-                               #75 : if (rep < 2) then
+                               #75 : if (rep < 2) then  // droite
                                         rep := rep + 1
                                      else
-                                        rep := 1;
-                               #77 : if (rep > 1) then
+                                        rep := 1; // On retourne à 1 si on est à 2
+                               #77 : if (rep > 1) then  // gauche
                                         rep := rep - 1
                                      else
-                                        rep := 2;
-                               #13 : cho := False;
+                                        rep := 2; // On retourne à 2 si on est à 1
+                               #13 : cho := False; // si le joueur valide on quitte la saisie
                           end;
 
 
@@ -365,13 +365,13 @@ begin
                               end;
                      end;
                if (rep = 1) then
-                   correcte := True
+                   correcte := True // On arrête la saisie
                else
                    rep := 1;
 
 
            end;
-           resume();
+           resume(); // On appelle résumé
 end;
 
 procedure resume();
@@ -438,15 +438,15 @@ begin
            begin
                ch := ReadKey;
                case ch of
-                    #80 : if (rep < 2) then
+                    #75 : if (rep < 2) then  // droite
                              rep := rep + 1
                           else
-                             rep := 1;
-                    #72 : if (rep > 1) then
+                             rep := 1; // On retourne à 1 si on est à 2
+                    #77 : if (rep > 1) then  // gauche
                              rep := rep - 1
                           else
-                             rep := 2;
-                    #13 : correcte := False;
+                             rep := 2; // On retourne à 2 si on est à 1
+                    #13 : correcte := False; // si le joueur valide on quitte la saisie
                end;
 
 
@@ -461,23 +461,22 @@ begin
                    begin
                       texteXY(94,12,'Oui',White);
                       texteXY(94,18,'Non',Red);
-                      //deplacerCurseurXY(97,18);                                                                                                                                                                 ;
+                      deplacerCurseurXY(97,18);                                                                                                                                                                 ;
                    end;
            end;
     if (rep = 1) then
         begin
-             miseAjourPersonnage(1);
-             creationInventaire(personnage1);
-             miseAjourOr(500);
-             miseAjourLvl(1);
-             miseAjourEXP(0);
-             modificationDataJoueur(calculHpMaxBase(),13);
-             choixMenuVillage();
+             miseAjourPersonnage(1); // On affirme que le personnage a été créer
+             creationInventaire(personnage1); // On créer/recréer l'inventaire
+             miseAjourOr(500); // On initialise les golds
+             miseAjourLvl(1);  // On initialise le niveau
+             miseAjourEXP(0);  // On initialise l'exp
+             modificationDataJoueur(calculHpMaxBase(),13); // On initialise la vie
+             choixMenuVillage(); // On appelle le village
 
-             // Village
         end
     else
-       creationPersonnage();
+       creationPersonnage(); // sinon on recommence la création du personnage
 end;
 
 procedure creationPersonnage();
@@ -516,7 +515,7 @@ begin
      texteAtemps('fiche d''information.',25,Red);
      ReadKey;
 
-     saisieNom();
+     saisieNom(); // On appelle la saisie du nom
 
 
 end;
