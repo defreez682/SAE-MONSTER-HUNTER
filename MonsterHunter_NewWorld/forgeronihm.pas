@@ -1,3 +1,4 @@
+{Partie IHM de la forge}
 unit forgeronIHM;
 
 {$mode objfpc}{$H+}
@@ -7,19 +8,19 @@ interface
 uses
   Classes, SysUtils, GestionEcran, GestionTexte, inventaireLogic, personnage,crtPerso;
 
-procedure ForgeronDesignIHM();
-procedure ForgeronDesignIHM2();
-procedure ForgeronCadreIHM();
+procedure ForgeronDesignIHM();  //dessin d'un forgeron
+procedure ForgeronDesignIHM2(); //dessin d'un forgeron
+procedure ForgeronCadreIHM();   //Interfgace de l'entrée de la forge
 
-procedure ForgerArmeIHM();
+procedure ForgerArmeIHM();      //Interface de la partie pour forger les armes
+procedure ForgerArmureIHM();    //Interface de la partie pour forger les armures
 
-procedure ForgerArmureIHM();
+procedure listerArmes(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);   //Permet d'afficher/lister tous les armes dans la BD
+procedure listerArmures(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer); //Permet d'afficher/lister tous les armures dans la BD
 
-procedure listerArmes(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);
-procedure listerArmures(x1,x2 : integer; stuffDispo:typeStuffDisponible; indiceAcolorer : integer);
-procedure listerDrop();
-procedure animationForgeron(objet : string);
-procedure messageForgeImpo();
+procedure listerDrop();  //Permet d'afficher/lister tous les drop possédé par le joueur
+procedure animationForgeron(objet : string); //animation d'un forgeron 
+procedure messageForgeImpo();                //message si la forge est impposible
 
 implementation
 
@@ -90,7 +91,7 @@ begin
    texteXY(32,27,'  Quitter',15);
 end;
 
-//___________________________________________________________IHM et choix forgeur Armes
+//___________________________________________________________IHM Armes
 procedure ForgerArmeIHM();
 begin
     //Cadre des armes
@@ -118,7 +119,7 @@ end;
 
 
 
-//___________________________________________________________IHM et choix forgeur Armures
+//___________________________________________________________IHM Armures
 procedure ForgerArmureIHM();
 begin
     effacerEcran();
