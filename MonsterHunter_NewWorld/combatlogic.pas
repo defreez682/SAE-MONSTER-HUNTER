@@ -186,8 +186,8 @@ begin
     if (esquive >= cesquive) then
        begin
             HPMonstre := HPMonstre - Int((adJoueur + (adJoueur * ratioArme)) / (1+(Int(EnvoyerMonstre(monstreEnCours).armureBase))/500)) + random(10)+1;
-            if not (chancefuite >= 40) then
-               chancefuite := chancefuite + 4;
+            if not (chancefuite >= 20) then
+               chancefuite := chancefuite + 2;
        end
 
     else

@@ -40,7 +40,7 @@ var cho : boolean;
     rep : integer = 1;
     ch : char;
 begin
-    creationChoixAvertissement(80);
+    creationChoixAvertissement(30);
     texteXY(44,14,'Oui',Red);
     texteXY(74,14,'Non',White);
     deplacerCurseurXY(47,14);
@@ -88,7 +88,7 @@ begin
      texteAtemps('Nouvelle partie',vitesse,White);
      dessinerCadreXY (50,16,70,20,double,White,Black);
      deplacerCurseurXY(60-9,18);
-     if not (getPersonnageActuelle(personnage1) = 1) then
+     if not (getPersonnageActuelle() = 1) then
          texteAtemps('Continuer la partie',vitesse,DarkGray)
      else
          texteAtemps('Continuer la partie',vitesse,White);
@@ -142,7 +142,7 @@ begin
           begin
               ch := ReadKey;
               case ch of
-                  #80 : if not (getPersonnageActuelle(personnage1) = 1) then
+                  #80 : if not (getPersonnageActuelle() = 1) then
                             begin
                                 if (rep < 3) then
                                    rep := rep + 2

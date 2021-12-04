@@ -62,8 +62,8 @@ begin
             monstre.ratioArmure := 0.5;
             monstre.ad := 115;
             monstre.ratioAd := 15;
-            monstre.orgagne := random(250) + 250;
-            monstre.xpgagne := random(2500) + 2000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.1;
             monstre.attaque1Chance := 40; // 40 % de chance
@@ -98,8 +98,8 @@ begin
             monstre.ratioArmure := 0.5;
             monstre.ad := 60;
             monstre.ratioAd := 20;
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(4000) + 3000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.2;
             monstre.attaque1Chance := 30; // 30 % de chance
@@ -134,8 +134,8 @@ begin
             monstre.ratioArmure := 0.55;
             monstre.ad := 75;
             monstre.ratioAd := 15;
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(2000) + 5000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.3;
             monstre.attaque1Chance := 40; // 40 % de chance
@@ -170,8 +170,8 @@ begin
             monstre.ratioArmure := 0.7;
             monstre.ad := 125;
             monstre.ratioAd := 10; 
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(2000) + 7000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.4;
             monstre.attaque1Chance := 20; // 20 % de chance
@@ -206,8 +206,8 @@ begin
             monstre.ratioArmure := 0.85; 
             monstre.ad := 115;
             monstre.ratioAd := 12;
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(2000) + 6000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.3;
             monstre.attaque1Chance := 40; // 40 % de chance
@@ -242,8 +242,8 @@ begin
             monstre.ratioArmure := 0.9;
             monstre.ad := 100;
             monstre.ratioAd := 15;
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(2000) + 4000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.3;
             monstre.attaque1Chance := 30; // 30 % de chance
@@ -278,8 +278,8 @@ begin
             monstre.ratioArmure := 1;
             monstre.ad := 85;
             monstre.ratioAd := 10;
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(4000) + 3000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.1;
             monstre.attaque1Chance := 40; // 40 % de chance
@@ -314,8 +314,8 @@ begin
             monstre.ratioArmure := 1;
             monstre.ad := 125;
             monstre.ratioAd := 15; 
-            monstre.orgagne := random(250) + 250;
-            monstre.xpgagne := random(8000) + 10000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.4;
             monstre.attaque1Chance := 40; // 40 % de chance
@@ -350,8 +350,8 @@ begin
             monstre.ratioArmure := 0.7;
             monstre.ad := 130;
             monstre.ratioAd := 13;  
-            monstre.orgagne := random(500) + 500;
-            monstre.xpgagne := random(8000) + 6000;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
             monstre.attaque1 := 0.35;
             monstre.attaque1Chance := 40; // 40 % de chance
@@ -386,8 +386,8 @@ begin
              monstre.ratioArmure := 0.5;
              monstre.ad := 115;
              monstre.ratioAd := 11;
-             monstre.orgagne := random(500) + 500;
-             monstre.xpgagne := random(8000) + 4500;
+             monstre.orgagne := random(1000) + 1000;
+             monstre.xpgagne := random(1000) + 1000;
 
              monstre.attaque1 := 0.15;
              monstre.attaque1Chance := 30; // 30 % de chance
@@ -422,8 +422,8 @@ begin
              monstre.ratioArmure := 0.6;
              monstre.ad := 65;
              monstre.ratioAd := 20;
-            monstre.orgagne := random(500) + 500;
-             monstre.xpgagne := random(8000) + 7500;
+            monstre.orgagne := random(1000) + 1000;
+            monstre.xpgagne := random(1000) + 1000;
 
              monstre.attaque1 := 0.2;
              monstre.attaque1Chance := 30; // 30 % de chance
@@ -458,25 +458,28 @@ begin
              monstre.ratioArmure := 0.6;
              monstre.ad := 80;
              monstre.ratioAd := 15;
-             monstre.orgagne := random(250) + 250;
-             monstre.xpgagne := random(8000) + 7500;
+             monstre.orgagne := random(1000) + 1000;
+             monstre.xpgagne := random(1000) + 1000;
 
              monstre.attaque1 := 0.2;
-             monstre.attaque1Chance := 30; // 30 % de chance
-             monstre.attaque1Desc := 'Le Legiana vous charge dessus !';
+             monstre.attaque1Chance := 25; // 25% de chance
+             monstre.attaque1Desc := 'Le Kirin vous charge dessus !';
 
              monstre.attaque2 := 0.2;
-             monstre.attaque2Chance := 30; // 30 % de chance
-             monstre.attaque2Desc := 'Le Legiana vous met un coup de queue !';
+             monstre.attaque2Chance := 50; // 25 % de chance
+             monstre.attaque2Desc := 'Le Kirin vous met un coup electrique !';
 
              monstre.attaque3 := 0.3;
-             monstre.attaque3Chance := 30; // 30 % de chance
-             monstre.attaque3Desc := 'Le Legiana vous met un coup de griffe !';
+             monstre.attaque3Chance := 75; // 25 % de chance
+             monstre.attaque3Desc := 'Le Kirin vous pietine !';
 
              monstre.attaque4 := 0.2 ;
-             monstre.attaque4Chance := 30; // 30 % de chance
-             monstre.attaque4Desc := 'Le Legiana glace le sol où vous êtes !';
+             monstre.attaque4Chance := 100; // 25 % de chance
+             monstre.attaque4Desc := 'Le Kirin lance une decharge ! ';
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
 
              envoyerMonstre := monstre;
         end
@@ -547,6 +550,10 @@ begin
              monstre.attaque4Chance := 90; // 15 % de chance
              monstre.attaque4Desc := 'Le Kushala Daora utilise un souffle invisble violent !';
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
+
 
              envoyerMonstre := monstre;
         end
@@ -580,6 +587,9 @@ begin
              monstre.attaque4Chance := 100; // 10 % de chance
              monstre.attaque4Desc := 'Le Nergigante s''envolle et projette une pluie de pique !';
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
 
              envoyerMonstre := monstre;
         end;

@@ -1,7 +1,7 @@
 unit gestionFichier;
 
 {$mode objfpc}{$H+}
-
+{$codepage UTF8}
 
 
 {Cette unité sert surtout à créer les fichiers au premier démarage}
@@ -29,7 +29,7 @@ begin
              miseAjourExp(1);
              miseAjourOr(500);
              miseAjourTaille(personnage1,0);
-             miseAjourPersonnage(personnage1,0);
+             miseAjourPersonnage(0);
              creationInventaireItem(0,65); // En rajouter si on ajoute des slots
         end;
 

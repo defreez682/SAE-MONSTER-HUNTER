@@ -489,27 +489,28 @@ begin
      texteAtemps('Aventurier.',40,White);
      ReadKey;
 
-     texteXY(21,15,'                                                                      ',White);
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-34,15);
      texteAtemps('Vous faites partie de la sixieme grande expedition du nouveau monde.',20,White);
      ReadKey;
 
-     texteXY(21,15,'                                                                      ',White);
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-23,15);
      texteAtemps('Une nouvelle ile mysterieuse a ete decouverte :',30,White);
      ReadKey;
 
-     texteXY(21,15,'                                                                      ',White);
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-4,15);
      texteAtemps('Aeternum',60,LightCyan);
      ReadKey;
 
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-32,15);
      texteAtemps('Vous y etes envoye pour decouvrir tous les ',25,White);
      texteAtemps('mysteres de cette ile.',25,Cyan);
      ReadKey;
 
-     texteXY(21,15,'                                                                      ',White);
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-37,15);
      texteAtemps('Mais avant tout, j''ai besoin que vous remplissiez cette ',25,White);
      texteAtemps('fiche d''information.',25,Red);

@@ -1,4 +1,3 @@
-{Uniteé dans laquelle le jouer peut se reposer et gestir son equipement}
 unit chambreIHM;
 
 {$mode objfpc}{$H+}
@@ -7,11 +6,10 @@ interface
 
 uses
   Classes, SysUtils,GestionEcran, gestiontexte, crtPerso,inventaireLogic,personnage,villageIHM;
-  
-  procedure chambreInterface(); //L'interface de la chambre
-  procedure chambreChoix();     //Choix de l'option à faire soit se reposer ou gestir son equipement
-  procedure repose();           //se reposer ajout des HP 
-  procedure chambre();          //regroupe les deux procedures chambreInterfaceIHM() et chambreChoix()
+  procedure chambreInterface();
+  procedure chambreChoix();
+  procedure repose();
+  procedure chambre();
 
 implementation
 
@@ -32,7 +30,7 @@ begin
     texteXY(10,21, 'RETOUR', 15);
 
 
-//Dessin de la chambre
+
 deplacerCurseurXY(25,1);
 write('///////////////////////////|_________________________________________________');   deplacerCurseurXY(25,2);
 write('///////////////////////////|_________________________________________________');   deplacerCurseurXY(25,3);
@@ -40,7 +38,7 @@ write('///////////////////////////|_____________________________________________
 write('///////////////////////////|_________________________________________________');   deplacerCurseurXY(25,5);
 write('///////////////////////////|_________|=========|___________________/=======\_');   deplacerCurseurXY(25,6);
 write('///////////////////////////|_________E         |___________________|Monster|_');   deplacerCurseurXY(25,7);
-write('/////////////.''|///////////|_________|         |___________________|Hunter |_');  deplacerCurseurXY(25,8);
+write('/////////////.''|///////////|_________|         |___________________|Hunted |_');  deplacerCurseurXY(25,8);
 write('//////////.'' | |///////////|_________|         |___________________\=======/_');  deplacerCurseurXY(25,9);
 write('/////////|   | |///////////|_________|       -6|_____________________________');   deplacerCurseurXY(25,10);
 write('/////////|   |/|///////////|_________|         |_____________________________');   deplacerCurseurXY(25,11);
@@ -130,7 +128,8 @@ begin
   texteAtemps('Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z Z', 30,15);
   readkey;
   modificationDataJoueur(calculHpMaxBase(),13);
-  chambre();
+  chambreInterface();
+  chambreChoix();
 end;
 
 procedure chambre();

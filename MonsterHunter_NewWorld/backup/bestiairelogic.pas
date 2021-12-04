@@ -62,12 +62,12 @@ begin
             monstre.ratioArmure := 0.5;
             monstre.ad := 115;
             monstre.ratioAd := 15;
-            monstre.orgagne := random(250) + 250;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(2500) + 2000;
 
             monstre.attaque1 := 0.1;
             monstre.attaque1Chance := 40; // 40 % de chance
-            monstre.attaque1Desc := 'Le Tigrex rugit avec une puissance phénoménal !';
+            monstre.attaque1Desc := 'Le Tigrex rugit avec une puissance phenomenal !';
 
             monstre.attaque2 := 0.4;
             monstre.attaque2Chance := 60; // 20 % de chance
@@ -98,7 +98,7 @@ begin
             monstre.ratioArmure := 0.5;
             monstre.ad := 60;
             monstre.ratioAd := 20;
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(4000) + 3000;
 
             monstre.attaque1 := 0.2;
@@ -134,7 +134,7 @@ begin
             monstre.ratioArmure := 0.55;
             monstre.ad := 75;
             monstre.ratioAd := 15;
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(2000) + 5000;
 
             monstre.attaque1 := 0.3;
@@ -170,7 +170,7 @@ begin
             monstre.ratioArmure := 0.7;
             monstre.ad := 125;
             monstre.ratioAd := 10; 
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(2000) + 7000;
 
             monstre.attaque1 := 0.4;
@@ -206,7 +206,7 @@ begin
             monstre.ratioArmure := 0.85; 
             monstre.ad := 115;
             monstre.ratioAd := 12;
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(2000) + 6000;
 
             monstre.attaque1 := 0.3;
@@ -242,7 +242,7 @@ begin
             monstre.ratioArmure := 0.9;
             monstre.ad := 100;
             monstre.ratioAd := 15;
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(2000) + 4000;
 
             monstre.attaque1 := 0.3;
@@ -278,7 +278,7 @@ begin
             monstre.ratioArmure := 1;
             monstre.ad := 85;
             monstre.ratioAd := 10;
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(4000) + 3000;
 
             monstre.attaque1 := 0.1;
@@ -306,7 +306,7 @@ begin
      else if (num = 8) then
         begin
             monstre.nom := 'Bazelgeuse';
-            monstre.description := 'Creature volante physiquement très lourd à l''ecaille rocheuse et explosive';
+            monstre.description := 'Creature volante physiquement très lourd a l''ecaille rocheuse et explosive';
             monstre.hpBase := 950;
             monstre.armureBase := 50;
             monstre.mobilite := 35;
@@ -314,12 +314,12 @@ begin
             monstre.ratioArmure := 1;
             monstre.ad := 125;
             monstre.ratioAd := 15; 
-            monstre.orgagne := random(250) + 250;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(8000) + 10000;
 
             monstre.attaque1 := 0.4;
             monstre.attaque1Chance := 40; // 40 % de chance
-            monstre.attaque1Desc := 'Le Bazelgeuse vous lance des écailles bombes!';
+            monstre.attaque1Desc := 'Le Bazelgeuse vous lance des ecailles bombes!';
 
             monstre.attaque2 := 0.5;
             monstre.attaque2Chance := 70; // 30 % de chance
@@ -350,7 +350,7 @@ begin
             monstre.ratioArmure := 0.7;
             monstre.ad := 130;
             monstre.ratioAd := 13;  
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
             monstre.xpgagne := random(8000) + 6000;
 
             monstre.attaque1 := 0.35;
@@ -386,7 +386,7 @@ begin
              monstre.ratioArmure := 0.5;
              monstre.ad := 115;
              monstre.ratioAd := 11;
-             monstre.orgagne := random(500) + 500;
+             monstre.orgagne := random(1000) + 1000;
              monstre.xpgagne := random(8000) + 4500;
 
              monstre.attaque1 := 0.15;
@@ -414,7 +414,7 @@ begin
      else if (num = 11) then
         begin
              monstre.nom := 'Legiana';
-             monstre.description := 'Dragon de glace très agile et puissant';
+             monstre.description := 'Dragon de glace tres agile et puissant';
              monstre.hpBase := 650;
              monstre.armureBase := 35;
              monstre.mobilite := 80;
@@ -422,7 +422,7 @@ begin
              monstre.ratioArmure := 0.6;
              monstre.ad := 65;
              monstre.ratioAd := 20;
-            monstre.orgagne := random(500) + 500;
+            monstre.orgagne := random(1000) + 1000;
              monstre.xpgagne := random(8000) + 7500;
 
              monstre.attaque1 := 0.2;
@@ -458,25 +458,28 @@ begin
              monstre.ratioArmure := 0.6;
              monstre.ad := 80;
              monstre.ratioAd := 15;
-             monstre.orgagne := random(250) + 250;
+             monstre.orgagne := random(1000) + 1000;
              monstre.xpgagne := random(8000) + 7500;
 
              monstre.attaque1 := 0.2;
-             monstre.attaque1Chance := 30; // 30 % de chance
-             monstre.attaque1Desc := 'Le Legiana vous charge dessus !';
+             monstre.attaque1Chance := 25; // 25% de chance
+             monstre.attaque1Desc := 'Le Kirin vous charge dessus !';
 
              monstre.attaque2 := 0.2;
-             monstre.attaque2Chance := 30; // 30 % de chance
-             monstre.attaque2Desc := 'Le Legiana vous met un coup de queue !';
+             monstre.attaque2Chance := 50; // 25 % de chance
+             monstre.attaque2Desc := 'Le Kirin vous met un coup electrique !';
 
              monstre.attaque3 := 0.3;
-             monstre.attaque3Chance := 30; // 30 % de chance
-             monstre.attaque3Desc := 'Le Legiana vous met un coup de griffe !';
+             monstre.attaque3Chance := 75; // 25 % de chance
+             monstre.attaque3Desc := 'Le Kirin vous pietine !';
 
              monstre.attaque4 := 0.2 ;
-             monstre.attaque4Chance := 30; // 30 % de chance
-             monstre.attaque4Desc := 'Le Legiana glace le sol où vous êtes !';
+             monstre.attaque4Chance := 100; // 25 % de chance
+             monstre.attaque4Desc := 'Le Kirin lance une decharge ! ';
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
 
              envoyerMonstre := monstre;
         end
@@ -510,12 +513,16 @@ begin
              monstre.attaque4Chance := 90; // 15 % de chance
              monstre.attaque4Desc := 'Le Tesotra vous fouette avec sa queue enflammee ! '; //enflamme
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
+
 
              envoyerMonstre := monstre;
         end
      else if (num = 14) then
         begin
-             monstre.nom := 'Kushala Daora'; // Deuxième boss
+             monstre.nom := 'Kushala Daora'; // Deuxieme boss
              monstre.description := 'Dragon d''acier capable de controler la meteo et les vents';
              monstre.hpBase := 6500;
              monstre.armureBase := 140;
@@ -542,6 +549,10 @@ begin
              monstre.attaque4 := 0.6 ;
              monstre.attaque4Chance := 90; // 15 % de chance
              monstre.attaque4Desc := 'Le Kushala Daora utilise un souffle invisble violent !';
+
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
 
 
              envoyerMonstre := monstre;
@@ -576,6 +587,9 @@ begin
              monstre.attaque4Chance := 100; // 10 % de chance
              monstre.attaque4Desc := 'Le Nergigante s''envolle et projette une pluie de pique !';
 
+             monstre.loot1 := 20;
+             monstre.loot2 := 2;
+             monstre.loot3 := 16;
 
              envoyerMonstre := monstre;
         end;

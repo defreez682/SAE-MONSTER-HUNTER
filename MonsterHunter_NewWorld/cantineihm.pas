@@ -1,4 +1,3 @@
-{Unité permet de se reposer et de gestir son inventaire}
 unit cantineIHM;
 
 {$mode objfpc}{$H+}
@@ -9,10 +8,10 @@ interface
 uses
   Classes, SysUtils ,GestionEcran, gestiontexte, crtPerso, Personnage,villageIHM;
 
-  procedure cantineInterface();     //Interface de la cantine
-  procedure cantineChoix();         //Choisir une option à faire soit Acheter ou retourner au village
-  procedure cantine();              //pregroupe les deux procedure cantineChoix() et cantineInterface()
-  procedure messageOrInsuffisant(); // Message qui s'affiche si l'achat n'est pas reussi quand l'or est
+  procedure cantineInterface();
+  procedure cantineChoix();
+  procedure cantine();
+  procedure messageOrInsuffisant();
 
 implementation
 //Creation de l'interface de la cantine

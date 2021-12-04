@@ -466,7 +466,7 @@ begin
            end;
     if (rep = 1) then
         begin
-             miseAjourPersonnage(personnage1,1);
+             miseAjourPersonnage(1);
              creationInventaire(personnage1);
              miseAjourOr(500);
              miseAjourLvl(1);

@@ -51,7 +51,7 @@ var monstreEnCours : Integer;
 implementation
 
 uses
-  Classes, SysUtils,personnage,bestiaireLogic,combatIHM,gestionEcran,gestionTexte,inventaireLogic;
+  Classes, SysUtils,personnage,bestiaireLogic,gestionEcran,gestionTexte,inventaireLogic;
 
 
 procedure utiliserBombeExplo(valeur : integer);

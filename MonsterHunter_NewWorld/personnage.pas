@@ -51,9 +51,9 @@ function calculADBase() : Integer;
 
 {Modifie le fichier personnage ce qui permet de vérifier si le joueur à un personnage.
 On utilise 0 et 1 (0 -> il n’a pas de personnage, 1 ->  il a un personnage)}
-procedure miseAjourPersonnage (var personnageAct:typePersonnage;valeur : integer);
+procedure miseAjourPersonnage (valeur : integer);
 {Renvoie si le joueur à un personnage (0 -> il n’a pas, 1 -> il a)}
-function getPersonnageActuelle (personnageAct:typePersonnage) : Integer;
+function getPersonnageActuelle () : Integer;
 {Modifie le fichier nom qui contient le nom du joueur}
 procedure miseAjourNom(var personnageAct:typePersonnage;valeur : String);
 {Renvoie le nom actuelle du joueur contenu dans son fichier}
@@ -181,12 +181,12 @@ end;
 
 //__________________________________________________ Création personnage
 
-procedure miseAjourPersonnage(var personnageAct:typePersonnage;valeur : integer);
+procedure miseAjourPersonnage(valeur : integer);
 begin
      modificationDataJoueur(valeur,4);
 end;
 
-function getPersonnageActuelle(personnageAct:typePersonnage) : integer;
+function getPersonnageActuelle() : integer;
 begin
      getPersonnageActuelle := dataJoueur(4);
 end;
@@ -536,7 +536,7 @@ begin
      stuffDispo.invBombeDispo[0].prix:=0;
 
      stuffDispo.invBombeDispo[1].nomBombe:='Bombe Barile';
-     stuffDispo.invBombeDispo[1].degat:=30;
+     stuffDispo.invBombeDispo[1].degat:=300;
      stuffDispo.invBombeDispo[1].prix:=250;
      stuffDispo.invBombeDispo[2].nomBombe:='Bombe Flash';
      stuffDispo.invBombeDispo[2].degat:= 0;
