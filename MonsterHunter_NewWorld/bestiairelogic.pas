@@ -506,11 +506,11 @@ begin
              monstre.attaque2Desc := 'Le Teostra repend de la poudre et la fait exploser !';
 
              monstre.attaque3 := 0.5;
-             monstre.attaque3Chance := 85; // 25 % de chance
+             monstre.attaque3Chance := 90; // 30 % de chance
              monstre.attaque3Desc := 'Le Teostra s''enflamme et fait une roulade sur vous !'; //enflamme
 
              monstre.attaque4 := 0.7 ;
-             monstre.attaque4Chance := 90; // 15 % de chance
+             monstre.attaque4Chance := 100; // 10 % de chance
              monstre.attaque4Desc := 'Le Tesotra vous fouette avec sa queue enflammee ! '; //enflamme
 
              monstre.loot1 := 12;
@@ -539,15 +539,15 @@ begin
              monstre.attaque1Desc := 'Le Kushala Daora vous lance une tornade !';
 
              monstre.attaque2 := 0.5;
-             monstre.attaque2Chance := 55; // 25 % de chance
+             monstre.attaque2Chance := 60; // 30 % de chance
              monstre.attaque2Desc := 'Le Kushala canalise un vent fort autour de lui puis le fait exploser !';
 
              monstre.attaque3 := 0.5;
-             monstre.attaque3Chance := 85; // 25 % de chance
+             monstre.attaque3Chance := 90; // 30 % de chance
              monstre.attaque3Desc := 'Le Kushala Daora vous charge dessus !';
 
              monstre.attaque4 := 0.6 ;
-             monstre.attaque4Chance := 90; // 15 % de chance
+             monstre.attaque4Chance := 100; // 10 % de chance
              monstre.attaque4Desc := 'Le Kushala Daora utilise un souffle invisble violent !';
 
              monstre.loot1 := 18;
