@@ -157,7 +157,7 @@ var
 
                       texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids,'          ');
                       texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
-                      texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[3].nomDrop,'             ');
+                      texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[3].nomDrop,'                ');
                       texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[14].nomDrop,'               ');
                    end;
                 4:begin
@@ -210,14 +210,14 @@ var
                      listerArmes(3,38, stuffDispo,rep);
                      texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids,'          ');
                      texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
-                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[2].nomDrop,'           ');
+                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[2].nomDrop,'              ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[11].nomDrop,'          ');
                    end;
                 11:begin
                      listerArmes(3,38, stuffDispo,rep);
                      texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids,'          ');
                      texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
-                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[16].nomDrop,'           ');
+                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[16].nomDrop,'            ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[20].nomDrop,'           ');
                   end;
                 12:
@@ -225,7 +225,7 @@ var
                      listerArmes(3,38, stuffDispo,rep);
                      texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmeDispo[rep].poids,'          ');
                      texteXY(77,23,'Ratio A/D: ',10); write(stuffDispo.invArmeDispo[rep].ratioAD*100:0:0, '%');
-                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[11].nomDrop,'           ');
+                     texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[11].nomDrop,'              ');
                      texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[13].nomDrop,'           ');
                 end;
                 13:
@@ -723,8 +723,8 @@ begin
                    listerArmures(3,38, stuffDispo,rep);
                    texteXY(77,22,'Poids: ' ,10); write(stuffDispo.invArmureDispo[rep].poids,'             ');
                    texteXY(77,23,'Defense: ',10); write(stuffDispo.invArmureDispo[rep].Defense,'             ');
-                   texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[1].nomDrop,'              ');
-                   texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[19].nomDrop,'             ');
+                   texteXY(77,25,'Loot 1: ',4); write(stuffDispo.invDropDispo[1].nomDrop,'                ');
+                   texteXY(77,26,'Loot 2: ',4); write(stuffDispo.invDropDispo[19].nomDrop,'               ');
                 end;
               12:
                    begin
