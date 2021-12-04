@@ -10,7 +10,7 @@ uses
   
   procedure chambreInterface(); //L'interface de la chambre
   procedure chambreChoix();     //Choix de l'option à faire soit se reposer ou gestir son equipement
-  procedure repose();           //se reposer et ripristiner les HP 
+  procedure repose();           //se reposer et restaurer les HP 
   procedure chambre();          //regroupe les deux procedures chambreInterfaceIHM() et chambreChoix()
 
 implementation
