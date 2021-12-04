@@ -1,4 +1,4 @@
-
+{Partie logique de la forge dans la quelle on peut choisir de forger une arme ou une armure}
 unit forgeronLogic;
 
 {$mode objfpc}{$H+}
@@ -8,12 +8,12 @@ interface
 uses
   Classes, SysUtils, GestionEcran, crtPerso, villageIHM, gestionTexte, forgeronIHM, inventaireLogic, personnage;
 
-procedure ForgeronDesign();
-procedure ForgeronCadre();
-procedure DemarrageForgeron();
-procedure ForgerArme();
-procedure ForgerArmure();
-function dropExist(drop1, drop2 : string ) : boolean;
+procedure ForgeronDesign();                           
+procedure ForgeronCadre();                            //afficher la forge et choisir si forger une arme ou une armure
+procedure DemarrageForgeron();                        //procedure principale 
+procedure ForgerArme();                               //specializé dans la forge des armes
+procedure ForgerArmure();                             //specializé dans la forge des armures
+function dropExist(drop1, drop2 : string ) : boolean; //pour verifier si le drop existe ou non
 
 implementation
 
@@ -86,6 +86,7 @@ begin
 
 end;
 
+//----------Partie Armes----------//
 procedure ForgerArme();
 var
       cho : boolean;
@@ -592,7 +593,7 @@ var
           end;
       end;
 
-
+//---------Partie Armures----------//
 procedure ForgerArmure();
 var
     cho : boolean;
@@ -1110,7 +1111,7 @@ begin
 
 end;
 
-//Function pour verifier si le drop existe ou non
+//Fonction pour verifier si le drop existe ou non
 function dropExist(drop1, drop2 : string ) : boolean;
 var
     res1 : boolean = false;
