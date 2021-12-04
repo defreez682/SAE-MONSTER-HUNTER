@@ -13,12 +13,20 @@ procedure demarrageTestUnitaire();
 // Commence le testunitaire de l'inventaire
 procedure testInventaire();
 
+//test de la cantine, la chambre et la forge
+procedure testCantine();
+procedure testChambre();
+procedure testForge();
+
 implementation
 
 // Démarre le testunitaire
 procedure demarrageTestUnitaire();
 begin
   testInventaire();
+  testCantine();
+  testChambre();
+  testForge();
 end;
 
 // Commence le testunitaire de l'inventaire
@@ -145,6 +153,62 @@ testisEqual(reussite);
 
 Summary();
 end;
+
+
+//----------Test Cantine-----------//
+procedure testCantine();
+var
+  solde : integer;
+begin
+    newTestsSeries('Test cantine: ');
+
+  //Crée un nouveau test dans la série de tests
+    newTest('Test cantine: ', 'Achat d''un repas ');
+
+    //je copie la valeur de l'or actuelle pour la comparer aprés
+    solde := getOrActuelle();
+
+    //modifier Or actuelle (procedure utilisé dans l'achat des repas)
+    miseAjourOr(getOrActuelle() - 50) ;
+
+
+    //Test d'égalité entre deux entiers
+    testIsEqual(getOrActuelle(),solde - 50);
+
+
+  end;
+
+//----------Test Forge-------------//
+procedure testForge();
+begin
+    newTestsSeries('Test Forge: ');
+
+    //Crée un nouveau test dans la série de tests
+    newTest('Test Forge: ', 'Controle si deux loots existe');
+
+    initialisationItemDisponibles();
+
+    //Je supprime duex loots pour le test
+    drop2Loots(1,2);
+
+    //Test d'un booléen
+    testIsEqual(not(dropExist(stuffDispo.invDropDispo[1].nomDrop, stuffDispo.invDropDispo[2].nomDrop)));
+
+end;
+
+//--------Test Chambre------------//
+procedure testChambre();
+begin
+     newTestsSeries('Test Chambre: ');
+     //Crée un nouveau test dans la série de tests
+     newTest('Test Chambre: ', 'Controle si les hp se sont restaurés');
+
+     //procedure permet de ripristiner les hp quand il repose
+     modificationDataJoueur(calculHpMaxBase(),13);
+
+     testIsEqual(dataJoueur(13), calculHpMaxBase());
+
+end; 
 
 
 end.
