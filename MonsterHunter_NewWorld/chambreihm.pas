@@ -1,4 +1,4 @@
-{Uniteé dans laquelle le jouer peut se reposer et gestir son equipement}
+{Unité dans laquelle le jouer peut se reposer et gestir son equipement}
 unit chambreIHM;
 
 {$mode objfpc}{$H+}
@@ -10,7 +10,7 @@ uses
   
   procedure chambreInterface(); //L'interface de la chambre
   procedure chambreChoix();     //Choix de l'option à faire soit se reposer ou gestir son equipement
-  procedure repose();           //se reposer ajout des HP 
+  procedure repose();           //se reposer et ripristiner les HP 
   procedure chambre();          //regroupe les deux procedures chambreInterfaceIHM() et chambreChoix()
 
 implementation
