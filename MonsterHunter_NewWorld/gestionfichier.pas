@@ -4,7 +4,7 @@ unit gestionFichier;
 {$codepage UTF8}
 
 
-{Cette unité sert surtout à créer les fichiers au premier démarage}
+{Cette unité sert à créer les fichiers au premier démarage}
 
 
 
@@ -20,16 +20,15 @@ uses
 
 procedure checkUp ();
 begin
-     if not DirectoryExists('C:\MHNewWorld') then
+     if not DirectoryExists('C:\MHNewWorld') then // On vérifie que le repertoire existe
         begin
-             MkDir('C:\MHNewWorld');
-             creationDataJoueur(0,20);
-             miseAjourLVL(1);
-             miseAjourExp(1);
-             miseAjourOr(500);
-             miseAjourTaille(personnage1,0);
-             miseAjourPersonnage(0);
-             creationInventaireItem(0,65); // En rajouter si on ajoute des slots
+             MkDir('C:\MHNewWorld'); // On créer le repertoire
+             creationDataJoueur(0,20);// On créer le fichier data
+             miseAjourLVL(1); // initialise les stats
+             miseAjourExp(1); // initialise les stats
+             miseAjourOr(500); // initialise les stats
+             miseAjourTaille(personnage1,0); // initialise les stats
+             miseAjourPersonnage(0); // On indique que aucun porsonnage existe
         end;
 
 end;
