@@ -11,7 +11,9 @@ procedure texteAtemps(texte : string; temps : integer; couleur : integer);
 procedure texteEnCouleur(texte : string; couleur : integer);
 {Créer un texte sur les coordonnées XY,  ne pas oublier de préciser la couleur.}
 procedure texteXY(x,y : Integer; texte : string; couleur : integer);
+{On colorie une zone d'une oculeut spécifié et des coordonnées que l'on veut}
 procedure ColorierZoneXY(couleur : Byte ;couleurT : Byte; xStart,yStart,xEnd,yEnd:Integer);
+{On créer un texte qui apparait de façon de façon douce et qui disparait de façon douce en fonction du temps donné}
 procedure texteFade(x,y : integer; texte : string; temps,temps2 : integer);
 implementation
 
@@ -20,6 +22,7 @@ uses
 
 procedure texteEnCouleur(texte :string; couleur : integer);
 begin
+     //On ajoute la couleur et on écrit
      couleurTexte(couleur);
      write(texte);
 end;
@@ -44,6 +47,7 @@ end;
 
 procedure texteXY(x,y : Integer; texte : string; couleur : integer);
 begin
+     // On ajoute la couleur, on déplace le curseur et on écrit
      couleurTexte(couleur);
      deplacerCurseurXY(x,y);
      write(texte);
@@ -53,23 +57,24 @@ end;
 
 procedure texteFade(x,y : integer; texte : string; temps,temps2 : integer);
 begin
-     texteXY(x,y,texte,darkGray);
+     texteXY(x,y,texte,darkGray); // On écrit le texte en gris foncé
+     attendre(temps); // On attend
+     texteXY(x,y,texte,LightGray); // On écrit en gris clair
+     attendre(temps); // On attend
+     texteXY(x,y,texte,White); // On écrit en blanc
+     attendre(temps2); // On attend avant de faire disparaitre
+     texteXY(x,y,texte,LightGray); // On écrit en gris clair
      attendre(temps);
-     texteXY(x,y,texte,LightGray);
+     texteXY(x,y,texte,darkGray); // On écrit le texte en gris foncé
      attendre(temps);
-     texteXY(x,y,texte,White);
-     attendre(temps2);
-     texteXY(x,y,texte,LightGray);
-     attendre(temps);
-     texteXY(x,y,texte,darkGray);
-     attendre(temps);
-     texteXY(x,y,texte,Black);
+     texteXY(x,y,texte,Black); // On le fait disparaitre en écrivant en noir
      attendre(temps);
 end;
 procedure ColorierZoneXY(couleur : Byte ;couleurT : Byte; xStart,yStart,xEnd,yEnd:Integer);
 var
    i: integer;
 begin
+  // On trace la zone en fonction de ystart et yend
   for i := yStart to yEnd do
       ColorierZone(couleur, couleurT, xStart,xEnd,i);
 end;
