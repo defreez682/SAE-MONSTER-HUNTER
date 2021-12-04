@@ -15,6 +15,8 @@ procedure testInventaire();
 
 //test de la cantine, la chambre et la forge
 procedure testCantine();
+
+procedure testMarchand();
 procedure testChambre();
 procedure testForge();
 
@@ -26,8 +28,8 @@ begin
   testInventaire();
   testCantine();
   testChambre();
-  testForge();
-  
+  //testForge();
+  testMarchand();
   Summary();
   readln;
 end;
@@ -153,15 +155,15 @@ testisEqual(reussite);
 end;
 
 
-//----------Test Cantine-----------//
+// Commence le testunitaire de la cantine
 procedure testCantine();
 var
   solde : integer;
 begin
-    newTestsSeries('Test cantine: ');
+    newTestsSeries('Cantine');
 
   //Crée un nouveau test dans la série de tests
-    newTest('Test cantine: ', 'Achat d''un repas ');
+    newTest('Cantine', 'Achat d''un repas ');
 
     //je copie la valeur de l'or actuelle pour la comparer aprés
     solde := getOrActuelle();
@@ -176,7 +178,7 @@ begin
 
   end;
 
-//----------Test Forge-------------//
+// Commence le testunitaire de la forge
 procedure testForge();
 begin
     newTestsSeries('Test Forge: ');
@@ -194,12 +196,41 @@ begin
 
 end;
 
-//--------Test Chambre------------//
+// Commence le testunitaire du marchand
+procedure testMarchand();
+
+var
+  orStockeBase : integer; // entier qui prend la valeur de GetOrActuelle
+
+begin
+   newTestsSeries('Marchand');
+
+
+   newTest('Marchand','Achat_Consommable');
+
+   orStockeBase:=getOrActuelle;
+   MiseajourOr(getOrActuelle()-stuffDispo.invBombeDispo[1].prix);
+
+   testisequal(getOrActuelle,orStockeBase-stuffDispo.invBombeDispo[1].prix);
+
+
+   newTest('Marchand','Vente_Consommable');
+
+   MiseajourOr(getOrActuelle()+stuffDispo.invBombeDispo[1].prix);
+   testisequal(getOrActuelle,orStockeBase);
+
+
+
+end;
+
+
+
+// Commence le testunitaire de la chambre
 procedure testChambre();
 begin
-     newTestsSeries('Test Chambre: ');
+     newTestsSeries('Chambre');
      //Crée un nouveau test dans la série de tests
-     newTest('Test Chambre: ', 'Controle si les hp se sont restaurés');
+     newTest('Chambre', 'Controle si les hp se sont restaures');
 
      //procedure permet de ripristiner les hp quand il repose
      modificationDataJoueur(calculHpMaxBase(),13);
