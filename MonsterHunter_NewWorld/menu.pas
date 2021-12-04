@@ -52,12 +52,12 @@ begin
                    #75 : if (rep < 2) then
                             rep := rep + 1
                          else
-                            rep := 1;
+                            rep := 1; // si rep est au dessus de 2 on renvoie à 1
                    #77 : if (rep > 1) then
                             rep := rep - 1
                          else
-                            rep := 2;
-                   #13 : cho := False;
+                            rep := 2; // si rep est au dessus de 2 on renvoie à 1
+                   #13 : cho := False; // Le joueur à fait sa décision
               end;
 
 
@@ -75,9 +75,9 @@ begin
                   end;
           end;
     if (rep = 1) then
-       creationPersonnage()
+       creationPersonnage() // On appelle le menu de création de personnage
     else
-       creationChoix();
+       creationChoix(); // On appelle le menu
 end;
 
 procedure creationChoixMenuInterface(vitesse : integer);
@@ -142,36 +142,36 @@ begin
           begin
               ch := ReadKey;
               case ch of
-                  #80 : if not (getPersonnageActuelle() = 1) then
+                  #80 : if not (getPersonnageActuelle() = 1) then // Si le joueur n'a pas été créer, alors on ne peut pas aller sur continuer
                             begin
                                 if (rep < 3) then
                                    rep := rep + 2
                                 else
-                                   rep := 1;
+                                   rep := 1; // si rep est au dessus de 3 on renvoie à 1
                             end
                         else
                             begin
                                 if (rep < 3) then
                                    rep := rep + 1
                                 else
-                                   rep := 1;
+                                   rep := 1; // si rep est au dessus de 3 on renvoie à 1
 
                             end;
-                  #72 : if not (getPersonnageActuelle() = 1) then
+                  #72 : if not (getPersonnageActuelle() = 1) then // Si le joueur n'a pas été créer, alors on ne peut pas aller sur continuer
                            begin
                                 if (rep > 1) then
                                    rep := rep - 2
                                 else
-                                   rep := 3;
+                                   rep := 3; // si rep est au dessus de 3 on renvoie à 1
                            end
                         else
                            begin
                                 if (rep > 1) then
                                    rep := rep - 1
                                 else
-                                   rep := 3;
+                                   rep := 3; // si rep est au dessus de 3 on renvoie à 1
                            end;
-                  #13 : cho := False;
+                  #13 : cho := False; // Le joueur à fait sa décision
               end;
 
               if (rep = 1) then
@@ -197,14 +197,11 @@ begin
                  end;
           end;
     if (rep = 1) then
-       menuAvertissement()
+       menuAvertissement() // On appelle le menu avertissement
     else if (rep = 2) then
        begin
-       recupInventaire(personnage1);
-
-       choixMenuVillage();
-
-
+            recupInventaire(personnage1); // on recupere l'inventaire
+            choixMenuVillage(); // On appelle le village
        end
     //else if (rep = 3) then
 
