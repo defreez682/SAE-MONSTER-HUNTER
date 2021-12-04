@@ -203,7 +203,8 @@ begin
             recupInventaire(personnage1); // on recupere l'inventaire
             choixMenuVillage(); // On appelle le village
        end
-    //else if (rep = 3) then
+    else if (rep = 3) then
+       halt;
 
 end;
 
