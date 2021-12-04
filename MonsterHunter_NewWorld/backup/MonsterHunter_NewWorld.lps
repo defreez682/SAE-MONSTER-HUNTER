@@ -4,20 +4,20 @@
     <PathDelim Value="\"/>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="28">
+    <Units Count="31">
       <Unit0>
         <Filename Value="MonsterHunter_NewWorld.pas"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="112" Y="18"/>
+        <CursorPos Y="13"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="menu.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="11"/>
-        <TopLine Value="180"/>
-        <CursorPos X="24" Y="213"/>
+        <EditorIndex Value="12"/>
+        <TopLine Value="150"/>
+        <CursorPos X="55" Y="160"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit1>
@@ -25,9 +25,8 @@
         <Filename Value="gestiontexte.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionTexte"/>
-        <EditorIndex Value="14"/>
-        <TopLine Value="35"/>
-        <CursorPos X="20" Y="54"/>
+        <EditorIndex Value="16"/>
+        <CursorPos X="67" Y="38"/>
         <UsageCount Value="232"/>
         <Loaded Value="True"/>
       </Unit2>
@@ -35,10 +34,9 @@
         <Filename Value="personnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Personnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="271"/>
-        <CursorPos X="47" Y="308"/>
+        <TopLine Value="170"/>
+        <CursorPos X="32" Y="189"/>
         <UsageCount Value="232"/>
         <Loaded Value="True"/>
       </Unit3>
@@ -46,8 +44,9 @@
         <Filename Value="gestionfichier.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="gestionFichier"/>
-        <EditorIndex Value="13"/>
-        <CursorPos X="37" Y="29"/>
+        <EditorIndex Value="15"/>
+        <TopLine Value="18"/>
+        <CursorPos X="4" Y="36"/>
         <UsageCount Value="228"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -55,9 +54,9 @@
         <Filename Value="personageihm.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="personageIHM"/>
-        <EditorIndex Value="12"/>
-        <TopLine Value="385"/>
-        <CursorPos X="120" Y="391"/>
+        <EditorIndex Value="13"/>
+        <TopLine Value="458"/>
+        <CursorPos X="34" Y="469"/>
         <UsageCount Value="225"/>
         <Loaded Value="True"/>
       </Unit5>
@@ -74,18 +73,19 @@
         <Filename Value="villageihm.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="villageIHM"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="218"/>
-        <CursorPos X="35" Y="228"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="18"/>
+        <CursorPos X="36" Y="73"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit7>
       <Unit8>
         <Filename Value="chasseihm.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="chasseIHM"/>
-        <EditorIndex Value="10"/>
-        <TopLine Value="799"/>
-        <CursorPos X="52" Y="825"/>
+        <EditorIndex Value="11"/>
+        <TopLine Value="756"/>
+        <CursorPos X="89" Y="755"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit8>
@@ -93,10 +93,9 @@
         <Filename Value="chassefuitelogic.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="chasseFuiteLogic"/>
-        <EditorIndex Value="15"/>
-        <TopLine Value="176"/>
-        <CursorPos X="79" Y="43"/>
-        <UsageCount Value="153"/>
+        <EditorIndex Value="17"/>
+        <CursorPos X="17" Y="4"/>
+        <UsageCount Value="159"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -104,34 +103,34 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="combatLogic"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="133"/>
-        <CursorPos X="66" Y="92"/>
-        <UsageCount Value="130"/>
+        <TopLine Value="8"/>
+        <CursorPos X="57" Y="193"/>
+        <UsageCount Value="136"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="GestionEcran.pas"/>
-        <EditorIndex Value="9"/>
-        <TopLine Value="38"/>
-        <CursorPos X="67" Y="38"/>
+        <EditorIndex Value="10"/>
+        <TopLine Value="70"/>
+        <CursorPos X="23" Y="4"/>
         <UsageCount Value="101"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
         <Filename Value="inventaireihm.pas"/>
-        <EditorIndex Value="16"/>
-        <TopLine Value="1139"/>
-        <CursorPos X="38" Y="1161"/>
-        <UsageCount Value="67"/>
+        <EditorIndex Value="18"/>
+        <TopLine Value="142"/>
+        <CursorPos X="17" Y="4"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="inventairelogic.pas"/>
         <UnitName Value="inventaireLogic"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="1285"/>
-        <CursorPos X="49" Y="1242"/>
-        <UsageCount Value="67"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="94"/>
+        <CursorPos X="71" Y="73"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit13>
       <Unit14>
@@ -159,44 +158,47 @@
       <Unit17>
         <Filename Value="chambreihm.pas"/>
         <UnitName Value="chambreIHM"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="95" Y="8"/>
-        <UsageCount Value="3"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="83"/>
+        <CursorPos X="110" Y="83"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="marchandlogic.pas"/>
         <UnitName Value="marchandLogic"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="411"/>
-        <CursorPos X="114" Y="438"/>
-        <UsageCount Value="44"/>
+        <TopLine Value="285"/>
+        <CursorPos X="64" Y="300"/>
+        <UsageCount Value="46"/>
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="marchandihm.pas"/>
         <UnitName Value="marchandIHM"/>
-        <EditorIndex Value="17"/>
-        <TopLine Value="120"/>
+        <EditorIndex Value="19"/>
+        <TopLine Value="82"/>
         <CursorPos X="23" Y="93"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="cantineihm.pas"/>
         <UnitName Value="cantineIHM"/>
         <EditorIndex Value="8"/>
-        <TopLine Value="6"/>
-        <CursorPos X="29" Y="278"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="225"/>
+        <CursorPos Y="288"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit20>
       <Unit21>
         <Filename Value="forgeronihm.pas"/>
         <UnitName Value="forgeronIHM"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="106"/>
-        <CursorPos X="70" Y="8"/>
-        <UsageCount Value="2"/>
+        <EditorIndex Value="14"/>
+        <TopLine Value="230"/>
+        <CursorPos X="76" Y="243"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="forgeronlogic.pas"/>
@@ -210,18 +212,19 @@
         <Filename Value="bestiairelogic.pas"/>
         <UnitName Value="bestiaireLogic"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="61"/>
-        <CursorPos X="143" Y="48"/>
-        <UsageCount Value="63"/>
+        <TopLine Value="471"/>
+        <CursorPos X="15"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit23>
       <Unit24>
         <Filename Value="combatihm.pas"/>
         <UnitName Value="combatIHM"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="285"/>
-        <CursorPos X="35" Y="308"/>
-        <UsageCount Value="63"/>
+        <TopLine Value="1423"/>
+        <CursorPos X="28" Y="1434"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit24>
       <Unit25>
@@ -239,132 +242,152 @@
       <Unit27>
         <Filename Value="..\..\..\AppData\Local\Temp\Temp1_SAE-MONSTER-HUNTER-e23512a4f73ac38787078e63296d750f87e0e3c5.zip\SAE-MONSTER-HUNTER-e23512a4f73ac38787078e63296d750f87e0e3c5\MonsterHunter_NewWorld\personnage.pas"/>
         <UnitName Value="Personnage"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="367"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="220"/>
+        <CursorPos X="86" Y="229"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit27>
+      <Unit28>
+        <Filename Value="..\..\AppData\Local\Temp\Temp1_SAE-MONSTER-HUNTER-ApokalipHD-patch-1 (3).zip\SAE-MONSTER-HUNTER-ApokalipHD-patch-1\MonsterHunter_NewWorld\dessinbaton.pas"/>
+        <UnitName Value="dessinBaton"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="..\..\AppData\Local\Temp\Temp1_SAE-MONSTER-HUNTER-ApokalipHD-patch-1 (3).zip\SAE-MONSTER-HUNTER-ApokalipHD-patch-1\MonsterHunter_NewWorld\cantineihm.pas"/>
+        <UnitName Value="cantineIHM"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="..\..\AppData\Local\Temp\Temp1_SAE-MONSTER-HUNTER-ApokalipHD-patch-1 (3).zip\SAE-MONSTER-HUNTER-ApokalipHD-patch-1\MonsterHunter_NewWorld\chambreihm.pas"/>
+        <UnitName Value="chambreIHM"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="120"/>
+        <CursorPos X="44" Y="130"/>
+        <UsageCount Value="10"/>
+      </Unit30>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="1036" Column="62" TopLine="998"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="26" Column="105" TopLine="12"/>
       </Position1>
       <Position2>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="1042" Column="71" TopLine="1006"/>
+        <Filename Value="chasseihm.pas"/>
+        <Caret Line="331" Column="30" TopLine="316"/>
       </Position2>
       <Position3>
         <Filename Value="combatihm.pas"/>
-        <Caret Line="1072" Column="64" TopLine="1038"/>
+        <Caret Line="264" Column="95" TopLine="248"/>
       </Position3>
       <Position4>
-        <Filename Value="combatlogic.pas"/>
-        <Caret Line="189" Column="150" TopLine="165"/>
+        <Filename Value="marchandihm.pas"/>
+        <Caret Line="93" Column="23" TopLine="82"/>
       </Position4>
       <Position5>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="231" Column="31" TopLine="22"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="62" Column="31" TopLine="51"/>
       </Position5>
       <Position6>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="86" Column="22" TopLine="69"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="130" Column="45" TopLine="120"/>
       </Position6>
       <Position7>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="235" Column="48" TopLine="158"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="134" Column="45" TopLine="124"/>
       </Position7>
       <Position8>
-        <Filename Value="bestiairelogic.pas"/>
-        <Caret Line="55" Column="33" TopLine="43"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="146" Column="44" TopLine="136"/>
       </Position8>
       <Position9>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="242" Column="50" TopLine="217"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="150" Column="58" TopLine="140"/>
       </Position9>
       <Position10>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="245" Column="23" TopLine="217"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="223" Column="64" TopLine="213"/>
       </Position10>
       <Position11>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="251" Column="41" TopLine="207"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="228" Column="50" TopLine="218"/>
       </Position11>
       <Position12>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="228" Column="23" TopLine="158"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="233" Column="64" TopLine="223"/>
       </Position12>
       <Position13>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="248" Column="50" TopLine="230"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="239" Column="50" TopLine="229"/>
       </Position13>
       <Position14>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="301" Column="25" TopLine="266"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="244" Column="64" TopLine="234"/>
       </Position14>
       <Position15>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="230" Column="18" TopLine="208"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="249" Column="75" TopLine="239"/>
       </Position15>
       <Position16>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="265" Column="44" TopLine="246"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="269" Column="64" TopLine="251"/>
       </Position16>
       <Position17>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="301" Column="54" TopLine="251"/>
+        <Filename Value="marchandlogic.pas"/>
+        <Caret Line="281" Column="71" TopLine="264"/>
       </Position17>
       <Position18>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="292" Column="114" TopLine="256"/>
+        <Filename Value="chambreihm.pas"/>
+        <Caret Line="130" Column="23"/>
       </Position18>
       <Position19>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="276" Column="112" TopLine="256"/>
+        <Filename Value="villageihm.pas"/>
+        <Caret Line="56" Column="35" TopLine="40"/>
       </Position19>
       <Position20>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="292" Column="117" TopLine="264"/>
+        <Filename Value="bestiairelogic.pas"/>
+        <Caret Line="7"/>
       </Position20>
       <Position21>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="303" Column="25" TopLine="277"/>
+        <Filename Value="bestiairelogic.pas"/>
+        <Caret Line="322" Column="68" TopLine="305"/>
       </Position21>
       <Position22>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="302" Column="20" TopLine="283"/>
+        <Filename Value="bestiairelogic.pas"/>
+        <Caret Line="592" Column="34" TopLine="576"/>
       </Position22>
       <Position23>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="268" Column="25" TopLine="260"/>
+        <Filename Value="bestiairelogic.pas"/>
+        <Caret Line="594" Column="57" TopLine="574"/>
       </Position23>
       <Position24>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="301" Column="119" TopLine="276"/>
+        <Filename Value="bestiairelogic.pas"/>
+        <Caret Line="473" Column="43" TopLine="465"/>
       </Position24>
       <Position25>
-        <Filename Value="combatihm.pas"/>
-        <Caret Line="308" Column="35" TopLine="285"/>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="56" Column="25" TopLine="226"/>
       </Position25>
       <Position26>
-        <Filename Value="inventaireihm.pas"/>
-        <Caret Line="1159" Column="38" TopLine="1139"/>
+        <Filename Value="personnage.pas"/>
+        <Caret Line="189" Column="32" TopLine="170"/>
       </Position26>
       <Position27>
-        <Filename Value="MonsterHunter_NewWorld.pas"/>
-        <Caret Line="18" Column="112"/>
+        <Filename Value="personageihm.pas"/>
+        <Caret Line="469" Column="34" TopLine="458"/>
       </Position27>
       <Position28>
-        <Filename Value="inventaireihm.pas"/>
-        <Caret Line="1161" Column="38" TopLine="1139"/>
+        <Filename Value="menu.pas"/>
+        <Caret Line="91" Column="38" TopLine="80"/>
       </Position28>
       <Position29>
-        <Filename Value="inventairelogic.pas"/>
-        <Caret Line="1237" Column="56" TopLine="1217"/>
+        <Filename Value="menu.pas"/>
+        <Caret Line="145" Column="55" TopLine="135"/>
       </Position29>
       <Position30>
-        <Filename Value="inventaireihm.pas"/>
-        <Caret Line="1161" Column="38" TopLine="1139"/>
+        <Filename Value="menu.pas"/>
+        <Caret Line="160" Column="55" TopLine="150"/>
       </Position30>
     </JumpHistory>
     <RunParams>

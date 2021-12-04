@@ -2,6 +2,7 @@ unit Personnage;
 
 {$mode objfpc}{$H+}
 {$I-}
+{$codepage UTF8}
 interface
 uses
     inventaireLogic;
@@ -50,9 +51,9 @@ function calculADBase() : Integer;
 
 {Modifie le fichier personnage ce qui permet de vérifier si le joueur à un personnage.
 On utilise 0 et 1 (0 -> il n’a pas de personnage, 1 ->  il a un personnage)}
-procedure miseAjourPersonnage (var personnageAct:typePersonnage;valeur : integer);
+procedure miseAjourPersonnage (valeur : integer);
 {Renvoie si le joueur à un personnage (0 -> il n’a pas, 1 -> il a)}
-function getPersonnageActuelle (personnageAct:typePersonnage) : Integer;
+function getPersonnageActuelle () : Integer;
 {Modifie le fichier nom qui contient le nom du joueur}
 procedure miseAjourNom(var personnageAct:typePersonnage;valeur : String);
 {Renvoie le nom actuelle du joueur contenu dans son fichier}
@@ -88,7 +89,14 @@ procedure initialisationItemDisponibles();
 3 : GOLD
 4 : PERSONNAGE
 5 : Combats
-6 : skiptour}
+6 : skiptour
+7 : Bonus1
+8 : Bonus2
+9 : Bonus3
+10 : Bonus4
+11 : Bonus5
+12 : Bonus6
+13 : HPduJoueur}
 procedure creationDataJoueur(val,pos : Integer);
 
 procedure modificationDataJoueur(val,pos : Integer);
@@ -158,7 +166,7 @@ end;
 
 function calculHpMaxBase() : Integer;
 begin
-    calculHpMaxBase := 300+(10*getlvlActuelle());
+    calculHpMaxBase := 500+(80*getlvlActuelle());
 end;
 
 function calculArmureBase() : Integer;
@@ -291,21 +299,35 @@ end;
 procedure ajoutStuffDepart(var personnage:typePersonnage);
 begin
      ajoutItemToPersonnage('arme',4,personnage);
+
+     equipEquipement(personnage,0,0,'arme');
+
      ajoutItemToPersonnage('armure',1,personnage);
+     equipEquipement(personnage,0,0,'armure');
+
      ajoutItemToPersonnage('armure',2,personnage);
+     equipEquipement(personnage,0,1,'armure');
+
      ajoutItemToPersonnage('armure',3,personnage);
+     equipEquipement(personnage,0,2,'armure');
+
      ajoutItemToPersonnage('armure',4,personnage);
+     equipEquipement(personnage,0,3,'armure');
+
      ajoutItemToPersonnage('armure',5,personnage);
+     equipEquipement(personnage,1,0,'armure');
+
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
      ajoutItemToPersonnage('potion',1,personnage);
+     equipEquipement(personnage,0,0,'arme');
 
 end;
 
 // Remplis un tableau de tous les items disponibles - BASE DE DONNEE A NE PAS OUVRIR
 procedure initialisationItemDisponibles();
 begin
-     stuffDispo.invArmeDispo[0].nomArme:='EMPTY';
+     stuffDispo.invArmeDispo[0].nomArme:='VIDE';
      stuffDispo.invArmeDispo[0].poids:=0;
      stuffDispo.invArmeDispo[0].ratioAD:=0;
      stuffDispo.invArmeDispo[0].prix:=0;
@@ -390,7 +412,7 @@ begin
      stuffDispo.invArmeDispo[20].ratioAD:=0.25;
      stuffDispo.invArmeDispo[20].prix:=200;
 
-     stuffDispo.invArmureDispo[0].nomArmure:='EMPTY';
+     stuffDispo.invArmureDispo[0].nomArmure:='VIDE';
      stuffDispo.invArmureDispo[0].poids:=0;
      stuffDispo.invArmureDispo[0].defense:=0;
      stuffDispo.invArmureDispo[0].prix:=0;
@@ -406,12 +428,12 @@ begin
      stuffDispo.invArmureDispo[2].prix:=15;
      stuffDispo.invArmureDispo[2].typeArmure:='Gants';
      stuffDispo.invArmureDispo[3].nomArmure:='Plastron de chasseur';
-     stuffDispo.invArmureDispo[3].poids:=13;
+     stuffDispo.invArmureDispo[3].poids:=7;
      stuffDispo.invArmureDispo[3].defense:=6;
      stuffDispo.invArmureDispo[3].prix:=35;
      stuffDispo.invArmureDispo[3].typeArmure:='Plastron';
      stuffDispo.invArmureDispo[4].nomArmure:='Jambiere de chasseur';
-     stuffDispo.invArmureDispo[4].poids:=8;
+     stuffDispo.invArmureDispo[4].poids:=6;
      stuffDispo.invArmureDispo[4].defense:=4;
      stuffDispo.invArmureDispo[4].prix:=25;
      stuffDispo.invArmureDispo[4].typeArmure:='Jambiere';
@@ -496,25 +518,25 @@ begin
      stuffDispo.invArmureDispo[20].prix:=150;
      stuffDispo.invArmureDispo[20].typeArmure:='Gants';
 
-     stuffDispo.invPotionDispo[0].nomPotion:='EMPTY';
+     stuffDispo.invPotionDispo[0].nomPotion:='VIDE';
      stuffDispo.invPotionDispo[0].HealHP:=0;
      stuffDispo.invPotionDispo[0].prix:=0;
      stuffDispo.invPotionDispo[1].nomPotion:='Potion';
-     stuffDispo.invPotionDispo[1].HealHP:=80;
-     stuffDispo.invPotionDispo[1].prix:=66;
+     stuffDispo.invPotionDispo[1].HealHP:= 250;
+     stuffDispo.invPotionDispo[1].prix:= 300;
      stuffDispo.invPotionDispo[2].nomPotion:='Mega Potion';
-     stuffDispo.invPotionDispo[2].HealHP:=150;
-     stuffDispo.invPotionDispo[2].prix:=77;
+     stuffDispo.invPotionDispo[2].HealHP:= 550;
+     stuffDispo.invPotionDispo[2].prix:=1000;
      stuffDispo.invPotionDispo[3].nomPotion:='Guerison';
-     stuffDispo.invPotionDispo[3].HealHP:=300;
-     stuffDispo.invPotionDispo[3].prix:=100;
+     stuffDispo.invPotionDispo[3].HealHP:= 900;
+     stuffDispo.invPotionDispo[3].prix:= 1500;
 
-     stuffDispo.invBombeDispo[0].nomBombe:='EMPTY';
+     stuffDispo.invBombeDispo[0].nomBombe:='VIDE';
      stuffDispo.invBombeDispo[0].degat:=0;
      stuffDispo.invBombeDispo[0].prix:=0;
 
      stuffDispo.invBombeDispo[1].nomBombe:='Bombe Barile';
-     stuffDispo.invBombeDispo[1].degat:=30;
+     stuffDispo.invBombeDispo[1].degat:=300;
      stuffDispo.invBombeDispo[1].prix:=250;
      stuffDispo.invBombeDispo[2].nomBombe:='Bombe Flash';
      stuffDispo.invBombeDispo[2].degat:= 0;
@@ -523,7 +545,7 @@ begin
      stuffDispo.invBombeDispo[3].degat:= 500;
      stuffDispo.invBombeDispo[3].prix:=1000;
 
-     stuffDispo.invDropDispo[0].nomDrop:='EMPTY';
+     stuffDispo.invDropDispo[0].nomDrop:='VIDE';
      stuffDispo.invDropDispo[1].nomDrop:='Ecaille';
      stuffDispo.invDropDispo[2].nomDrop:='Oeil';
      stuffDispo.invDropDispo[3].nomDrop:='Cuir';

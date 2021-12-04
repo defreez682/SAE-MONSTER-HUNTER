@@ -155,7 +155,7 @@ begin
                                choixAchat(rep);
                            end;
                       end;
-                  rep := 1;
+
                   end;
           end;
       DessinFlecheAchat(rep);
@@ -163,6 +163,7 @@ begin
 
 end;
 
+// ----------------------------------- permet de choisir ce que l'on veut vendre
 procedure choixVente();
 
 var
@@ -173,6 +174,7 @@ var
 begin
 
      VendreIHM();
+     recupinventaire(personnage1);
      deplacerCurseurXY(4,10);
      write('>>');
      cho := True;
@@ -215,98 +217,99 @@ begin
                    end;
               #13 : begin
               cho := False;  //la touche entrer
+                             case rep of
+                                 1: // Partie potions
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[0][0].prix);
+                                     dropInventaire(personnage1,0,0,'potion');
+                                   end;
+                                 2:
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[0][1].prix);
+                                     dropInventaire(personnage1,0,1,'potion');
+                                   end;
+                                 3 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[0][2].prix);
+                                     dropInventaire(personnage1,0,2,'potion');
+                                   end;
 
-              { if rep="VIDE" then
-                 choixVente()
-              else if rep>=8 then
-                   begin
-                      dropEquipement();
-                      miseaourOr(personnage1,getOrActuelle(personnage1)+valeurObjetInventaire;
-                      cadreArgent();
-                   end;
-              else
+                                 4 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[0][3].prix);
+                                     dropInventaire(personnage1,0,3,'potion');
+                                   end;
+                                 5 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[1][0].prix);
+                                     dropInventaire(personnage1,1,0,'potion');
+                                   end;
+                                 6 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[1][1].prix);
+                                     dropInventaire(personnage1,1,1,'potion');
+                                   end;
+                                 7 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[1][2].prix);
+                                     dropInventaire(personnage1,1,2,'potion');
+                                   end;
+                                 8 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invpotion[1][3].prix);
+                                     dropInventaire(personnage1,1,3,'potion');
+                                   end;
+                                 9: // Partie bombe
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[0][0].prix);
+                                     dropInventaire(personnage1,2,0,'bombe');
+                                   end;
+                                 10:
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[0][1].prix);
+                                     dropInventaire(personnage1,2,1,'bombe');
+                                   end;
+                                 11:
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[0][2].prix);
+                                     dropInventaire(personnage1,2,2,'bombe');
+                                   end;
 
+                                 12 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[0][3].prix);
+                                     dropInventaire(personnage1,2,3,'bombe');
+                                   end;
+                                 13 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][0].prix);
+                                     dropInventaire(personnage1,3,0,'bombe');
+                                   end;
+                                 14 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][1].prix);
+                                     dropInventaire(personnage1,3,1,'bombe');
+                                   end;
+                                 15 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][2].prix);
+                                     dropInventaire(personnage1,3,2,'bombe');
+                                   end;
+                                 16 :
+                                   begin
+                                     miseajourOr(getOrActuelle()+personnage1.inventaire.invbombe[1][3].prix);
+                                     dropInventaire(personnage1,3,3,'bombe');
+                                   end;
 
-                 }
-
-              {if (rep<=8) then
-                  begin
-                    dropEquipement(Personnage1,
-                  end;}
-              end;
-              {case rep of
-                  1 :
-                    begin
-
-                    end;
-                  2 :
-                    begin
-
-                    end;
-                  3 :
-                    begin
-
-                    end;
-                  4 :
-                    begin
-
-                    end;
-                  5 :
-                    begin
-
-                    end;
-                  6 :
-                    begin
-
-                    end;
-                  7 :
-                    begin
-
-                    end;
-                  8 :
-                    begin
-
-                    end;
-                  9 :
-                    begin
-
-                    end;
-                  10:
-                    begin
-
-                    end;
-                  11:
-                    begin
-
-                    end;
-                  12:
-                    begin
-
-                    end;
-                  13:
-                    begin
-
-                    end;
-                  14:
-                    begin
-
-                    end;
-                  15:
-                    begin
-
-                    end;
-                  16:
-                    begin
-
-                    end;
-
-              end;}
+                             end;
+                             cadreargent();
+                             choixvente();
+                  end;
           end;
 
       DessinFlecheVendre(rep);
       end;
 end;
-
 
 // ----------------- permet de faire un choix aux types de discussions possibles
 procedure choixDiscussions();

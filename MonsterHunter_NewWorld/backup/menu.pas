@@ -1,6 +1,7 @@
 unit menu;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
@@ -22,6 +23,9 @@ uses
 
 
 
+
+
+
 procedure creationChoixAvertissement(vitesse : integer);
 begin
      creationMenuInterface(0);
@@ -36,7 +40,7 @@ var cho : boolean;
     rep : integer = 1;
     ch : char;
 begin
-    creationChoixAvertissement(80);
+    creationChoixAvertissement(30);
     texteXY(44,14,'Oui',Red);
     texteXY(74,14,'Non',White);
     deplacerCurseurXY(47,14);
@@ -84,7 +88,7 @@ begin
      texteAtemps('Nouvelle partie',vitesse,White);
      dessinerCadreXY (50,16,70,20,double,White,Black);
      deplacerCurseurXY(60-9,18);
-     if not (getPersonnageActuelle(personnage1) = 1) then
+     if not (getPersonnageActuelle() = 1) then
          texteAtemps('Continuer la partie',vitesse,DarkGray)
      else
          texteAtemps('Continuer la partie',vitesse,White);
@@ -120,17 +124,6 @@ begin
     attendre(vitesse);
     texteXY(30,7,'|| \|| ||___  \V/\V/      \V/\V/   \\_//  || \\ ||__| ||_//',White);
 
-    {texteXY(0,10,'    \`----.__                 ____',White);
-    texteXY(0,11,'    |       `--._         <=#  , *--,',White);
-    texteXY(0,12,'    /_             `-.    ,/  / `````',White);
-    texteXY(0,13,'      \__             (_.''  ,''',White);
-    texteXY(0,14,'         \__ ......''       \___----^__''',White);
-    texteXY(0,15,'        _./               ,''           `.',White);
-    texteXY(0,15,'|\     _.''   ___/ )\...._"   ___           \',White);
-    texteXY(0,16,'| \__.''  __.''            `""''   `""`.''"""`--\',White);
-    texteXY(0,17,'\____.-''',White)}
-
-
 end;
 
 procedure creationChoix();
@@ -139,7 +132,6 @@ var cho : boolean;
     ch : char;
 
 begin
-
     creationMenuInterface(50);
     creationChoixMenuInterface(20);
     deplacerCurseurXY(60-12,13);
@@ -150,7 +142,7 @@ begin
           begin
               ch := ReadKey;
               case ch of
-                  #80 : if not (getPersonnageActuelle(personnage1) = 1) then
+                  #80 : if not (getPersonnageActuelle() = 1) then
                             begin
                                 if (rep < 3) then
                                    rep := rep + 2
@@ -165,7 +157,7 @@ begin
                                    rep := 1;
 
                             end;
-                  #72 : if not (StrToInt(getPersonnageActuelle(personnage1)) = 1) then
+                  #72 : if not (getPersonnageActuelle(personnage1) = 1) then
                            begin
                                 if (rep > 1) then
                                    rep := rep - 2

@@ -2,6 +2,7 @@ unit personageIHM;
 
 {$mode objfpc}{$H+}
 
+
 interface
 
 {créer l’interface de choix pour le nom, le sexe et la taille}
@@ -395,17 +396,17 @@ begin
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,12);
      texteAtemps('Niveau : ',20,White);
-     texteAtemps(IntToStr(getLvlActuelle()),20,White);
+     texteAtemps('1',20,White);
      deplacerCurseurXY(41,13);
      texteAtemps('Experience necessaire avant niveau',10,White);
      deplacerCurseurXY(41,14);
      texteAtemps('suivant : ',10,White);
-     texteAtemps(IntToStr(calculLvlSuivant()),10,White);
+     texteAtemps('1000',10,White);
      deplacerCurseurXY(41,15);
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,17);
      texteAtemps('Argent : ',20,White);
-     texteAtemps(IntToStr(getOrActuelle(personnage1)),20,White);
+     texteAtemps('500',20,White);
      deplacerCurseurXY(41,18);
      texteAtemps('_______________________________________',5,White);
      deplacerCurseurXY(41,20);
@@ -427,7 +428,7 @@ begin
      deplacerCurseurXY(60-9,1);
      texteAtemps('Cela vous convient ?',30,White);
      deplacerCurseurXY(60-21,2);
-     texteAtemps('(Une fois accepte, plus de retour arriere)',100,Red);
+     texteAtemps('(Une fois accepte, plus de retour arriere)',30,Red);
      choixONInterface2();
      texteXY(94,12,'Oui',Red);
      texteXY(94,18,'Non',White);
@@ -467,6 +468,10 @@ begin
         begin
              miseAjourPersonnage(personnage1,1);
              creationInventaire(personnage1);
+             miseAjourOr(500);
+             miseAjourLvl(1);
+             miseAjourEXP(0);
+             modificationDataJoueur(calculHpMaxBase(),13);
              choixMenuVillage();
 
              // Village
@@ -484,28 +489,28 @@ begin
      texteAtemps('Aventurier.',40,White);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-34,15);
      texteAtemps('Vous faites partie de la sixieme grande expedition du nouveau monde.',20,White);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-23,15);
      texteAtemps('Une nouvelle ile mysterieuse a ete decouverte :',30,White);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-4,15);
      texteAtemps('Aeternum',60,LightCyan);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-32,15);
      texteAtemps('Vous y etes envoye pour decouvrir tous les ',25,White);
      texteAtemps('mysteres de cette ile.',25,Cyan);
      ReadKey;
 
-     creationInterfaceDialogue();
+     texteXY(21,15,'                                                                          ',White);
      deplacerCurseurXY(60-37,15);
      texteAtemps('Mais avant tout, j''ai besoin que vous remplissiez cette ',25,White);
      texteAtemps('fiche d''information.',25,Red);

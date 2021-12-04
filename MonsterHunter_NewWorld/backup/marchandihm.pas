@@ -28,7 +28,7 @@ procedure AchatImpossible();
 implementation
 
 uses
-   SysUtils, GestionEcran, gestionTexte, crtPerso, marchandLogic, Personnage, VillageIHM, inventaireLogic;
+   SysUtils, GestionEcran, gestionTexte, crtPerso, marchandLogic, Personnage, inventaireLogic;
 
 // -------------- Design du marchand ainsi que ce qui se trouve dans la boutique
 procedure MarchandDesignIHM();
@@ -478,6 +478,7 @@ begin
 
 end;
 
+// ------------------------------------ Affiche les flèches du coté de la vente
 procedure DessinFlecheVendre(rep : integer);
 begin
 

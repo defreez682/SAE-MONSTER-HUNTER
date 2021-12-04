@@ -23,13 +23,48 @@ procedure descriptionCantine();
 {Décrit ce que fait le bouton menu}
 procedure descriptionMenu();
 
+procedure afficheStat();
+
 
 
 
 implementation
 
 uses
-  Classes, SysUtils,GestionEcran,gestionTexte,crtPerso,menu,chasseIHM,chambreIHM,marchandLogic,inventaireLogic,cantineIHM,forgeronLogic;
+  Classes, SysUtils,GestionEcran,gestionTexte,crtPerso,menu,chasseIHM,chambreIHM,marchandLogic,inventaireLogic,cantineIHM,forgeronLogic,personnage;
+
+
+procedure afficheStat();
+var ArmureJoueur : Integer;
+    AdJoueur : Integer;
+    MobiliteJoueur : Integer;
+
+begin
+    texteXY(90,2,getNomActuelle(personnage1),white);
+    texteXY(90,3,'_________________',white);
+    texteXY(90,4,'LVL : ',white);
+    texteEnCouleur(IntToStr(getLvlActuelle()),Cyan);
+    texteXY(90,5,'EXP : ',white);
+    texteEnCouleur(IntToStr(getEXPActuelle()),LightCyan);
+    texteEnCouleur('/',LightCyan);
+    texteEnCouleur(IntToStr(calculLvlSuivant()),LightCyan);
+    texteXY(90,6,'Or : ',white);
+    texteEnCouleur(IntToStr(getOrActuelle()),Brown);
+    texteXY(90,7,'HP : ',white);
+    texteEnCouleur(IntToStr(dataJoueur(13)),Red);
+    texteEnCouleur('/',Red);
+    texteEnCouleur(IntToStr(calculHpMaxBase()),red);
+
+    ArmureJoueur := (calculArmureBase() + stuffDispo.invArmureDispo[ItemSlot(66)].defense + stuffDispo.invArmureDispo[ItemSlot(65)].defense + stuffDispo.invArmureDispo[ItemSlot(68)].defense + stuffDispo.invArmureDispo[ItemSlot(69)].defense+ stuffDispo.invArmureDispo[ItemSlot(70)].defense) + (dataJoueur(7)+dataJoueur(11));
+    AdJoueur := calculADBase() + (dataJoueur(8)+dataJoueur(9));
+    MobiliteJoueur := 100 - trunc(((stuffDispo.invArmureDispo[ItemSlot(66)].poids + stuffDispo.invArmureDispo[ItemSlot(65)].poids + stuffDispo.invArmureDispo[ItemSlot(68)].poids + stuffDispo.invArmureDispo[ItemSlot(69)].poids+ stuffDispo.invArmureDispo[ItemSlot(70)].poids + stuffDispo.invArmeDispo[ItemSlot(67)].poids) - (dataJoueur(10)+dataJoueur(12))) div 2);    texteXY(90,8,'AD : ',white);
+
+    texteEnCouleur(IntToStr(AdJoueur),lightRed);
+    texteXY(90,9,'Armure : ',white);
+    texteEnCouleur(IntToStr(ArmureJoueur),green);
+    texteXY(90,10,'Mobilite : ',white);
+    texteEnCouleur(IntToStr(MobiliteJoueur),LightMagenta);
+end;
 
 
 procedure descriptionChasse();
@@ -148,6 +183,8 @@ var cho : boolean = False;
 
 begin
      creationMenuVillage();
+     afficheStat();
+     recupInventaire(personnage1);
      cho := True;
      descriptionChasse();
      texteXY(8,3,'>>',White);

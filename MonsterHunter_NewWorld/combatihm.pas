@@ -87,6 +87,7 @@ begin
            barreHP();
            readKey;
            victoireDefaite();
+           modificationDataJoueur(Trunc(HPJoueur),13);
       end
    else
        begin
@@ -106,7 +107,7 @@ begin
     texteXY(46,26,'HP : ',white);
     texteXY(51,26,'   ',white);
     texteXY(51,26,FloatToStrF(HPJoueur,fffixed,1,0),white);
-    texteXY(54,26,'/',white);
+    texteEnCouleur('/',white);
     texteEnCouleur(IntToStr(calculHpMaxBase()),white);
 
     if (HPJoueur <= calculHpMaxBase()*0.9) then
@@ -238,6 +239,9 @@ begin
            texteFade(60-22,15,'Une groupe de palico vous ramènes au village.',100,3000);
            texteFade(60-16,15,'Vous avez perdu 50% de votre or.',100,3000);
            miseAjourOr(getOrActuelle() div 2);
+           for i:= 7 to 12 do
+               modificationDataJoueur(0,i);
+
            choixMenuVillage();
       end;
    if (HPMonstre <= 0) then
@@ -314,6 +318,9 @@ begin
                     texteAtemps('Vous n''avez plus de place dans votre inventaire.',5,Red);
                end;
            modificationDataJoueur(dataJoueur(5)+1,5);
+           for i:= 7 to 12 do
+               modificationDataJoueur(0,i);
+
            readkey;
            choixMenuVillage();
       end;
@@ -354,7 +361,7 @@ begin
            if (monstreactuelle = 3)
            or (monstreactuelle = 4)
            or (monstreactuelle = 6)
-           or (monstreactuelle = 12) then
+           or (monstreactuelle = 13) then
               texteXY(11,15,'Vous etes en feu !',LightRed);
            if (tour = 2) then
               effet := False;
@@ -453,6 +460,7 @@ begin
                                texteXY(11,20,'>>',White);
                                deplacerCurseurXY(13,20);
                           end;
+                      texteXY(0,0,IntToStr(rep),White);
 
                   end;
             if (rep = 1) then
@@ -899,536 +907,534 @@ begin
                          combatQFQ;
 
                 end;
-            if (rep = 3) then;
-            begin
-                 choComb := False;
-                 choBombe := True;
-                 viderBarre();
-                 rep := 1;
-                 texteXY(11,14,'>>',White);
+            if (rep = 3) and not (rep = 4) then;
+                begin
+                     choComb := False;
+                     choBombe := True;
+                     viderBarre();
+                     rep := 1;
+                     texteXY(11,14,'>>',White);
 
-                 if not (itemSlot(41) = 0) then
-                    texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,brown)
-                 else
-                    texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,white);
-                 if not (itemSlot(42) = 0) then
-                    texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,brown)
-                 else
-                    texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,white);
-                 if not (itemSlot(43) = 0) then
-                    texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,brown)
-                 else
-                    texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,white);
-                 if not (itemSlot(44) = 0) then
-                    texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,brown)
-                 else
-                    texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,white);
-                 if not (itemSlot(45) = 0) then
-                    texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,brown)
-                 else
-                    texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,white);
-                 if not (itemSlot(46) = 0) then
-                    texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,brown)
-                 else
-                    texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,white);
-                 if not (itemSlot(47) = 0) then
-                    texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,brown)
-                 else
-                    texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,white);
-                 if not (itemSlot(48) = 0) then
-                    texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,brown)
-                 else
-                    texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,white);
+                     if not (itemSlot(41) = 0) then
+                        texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,brown)
+                     else
+                        texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,white);
+                     if not (itemSlot(42) = 0) then
+                        texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,brown)
+                     else
+                        texteXY(13,16,stuffDispo.invBombeDispo[itemSlot(42)].nomBombe,white);
+                     if not (itemSlot(43) = 0) then
+                        texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,brown)
+                     else
+                        texteXY(13,18,stuffDispo.invBombeDispo[itemSlot(43)].nomBombe,white);
+                     if not (itemSlot(44) = 0) then
+                        texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,brown)
+                     else
+                        texteXY(13,20,stuffDispo.invBombeDispo[itemSlot(44)].nomBombe,white);
+                     if not (itemSlot(45) = 0) then
+                        texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,brown)
+                     else
+                        texteXY(33,14,stuffDispo.invBombeDispo[itemSlot(45)].nomBombe,white);
+                     if not (itemSlot(46) = 0) then
+                        texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,brown)
+                     else
+                        texteXY(33,16,stuffDispo.invBombeDispo[itemSlot(46)].nomBombe,white);
+                     if not (itemSlot(47) = 0) then
+                        texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,brown)
+                     else
+                        texteXY(33,18,stuffDispo.invBombeDispo[itemSlot(47)].nomBombe,white);
+                     if not (itemSlot(48) = 0) then
+                        texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,brown)
+                     else
+                        texteXY(33,20,stuffDispo.invBombeDispo[itemSlot(48)].nomBombe,white);
 
-                 texteXY(53,14,'Retour',White);
-                 deplacerCurseurXY(13,14);
+                     texteXY(53,14,'Retour',White);
+                     deplacerCurseurXY(13,14);
 
-                 while (choBombe = True) do
-                       begin
-                            ch := ReadKey;
-                            case ch of
-                                  #80 : begin
-                                             if (rep < 9) then
-                                                 rep := rep + 1
-                                             else
-                                                 rep := 1;
-                                        end;
-                                  #72 : begin
-                                             if (rep > 1) then
-                                                 rep := rep - 1
-                                             else
-                                                 rep := 9;
-                                        end;
-                                  #77 :begin
-                                            if (rep < 9) then
-                                                begin
-                                                     rep := rep + 4;
-                                                     if (rep = 10) then
-                                                        rep := 2;
-                                                     if (rep = 11) then
-                                                        rep := 3;
-                                                     if (rep = 12) then
-                                                           rep := 4;
-                                                end
-                                            else
-                                                rep := 1;
-                                       end;
-                                  #75 :begin
-                                            if (rep > 1) then
-                                                begin
-                                                     rep := rep - 4;
-                                                     if (rep = -2) then
-                                                        rep := 6;
-                                                     if (rep = -1) then
-                                                        rep := 7;
-                                                     if (rep = 0) then
-                                                           rep := 8;
-                                                end
-                                            else
-                                                rep := 9;
-                                       end;
-                                  #13 : choBombe := False;
-                            end;
-
-                            if (rep = 1) then
-                                begin
-                                     texteXY(11,14,'>>',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(13,14);
-                                end;
-                            if (rep = 2) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'>>',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(13,16);
-                                end;
-                            if (rep = 3) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'>>',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(13,18);
-                                end;
-                            if (rep = 4) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'>>',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(13,20);
-                                end;
-                            if (rep = 5) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'>>',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(33,14);
-                                end;
-                            if (rep = 6) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'>>',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(33,16);
-                                end;
-                            if (rep = 7) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'>>',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(33,18);
-                                end;
-                            if (rep = 8) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'>>',White);
-                                     texteXY(51,14,'  ',White);
-                                     deplacerCurseurXY(33,20);
-                                end;
-                            if (rep = 9) then
-                                begin
-                                     texteXY(11,14,'  ',White);
-                                     texteXY(11,16,'  ',White);
-                                     texteXY(11,18,'  ',White);
-                                     texteXY(11,20,'  ',White);
-                                     texteXY(31,14,'  ',White);
-                                     texteXY(31,16,'  ',White);
-                                     texteXY(31,18,'  ',White);
-                                     texteXY(31,20,'  ',White);
-                                     texteXY(51,14,'>>',White);
-                                     deplacerCurseurXY(53,14);
+                     while (choBombe = True) do
+                           begin
+                                ch := ReadKey;
+                                case ch of
+                                      #80 : begin
+                                                 if (rep < 9) then
+                                                     rep := rep + 1
+                                                 else
+                                                     rep := 1;
+                                            end;
+                                      #72 : begin
+                                                 if (rep > 1) then
+                                                     rep := rep - 1
+                                                 else
+                                                     rep := 9;
+                                            end;
+                                      #77 :begin
+                                                if (rep < 9) then
+                                                    begin
+                                                         rep := rep + 4;
+                                                         if (rep = 10) then
+                                                            rep := 2;
+                                                         if (rep = 11) then
+                                                            rep := 3;
+                                                         if (rep = 12) then
+                                                               rep := 4;
+                                                    end
+                                                else
+                                                    rep := 1;
+                                           end;
+                                      #75 :begin
+                                                if (rep > 1) then
+                                                    begin
+                                                         rep := rep - 4;
+                                                         if (rep = -2) then
+                                                            rep := 6;
+                                                         if (rep = -1) then
+                                                            rep := 7;
+                                                         if (rep = 0) then
+                                                               rep := 8;
+                                                    end
+                                                else
+                                                    rep := 9;
+                                           end;
+                                      #13 : choBombe := False;
                                 end;
 
-                       end;
-                 if (rep = 1) then
-                     begin
-                          if (itemSlot(41) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   if (itemSlot(41) = 2) then
-                                       begin
-                                            modificationDataJoueur(1,6);
-                                            texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                       end
-                                   else
-                                       begin
-                                            sHPMonstre := HPMonstre;
-                                            utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(41)].degat);
-                                            if (dataJoueur(6) = 1) then
-                                               modificationDataJoueur(0,6);
-                                            deplacerCurseurXY(11,16);
-                                            texteATemps('La bombe explose ! et fait ',5,white);
-                                            texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                            texteATemps(' degats.',5,white);
-                                            barreHPMonstre();
+                                if (rep = 1) then
+                                    begin
+                                         texteXY(11,14,'>>',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(13,14);
+                                    end;
+                                if (rep = 2) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'>>',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(13,16);
+                                    end;
+                                if (rep = 3) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'>>',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(13,18);
+                                    end;
+                                if (rep = 4) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'>>',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(13,20);
+                                    end;
+                                if (rep = 5) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'>>',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(33,14);
+                                    end;
+                                if (rep = 6) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'>>',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(33,16);
+                                    end;
+                                if (rep = 7) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'>>',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(33,18);
+                                    end;
+                                if (rep = 8) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'>>',White);
+                                         texteXY(51,14,'  ',White);
+                                         deplacerCurseurXY(33,20);
+                                    end;
+                                if (rep = 9) then
+                                    begin
+                                         texteXY(11,14,'  ',White);
+                                         texteXY(11,16,'  ',White);
+                                         texteXY(11,18,'  ',White);
+                                         texteXY(11,20,'  ',White);
+                                         texteXY(31,14,'  ',White);
+                                         texteXY(31,16,'  ',White);
+                                         texteXY(31,18,'  ',White);
+                                         texteXY(31,20,'  ',White);
+                                         texteXY(51,14,'>>',White);
+                                         deplacerCurseurXY(53,14);
+                                    end;
 
-                                       end;
+                           end;
+                     if (rep = 1) then
+                         begin
+                              if (itemSlot(41) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       if (itemSlot(41) = 2) then
+                                           begin
+                                                modificationDataJoueur(1,6);
+                                                texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                           end
+                                       else
+                                           begin
+                                                sHPMonstre := HPMonstre;
+                                                utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(41)].degat);
+                                                if (dataJoueur(6) = 1) then
+                                                   modificationDataJoueur(0,6);
+                                                deplacerCurseurXY(11,16);
+                                                texteATemps('La bombe explose ! et fait ',5,white);
+                                                texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                                texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                   modificationInventaireItem(0,41);
-                                   readKey;
-                                   victoireDefaite();
-                                   AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 2) then
-                     begin
-                           if (itemSlot(42) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   if (itemSlot(42) = 2) then
-                                       begin
-                                            modificationDataJoueur(1,6);
-                                            texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                       end
-                                   else
-                                       begin
-                                            sHPMonstre := HPMonstre;
-                                            utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(42)].degat);  
-                                            if (dataJoueur(6) = 1) then
-                                               modificationDataJoueur(0,6);
-                                            deplacerCurseurXY(11,16);
-                                            texteATemps('La bombe explose ! et fait ',5,white);
-                                            texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                            texteATemps(' degats.',5,white);
-                                            barreHPMonstre();
+                                           end;
 
-                                       end;
+                                       modificationInventaireItem(0,41);
+                                       readKey;
+                                       victoireDefaite();
+                                       AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 2) then
+                         begin
+                               if (itemSlot(42) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       if (itemSlot(42) = 2) then
+                                           begin
+                                                modificationDataJoueur(1,6);
+                                                texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                           end
+                                       else
+                                           begin
+                                                sHPMonstre := HPMonstre;
+                                                utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(42)].degat);
+                                                if (dataJoueur(6) = 1) then
+                                                   modificationDataJoueur(0,6);
+                                                deplacerCurseurXY(11,16);
+                                                texteATemps('La bombe explose ! et fait ',5,white);
+                                                texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                                texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                   modificationInventaireItem(0,42);
-                                   readKey;
-                                   AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 3) then
-                     begin
-                          if (itemSlot(43) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                  viderBarre();
-                                  deplacerCurseurXY(11,14);
-                                  if (itemSlot(43) = 2) then
-                                      begin
-                                           modificationDataJoueur(1,6);
-                                           texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                      end
-                                  else
-                                      begin
-                                           sHPMonstre := HPMonstre;
-                                           utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(43)].degat);  
-                                          if (dataJoueur(6) = 1) then
-                                             modificationDataJoueur(0,6);
-                                            deplacerCurseurXY(11,16);
-                                           texteATemps('La bombe explose ! et fait ',5,white);
-                                           texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                           texteATemps(' degats.',5,white); 
-                                            barreHPMonstre();
+                                           end;
 
-                                      end;
+                                       modificationInventaireItem(0,42);
+                                       readKey;
+                                       AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 3) then
+                         begin
+                              if (itemSlot(43) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                      viderBarre();
+                                      deplacerCurseurXY(11,14);
+                                      if (itemSlot(43) = 2) then
+                                          begin
+                                               modificationDataJoueur(1,6);
+                                               texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                          end
+                                      else
+                                          begin
+                                               sHPMonstre := HPMonstre;
+                                               utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(43)].degat);
+                                              if (dataJoueur(6) = 1) then
+                                                 modificationDataJoueur(0,6);
+                                                deplacerCurseurXY(11,16);
+                                               texteATemps('La bombe explose ! et fait ',5,white);
+                                               texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                               texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                  modificationInventaireItem(0,43);
-                                  readKey;  
-                                   victoireDefaite();
-                                  AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 4) then
-                     begin
-                          if (itemSlot(44) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                  viderBarre();
-                                  deplacerCurseurXY(11,14);
-                                  if (itemSlot(44) = 2) then
-                                      begin
-                                           modificationDataJoueur(1,6);
-                                           texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                      end
-                                  else
-                                      begin
-                                           sHPMonstre := HPMonstre;
-                                           utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(44)].degat);  
-                                           if (dataJoueur(6) = 1) then
-                                             modificationDataJoueur(0,6);
-                                           deplacerCurseurXY(11,16);
-                                           texteATemps('La bombe explose ! et fait ',5,white);
-                                           texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                           texteATemps(' degats.',5,white); 
-                                           barreHPMonstre();
+                                          end;
 
-                                      end;
+                                      modificationInventaireItem(0,43);
+                                      readKey;
+                                       victoireDefaite();
+                                      AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 4) then
+                         begin
+                              if (itemSlot(44) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                      viderBarre();
+                                      deplacerCurseurXY(11,14);
+                                      if (itemSlot(44) = 2) then
+                                          begin
+                                               modificationDataJoueur(1,6);
+                                               texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                          end
+                                      else
+                                          begin
+                                               sHPMonstre := HPMonstre;
+                                               utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(44)].degat);
+                                               if (dataJoueur(6) = 1) then
+                                                 modificationDataJoueur(0,6);
+                                               deplacerCurseurXY(11,16);
+                                               texteATemps('La bombe explose ! et fait ',5,white);
+                                               texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                               texteATemps(' degats.',5,white);
+                                               barreHPMonstre();
 
-                                  modificationInventaireItem(0,44);
-                                  readKey;  
-                                  victoireDefaite();
-                                  AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 5) then
-                     begin
-                          if (itemSlot(45) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                  viderBarre();
-                                  deplacerCurseurXY(11,14);
-                                  if (itemSlot(45) = 2) then
-                                      begin
-                                           modificationDataJoueur(1,6);
-                                           texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                      end
-                                  else
-                                      begin
-                                           sHPMonstre := HPMonstre;
-                                           utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(45)].degat); 
-                                           if (dataJoueur(6) = 1) then
-                                             modificationDataJoueur(0,6);
-                                           deplacerCurseurXY(11,16);
-                                           texteATemps('La bombe explose ! et fait ',5,white);
-                                           texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                           texteATemps(' degats.',5,white); 
-                                            barreHPMonstre();
+                                          end;
 
-                                      end;
+                                      modificationInventaireItem(0,44);
+                                      readKey;
+                                      victoireDefaite();
+                                      AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 5) then
+                         begin
+                              if (itemSlot(45) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                      viderBarre();
+                                      deplacerCurseurXY(11,14);
+                                      if (itemSlot(45) = 2) then
+                                          begin
+                                               modificationDataJoueur(1,6);
+                                               texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                          end
+                                      else
+                                          begin
+                                               sHPMonstre := HPMonstre;
+                                               utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(45)].degat);
+                                               if (dataJoueur(6) = 1) then
+                                                 modificationDataJoueur(0,6);
+                                               deplacerCurseurXY(11,16);
+                                               texteATemps('La bombe explose ! et fait ',5,white);
+                                               texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                               texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                  modificationInventaireItem(0,45);
-                                  readKey;  
-                                   victoireDefaite();
-                                  AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 6) then
-                     begin
-                          if (itemSlot(46) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                  viderBarre();
-                                  deplacerCurseurXY(11,14);
-                                  if (itemSlot(46) = 2) then
-                                      begin
-                                           modificationDataJoueur(1,6);
-                                           texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                      end
-                                  else
-                                      begin
-                                           sHPMonstre := HPMonstre;
-                                           utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(46)].degat);  
-                                           if (dataJoueur(6) = 1) then
-                                              modificationDataJoueur(0,6);
-                                           deplacerCurseurXY(11,16);
-                                           texteATemps('La bombe explose ! et fait ',5,white);
-                                           texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                           texteATemps(' degats.',5,white); 
-                                            barreHPMonstre();
+                                          end;
 
-                                      end;
+                                      modificationInventaireItem(0,45);
+                                      readKey;
+                                       victoireDefaite();
+                                      AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 6) then
+                         begin
+                              if (itemSlot(46) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                      viderBarre();
+                                      deplacerCurseurXY(11,14);
+                                      if (itemSlot(46) = 2) then
+                                          begin
+                                               modificationDataJoueur(1,6);
+                                               texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                          end
+                                      else
+                                          begin
+                                               sHPMonstre := HPMonstre;
+                                               utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(46)].degat);
+                                               if (dataJoueur(6) = 1) then
+                                                  modificationDataJoueur(0,6);
+                                               deplacerCurseurXY(11,16);
+                                               texteATemps('La bombe explose ! et fait ',5,white);
+                                               texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                               texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                  modificationInventaireItem(0,46);
-                                  readKey; 
-                                   victoireDefaite();
-                                  AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 7) then
-                     begin
-                          if (itemSlot(47) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                  viderBarre();
-                                  deplacerCurseurXY(11,14);
-                                  if (itemSlot(47) = 2) then
-                                      begin
-                                           modificationDataJoueur(1,6);
-                                           texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                      end
-                                  else
-                                      begin
-                                           sHPMonstre := HPMonstre;
-                                           utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(47)].degat);  
-                                           if (dataJoueur(6) = 1) then
-                                             modificationDataJoueur(0,6);
-                                           deplacerCurseurXY(11,16);
-                                           texteATemps('La bombe explose ! et fait ',5,white);
-                                           texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                           texteATemps(' degats.',5,white); 
-                                            barreHPMonstre();
+                                          end;
 
-                                      end;
+                                      modificationInventaireItem(0,46);
+                                      readKey;
+                                       victoireDefaite();
+                                      AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 7) then
+                         begin
+                              if (itemSlot(47) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                      viderBarre();
+                                      deplacerCurseurXY(11,14);
+                                      if (itemSlot(47) = 2) then
+                                          begin
+                                               modificationDataJoueur(1,6);
+                                               texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                          end
+                                      else
+                                          begin
+                                               sHPMonstre := HPMonstre;
+                                               utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(47)].degat);
+                                               if (dataJoueur(6) = 1) then
+                                                 modificationDataJoueur(0,6);
+                                               deplacerCurseurXY(11,16);
+                                               texteATemps('La bombe explose ! et fait ',5,white);
+                                               texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                               texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                  modificationInventaireItem(0,47);
-                                  readKey; 
-                                   victoireDefaite();
-                                  AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 8) then
-                     begin
-                          if (itemSlot(48) = 0) then
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   texteAtemps('L''emplacement est vide.',5,white);
-                                   readKey;
-                                   combatQFQ();
-                              end
-                          else
-                              begin
-                                   viderBarre();
-                                   deplacerCurseurXY(11,14);
-                                   if (itemSlot(48) = 2) then
-                                       begin
-                                            modificationDataJoueur(1,6);
-                                            texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
-                                       end
-                                   else
-                                       begin
-                                            sHPMonstre := HPMonstre;
-                                            utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(48)].degat); 
-                                            if (dataJoueur(6) = 1) then
-                                               modificationDataJoueur(0,6);
-                                            deplacerCurseurXY(11,16);
-                                            texteATemps('La bombe explose ! et fait ',5,white);
-                                            texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
-                                            texteATemps(' degats.',5,white); 
-                                            barreHPMonstre();
+                                          end;
 
-                                       end;
+                                      modificationInventaireItem(0,47);
+                                      readKey;
+                                       victoireDefaite();
+                                      AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 8) then
+                         begin
+                              if (itemSlot(48) = 0) then
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       texteAtemps('L''emplacement est vide.',5,white);
+                                       readKey;
+                                       combatQFQ();
+                                  end
+                              else
+                                  begin
+                                       viderBarre();
+                                       deplacerCurseurXY(11,14);
+                                       if (itemSlot(48) = 2) then
+                                           begin
+                                                modificationDataJoueur(1,6);
+                                                texteATemps('Le flash etourdit tout les sens du monstre !',5,white);
+                                           end
+                                       else
+                                           begin
+                                                sHPMonstre := HPMonstre;
+                                                utiliserBombeExplo(stuffDispo.invBombeDispo[itemSlot(48)].degat);
+                                                if (dataJoueur(6) = 1) then
+                                                   modificationDataJoueur(0,6);
+                                                deplacerCurseurXY(11,16);
+                                                texteATemps('La bombe explose ! et fait ',5,white);
+                                                texteATemps(FloatToStrF((sHPMonstre-HPMonstre),fffixed,1,0),10,red);
+                                                texteATemps(' degats.',5,white);
+                                                barreHPMonstre();
 
-                                   modificationInventaireItem(0,48);
-                                   readKey;
-                                   victoireDefaite();
-                                   AttaqueMonstre();
-                              end;
-                     end;
-                 if (rep = 9) then
-                     combatQFQ();
-            end;
+                                           end;
+
+                                       modificationInventaireItem(0,48);
+                                       readKey;
+                                       victoireDefaite();
+                                       AttaqueMonstre();
+                                  end;
+                         end;
+                     if (rep = 9) then
+                         combatQFQ();
+                end;
             if (rep = 4) then
-               combatQFQ();
-
-            combatQFQ();
-
-
+               begin
+                    combatQFQ();
+               end;
        end
    else
        begin
@@ -1436,8 +1442,6 @@ begin
            viderBarre();
            deplacerCurseurXY(11,14);
            texteATemps(envoyerMonstre(monstreactuelle).nom,10,red);
-
-
            deplacerCurseurXY(11,16);
            texteAtemps('HPMonstre : ',10,Green);
            texteAtemps(FloatToStrF(HPMonstre,fffixed,1,0),10,Green);
@@ -1461,8 +1465,6 @@ begin
        end;
 
 end;
-
-
 
 end.
 

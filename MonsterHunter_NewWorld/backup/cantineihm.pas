@@ -1,6 +1,7 @@
 unit cantineIHM;
 
 {$mode objfpc}{$H+}
+{$codepage UTF8}
 
 interface
 
@@ -239,6 +240,7 @@ begin
              messageOrInsuffisant()
           else
              miseAjourOr(getOrActuelle() - 50) ;
+             modificationDataJoueur(5,7)
              cantine();
         end
      else if (rep = 2) then
@@ -247,6 +249,7 @@ begin
              messageOrInsuffisant()
           else
              miseAjourOr(getOrActuelle() - 70) ;
+             modificationDataJoueur(15,8)
              cantine();
          end
      else if (rep = 3) then
@@ -254,7 +257,8 @@ begin
           if ((getOrActuelle() - 80) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 80) ;
+             miseAjourOr(getOrActuelle() - 80) ; 
+             modificationDataJoueur(8,9)
              cantine();
         end
      else if (rep = 4) then
@@ -263,6 +267,7 @@ begin
              messageOrInsuffisant()
           else
              miseAjourOr(getOrActuelle() - 65) ;
+             modificationDataJoueur(10,10)
              cantine();
         end
      else if (rep = 5) then
@@ -271,14 +276,16 @@ begin
              messageOrInsuffisant()
           else
              miseAjourOr(getOrActuelle() - 82) ;
+             modificationDataJoueur(15,11)
              cantine();
         end
      else if (rep = 6) then
        begin
-         if ((getOrActuelle(personnage1) - 55) < 0) then
+         if ((getOrActuelle() - 55) < 0) then
              messageOrInsuffisant()
           else
-             miseAjourOr(getOrActuelle() - 55) ;
+             miseAjourOr(getOrActuelle() - 55) ;  
+             modificationDataJoueur(5,12)
              cantine();
        end
      else if (rep = 7) then

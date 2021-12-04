@@ -51,7 +51,7 @@ var monstreEnCours : Integer;
 implementation
 
 uses
-  Classes, SysUtils,personnage,bestiaireLogic,combatIHM,gestionEcran,gestionTexte,inventaireLogic;
+  Classes, SysUtils,personnage,bestiaireLogic,gestionEcran,gestionTexte,inventaireLogic;
 
 
 procedure utiliserBombeExplo(valeur : integer);
@@ -97,17 +97,17 @@ begin
 
     difficulte := random(2);
     //Joueur
-    HPJoueur := calculHpMaxBase();
-    ArmureJoueur := calculArmureBase() + stuffDispo.invArmureDispo[ItemSlot(66)].defense + stuffDispo.invArmureDispo[ItemSlot(65)].defense + stuffDispo.invArmureDispo[ItemSlot(68)].defense + stuffDispo.invArmureDispo[ItemSlot(69)].defense+ stuffDispo.invArmureDispo[ItemSlot(70)].defense;
-    AdJoueur := calculADBase();
-    MobiliteJoueur := 100 - (stuffDispo.invArmureDispo[ItemSlot(66)].poids + stuffDispo.invArmureDispo[ItemSlot(65)].poids + stuffDispo.invArmureDispo[ItemSlot(68)].poids + stuffDispo.invArmureDispo[ItemSlot(69)].poids+ stuffDispo.invArmureDispo[ItemSlot(70)].poids + stuffDispo.invArmeDispo[ItemSlot(67)].poids);
+    HPJoueur := dataJoueur(13);
+    ArmureJoueur := (calculArmureBase() + stuffDispo.invArmureDispo[ItemSlot(66)].defense + stuffDispo.invArmureDispo[ItemSlot(65)].defense + stuffDispo.invArmureDispo[ItemSlot(68)].defense + stuffDispo.invArmureDispo[ItemSlot(69)].defense+ stuffDispo.invArmureDispo[ItemSlot(70)].defense) + (dataJoueur(7)+dataJoueur(11));
+    AdJoueur := calculADBase() + (dataJoueur(8)+dataJoueur(9));
+    MobiliteJoueur := 100 - trunc(((stuffDispo.invArmureDispo[ItemSlot(66)].poids + stuffDispo.invArmureDispo[ItemSlot(65)].poids + stuffDispo.invArmureDispo[ItemSlot(68)].poids + stuffDispo.invArmureDispo[ItemSlot(69)].poids+ stuffDispo.invArmureDispo[ItemSlot(70)].poids + stuffDispo.invArmeDispo[ItemSlot(67)].poids) - (dataJoueur(10)+dataJoueur(12))) div 2);
     ratioArme := stuffDispo.invArmeDispo[ItemSlot(67)].ratioAD;
 
 
     // Monstre
 
 
-    for i:= 1 to (getlvlActuelle()) do//+(difficulte*facilerand)) do
+    for i:= 1 to (getlvlActuelle()) +(difficulte*facilerand) do
         begin
           if (i = 1) then
              begin
@@ -170,8 +170,6 @@ begin
     monstreAttaque := nattaque;
 end;
 
-
-
 procedure joueurAttaque();
 
 var
@@ -183,7 +181,7 @@ begin
     cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;
 
     if (dataJoueur(6) = 1) then
-       cesquive := 500;
+       cesquive := 0;
 
     if (esquive >= cesquive) then
        begin
