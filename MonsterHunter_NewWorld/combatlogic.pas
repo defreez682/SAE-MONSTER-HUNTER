@@ -158,7 +158,7 @@ begin
        nattaque := 4;
 
 
-    if (esquive <= cesquive) then
+    if (esquive >= cesquive) then
        begin
             // On applique les dégats en fonction de l'attaque.
             if (nattaque = 1) then
@@ -185,9 +185,9 @@ begin
     cesquive := (EnvoyerMonstre(monstreEnCours).mobilite + (MobiliteJoueur div 2)) div 2;  // On regarde la chance d'equive
 
     if (dataJoueur(6) = 1) then  // Si la bombe flash est utilisé, la prochaine attaque touche
-       cesquive := 0;
+       cesquive := 200;
 
-    if (esquive >= cesquive) then
+    if (esquive <= cesquive) then
        begin
             // On applique les dégats au monstre
             HPMonstre := HPMonstre - Int((adJoueur + (adJoueur * ratioArme)) / (1+(Int(EnvoyerMonstre(monstreEnCours).armureBase))/500)) + random(10)+1;

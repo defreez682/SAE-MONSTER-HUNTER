@@ -5,19 +5,24 @@ unit testUnitaireMH;
 interface
 
 uses
-  Classes, SysUtils,inventaireLogic,Personnage,MarchandLogic,TestUnitaire;
+  Classes, SysUtils,inventaireLogic,Personnage,MarchandLogic,forgeronlogic,combatLogic,TestUnitaire;
 
 // Démarre le testunitaire
 procedure demarrageTestUnitaire();
 
 // Commence le testunitaire de l'inventaire
 procedure testInventaire();
-
-//test de la cantine, la chambre et la forge
+// Commence le test unitaire du combat
+procedure testCombat();
+// commence le test unitaire de datajoueur
+procedure testDataJoueur();
+// commence le test unitaire de la cantine
 procedure testCantine();
-
+// commence le test unitaire du marchand
 procedure testMarchand();
+// Commande le test unitaire de la chambre
 procedure testChambre();
+// commence le test unitaire de la forge
 procedure testForge();
 
 implementation
@@ -26,12 +31,13 @@ implementation
 procedure demarrageTestUnitaire();
 begin
   testInventaire();
+  testCombat();
+  testDataJoueur();
   testCantine();
-  testChambre();
-  //testForge();
   testMarchand();
+  testforge();
   Summary();
-  readln;
+  readln();
 end;
 
 // Commence le testunitaire de l'inventaire
@@ -152,6 +158,7 @@ testisEqual(reussite);
 
 
 
+
 end;
 
 
@@ -175,7 +182,6 @@ begin
     //Test d'égalité entre deux entiers
     testIsEqual(getOrActuelle(),solde - 50);
 
-
   end;
 
 // Commence le testunitaire de la forge
@@ -193,7 +199,6 @@ begin
 
     //Test d'un booléen
     testIsEqual(not(dropExist(stuffDispo.invDropDispo[1].nomDrop, stuffDispo.invDropDispo[2].nomDrop)));
-
 end;
 
 // Commence le testunitaire du marchand
@@ -220,7 +225,6 @@ begin
    testisequal(getOrActuelle,orStockeBase);
 
 
-
 end;
 
 
@@ -236,8 +240,246 @@ begin
      modificationDataJoueur(calculHpMaxBase(),13);
 
      testIsEqual(dataJoueur(13), calculHpMaxBase());
+     Summary();
+end;
 
-end; 
+procedure testCombat();
+var reussite : boolean;
+    sHPMonstre : Integer;
+    sHPJoueur : Integer;
+begin
+      newTestsSeries('Combat');
+      newTest('Combat','Rendrevie');
+      reussite := false;
+      initStat(1);
+      HPJoueur := 200;
+      rendreVie(200);
+      if not (HPJoueur = 200) then
+         reussite := true;
+      testisEqual(reussite);
+
+
+      newTest('Combat','DegatJoueur');
+      reussite := false;
+      initStat(1);
+      HPMonstre := 300;
+      sHPMonstre := Trunc(HPMonstre);
+      MobiliteJoueur := 5000;
+      joueurAttaque();
+      if not (HPMonstre = sHPMonstre) then
+         reussite := true;
+      testisEqual(reussite);
+
+
+
+      newTest('Combat','Degatmonstre');
+      reussite := false;
+      initStat(1);
+      HPJoueur := 300;
+      MobiliteJoueur := -30000;
+      sHPJoueur := trunc(HPJoueur);
+      monstreAttaque();
+      if not (sHPJoueur = HPJoueur) then
+         reussite := True;
+      testisEqual(reussite);
+
+
+      newTest('Combat','DegatDebutTour');
+      reussite := false;
+      initStat(1);
+      rendreVie(600);
+      sHPJoueur := Trunc(HPJoueur);
+      degatDebutTour(0.05);
+      if not (sHPJoueur = HPJoueur) then
+         reussite := True;
+      testisEqual(reussite);
+
+      newTest('Combat','DegatBombe');
+      reussite := false;
+      initStat(1);
+      HPMonstre := 3000;
+      MobiliteJoueur := 3000;
+      sHPMonstre := Trunc(HPMonstre);
+      utiliserBombeExplo(500);
+      if not (sHPMonstre = HPMonstre) then
+         reussite := True;
+      testisEqual(reussite);
+
+
+
+end;
+
+
+procedure testDataJoueur();
+var reussite : boolean;
+    testi : integer = 0;
+    i :integer;
+begin
+
+    newTestsSeries('dataJoueur');
+
+    newTest('dataJoueur','creation');
+    reussite := False;
+    creationDataJoueur(0,17);
+    for i := 1 to 17 do
+        begin
+             if (dataJoueur(i) = 0) then
+                testi := testi + 1;
+        end;
+
+    if (testi = 17) then
+       reussite := True;
+
+    testisEqual(reussite);
+
+
+
+    newTest('dataJoueur','lvl');
+    reussite := False;
+
+    miseAjourLvl(1);
+
+    if (getLvlActuelle = 1) and (dataJoueur(1) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','EXP');
+    reussite := False;
+
+    miseAjourExp(50);
+
+    if (getEXPActuelle = 50) and (dataJoueur(2) = 50) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','GOLD');
+    reussite := False;
+
+    miseAjourOr(50);
+
+    if (getOrActuelle = 50) and (dataJoueur(3) = 50) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','PERSONNAGE');
+    reussite := False;
+
+    miseAjourPersonnage(1);
+
+    if (getPersonnageActuelle = 1) and (dataJoueur(4) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','COMBATS');
+    reussite := False;
+
+    modificationDataJoueur(1,5);
+
+    if (dataJoueur(5) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+
+    newTest('dataJoueur','skiptour');
+    reussite := False;
+
+    modificationDataJoueur(1,6);
+
+    if (dataJoueur(6) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Bonus1');
+    reussite := False;
+
+    modificationDataJoueur(1,7);
+
+    if (dataJoueur(7) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Bonus2');
+    reussite := False;
+
+    modificationDataJoueur(1,8);
+
+    if (dataJoueur(8) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Bonus3');
+    reussite := False;
+
+    modificationDataJoueur(1,9);
+
+    if (dataJoueur(9) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Bonus4');
+    reussite := False;
+
+    modificationDataJoueur(1,10);
+
+    if (dataJoueur(10) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Bonus5');
+    reussite := False;
+
+    modificationDataJoueur(1,11);
+
+    if (dataJoueur(11) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Bonus6');
+    reussite := False;
+
+    modificationDataJoueur(1,12);
+
+    if (dataJoueur(12) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','HPJoueur');
+    reussite := False;
+
+    modificationDataJoueur(200,13);
+
+    if (dataJoueur(13) = 200) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Boss1');
+    reussite := False;
+
+    modificationDataJoueur(1,14);
+
+    if (dataJoueur(14) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Boss2');
+    reussite := False;
+
+    modificationDataJoueur(1,15);
+
+    if (dataJoueur(15) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+    newTest('dataJoueur','Boss3');
+    reussite := False;
+
+    modificationDataJoueur(1,16);
+
+    if (dataJoueur(16) = 1) then
+       reussite := True;
+    testisEqual(reussite);
+
+end;
 
 
 end.
