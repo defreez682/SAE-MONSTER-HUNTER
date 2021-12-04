@@ -5,20 +5,30 @@ unit combatIHM;
 
 interface
 
+{Introduction qu'on affiche et ou on initialise les stats du combat}
 procedure introduction(num : integer);
+{Permet d'afficher le combat et de combattre}
 procedure combatQFQ();
+{Créer l'interface du combat}
 procedure creationInterface();
+{Vide le rectangle de texte}
 procedure viderBarre();
+{vérifie si le joueur à gagner ou perdu et agis en conséquence}
 procedure victoireDefaite();
+{affiche la barre hp du joueur}
 procedure barreHP();
+{affiche la barre hp du monstre}
+procedure barreHPMonstre();
+{affiche l'animation d'attaque du joueur et du monstre en fonction de la valeur (1 = joueur, reste = monstre}
+procedure animationSlash(val : integer);
 
 implementation
 uses
   Classes, SysUtils,bestiaireLogic,gestionEcran,GestionTexte,Personnage,combatLogic,chasseIHM,crtPerso,inventaireLogic,VillageIHM;
 
-var monstreactuelle : Integer = 1;
-    effet : boolean = False;
-    tour : integer = 0;
+var monstreactuelle : Integer = 1; // Contient le monstre que le joueur va devoir affronter
+    effet : boolean;
+    tour : integer = 0; // utiliser pour compter le nombre de tour le joueur à été sous effet
 
 
 
@@ -36,15 +46,13 @@ begin
     attendre(800);
     texteFade(60-(Length(envoyerMonstre(num).nom) div 2),15,envoyerMonstre(num).nom,100,2000);
     texteFade(60-(Length(envoyerMonstre(num).description) div 2),15,envoyerMonstre(num).description,100,3000);
-    initStat(monstreactuelle);
-    combatQFQ();
+    initStat(monstreactuelle); // On initialise les stats du joueur
+    combatQFQ(); // On appelle le combat
 end;
-
-
 
 procedure animationSlash(val : integer);
 begin
-    if (val = 1) then
+    if (val = 1) then // slash joueur
         begin
              ColorierZoneXY(white,black,60,1,60,1);
              attendre(10);
@@ -66,7 +74,7 @@ begin
              attendre(10);
              ColorierZoneXY(black,black,58,7,58,9);
         end
-    else
+    else  // Slash monstre
         begin
             ColorierZoneXY(red,black,59,1,59,1);
             ColorierZoneXY(red,black,60,2,60,2);
@@ -103,19 +111,19 @@ begin
 end;
 
 procedure AttaqueMonstre();
-var m : Integer;
-    sHPJoueur : Real;
+var m : Integer; // contient l'attaque du monstre
+    sHPJoueur : Real; // contient la sauvegarde des hp du joueur
 begin
-   if (dataJoueur(6) = 0) then
+   if (dataJoueur(6) = 0) then // On regarde s'il y a eu une bombe flash
       begin
            viderBarre();
            sHPJoueur := HPJoueur;
            animationSlash(2);
-           m := monstreAttaque();
+           m := monstreAttaque(); // On fait attaquer le monstre
 
            deplacerCurseurXY(11,14);
 
-           if (m = 1) then
+           if (m = 1) then   // On affiche le texte en fonction de l'attaque du montre
               texteAtemps(envoyerMonstre(monstreActuelle).attaque1Desc,5,White)
            else if (m = 2) then
               texteAtemps(envoyerMonstre(monstreActuelle).attaque2Desc,5,White)
@@ -125,10 +133,11 @@ begin
               texteAtemps(envoyerMonstre(monstreActuelle).attaque4Desc,5,White);
 
            deplacerCurseurXY(11,15);
-           if (HPJoueur = sHPJoueur) then
+           if (HPJoueur = sHPJoueur) then  // Si les hp ont pas changé, c'est que le joueur à esquivé
               texteATemps('Vous avez esquive son attaque !',10,White)
            else
                begin
+                     // En fonction du monstre et de son attaque, on applique un effet
                      if (m = 1) and (monstreactuelle = 7)
                      or (m = 1) and (monstreactuelle = 3)
                      or (m = 4) and (monstreactuelle = 3)
@@ -145,10 +154,10 @@ begin
            texteATemps('Le monstre vous inflige ',5,White);
            texteAtemps(FloatToStrF((sHPJoueur-HPJoueur),fffixed,1,0),10,Red);
            texteAtemps(' de degats !',5,White);
-           barreHP();
+           barreHP(); // On met à jour sa barre d'hp
            readKey;
-           victoireDefaite();
-           modificationDataJoueur(Trunc(HPJoueur),13);
+           victoireDefaite(); // On vérifie si le joueur gagne ou perd
+           modificationDataJoueur(Trunc(HPJoueur),13); // On sauvegarde ses hp
       end
    else
        begin
@@ -158,7 +167,7 @@ begin
             deplacerCurseurXY(11,15);
             texteAtemps('Votre prochaine attaque a 100% de chance de toucher.',5,red);
             readKey;
-            combatQFQ();
+            combatQFQ();// On appelle combat
        end;
 end;
 
@@ -289,35 +298,37 @@ end;
 procedure victoireDefaite();
 var slvl : Integer = 0;
     i :integer;
-    l1 : boolean = False;
-    l2 : boolean = False;
-    l3 : boolean = False;
+    l1 : boolean = False; // permet de savoir si un item à été mis
+    l2 : boolean = False; // permet de savoir si un item à été mis
+    l3 : boolean = False; // permet de savoir si un item à été mis
 begin
-   if (HPJoueur <= 0) then
+   if (HPJoueur <= 0) then  // Le joueur à perdu
       begin
            effacerEcran();
+           fuite := False;
            texteFade(60-12,15,'Vous vous etes evanouie.',100,3000);
            texteFade(60-22,15,'Une groupe de palico vous ramènes au village.',100,3000);
            texteFade(60-16,15,'Vous avez perdu 50% de votre or.',100,3000);
-           miseAjourOr(getOrActuelle() div 2);
+           miseAjourOr(getOrActuelle() div 2); // On divise son or
            for i:= 7 to 12 do
-               modificationDataJoueur(0,i);
+               modificationDataJoueur(0,i); // On enlève les bonus de la cantine
 
-           choixMenuVillage();
+           choixMenuVillage(); // On renvoie au village
       end;
-   if (HPMonstre <= 0) then
+   if (HPMonstre <= 0) then // Le monstre à gagner
       begin
            effacerEcran();
+           fuite := False;
            dessinerCadreXY(54,7,67,11,double,white,black);
            texteXY(56,9,'Victoire !',LightGreen);
            deplacerCurseurXY(50,13);
            texteATemps('Experience :',10,white);
            texteATemps(IntToStr(envoyerMonstre(monstreactuelle).xpgagne),10,Cyan);
-           miseAjourExp(envoyerMonstre(monstreactuelle).xpgagne);
-           while not (slvl = getLvlActuelle()) do
+           miseAjourExp(envoyerMonstre(monstreactuelle).xpgagne); // On met à jour l'exp
+           while not (slvl = getLvlActuelle()) do  // On vérifie de combient de lvl le joueur augmente
            begin
                slvl := getLvlActuelle();
-               verifLvlUp();
+               verifLvlUp(); // On met à jour son niveau
            end;
            deplacerCurseurXY(50,14);
            texteATemps('Votre niveau : ',10,white);
@@ -325,10 +336,10 @@ begin
            deplacerCurseurXY(50,15);
            texteATemps('Or :',10,white);
            texteATemps(IntToStr(envoyerMonstre(monstreactuelle).orgagne),10,Brown);
-           miseAjourOr(getOrActuelle()+envoyerMonstre(monstreactuelle).orgagne);
+           miseAjourOr(getOrActuelle()+envoyerMonstre(monstreactuelle).orgagne); // On met à jour les golds
            deplacerCurseurXY(50,16);
            texteATemps('Items :',10,white);
-           for i := 1 to 16 do
+           for i := 1 to 16 do // On vérifie s'il y a de la place pour le première item, si oui, on l'ajoute au premier emplacement disponible
                begin
                      if (itemSlot(48 + i) = 0) then
                         begin
@@ -343,7 +354,7 @@ begin
                              else;
                         end;
                end;
-           for i := 1 to 16 do
+           for i := 1 to 16 do // On vérifie s'il y a de la place pour le deuxième item, si oui, on l'ajoute au premier emplacement disponible
                begin
                      if (itemSlot(48 + i) = 0) then
                         begin
@@ -358,7 +369,7 @@ begin
                              else;
                         end;
                end;
-           for i := 1 to 16 do
+           for i := 1 to 16 do // On vérifie s'il y a de la place pour le troisième item, si oui, on l'ajoute au premier emplacement disponible
                begin
                      if (itemSlot(48 + i) = 0) then
                         begin
@@ -373,34 +384,39 @@ begin
                              else;
                         end;
                end;
-           if not (l1 = true) and not (l2 = true) and not (l3 = true) then
+           if not (l1 = True) and not (l2 = True) and not (l3 = True) then // Si aucun item n'a pu être mis
                begin
                     deplacerCurseurXY(50,20);
                     texteAtemps('Vous n''avez plus de place dans votre inventaire.',5,Red);
                end;
            modificationDataJoueur(dataJoueur(5)+1,5);
            for i:= 7 to 12 do
-               modificationDataJoueur(0,i);
-
+               modificationDataJoueur(0,i); // On enlève les bonus de la cantine
+           if (monstreActuelle = 13) then
+              modificationDataJoueur(0,14); // Si le boss 1 à été vaincu, on le sauvegarde
+           if (monstreActuelle = 14) then
+              modificationDataJoueur(0,15); // Si le boss 2 à été vaincu, on le sauvegarde
+           if (monstreActuelle = 15) then
+              modificationDataJoueur(0,16); // Si le boss 3 à été vaincu, on le sauvegarde
            readkey;
-           choixMenuVillage();
+           choixMenuVillage(); // On renvoie au village
       end;
 end;
 
 procedure combatQFQ();
 
-var cho: boolean = True;
-    choInf: boolean = False;
-    choComb : boolean = False;
-    choPot : boolean = False;
-    choBombe : boolean = False;
-    ch : char;
-    rep : integer = 1;
+var cho: boolean = True; // Choix initiale (entre action et info)
+    choInf: boolean = False; // Choix info
+    choComb : boolean = False; // Choix combat (entre attaquer, potion, bombe et retour)
+    choPot : boolean = False; // choix dans l'inventaire des potions
+    choBombe : boolean = False; // choix dans l'inventaire des bombes
+    ch : char; // Contient la touche appuyé
+    rep : integer = 1;  // Choix en cours
 
     //
 
-    fuitechasse : Integer;
-    sHPMonstre : Real;
+    fuitechasse : Integer; // Permet de savoir si le monstre va s'enfuir ou non
+    sHPMonstre : Real; // Sauvegarde les hp du montre
 
     //
 
@@ -408,13 +424,11 @@ var cho: boolean = True;
 
 begin
    creationInterface();
-   //initStat(monstreactuelle);
    barreHP();
    barreHPMonstre();
 
-   if (effet = True) then
+   if (effet = True) then // si le joueur a eu un effet, alors
       begin
-
            tour := tour + 1;
            degatDebutTour(0.05);
            if (monstreactuelle = 7) then
@@ -424,7 +438,7 @@ begin
            or (monstreactuelle = 6)
            or (monstreactuelle = 13) then
               texteXY(11,15,'Vous etes en feu !',LightRed);
-           if (tour = 2) then
+           if (tour = 2) then // Au bout de 2 tour on enlève l'effet
               effet := False;
       end;
 
@@ -437,15 +451,15 @@ begin
          begin
               ch := ReadKey;
               case ch of
-                   #75 : if (rep < 2) then
+                   #75 : if (rep < 2) then // droite
                            rep := rep + 1
                          else
-                           rep := 1;
-                   #77 : if (rep > 1) then
+                           rep := 1;  // Si au dessus de 2 on renvoie à 1
+                   #77 : if (rep > 1) then  // gauche
                            rep := rep - 1
                          else
-                             rep := 2;
-                   #13 : cho := False;
+                             rep := 2; // si en dessous de 1 on renvoie à 2
+                   #13 : cho := False; // Le joueur à validé son choix
               end;
               if (rep = 1) then
                  begin
@@ -461,7 +475,7 @@ begin
                  end;
          end;
 
-   if (rep = 1) then
+   if (rep = 1) then // le joueur à choisis action
        begin
             choComb := True;
             viderBarre();
@@ -474,19 +488,19 @@ begin
                   begin
                       ch := ReadKey;
                       case ch of
-                          #80 : begin
+                          #80 : begin  // haut
                                      if (rep < 4) then
                                          rep := rep + 1
                                      else
                                          rep := 1;
                                 end;
-                          #72 : begin
-                                     if (rep > 1) then
+                          #72 : begin // bas
+                                     if (rep > 1) then // Si au dessus de 4 on renvoie à 1
                                          rep := rep - 1
                                      else
-                                         rep := 4;
+                                         rep := 4; // si en dessous de 1 on renvoie à 4
                                 end;
-                          #13 : choComb := False;
+                          #13 : choComb := False; // le joueur à fait son choix
 
                       end;
 
@@ -524,11 +538,11 @@ begin
                           end;
 
                   end;
-            if (rep = 1) then
+            if (rep = 1) then // le joueurà choisis de attaquer
                begin
                       choComb := False;
                       fuitechasse := random(100)+1;
-                      if (fuitechasse >= chancefuite) then
+                      if (fuitechasse >= chancefuite) then // On regarde si le mosntre fuit ou non
                           begin
                                viderBarre();
                                sHPMonstre := HPMonstre;
@@ -548,17 +562,19 @@ begin
                           end
                       else
                           begin
-                               victoireDefaite();
+                               victoireDefaite(); // on vérifie si le joueur a gagné ou perdu avant de fuire
                                fuite := True;
                                deplacementJoueur();
                           end;
                end;
-            if (rep = 2) then
+            if (rep = 2) then // Le joueur à choisis d'aller dans les potions
                 begin
                      viderBarre();
                      choComb := False;
                      choPot := True;
                      texteXY(11,14,'>>',White);
+
+                     // on ajoute les potions s'il y en a
 
                      if not (itemSlot(33) = 0) then
                         texteXY(13,14,stuffDispo.invPotionDispo[itemSlot(33)].nomPotion,LightRed)
@@ -607,49 +623,48 @@ begin
                            begin
                                 ch := ReadKey;
                                 case ch of
-                                      #80 : begin
+                                      #80 : begin // haut
                                                  if (rep < 9) then
                                                      rep := rep + 1
                                                  else
-                                                     rep := 1;
+                                                     rep := 1; // Si on est au dessus de 9 renvoie à 1
                                             end;
-                                      #72 : begin
+                                      #72 : begin // bas
                                                  if (rep > 1) then
                                                      rep := rep - 1
                                                  else
-                                                     rep := 9;
+                                                     rep := 9; // Si on est en dessous de 1 renvoie à 9
                                             end;
-                                      #77 :begin
+                                      #77 :begin // droite
                                                 if (rep < 9) then
                                                     begin
                                                          rep := rep + 4;
-                                                         if (rep = 10) then
+                                                         if (rep = 10) then  // si on est à 10, on renvoie à 2
                                                             rep := 2;
-                                                         if (rep = 11) then
+                                                         if (rep = 11) then // si on est à 11, on renvoie à 3
                                                             rep := 3;
-                                                         if (rep = 12) then
+                                                         if (rep = 12) then // si on est à 12, on renvoie à 4
                                                                rep := 4;
                                                     end
                                                 else
-                                                    rep := 1;
+                                                    rep := 1; // Si on est au dessus de 9 renvoie à 1
                                            end;
-                                      #75 :begin
+                                      #75 :begin // gauche
                                                 if (rep > 1) then
                                                     begin
                                                          rep := rep - 4;
-                                                         if (rep = -2) then
+                                                         if (rep = -2) then // Si on est à -2 on renvoie à 6
                                                             rep := 6;
-                                                         if (rep = -1) then
+                                                         if (rep = -1) then // Si on est à -1 on renvoie à 7
                                                             rep := 7;
-                                                         if (rep = 0) then
-                                                               rep := 8;
+                                                         if (rep = 0)  then // Si on est à 0 on renvoie à 8
+                                                            rep := 8;
                                                     end
                                                 else
-                                                    rep := 9;
+                                                    rep := 9; // Si on est en dessous de 1 renvoie à 9
                                            end;
-                                      #13 : choPot := False;
+                                      #13 : choPot := False; // Le joueur à fait sa décision
                                 end;
-                                texteXY(0,0,IntToStr(rep),white);
                                 if (rep = 1) then
                                     begin
                                          texteXY(11,14,'>>',White);
@@ -769,6 +784,10 @@ begin
                                     end;
 
                            end;
+
+                     {Principe : On regarde s'il y a une potion, si non on affiche qui l'emplacement est vide et on revient au combat.
+                     sinon, on rend la vie en fonction de ce que la poition peut nous rendre, puis on la supprime et c'est au monstre d'attaquer,
+                     on répète ça pour les 8 slots de potions}
                      if (rep = 1) then
                          begin
                               if (itemSlot(33) = 0) then
@@ -966,8 +985,8 @@ begin
                                        combatQFQ();
                                   end;
                          end;
-                     if (rep = 9) then
-                         combatQFQ;
+                     if (rep = 9) then // le joueur à appuyer sur retour
+                         combatQFQ; // on renvoie au combat
 
                 end;
             if (rep = 3) then;
@@ -976,12 +995,12 @@ begin
                          combatQFQ();   // donc bas on vérifie dans inventaire bombe si on est sur retour.
 
                      choComb := False;
-                     choPot := False;
                      choBombe := True;
                      viderBarre();
                      rep := 1;
                      texteXY(11,14,'>>',White);
 
+                     // On ajoute les bombes s'il y en a
                      if not (itemSlot(41) = 0) then
                         texteXY(13,14,stuffDispo.invBombeDispo[itemSlot(41)].nomBombe,brown)
                      else
@@ -1022,47 +1041,47 @@ begin
                            begin
                                 ch := ReadKey;
                                 case ch of
-                                      #80 : begin
+                                      #80 : begin // haut
                                                  if (rep < 9) then
                                                      rep := rep + 1
                                                  else
-                                                     rep := 1;
+                                                     rep := 1; // Si on est au dessus de 9 renvoie à 1
                                             end;
-                                      #72 : begin
+                                      #72 : begin // bas
                                                  if (rep > 1) then
                                                      rep := rep - 1
                                                  else
-                                                     rep := 9;
+                                                     rep := 9; // Si on est en dessous de 1 renvoie à 9
                                             end;
-                                      #77 :begin
+                                      #77 :begin // droite
                                                 if (rep < 9) then
                                                     begin
                                                          rep := rep + 4;
-                                                         if (rep = 10) then
+                                                         if (rep = 10) then  // si on est à 10, on renvoie à 2
                                                             rep := 2;
-                                                         if (rep = 11) then
+                                                         if (rep = 11) then // si on est à 11, on renvoie à 3
                                                             rep := 3;
-                                                         if (rep = 12) then
+                                                         if (rep = 12) then // si on est à 12, on renvoie à 4
                                                                rep := 4;
                                                     end
                                                 else
-                                                    rep := 1;
+                                                    rep := 1; // Si on est au dessus de 9 renvoie à 1
                                            end;
-                                      #75 :begin
+                                      #75 :begin // gauche
                                                 if (rep > 1) then
                                                     begin
                                                          rep := rep - 4;
-                                                         if (rep = -2) then
+                                                         if (rep = -2) then // Si on est à -2 on renvoie à 6
                                                             rep := 6;
-                                                         if (rep = -1) then
+                                                         if (rep = -1) then // Si on est à -1 on renvoie à 7
                                                             rep := 7;
-                                                         if (rep = 0) then
-                                                               rep := 8;
+                                                         if (rep = 0)  then // Si on est à 0 on renvoie à 8
+                                                            rep := 8;
                                                     end
                                                 else
-                                                    rep := 9;
+                                                    rep := 9; // Si on est en dessous de 1 renvoie à 9
                                            end;
-                                      #13 : choBombe := False;
+                                      #13 : choBombe := False;  // le joueur à pris sa décision
                                 end;
 
                                 if (rep = 1) then
@@ -1184,6 +1203,9 @@ begin
                                     end;
 
                            end;
+                     {Principe : On regarde s'il y a une bpùbe, si non on affiche qui l'emplacement est vide et on revient au combat.
+                     sinon, attaque avec la bombe, si c'est une bombe flash, on initialise le flash pour le prochain tour ce qui fait que notre prochaine attaque touche,
+                     puis on supprime la bombe de notre inventaire. et c'est au monstre d'attaquer, on répète ça pour les 8 slots de bombe}
                      if (rep = 1) then
                          begin
                               if (itemSlot(41) = 0) then
@@ -1500,7 +1522,7 @@ begin
                 end;
        end
    else
-       begin
+       begin // Le joueur à choisis info, on affiche les stats du monstre
            choInf := True;
            viderBarre();
            deplacerCurseurXY(11,14);
@@ -1514,13 +1536,14 @@ begin
            deplacerCurseurXY(11,20);
            texteAtemps('AdMonstre : ',10,LightRed);
            texteAtemps(IntToStr(AdMonstre),10,LightRed);
+           tour :=  tour + 1; // On compte pour un tour si on appuie sur info, sinon on peut perde de la vie à l'infinie.
            while (choInf = True) do
                 begin
                      ch := ReadKey;
                      case ch of
-                     #13 : begin
+                     #13 : begin // Si on appuie sur entree on revient au combat
                                 choInf := False;
-                                combatQFQ();
+                                combatQFQ(); // On appelle le combat
                            end;
                      end;
                 end;

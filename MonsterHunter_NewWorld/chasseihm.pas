@@ -5,20 +5,32 @@ unit chasseIHM;
 
 interface
 
-var Orange : Integer = 150;
-    fuite : Boolean = False;
-    combat : integer;
+var Orange : Integer = 150; // Couleur Orange
+    fuite : Boolean = False; // Savoir si le monstre est en fuite
+    combat : integer; // Compteur du nombre de combat du joueur
 
+
+{Créer la carte}
 procedure creationFuiteInterface();
+{S'occupe de la gestion du déplacement du joueur}
 procedure deplacementJoueur();
+{S'occupe de la création des bordures}
 procedure creationBordure();
+{S'occupe de la création des frontières}
 procedure creationFrontiere();
+{Création de la zone 1}
 procedure creationZone1();
+{Création de la zone 2}
 procedure creationZone2();
 procedure creationZone3();
+{Création de la zone 3}
 procedure creationZone4();
+{Création de la zone 4}
 procedure creationZone6();
+{Création de la zone 5}
 procedure creationZone5();
+{Création de la légende sur le côté}
+procedure legende();
 
 implementation
 
@@ -298,54 +310,56 @@ type
     end;
 
 
-var x : integer = 45;
-    y : integer = 15;
-    cho : boolean = True;
-    ch : Char;
-    zoneActuelle : Integer = 1;
-    zoneMonstre : Integer;
-    zoneMonstreC : RECORD
+var x : integer = 45; // Position initiale du joueur en x
+    y : integer = 15; // Position initiale du joueur en y
+    cho : boolean = True; // boucle pour permettre le déplacement
+    ch : Char; // Contient la touche appuyé
+    zoneActuelle : Integer = 1; // Contient la zone actuelle du joueur
+    zoneMonstre : Integer; // Contient la zone du monstre
+    zoneMonstreC : RECORD // Coordonnée du monstre
                  x : Integer;
                  y : Integer;
     end;
-    i : Integer;
-    nbmonstre : array[1..8] of monstre;
-    mstr : Integer;
-    choix : Boolean = False;
-    rep : Integer = 1;
-    ox : Integer = 0;
+    i : Integer; // compteur
+    nbmonstre : array[1..8] of monstre; // Nombre de monstre maximum sur la carte
+    mstr : Integer; // Nombre de monstre que l'on va créer
+    choix : Boolean = False; // Choix lorsque on est sur un monstre
+    rep : Integer = 1; // Réponse du joueur
+    ox : Integer = 0; // Ancienne position en x
     monstreal : Integer;
 
-    // On vérifira plus tard via la sauvegarde si le monstre a été vaincu ou non
-    boss1 : Boolean = True;
-    boss2 : Boolean = True;
-    boss3 : Boolean = True;
+    boss1 : Integer; // Vérification si le premier boss a été vaincue via la sauvegarde
+    boss2 : Integer; // Vérification si le deuxième boss a été vaincue via la sauvegarde
+    boss3 : Integer; // Vérification si le troisième boss a été vaincue via la sauvegarde
 
-    affboss1 : Boolean = False;
-    affboss2 : Boolean = False;
-    affboss3 : Boolean = False;
+    affboss1 : Boolean = False; // Permet de vérifier quel boss on affiche
+    affboss2 : Boolean = False; // Permet de vérifier quel boss on affiche
+    affboss3 : Boolean = False; // Permet de vérifier quel boss on affiche
 
 
 begin
      randomize;
      combat := datajoueur(5);
+     boss1 := dataJoueur(14);
+     boss2 := dataJoueur(15);
+     boss3 := dataJoueur(16);
      creationFuiteInterface();
      creationBordure();
      creationFrontiere();
      legende();
-     if (fuite = True) then
+     if (fuite = True) then // si on est en fuite, que un seul monstre est affiché
         begin
              mstr := 1;
              texteXY(60-12,1,'Le monstre est en fuite !',Red);
         end
      else
         begin
-             mstr := random(8)+1;
-             if (combat >= 5) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+             mstr := random(8)+1; // On créer entre 1 à 8 monstre
+             if (combat >= 5) and (boss1 = 1) then // On met le boss 1 s'il y a assez de combat
                 texteXY(50,15,'X',Red);
-             if (combat >= 10) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+             if (combat >= 10) and (boss2 = 1) then // On met le boss 2 s'il y a assez de combat
                 texteXY(55,14,'X',Red);
-             if (combat >= 15) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+             if (combat >= 15) and (boss3 = 1) then // On met le boss 3 s'il y a assez de combat
                 texteXY(65,16,'X',Red);
         end;
 
@@ -464,11 +478,11 @@ begin
                                        texteXY(60-12,1,'Le monstre est en fuite !',Red);
                                     for i := 1 to mstr do
                                         texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-                                    if (combat >= 5) and (boss1 = True) then // On met le boss 1 s'il y a assez de combat
+                                    if (combat >= 5) and (boss1 = 1) then // On met le boss 1 s'il y a assez de combat
                                        texteXY(50,15,'X',Red);
-                                    if (combat >= 10) and (boss2 = True) then // On met le boss 2 s'il y a assez de combat
+                                    if (combat >= 10) and (boss2 = 1) then // On met le boss 2 s'il y a assez de combat
                                        texteXY(55,14,'X',Red);
-                                    if (combat >= 15) and (boss3 = True) then // On met le boss 3 s'il y a assez de combat
+                                    if (combat >= 15) and (boss3 = 1) then // On met le boss 3 s'il y a assez de combat
                                        texteXY(65,16,'X',Red);
                                     affboss1 := False;
                                     affboss2 := False;
@@ -479,13 +493,16 @@ begin
                                end ;
                      end;
                    #27 : begin
-                              if (fuite = False) then
+                              if (fuite = False) then // On permet de renvoyer au menu sauf en fuite
                                  begin
                                       rep := 3;
                                       cho := False;
                                  end;
                          end;
                end;
+
+
+               // On vérifie dans quel zone est le monstre
 
                if (x = 49) and (y = 20) then
                    zoneActuelle := 1
@@ -715,6 +732,8 @@ begin
                    zoneActuelle := 6;
 
 
+               // En fonction de ou est le joueur, on créer seulement la zone ou il est
+
                if (zoneActuelle = 1) then
                   creationZone1()
                else if (zoneActuelle = 2) then
@@ -728,21 +747,21 @@ begin
                else if (zoneActuelle = 6) then
                   creationZone6();
 
-                                                     ;
+               // On affiche le joueur
                texteXY(73,2,IntToStr(zoneActuelle),LightGreen);
                texteXY(x,y,'X',LightBlue);
 
 
-
+               // On affiche les monstres et les boss
                for i := 1 to mstr do
                    texteXY(nbmonstre[i].x,nbmonstre[i].y,'X',LightMagenta);
-               if (combat >= 5) and (boss1 = True) then
+               if (combat >= 5) and (boss1 = 1) then
                    texteXY(50,15,'X',Red);
-               if (combat >= 10) and (boss2 = True) then
+               if (combat >= 10) and (boss2 = 1) then
                   texteXY(55,14,'X',Red);
-               if (combat >= 15) and (boss3 = True) then
+               if (combat >= 15) and (boss3 = 1) then
                   texteXY(65,16,'X',Red);
-
+               // On vérifie que le joueur sur un monstre, s'il l'est on affiche le menu de choix
                if (choix = False) then
                   begin
                        for i := 1 to mstr do
@@ -755,19 +774,19 @@ begin
                                            ox := x-1;
                                        choix := True;
                                   end
-                               else if (x = 50) and (y = 15) and (boss1 = True) and (combat >= 5) then
+                               else if (x = 50) and (y = 15) and (boss1 = 1) and (combat >= 5) then
                                   begin
                                       ox := x-1;
                                       choix := True;
                                       affboss1 := True;
                                   end
-                               else if (x = 55) and (y = 14) and (boss2 = True) and (combat >= 10) then
+                               else if (x = 55) and (y = 14) and (boss2 = 1) and (combat >= 10) then
                                   begin
                                     ox := x-1;
                                     choix := True;
                                     affboss2 := True;
                                   end
-                               else if (x = 65) and (y = 16) and (boss3 = True) and (combat >= 15) then
+                               else if (x = 65) and (y = 16) and (boss3 = 1) and (combat >= 15) then
                                   begin
                                     ox := x-1;
                                     choix := True;
@@ -777,6 +796,7 @@ begin
                            end;
                   end;
 
+               // si le menu de choix est actif, affiche le texte pour les boss, en fuite ou en temps normal et on permet au joueur d'accepter ou de refuser
                if (choix = True) then
                   begin
                       dessinerCadreXY(35,13,84,16,simple,white,black);
@@ -807,31 +827,31 @@ begin
                              texteXY(76,17,'Refuser',Red);
                           end;
                   end;
-               texteXY(0,0,' ',White);
+               texteXY(0,0,' ',White); // On supprime les monstres qui on été placer en 0.0 à cause d'un problème de colision
                deplacerCurseurXY(x,y);
            end;
 
      if (fuite = True) then
         begin
-            fuite := False;
+            fuite := False; // Si on était en fuite, alors on renvoie au combat
             combatQFQ()
         end
      else
         begin
              if (rep = 3) then
-                choixMenuVillage()
+                choixMenuVillage() // On renvoie au village si on appuie sur echap
              else
                 begin
-                     if (affboss1 = True) then
+                     if (affboss1 = True) then // On appelle le boss 1
                         introduction(13)
-                     else if (affboss2 = True) then
+                     else if (affboss2 = True) then // On appelle le boss 2
                         introduction(14)
-                     else if (affboss3 = True) then
+                     else if (affboss3 = True) then // On appelle le boss 3
                         introduction(15)
                      else
-                         begin
+                         begin  // On appelle un monstre aléatoire
                               monstreal := random(12)+1;
-                              introduction(monstreal);
+                              introduction(monstreal); // On appelle l'introduction du combat avec le monstre choisis
                          end;
                 end;
 

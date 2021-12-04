@@ -96,7 +96,10 @@ procedure initialisationItemDisponibles();
 10 : Bonus4
 11 : Bonus5
 12 : Bonus6
-13 : HPduJoueur}
+13 : HPduJoueur
+14 : Boss1Vaincue
+15 : Boss2Vaincue
+16 : Boss3Vaincue}
 procedure creationDataJoueur(val,pos : Integer);
 
 procedure modificationDataJoueur(val,pos : Integer);

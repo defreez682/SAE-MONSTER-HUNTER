@@ -472,6 +472,9 @@ begin
              miseAjourLvl(1);  // On initialise le niveau
              miseAjourEXP(0);  // On initialise l'exp
              modificationDataJoueur(calculHpMaxBase(),13); // On initialise la vie
+             modificationDataJoueur(1,14); // Le combat contre le boss 1 n'a pas été fait
+             modificationDataJoueur(1,15); // Le combat contre le boss 1 n'a pas été fait
+             modificationDataJoueur(1,16); // Le combat contre le boss 1 n'a pas été fait
              choixMenuVillage(); // On appelle le village
 
         end
