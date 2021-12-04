@@ -27,6 +27,9 @@ begin
   testCantine();
   testChambre();
   testForge();
+  
+  Summary();
+  readln;
 end;
 
 // Commence le testunitaire de l'inventaire
@@ -147,11 +150,6 @@ testisEqual(reussite);
 
 
 
-
-
-
-
-Summary();
 end;
 
 
